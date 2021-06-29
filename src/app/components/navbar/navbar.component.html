@@ -1,0 +1,74 @@
+<div class="conainer__logo">
+  <div class="color__logo__Brown">
+    <h2>Universidad Iberoamericana del Ecuador</h2>
+  </div>
+  <a class="img__logo" [routerLink]="['/topic-banck']"
+    ><img src="../../assets/logo.png" alt="UNIBE"
+  /></a>
+  <div class="color__logo__white"></div>
+</div>
+<div class="container__nav">
+  <nav class="nav">
+    <ul class="nav__ul">
+      <li>
+        <a class="title__nav" [routerLink]="['/topic-banck']">Banco de temas</a>
+      </li>
+      <li>
+        <a class="title__nav" [routerLink]="['/topic-denunciation']"
+          >Denuncias de tema y modalidad de investigación
+        </a>
+      </li>
+      <li>
+        <a class="title__nav" [routerLink]="['/topic-proposal']"
+          >Propuestas de Tema</a
+        >
+      </li>
+      <li>
+        <a class="title__nav" [routerLink]="['/topic-notification']"
+          >Notificaciones de aprobación de tema</a
+        >
+      </li>
+      <li>
+        <a class="title__nav" [matMenuTriggerFor]="menu"
+          ><img src="../../assets/user.png" alt="User"
+        /></a>
+        <mat-menu #menu="matMenu">
+          <a class="mat-menu" [routerLink]="['/profile']"
+            ><button mat-menu-item>Perfil</button></a
+          >
+          <a class="mat-menu" href="#"
+            ><button mat-menu-item>Cerrar Sesión</button></a
+          >
+        </mat-menu>
+      </li>
+    </ul>
+    <img
+      class="btn__bar"
+      [matMenuTriggerFor]="bar__responsive"
+      src="../../assets/menu.png"
+      alt="menu"
+    />
+    <mat-menu #bar__responsive="matMenu">
+      <a class="mat-menu" [routerLink]="['/topic-banck']"
+        ><button mat-menu-item>Banco de temas</button></a
+      >
+      <a class="mat-menu" [routerLink]="['/topic-denunciation']"
+        ><button mat-menu-item>
+          Denuncia de tema y modalidad de investigación
+        </button></a
+      >
+      <a class="mat-menu" [routerLink]="['/topic-proposal']"
+        ><button mat-menu-item>Propuestas de Tema</button></a
+      >
+      <a class="mat-menu" [routerLink]="['/topic-notification']"
+        ><button mat-menu-item>Notificación de aprobación de tema</button></a
+      >
+      <a class="mat-menu" [routerLink]="['/profile']"
+        ><button mat-menu-item>Perfil</button></a
+      >
+      <a class="mat-menu" href="#"
+        ><button mat-menu-item>Cerrar Sesión</button></a
+      >
+    </mat-menu>
+  </nav>
+</div>

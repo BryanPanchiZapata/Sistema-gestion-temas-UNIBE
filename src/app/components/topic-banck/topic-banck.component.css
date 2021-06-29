@@ -1,0 +1,71 @@
+.container__topicBanck {
+  width: 95%;
+  margin-inline: auto;
+  padding: 1.5rem 0;
+}
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.container__button {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.button__topicbanck {
+  background: #002858;
+  color: #fff;
+}
+input {
+  width: 50%;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #c6cdde;
+  font-size: 0.9rem;
+}
+table {
+  width: 100%;
+  border-radius: 1rem;
+}
+td,
+th {
+  width: 5%;
+}
+
+@media screen and (max-width: 858px) {
+  .container__button {
+    flex-direction: column;
+    width: 100%;
+  }
+  input {
+    width: 100%;
+    padding: .5rem 0;
+  }
+  .button__topicbanck {
+    margin-top: 1rem;
+  }
+  .responsive {
+    overflow-x: auto;
+  }
+  .uno {
+    min-width: 70px;
+  }
+  .dos {
+    min-width: 150px;
+  }
+  .tres {
+    min-width: 150px;
+  }
+  .cuatro {
+    min-width: 120px;
+  }
+  .cinco {
+    min-width: 100px;
+  }
+  .seis {
+    min-width: 130px;
+  }
+  .siete {
+    min-width: 130px;
+  }
+}
