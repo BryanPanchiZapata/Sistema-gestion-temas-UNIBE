@@ -2,7 +2,7 @@
   <div class="color__logo__Brown">
     <h2>Universidad Iberoamericana del Ecuador</h2>
   </div>
-  <a class="img__logo" [routerLink]="['/topic-banck']"
+  <a class="img__logo" [routerLink]="['/banco-de-temas']"
     ><img src="../../assets/logo.png" alt="UNIBE"
   /></a>
   <div class="color__logo__white"></div>
@@ -11,20 +11,14 @@
   <nav class="nav">
     <ul class="nav__ul">
       <li>
-        <a class="title__nav" [routerLink]="['/topic-banck']">Banco de temas</a>
-      </li>
-      <li>
-        <a class="title__nav" [routerLink]="['/topic-denunciation']"
-          >Denuncias de tema y modalidad de investigación
-        </a>
-      </li>
-      <li>
-        <a class="title__nav" [routerLink]="['/topic-proposal']"
-          >Propuestas de Tema</a
+        <a class="title__nav" [routerLink]="['/banco-de-temas']"
+          >Banco de temas</a
         >
       </li>
       <li>
-        <a class="title__nav" [routerLink]="['/topic-notification']"
+        <a
+          class="title__nav"
+          [routerLink]="['/notificación-de-aprobación-de-tema']"
           >Notificaciones de aprobación de tema</a
         >
       </li>
@@ -33,7 +27,7 @@
           ><img src="../../assets/user.png" alt="User"
         /></a>
         <mat-menu #menu="matMenu">
-          <a class="mat-menu" [routerLink]="['/profile']"
+          <a class="mat-menu" [routerLink]="['/perfil']"
             ><button mat-menu-item>Perfil</button></a
           >
           <a class="mat-menu" href="#"
@@ -49,21 +43,13 @@
       alt="menu"
     />
     <mat-menu #bar__responsive="matMenu">
-      <a class="mat-menu" [routerLink]="['/topic-banck']"
+      <a class="mat-menu" [routerLink]="['/banco-de-temas']"
         ><button mat-menu-item>Banco de temas</button></a
       >
-      <a class="mat-menu" [routerLink]="['/topic-denunciation']"
-        ><button mat-menu-item>
-          Denuncia de tema y modalidad de investigación
-        </button></a
-      >
-      <a class="mat-menu" [routerLink]="['/topic-proposal']"
-        ><button mat-menu-item>Propuestas de Tema</button></a
-      >
-      <a class="mat-menu" [routerLink]="['/topic-notification']"
+      <a class="mat-menu" [routerLink]="['/notificación-de-aprobación-de-tema']"
         ><button mat-menu-item>Notificación de aprobación de tema</button></a
       >
-      <a class="mat-menu" [routerLink]="['/profile']"
+      <a class="mat-menu" [routerLink]="['/perfil']"
         ><button mat-menu-item>Perfil</button></a
       >
       <a class="mat-menu" href="#"

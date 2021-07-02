@@ -1,1 +1,89 @@
-<p>topic-denunciation works!</p>
+<div class="container">
+  <div class="container__form">
+    <figure class="unibe__img">
+      <img src="../../../assets/unibe_form.png" alt="UNIBE" />
+    </figure>
+
+    <div class="form__title">
+      <h2>DENUNCIA DE TEMA Y MODALIDAD DE INVESTIGACIÓN</h2>
+    </div>
+    <div class="form__data">
+      <h4>DATOS GENERALES:</h4>
+      <h4>Valor: $10</h4>
+    </div>
+    <div class="container__global">
+      <div class="form__info">
+        <p>Apellidos:</p>
+        <p>Nombres:</p>
+        <p>Cédula de Identidad:</p>
+        <p>Carrera:</p>
+        <p>Semestre:</p>
+        <p>Director (a) de carrera:</p>
+        <p>Ciudad/Fecha:</p>
+      </div>
+      <div class="form__inputs">
+        <input type="text" placeholder="Apellidos" required />
+        <input type="text" placeholder="Nombres" required />
+        <input type="number" placeholder="Cédula" required />
+        <input type="text" placeholder="Carrera" required />
+        <input type="text" placeholder="Semestre" required />
+        <input type="text" placeholder="Director de carrera" required />
+        <div class="form__date__city">
+          <input type="text" placeholder="Ciudad" required />
+          <input type="date" required />
+        </div>
+      </div>
+    </div>
+    <span>De mis consideraciones.</span>
+    <span>
+      Solicito la evaluación de la propuesta del Trabajo de Titulación o Trabajo
+      de Integración Curricular para obtener el título de
+      <input type="text" required />
+    </span>
+    <span>Los datos de la propuesta se especifican a continuación:</span>
+    <div class="form__topic">
+      <h4>Tema:</h4>
+      <input class="topic__texts" type="text" name="" id="" />
+      <h4>Línea de investigación:</h4>
+      <input class="topic__texts" type="text" name="" id="" />
+      <h4>
+        Título del proyecto de la universidad con el cual se articula el tema
+        propuesto:
+      </h4>
+      <input class="topic__texts" type="text" name="" id="" />
+    </div>
+    <div class="form__selector">
+      <h4>Tipo de proyecto:</h4>
+      <mat-form-field>
+        <mat-label>Seleccionar</mat-label>
+        <mat-select>
+          <mat-option
+            *ngFor="let proyecto of proyectos"
+            [value]="proyecto.value"
+          >
+            {{ proyecto.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <h4>Modalidad de investigación:</h4>
+      <mat-form-field>
+        <mat-label>Seleccionar</mat-label>
+        <mat-select>
+          <mat-option
+            *ngFor="let investigacion of investigaciones"
+            [value]="investigacion.value"
+          >
+            {{ investigacion.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <h3 class="firma">Solicitado por:</h3>
+    <div class="buttons">
+      <a><button class="primary" mat-raised-button>Enviar</button></a>
+      <a download=""
+        ><button class="second" mat-raised-button>Imprimir</button></a
+      >
+    </div>
+  </div>
+</div>

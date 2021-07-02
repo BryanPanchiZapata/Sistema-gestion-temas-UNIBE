@@ -2,29 +2,23 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TopicBanckComponent } from './components/topic-banck/topic-banck.component';
-import { TopicDenunciationComponent } from './components/topic-denunciation/topic-denunciation.component';
 import { TopicNotificationComponent } from './components/topic-notification/topic-notification.component';
-import { TopicProposalComponent } from './components/topic-proposal/topic-proposal.component';
 
 const routes: Routes = [
   {
-    path: 'topic-banck',
+    path: '',
     component: TopicBanckComponent,
   },
   {
-    path: 'topic-denunciation',
-    component: TopicDenunciationComponent,
+    path: 'banco-de-temas',
+    component: TopicBanckComponent,
   },
   {
-    path: 'topic-proposal',
-    component: TopicProposalComponent,
-  },
-  {
-    path: 'topic-notification',
+    path: 'notificación-de-aprobación-de-tema',
     component: TopicNotificationComponent,
   },
   {
-    path: 'profile',
+    path: 'perfil',
     component: ProfileComponent,
   },
 ];
