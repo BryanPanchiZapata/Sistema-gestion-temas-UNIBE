@@ -1,0 +1,50 @@
+.container__topicBanck {
+  width: 95%;
+  margin-inline: auto;
+  padding: 1.5rem 0;
+}
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+input {
+  width: 50%;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #c6cdde;
+  font-size: 0.9rem;
+  margin: 0.8rem 0;
+}
+
+table {
+  width: 100%;
+}
+.uno {
+  width: 15%;
+}
+.dos {
+  width: 25%;
+}
+
+@media screen and (max-width: 920px) {
+  input {
+    width: 100%;
+    padding: 0.5rem 0;
+  }
+  .responsive {
+    overflow-x: auto;
+  }
+  .uno {
+    min-width: 90px;
+  }
+  .dos {
+    min-width: 150px;
+  }
+  .tres {
+    min-width: 250px;
+  }
+  .cuatro {
+    min-width: 150px;
+  }
+}

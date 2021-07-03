@@ -1,0 +1,38 @@
+<section class="container__topicBanck">
+  <h1 class="title">Banco de Temas</h1>
+  <div class="container__button">
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      type="text"
+      placeholder="Buscar..."
+    />
+  </div>
+  <div class="mat-elevation-z8 responsive">
+    <table
+      class="example-table mat-elevation-z8"
+      mat-table
+      recycleRows
+      [dataSource]="dataSource"
+    >
+      <ng-container matColumnDef="position">
+        <th class="uno" mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="tema">
+        <th class="dos" mat-header-cell *matHeaderCellDef>Tema</th>
+        <td mat-cell *matCellDef="let element">{{ element.tema }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="estado">
+        <th class="tres" mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let element">{{ element.estado }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+</section>

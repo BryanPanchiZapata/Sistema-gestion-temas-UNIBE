@@ -11,11 +11,13 @@ import { TopicProposalComponent } from './components/topic-proposal/topic-propos
 import { TopicNotificationComponent } from './components/topic-notification/topic-notification.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { TopicStudentComponent } from './components/topic-student/topic-student.component';
+import { PaidRegistrationComponent } from './components/paid-registration/paid-registration.component';
 
 
 
 @NgModule({
-  declarations: [AppComponent, TopicBanckComponent, TopicDenunciationComponent, TopicProposalComponent, TopicNotificationComponent, NavbarComponent, ProfileComponent, ],
+  declarations: [AppComponent, TopicBanckComponent, TopicDenunciationComponent, TopicProposalComponent, TopicNotificationComponent, NavbarComponent, ProfileComponent, TopicStudentComponent, PaidRegistrationComponent, ],
   imports: [
     BrowserModule,
     AppRoutingModule,
