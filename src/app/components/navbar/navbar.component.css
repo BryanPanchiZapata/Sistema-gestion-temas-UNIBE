@@ -10,16 +10,16 @@
   height: 100px;
 }
 .color__logo__Brown {
-  background: #f7b926;
+  background: var(--secondary-color);
   height: 55px;
-  border-bottom: 4px solid #002858;
+  border-bottom: 4px solid var(--primary-color);
   display: flex;
   justify-content: center;
 }
 .color__logo__Brown h2 {
   margin-top: 1rem;
   font-size: 1.8rem;
-  color: #002858;
+  color: var(--primary-color);
   font-weight: bold;
 }
 .color__logo__white {
@@ -29,7 +29,7 @@
 
 .container__nav {
   width: 100%;
-  background: #002858;
+  background: var(--primary-color);
 }
 .nav {
   height: 55px;

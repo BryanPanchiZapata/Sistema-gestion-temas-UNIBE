@@ -12,3 +12,7 @@ body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
+:root {
+  --primary-color: #002858;
+  --secondary-color: #f7b926;
+}

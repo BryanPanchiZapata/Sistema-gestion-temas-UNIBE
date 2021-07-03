@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TopicBanckComponent } from './components/topic-banck/topic-banck.component';
 import { TopicNotificationComponent } from './components/topic-notification/topic-notification.component';
+import {LoginComponent} from "./components/login/login.component";
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'perfil',
     component: ProfileComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
 ];
 

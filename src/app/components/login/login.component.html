@@ -1,0 +1,24 @@
+<div class="container" fxLayout="column" fxLayoutAlign="center center">
+  <mat-card class="login" fxLayout="column" fxLayoutAlign="center center">
+    <h1>Inicie Sesión</h1>
+    <form fxLayout="column" class="login-form">
+      <mat-form-field appearance="legacy" class="login-full-width">
+        <mat-label>Identificación</mat-label>
+        <div fxLayout="row">
+          <input matInput id="login" name="login" [(ngModel)]="user.ci">
+          <mat-icon class="icono">person</mat-icon>
+        </div>
+      </mat-form-field>
+      <mat-form-field id="password" appearance="legacy" class="login-full-width">
+        <mat-label>Contraseña</mat-label>
+        <div fxLayout="row">
+          <input matInput name="login" [(ngModel)]="user.password">
+          <mat-icon class="icono">vpn_key</mat-icon>
+        </div>
+      </mat-form-field>
+      <div fxLayout="row" fxFlexAlign="center">
+        <button mat-raised-button class="button"  (click)="login()">Iniciar Sesión</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
