@@ -8,7 +8,7 @@ import {catchError, map} from "rxjs/operators";
   providedIn: 'root'
 })
 export class AuthService {
-  private url = 'http://localhost:8080/degreetopics/v1/auth/login';
+  private url = 'https://degreetopics-api.herokuapp.com/degreetopics/v1/auth/login';
 
   constructor(private http: HttpClient) {
   }
