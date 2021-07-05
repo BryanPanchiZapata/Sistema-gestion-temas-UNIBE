@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.user).subscribe(
       data => {
         localStorage.setItem('user', data.id);
-        this.router.navigate(['topic-banck']);
+        this.router.navigate(['']);
       }
     )
 }
