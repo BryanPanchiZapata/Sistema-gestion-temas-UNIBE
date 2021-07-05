@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+static END_POINT= 'topic'
   constructor() { }
 
   ngOnInit(): void {

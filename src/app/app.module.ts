@@ -15,15 +15,24 @@ import { TopicStudentComponent } from './components/topic-student/topic-student.
 import { PaidRegistrationComponent } from './components/paid-registration/paid-registration.component';
 import { HeaderComponent } from './components/header/header.component';
 
-
-
 @NgModule({
-  declarations: [AppComponent, TopicBanckComponent, TopicDenunciationComponent, TopicProposalComponent, TopicNotificationComponent, NavbarComponent, ProfileComponent, TopicStudentComponent, PaidRegistrationComponent, HeaderComponent, ],
+  declarations: [
+    AppComponent,
+    TopicBanckComponent,
+    TopicDenunciationComponent,
+    TopicProposalComponent,
+    TopicNotificationComponent,
+    NavbarComponent,
+    ProfileComponent,
+    TopicStudentComponent,
+    PaidRegistrationComponent,
+    HeaderComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
