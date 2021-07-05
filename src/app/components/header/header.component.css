@@ -1,0 +1,43 @@
+.conainer__logo {
+  width: 100%;
+}
+.img__logo {
+  position: absolute;
+  top: 0.3rem;
+  left: 2rem;
+}
+.img__logo img {
+  height: 100px;
+}
+.color__logo__Brown {
+  background: #f7b926;
+  height: 55px;
+  border-bottom: 4px solid #002858;
+  display: flex;
+  justify-content: center;
+}
+.color__logo__Brown h2 {
+  margin-top: 1rem;
+  font-size: 1.8rem;
+  color: #002858;
+  font-weight: bold;
+}
+.color__logo__white {
+  background: #fff;
+  height: 55px;
+}
+
+@media screen and (max-width: 858px) {
+  .img__logo {
+    position: absolute;
+    top: 0.3rem;
+    left: 0.5rem;
+  }
+  .img__logo img {
+    height: 90px;
+  }
+  .color__logo__Brown h2 {
+    font-size: 1.2rem;
+    margin-left: 7rem;
+  }
+}
