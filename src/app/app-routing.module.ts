@@ -15,7 +15,7 @@ const routes: Routes = [
     component: NavbarComponent,
     children:[
       {
-        path: TopicBanckComponent.END_POINT,
+        path: '',
         component: TopicBanckComponent,
       },
       {

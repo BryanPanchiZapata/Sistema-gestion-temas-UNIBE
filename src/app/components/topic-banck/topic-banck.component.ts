@@ -9,7 +9,6 @@ import {TopicModel} from "../../models/topic-model";
   templateUrl: './topic-banck.component.html',
 })
 export class TopicBanckComponent implements AfterViewInit {
-  static END_POINT = 'topic-banck';
   public topic : TopicModel = {};
   public topics : TopicModel[] = [];
 
