@@ -7,14 +7,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-<<<<<<< HEAD
-
   constructor(private router: Router) {
   }
-=======
-static END_POINT= 'topic'
-  constructor() { }
->>>>>>> bryan
 
   ngOnInit(): void {
     this.canBeActivate();
