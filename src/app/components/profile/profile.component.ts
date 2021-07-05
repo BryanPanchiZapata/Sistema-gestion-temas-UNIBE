@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
+  static END_POINT = 'profile';
   constructor() { }
 
   ngOnInit(): void {

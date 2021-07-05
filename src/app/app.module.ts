@@ -16,6 +16,9 @@ import {HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './components/login/login.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {FormsModule} from "@angular/forms";
+import {TopicService} from "./services/topic.service";
+import {SignUpAcademic, SignUpComponent} from './components/sign-up/sign-up.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 @NgModule({
@@ -28,6 +31,9 @@ import {FormsModule} from "@angular/forms";
     NavbarComponent,
     ProfileComponent,
     LoginComponent,
+    SignUpComponent,
+    SignUpAcademic,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +44,10 @@ import {FormsModule} from "@angular/forms";
     FlexLayoutModule,
     FormsModule
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    TopicService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

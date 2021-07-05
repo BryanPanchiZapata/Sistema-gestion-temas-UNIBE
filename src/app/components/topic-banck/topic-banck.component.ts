@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import {TopicModel} from "../../models/topic-model";
 
 @Component({
   selector: 'app-topic-banck',
@@ -8,6 +9,10 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './topic-banck.component.html',
 })
 export class TopicBanckComponent implements AfterViewInit {
+  static END_POINT = 'topic-banck';
+  public topic : TopicModel = {};
+  public topics : TopicModel[] = [];
+
   displayedColumns: string[] = [
     'position',
     'tema',

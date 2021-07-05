@@ -15,6 +15,7 @@ interface Investigacion{
   styleUrls: ['./topic-denunciation.component.css']
 })
 export class TopicDenunciationComponent implements OnInit {
+  static END_POINT = 'topic-denunciation';
   proyectos: Proyecto[] = [
     {value: 'vinculación-0', viewValue: 'Vinculación'},
     {value: 'investigación-1', viewValue: 'Investigación'},

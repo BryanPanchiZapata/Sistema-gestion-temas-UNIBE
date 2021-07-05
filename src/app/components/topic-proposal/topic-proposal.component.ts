@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./topic-proposal.component.css']
 })
 export class TopicProposalComponent implements OnInit {
-
+  static END_POINT = 'topic-proposal';
   constructor() { }
 
   ngOnInit(): void {

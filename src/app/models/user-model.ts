@@ -8,9 +8,6 @@ export interface UserModel {
   role?:string;
   secondName?:string;
   secondLastName?:string;
-}
-
-export interface AcademicUser extends UserModel {
   career?:string;
   sign?:string;
 }

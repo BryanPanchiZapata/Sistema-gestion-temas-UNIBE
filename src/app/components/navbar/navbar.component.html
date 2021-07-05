@@ -1,12 +1,3 @@
-<div class="conainer__logo">
-  <div class="color__logo__Brown">
-    <h2>Universidad Iberoamericana del Ecuador</h2>
-  </div>
-  <a class="img__logo" [routerLink]="['/banco-de-temas']"
-    ><img src="../../assets/logo.png" alt="UNIBE"
-  /></a>
-  <div class="color__logo__white"></div>
-</div>
 <div class="container__nav">
   <nav class="nav">
     <ul class="nav__ul">
@@ -43,7 +34,7 @@
       alt="menu"
     />
     <mat-menu #bar__responsive="matMenu">
-      <a class="mat-menu" [routerLink]="['/banco-de-temas']"
+      <a class="mat-menu" [routerLink]="['topic-banck']"
         ><button mat-menu-item>Banco de temas</button></a
       >
       <a class="mat-menu" [routerLink]="['/notificación-de-aprobación-de-tema']"
@@ -57,4 +48,8 @@
       >
     </mat-menu>
   </nav>
+</div>
+
+<div class="container">
+  <router-outlet></router-outlet>
 </div>

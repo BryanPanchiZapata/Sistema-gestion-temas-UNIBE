@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./topic-notification.component.css']
 })
 export class TopicNotificationComponent implements OnInit {
-
+  static END_POINT = 'topic-approval';
   constructor() { }
 
   ngOnInit(): void {
