@@ -18,7 +18,6 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {FormsModule} from "@angular/forms";
 import {TopicService} from "./services/topic.service";
 import {SignUpAcademic, SignUpComponent} from './components/sign-up/sign-up.component';
-import { HeaderComponent } from './components/header/header.component';
 
 
 @NgModule({
@@ -32,8 +31,7 @@ import { HeaderComponent } from './components/header/header.component';
     ProfileComponent,
     LoginComponent,
     SignUpComponent,
-    SignUpAcademic,
-    HeaderComponent
+    SignUpAcademic
   ],
   imports: [
     BrowserModule,
