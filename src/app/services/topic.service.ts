@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {TopicModel} from "../models/topic-model";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable({
