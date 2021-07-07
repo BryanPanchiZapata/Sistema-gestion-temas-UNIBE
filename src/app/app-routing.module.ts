@@ -27,8 +27,12 @@ const routes: Routes = [
         component: TopicNotificationComponent,
       },
       {
-        path: TopicProposalComponent.END_POINT,
+        path: ProfileComponent.END_POINT,
         component: ProfileComponent,
+      },
+      {
+        path: TopicProposalComponent.END_POINT,
+        component: TopicProposalComponent,
       },
     ]
   },

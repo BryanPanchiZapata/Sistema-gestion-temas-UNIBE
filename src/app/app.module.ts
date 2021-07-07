@@ -18,6 +18,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {FormsModule} from "@angular/forms";
 import {TopicService} from "./services/topic.service";
 import {SignUpAcademic, SignUpComponent} from './components/sign-up/sign-up.component';
+import {PaymentRegistrationComponent} from "./components/payment-registration/payment-registration.component";
+import {TopicStudentComponent} from "./components/topic-student/topic-student.component";
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import {SignUpAcademic, SignUpComponent} from './components/sign-up/sign-up.comp
     ProfileComponent,
     LoginComponent,
     SignUpComponent,
-    SignUpAcademic
+    SignUpAcademic,
+    PaymentRegistrationComponent,
+    TopicStudentComponent
   ],
   imports: [
     BrowserModule,

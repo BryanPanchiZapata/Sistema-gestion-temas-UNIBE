@@ -4,10 +4,10 @@ import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-paid-registration',
-  templateUrl: './paid-registration.component.html',
-  styleUrls: ['./paid-registration.component.css']
+  templateUrl: './payment-registration.component.html',
+  styleUrls: ['./payment-registration.component.css']
 })
-export class PaidRegistrationComponent implements AfterViewInit {
+export class PaymentRegistrationComponent implements AfterViewInit {
 
   displayedColumns: string[] = ['position', 'cedula', 'estudiante', 'estado'];
   dataSource = new MatTableDataSource<TopicData>(ELEMENT_DATA);
@@ -37,31 +37,31 @@ const ELEMENT_DATA: TopicData[] = [
     position: 1,
     cedula: 1726010786,
     estudiante: 'Maria Belen Canesas Caicedo',
-    
+
   },
   {
     position: 2,
     cedula: 1726010786,
     estudiante: 'Maria Belen Canesas Caicedo',
-    
+
   },
   {
     position: 3,
     cedula: 1726010786,
     estudiante: 'Maria Belen Canesas Caicedo',
-    
+
   },
   {
     position: 4,
     cedula: 1726010786,
     estudiante: 'Maria Belen Canesas Caicedo',
-    
+
   },
   {
     position: 5,
     cedula: 1726010786,
     estudiante: 'Maria Belen Canesas Caicedo',
-    
+
   },
 
 ]
