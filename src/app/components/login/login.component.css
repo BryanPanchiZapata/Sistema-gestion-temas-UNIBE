@@ -5,17 +5,11 @@
 }
 
 .login-full-width {
-  width: 100%;
+  width: 20rem;
 }
 .button {
   background-color: var(--primary-color);
   color: white;
-}
-.login {
-  width: 20rem;
-}
-.container {
-  height: 50vh;
 }
 .icono {
   color: var(--primary-color);
