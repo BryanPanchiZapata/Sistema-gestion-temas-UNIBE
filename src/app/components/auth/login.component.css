@@ -15,7 +15,7 @@
   background-color: var(--primary-color);
   color: white;
 }
-.icono {
+mat-icon {
   color: var(--primary-color);
 }
 

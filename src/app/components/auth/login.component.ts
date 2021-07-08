@@ -11,32 +11,21 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   public user: UserModel = {};
+
   hide: boolean = true;
-  loginForm = this.formBuilder.group({
-    ci: ['', Validators.required],
-    password: ['', Validators.required]
-  });
 
   constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {
-  }
-  onResetForm() {
-    this.loginForm.reset();
   }
 
   ngOnInit(): void {
   }
   login(): void {
-    if (this.loginForm.valid) {
-      this.authService.login(this.user).subscribe(
-        data => {
-          localStorage.setItem('user', data.id);
-          this.router.navigate(['']);
-        }
-      )
-      this.onResetForm();
-    } else {
-      return;
-    }
+    this.authService.login(this.user).subscribe(
+      data => {
+        localStorage.setItem('user', data.id);
+        this.router.navigate(['']);
+      }
+    )
   }
 
 }
