@@ -36,11 +36,17 @@
       <table class="sign-up-full-width" cellspacing="0"><tr>
         <td><mat-form-field appearance="legacy" class="sign-up-full-width">
           <mat-label>Contraseña</mat-label>
-          <input type="password" matInput id="password" name="sign-up" placeholder="Ingrese una contraseña">
+          <input [type]="hide ? 'password' : 'text'" matInput id="password" name="sign-up" placeholder="Ingrese una contraseña">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
         </mat-form-field></td>
         <td><mat-form-field appearance="legacy" class="sign-up-full-width">
           <mat-label>Confirmar contraseña</mat-label>
-          <input type="password" matInput id="confirm-password" name="sign-up" placeholder="Ingrese nuevamante la contraseña">
+          <input [type]="hide ? 'password' : 'text'" matInput id="confirm-password" name="sign-up" placeholder="Ingrese nuevamante la contraseña">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
         </mat-form-field></td>
       </tr></table>
       <div fxLayout="row" fxFlexAlign="center">

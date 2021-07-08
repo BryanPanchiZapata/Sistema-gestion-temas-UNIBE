@@ -6,6 +6,7 @@
 
 .auth-full-width {
   width: 20rem;
+  padding-bottom: 10px;
 }
 .sign-up-full-width {
   width: 100%;
@@ -20,4 +21,10 @@
 
 td {
   padding-right: 8px;
+}
+
+.icon-button {
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
 }
