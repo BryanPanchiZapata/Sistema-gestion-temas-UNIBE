@@ -12,13 +12,12 @@ import { TopicProposalComponent } from './components/topic-proposal/topic-propos
 import { TopicNotificationComponent } from './components/topic-notification/topic-notification.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { AuthService } from "./services/auth.service";
+import { AuthService,  } from "./services/auth.service";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent, SignUpComponent } from './components/auth/login.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule } from "@angular/forms";
 import { TopicService } from "./services/topic.service";
-import { SignUpAcademic, SignUpComponent } from './components/sign-up/sign-up.component';
 import { PaymentRegistrationComponent } from "./components/payment-registration/payment-registration.component";
 import { TopicStudentComponent } from "./components/topic-student/topic-student.component";
 import { SpinnerInterceptor } from './components/interceptor/spinner.interceptor';
@@ -34,10 +33,9 @@ import { SpinnerInterceptor } from './components/interceptor/spinner.interceptor
     NavbarComponent,
     ProfileComponent,
     LoginComponent,
-    SignUpComponent,
-    SignUpAcademic,
     PaymentRegistrationComponent,
-    TopicStudentComponent
+    TopicStudentComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

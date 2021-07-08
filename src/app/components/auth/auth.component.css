@@ -1,11 +1,14 @@
-.login-form {
+.auth-form {
   min-width: 150px;
   max-width: 500px;
   width: 100%;
 }
 
-.login-full-width {
+.auth-full-width {
   width: 20rem;
+}
+.sign-up-full-width {
+  width: 100%;
 }
 .button {
   background-color: var(--primary-color);
@@ -13,4 +16,8 @@
 }
 .icono {
   color: var(--primary-color);
+}
+
+td {
+  padding-right: 8px;
 }
