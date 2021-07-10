@@ -5,9 +5,14 @@ export interface UserModel {
   firstName?:string;
   lastName?: string;
   password?:string;
-  role?:string;
+  role?:UserRole;
   secondName?:string;
-  secondLastName?:string;
-  career?:string;
-  sign?:string;
+  secondLastname?:string;
+}
+
+export enum UserRole {
+  STUDENT = "STUDENT",
+	CAREER_DIRECTOR = "CAREER_DIRECTOR",
+	AUTHORITY = "AUTHORITY",
+	FINANCIAL = "FINANCIAL"
 }

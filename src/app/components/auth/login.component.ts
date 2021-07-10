@@ -1,5 +1,6 @@
+import { Observable } from 'rxjs';
+import { UserModel, UserRole } from './../../models/user-model';
 import { Component, OnInit } from '@angular/core';
-import { UserModel } from "../../models/user-model";
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { FormBuilder, Validators } from '@angular/forms';
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   hide: boolean = true;
 
-  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -38,7 +39,38 @@ export class LoginComponent implements OnInit {
 export class SignUpComponent {
   hide: boolean = true;
 
+  public response:any = [];
+  public user: UserModel = {};
 
-  constructor() {
+  keys = Object.keys;
+  userRoles = UserRole;
+
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
+  }
+
+  private isValidEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  registerForm = this.formBuilder.group({
+    ci:['', Validators.required],
+    email: ['', [Validators.required, Validators.pattern(this.isValidEmail)]],
+    firstName:['', Validators.required],
+    lastName: ['', Validators.required],
+    password: ['', [Validators.required, Validators.minLength(8)]],
+    role: ['', Validators.required],
+    secondName:[''],
+    secondLastname: [''],
+
+  });
+
+  OnResetForm() {
+    this.registerForm.reset();
+  }
+
+  onSignUpAdmini() {
+    this.authService.signUpAdmini(this.registerForm.value).subscribe(
+      data => {
+        this.router.navigate(['']);
+      }
+    );
   }
 }
