@@ -37,31 +37,31 @@ const ELEMENT_DATA: TopicData[] = [
     position: 1,
     cedula: 1726010786,
     estudiante: 'Maria Belen Canesas Caicedo',
-    
+
   },
   {
     position: 2,
     cedula: 1726010786,
     estudiante: 'Maria Belen Canesas Caicedo',
-    
+
   },
   {
     position: 3,
     cedula: 1726010786,
     estudiante: 'Maria Belen Canesas Caicedo',
-    
+
   },
   {
     position: 4,
     cedula: 1726010786,
     estudiante: 'Maria Belen Canesas Caicedo',
-    
+
   },
   {
     position: 5,
     cedula: 1726010786,
     estudiante: 'Maria Belen Canesas Caicedo',
-    
+
   },
 
 ]

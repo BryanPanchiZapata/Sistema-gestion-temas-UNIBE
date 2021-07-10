@@ -1,0 +1,57 @@
+<div class="container" fxLayout="column" fxLayoutAlign="center center">
+  <mat-card fxLayout="column" fxLayoutAlign="center center">
+    <form fxLayout="column" class="auth-form">
+      <mat-form-field appearance="legacy" class="sign-up-full-width">
+        <mat-label>Identificación</mat-label>
+        <div fxLayout="row">
+          <input matInput id="ci" name="sign-up" placeholder="Ingrese su número de cédula de identidad o pasaporte">
+        </div>
+      </mat-form-field>
+      <table class="sign-up-full-width" cellspacing="0"><tr>
+        <td><mat-form-field appearance="legacy" class="sign-up-full-width">
+          <mat-label>Primer nombre</mat-label>
+          <input matInput id="first-name" name="sign-up" placeholder="Ingrese su primer nombre">
+        </mat-form-field></td>
+        <td><mat-form-field appearance="legacy" class="sign-up-full-width">
+          <mat-label>Segundo Nombre</mat-label>
+          <input matInput id="second=name" name="sign-up" placeholder="Ingrese su segundo nombre">
+        </mat-form-field></td>
+      </tr></table>
+      <table class="sign-up-full-width" cellspacing="0"><tr>
+        <td><mat-form-field appearance="legacy" class="sign-up-full-width">
+          <mat-label>Primer Apellido</mat-label>
+          <input matInput id="first-last-name" name="sign-up" placeholder="Ingrese su primer apellido">
+        </mat-form-field></td>
+        <td><mat-form-field appearance="legacy" class="sign-up-full-width">
+          <mat-label>Segundo Apellido</mat-label>
+          <input matInput id="second-last-name" name="sign-up" placeholder="Ingrese su segundo apellido">
+        </mat-form-field></td>
+      </tr></table>
+      <mat-form-field appearance="legacy" class="sign-up-full-width">
+        <mat-label>Email</mat-label>
+        <div fxLayout="row">
+          <input type="email" matInput id="email" name="sign-up" placeholder="Ingrese su correo electrónico institucional">
+        </div>
+      </mat-form-field>
+      <table class="sign-up-full-width" cellspacing="0"><tr>
+        <td><mat-form-field appearance="legacy" class="sign-up-full-width">
+          <mat-label>Contraseña</mat-label>
+          <input [type]="hide ? 'password' : 'text'" matInput id="password" name="sign-up" placeholder="Ingrese una contraseña">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field></td>
+        <td><mat-form-field appearance="legacy" class="sign-up-full-width">
+          <mat-label>Confirmar contraseña</mat-label>
+          <input [type]="hide ? 'password' : 'text'" matInput id="confirm-password" name="sign-up" placeholder="Ingrese nuevamante la contraseña">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field></td>
+      </tr></table>
+      <div fxLayout="row" fxFlexAlign="center">
+        <button mat-raised-button class="button" type="submit">Registarse</button>
+      </div>
+    </form>
+  </mat-card>
+</div>

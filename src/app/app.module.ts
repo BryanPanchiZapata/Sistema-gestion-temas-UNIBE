@@ -1,3 +1,4 @@
+import { SpinnerModule } from './components/spinner/spinner.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -11,13 +12,15 @@ import { TopicProposalComponent } from './components/topic-proposal/topic-propos
 import { TopicNotificationComponent } from './components/topic-notification/topic-notification.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { AuthService } from './services/auth.service';
-import { HttpClientModule } from '@angular/common/http';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
-import { TopicService } from './services/topic.service';
-import { PaymentRegistrationComponent } from './components/payment-registration/payment-registration.component';
-import { TopicStudentComponent } from './components/topic-student/topic-student.component';
+import { AuthService,  } from "./services/auth.service";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { LoginComponent, SignUpComponent } from './components/auth/login.component';
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { TopicService } from "./services/topic.service";
+import { PaymentRegistrationComponent } from "./components/payment-registration/payment-registration.component";
+import { TopicStudentComponent } from "./components/topic-student/topic-student.component";
+import { SpinnerInterceptor } from './components/interceptor/spinner.interceptor';
 
 
 @NgModule({
@@ -29,8 +32,10 @@ import { TopicStudentComponent } from './components/topic-student/topic-student.
     TopicNotificationComponent,
     NavbarComponent,
     ProfileComponent,
+    LoginComponent,
     PaymentRegistrationComponent,
-    TopicStudentComponent
+    TopicStudentComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -40,8 +45,14 @@ import { TopicStudentComponent } from './components/topic-student/topic-student.
     HttpClientModule,
     FlexLayoutModule,
     FormsModule,
+    SpinnerModule,
+    ReactiveFormsModule,
   ],
-  providers: [AuthService, TopicService],
+  providers: [
+    AuthService,
+    TopicService,
+    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
