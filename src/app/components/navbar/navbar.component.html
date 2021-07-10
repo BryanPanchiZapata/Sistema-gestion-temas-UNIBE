@@ -1,18 +1,19 @@
 <div class="container__nav">
   <nav class="nav">
     <ul class="nav__ul">
-      <li>
+      <button mat-button>
         <a class="title__nav" [routerLink]="['/banco-de-temas']"
           >Banco de temas</a
         >
-      </li>
-      <li>
+      </button>
+      <button mat-button>
         <a
           class="title__nav"
           [routerLink]="['/notificación-de-aprobación-de-tema']"
           >Notificaciones de aprobación de tema</a
         >
-      </li>
+      </button>
+
       <li>
         <a class="title__nav" [matMenuTriggerFor]="menu"
           ><img src="../../assets/user.png" alt="UserModel"

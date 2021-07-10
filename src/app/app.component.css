@@ -26,3 +26,17 @@
   background: #fff;
   height: 55px;
 }
+@media screen and (max-width: 858px) {
+  .img__logo {
+    position: absolute;
+    top: 0.3rem;
+    left: 0.5rem;
+  }
+  .img__logo img {
+    height: 90px;
+  }
+  .color__logo__Brown h2 {
+    font-size: 1.2rem;
+    margin-left: 7rem;
+  }
+}

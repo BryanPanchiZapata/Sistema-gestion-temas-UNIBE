@@ -55,5 +55,4 @@ import { SpinnerInterceptor } from './components/interceptor/spinner.interceptor
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

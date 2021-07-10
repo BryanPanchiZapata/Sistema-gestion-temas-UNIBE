@@ -7,6 +7,8 @@ import {LoginComponent} from "./components/auth/login.component";
 import {NavbarComponent} from "./components/navbar/navbar.component";
 import {TopicProposalComponent} from "./components/topic-proposal/topic-proposal.component";
 import {TopicDenunciationComponent} from "./components/topic-denunciation/topic-denunciation.component";
+import { PaymentRegistrationComponent } from './components/payment-registration/payment-registration.component';
+import { TopicStudentComponent } from './components/topic-student/topic-student.component';
 
 const routes: Routes = [
   {
@@ -26,12 +28,20 @@ const routes: Routes = [
         component: TopicNotificationComponent,
       },
       {
+        path: TopicProposalComponent.END_POINT,
+        component: TopicProposalComponent,
+      },
+      {
         path: ProfileComponent.END_POINT,
         component: ProfileComponent,
       },
       {
-        path: TopicProposalComponent.END_POINT,
-        component: TopicProposalComponent,
+        path: PaymentRegistrationComponent.END_POINT,
+        component: PaymentRegistrationComponent,
+      },
+      {
+        path: TopicStudentComponent.END_POINT,
+        component: TopicStudentComponent,
       },
     ]
   },
