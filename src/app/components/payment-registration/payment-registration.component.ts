@@ -3,12 +3,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-  selector: 'app-paid-registration',
-  templateUrl: './paid-registration.component.html',
-  styleUrls: ['./paid-registration.component.css']
+  selector: 'app-payment-registration',
+  templateUrl: './payment-registration.component.html',
+  styleUrls: ['./payment-registration.component.css']
 })
-export class PaidRegistrationComponent implements AfterViewInit {
-
+export class PaymentRegistrationComponent implements AfterViewInit {
+  static END_POINT = 'payment-registration';
   displayedColumns: string[] = ['position', 'cedula', 'estudiante', 'estado'];
   dataSource = new MatTableDataSource<TopicData>(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;

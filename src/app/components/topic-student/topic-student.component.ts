@@ -8,6 +8,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./topic-student.component.css'],
 })
 export class TopicStudentComponent implements AfterViewInit {
+  static END_POINT = 'topic-student';
   displayedColumns: string[] = ['position', 'tema', 'estado'];
   dataSource = new MatTableDataSource<TopicData>(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;

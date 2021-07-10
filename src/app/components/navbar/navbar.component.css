@@ -13,7 +13,7 @@
 .nav__ul {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   list-style: none;
 }
@@ -34,6 +34,7 @@
   color: #92b0f7;
 }
 
+
 @media screen and (max-width: 1280px) {
   .nav {
     height: 50px;
@@ -49,4 +50,17 @@
     justify-content: center;
   }
 }
-
+@media screen and (max-width: 858px) {
+  .img__logo {
+    position: absolute;
+    top: 0.3rem;
+    left: 0.5rem;
+  }
+  .img__logo img {
+    height: 90px;
+  }
+  .color__logo__Brown h2 {
+    font-size: 1.2rem;
+    margin-left: 7rem;
+  }
+}

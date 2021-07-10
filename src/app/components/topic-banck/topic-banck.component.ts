@@ -1,7 +1,8 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import {TopicModel} from "../../models/topic-model";
+import { TopicService } from 'src/app/services/topic.service';
+import { TopicModel } from '../../models/topic-model';
 
 @Component({
   selector: 'app-topic-banck',
@@ -9,9 +10,13 @@ import {TopicModel} from "../../models/topic-model";
   templateUrl: './topic-banck.component.html',
 })
 export class TopicBanckComponent implements AfterViewInit {
-  public topic : TopicModel = {};
-  public topics : TopicModel[] = [];
+  public topics: TopicModel[];
+  public topic: TopicModel = {};
+  /*   public topics: TopicModel[] = []; */
 
+  constructor(private topicService: TopicService) {
+    this.topics = [];
+  }
   displayedColumns: string[] = [
     'position',
     'tema',
@@ -21,7 +26,7 @@ export class TopicBanckComponent implements AfterViewInit {
     'evaluacion',
     'accion',
   ];
-  dataSource = new MatTableDataSource<TopicData>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
@@ -35,9 +40,15 @@ export class TopicBanckComponent implements AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+  ngOnInit(): void {
+    this.synch();
+  }
+  synch(): void {
+    this.topicService.getAllTopic().subscribe((data) => console.log(data));
+  }
 }
 
-export interface TopicData {
+/* export interface TopicData {
   position: number;
   tema: string;
   articulacion: string;
@@ -128,3 +139,4 @@ const ELEMENT_DATA: TopicData[] = [
     evaluacion: 'Aprobado',
   },
 ];
+ */
