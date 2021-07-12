@@ -1,18 +1,27 @@
+import { CareerModel } from './career-model';
 export interface UserModel {
   id?: string;
-  ci?:string;
-  email?:string;
-  firstName?:string;
+  ci?: string;
+  email?: string;
+  firstName?: string;
   lastName?: string;
-  password?:string;
-  role?:UserRole;
-  secondName?:string;
-  secondLastname?:string;
+  password?: string;
+  role?: UserRole;
+  secondName?: string;
+  secondLastname?: string;
+}
+
+export interface UserAcademicModel extends UserModel {
+  career?: CareerModel;
+  sign?: string;
 }
 
 export enum UserRole {
-  STUDENT = "STUDENT",
-	CAREER_DIRECTOR = "CAREER_DIRECTOR",
-	AUTHORITY = "AUTHORITY",
-	FINANCIAL = "FINANCIAL"
+  'Estudiante' = 'STUDENT',
+  'Director de carrera' = 'CAREER_DIRECTOR',
+  'Autoridad' = 'AUTHORITY',
+  'Dirección Financiera' = 'FINANCIAL'
 }
+
+
+

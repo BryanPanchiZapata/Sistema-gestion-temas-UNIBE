@@ -44,7 +44,7 @@ export class TopicBanckComponent implements AfterViewInit {
     this.synch();
   }
   synch(): void {
-    this.topicService.getAllTopic().subscribe((data) => console.log(data));
+    this.topicService.getAllTopic().subscribe();
   }
 }
 
