@@ -1,10 +1,11 @@
 import { Router } from '@angular/router';
 import { AuthService } from './../../../services/auth.service';
 import { CareerService } from './../../../services/career.service';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { UserModel, UserRole } from './../../../models/user-model';
 import { Component, OnInit } from '@angular/core';
 import { CareerModel } from 'src/app/models/career-model';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 @Component({
   selector: 'app-sign-up',
@@ -40,26 +41,24 @@ export class SignUpComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(8)]],
     secondName: [''],
     secondLastname: [''],
-  });
-
-  roleForm = this.formBuilder.group({
     role: ['', Validators.required]
+
   });
 
   careerForm = this.formBuilder.group({
     career: ['', Validators.required]
   });
 
+  matcher = new MyErrorStateMatcher();
 
   OnResetForm() {
     this.registerForm.reset();
-    this.roleForm.reset();
     this.careerForm.reset();
   }
 
   onSignUpAdmini() {
-    let user = Object.assign(this.registerForm.value, this.roleForm.value);
-    if (this.registerForm.valid, this.roleForm.valid) {
+    let user = Object.assign(this.registerForm.value);
+    if (this.registerForm.valid) {
       this.authService.signUpAdmini(user).subscribe(
         data => {
           this.router.navigate(['']);
@@ -70,8 +69,8 @@ export class SignUpComponent implements OnInit {
   }
 
   onSignUpAcademic() {
-    let user = Object.assign(this.registerForm.value, this.roleForm.value, this.careerForm.value);
-    if (this.registerForm.valid, this.roleForm.valid, this.careerForm.valid) {
+    let user = Object.assign(this.registerForm.value, this.careerForm.value);
+    if (this.registerForm.valid, this.careerForm.valid) {
       this.authService.signUpAcademic(user).subscribe(
         data => {
           this.router.navigate(['']);
@@ -79,5 +78,12 @@ export class SignUpComponent implements OnInit {
         }
       );
     }
+  }
+}
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }

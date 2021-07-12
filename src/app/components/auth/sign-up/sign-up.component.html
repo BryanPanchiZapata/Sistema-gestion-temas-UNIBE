@@ -1,41 +1,39 @@
 <div class="container" fxLayout="column" fxLayoutAlign="center center">
   <mat-card fxLayout="column" fxLayoutAlign="center center" class="auth-form">
+    <form fxLayout="column" [formGroup]="registerForm">
+      <table cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field appearance="legacy" class="auth-full-width">
+              <mat-label>Rol que desempeña</mat-label>
+              <mat-select required formControlName="role">
+                <mat-option *ngFor="let role of userRoles | keyvalue" [value]="role.value">
+                  {{role.key}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="registerForm.get('role')?.hasError('required')">Campo <strong>obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </td>
+          <td
+            *ngIf="registerForm.get('role')?.value === 'STUDENT' || registerForm.get('role')?.value === 'CAREER_DIRECTOR' ">
+            <form [formGroup]="careerForm">
+              <mat-form-field appearance="legacy" class="auth-full-width">
+                <mat-label>Carrera</mat-label>
+                <mat-select required formControlName="career">
+                  <mat-option *ngFor="let career of careers" [value]="career">
+                    {{career.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="careerForm.get('career')?.hasError('required')">Campo <strong>obligatorio</strong>
+                </mat-error>
+              </mat-form-field>
+            </form>
+          </td>
+        </tr>
+      </table>
 
-   <table cellspacing="0">
-     <tr>
-      <td>
-        <form [formGroup]="roleForm">
-          <mat-form-field appearance="legacy" class="auth-full-width">
-            <mat-label>Rol que desempeña</mat-label>
-            <mat-select required formControlName="role">
-              <mat-option *ngFor="let role of userRoles | keyvalue" [value]="role.value">
-                {{role.key}}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="roleForm.get('role')?.hasError('required')">Campo <strong>obligatorio</strong>
-            </mat-error>
-          </mat-form-field>
-        </form>
-       </td>
-        <td *ngIf="roleForm.get('role')?.value === 'STUDENT' || roleForm.get('role')?.value === 'CAREER_DIRECTOR' ">
-          <form [formGroup]="careerForm">
-          <mat-form-field appearance="legacy" class="auth-full-width">
-            <mat-label>Carrera</mat-label>
-            <mat-select required formControlName="career">
-              <mat-option *ngFor="let career of careers" [value]="career">
-                {{career.name}}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="careerForm.get('career')?.hasError('required')">Campo <strong>obligatorio</strong>
-            </mat-error>
-          </mat-form-field>
-        </form>
-        </td>
-     </tr>
-   </table>
-
-    <div *ngIf="roleForm.get('role')?.value !null" fxLayout="column" fxLayoutAlign="center center">
-      <form fxLayout="column" [formGroup]="registerForm">
+      <div *ngIf="registerForm.get('role')?.value !null" fxLayout="column" fxLayoutAlign="center center">
         <mat-form-field appearance="legacy">
           <mat-label>Identificación</mat-label>
           <input matInput text="text" required formControlName="ci"
@@ -117,19 +115,21 @@
             </td>
           </tr>
         </table>
-      </form>
 
-      <div fxLayout="row" fxFlexAlign="center">
-        <button mat-raised-button class="button" type="submit" (click)="onSignUpAdmini()"
-          *ngIf="roleForm.get('role')?.value === 'FINANCIAL' || roleForm.get('role')?.value === 'AUTHORITY' "
-          [disabled]="registerForm.invalid">Registarse
-        </button>
+        <div fxLayout="row" fxFlexAlign="center">
+          <button mat-raised-button class="button" type="submit" (click)="onSignUpAdmini()"
+            *ngIf="registerForm.get('role')?.value === 'FINANCIAL' || registerForm.get('role')?.value === 'AUTHORITY' "
+            [disabled]="registerForm.invalid">Registarse
+          </button>
 
-        <button mat-raised-button class="button" type="submit" (click)="onSignUpAcademic()"
-          *ngIf="roleForm.get('role')?.value === 'STUDENT' || roleForm.get('role')?.value === 'CAREER_DIRECTOR' "
-          [disabled]="registerForm.invalid || careerForm.invalid">Registarse
-        </button>
+          <button mat-raised-button class="button" type="submit" (click)="onSignUpAcademic()"
+            *ngIf="registerForm.get('role')?.value === 'STUDENT' || registerForm.get('role')?.value === 'CAREER_DIRECTOR' "
+            [disabled]="registerForm.invalid || careerForm.invalid">Registarse
+          </button>
+        </div>
+
       </div>
-    </div>
+    </form>
+
   </mat-card>
 </div>
