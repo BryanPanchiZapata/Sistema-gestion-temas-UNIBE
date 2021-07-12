@@ -6,7 +6,7 @@
           <mat-form-field appearance="legacy" class="auth-full-width">
             <mat-label>Identificación</mat-label>
             <div fxLayout="row">
-              <input matInput required #ci="ngModel" name="ci" [(ngModel)]="user.ci">
+              <input matInput required #ci="ngModel" name="ci" [(ngModel)]="user.ci" placeholder="Ingrese su número de identificación">
               <mat-icon >person</mat-icon>
             </div>
             <mat-error *ngIf="!ci.valid || ci.pristine"> La identificación es <strong>requerida</strong></mat-error>
@@ -14,7 +14,7 @@
           <mat-form-field appearance="legacy" class="auth-full-width">
             <mat-label>Contraseña</mat-label>
             <div fxLayout="row">
-              <input matInput [type]="hide ? 'password' : 'text'" required #password="ngModel" name="password" [(ngModel)]="user.password">
+              <input matInput [type]="hide ? 'password' : 'text'" required #password="ngModel" name="password" [(ngModel)]="user.password" placeholder="Ingrese su contraseña">
               <button mat-icon-button matSuffix class="icon-button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>

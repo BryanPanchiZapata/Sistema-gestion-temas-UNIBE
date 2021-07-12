@@ -1,8 +1,7 @@
-import { CiValidator } from './../validate-ci';
 import { Router } from '@angular/router';
 import { AuthService } from './../../../services/auth.service';
 import { CareerService } from './../../../services/career.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { UserModel, UserRole } from './../../../models/user-model';
 import { Component, OnInit } from '@angular/core';
 import { CareerModel } from 'src/app/models/career-model';
@@ -19,8 +18,6 @@ export class SignUpComponent implements OnInit {
   user: UserModel = {};
   careers: CareerModel[];
   userRoles = UserRole;
-  typesId = TypeId;
-
 
   constructor(private formBuilder: FormBuilder, private careerService: CareerService, private authService: AuthService, private router: Router) {
   }
@@ -36,7 +33,7 @@ export class SignUpComponent implements OnInit {
   private isValidEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   registerForm = this.formBuilder.group({
-    ci: ['', [Validators.required, CiValidator.validateCi]],
+    ci: ['', Validators.required],
     email: ['', [Validators.required, Validators.pattern(this.isValidEmail)]],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
@@ -84,8 +81,3 @@ export class SignUpComponent implements OnInit {
     }
   }
 }
-export enum TypeId {
-  "Pasaporte",
-  "Cédula de Identidad"
-}
-
