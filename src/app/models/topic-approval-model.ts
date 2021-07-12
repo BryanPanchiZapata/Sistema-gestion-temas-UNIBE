@@ -3,5 +3,18 @@ export interface TopicApprovalModel {
   meetingDate?: Text;
   meetingNumber?: string;
   observations?: string;
-  career_id?: string;
+  topicStudent: {
+    student: {
+      career:{
+        degree: string;
+      }
+      firstName: string;
+      lastName: string;
+      secondName: string;
+      secondLastname: string;
+    };
+    topic: {
+      name: string;
+    }
+  };
 }

@@ -9,21 +9,20 @@
         <input type="number" required />
       </div>
       <div>
-        <span>Quito, DM. {{today | date:'dd-MM-yyyy'}}</span>
+        <span>Quito, DM. {{ today | date: "dd-MM-yyyy" }}</span>
       </div>
     </div>
     <div class="form__texts" *ngFor="let item of approvals">
       <h3>Señor</h3>
-      <input
-        class="input__name"
-        type="text"
-        placeholder="Apellidos y Nombres del estudiante "
-        required
-      />
+      <b><span>{{ item.topicStudent.student.firstName }} </span>
+      <span>{{ item.topicStudent.student.lastName }} </span>
+      <span>{{ item.topicStudent.student.secondName }} </span>
+      <span>{{ item.topicStudent.student.secondLastname }}</span></b>
+
       <h3 class="spacing">Presente.</h3>
       <h3>De nuestras consideraciones:</h3>
-      <span>Por medio de la presente el Comité de Grado de la Carrera de</span>
-      <input class="form__carrera" type="text" required />
+      <span>Por medio de la presente el Comité de Grado de la Carrera de </span>
+      <b><span>{{item.topicStudent.student.career.degree}} </span></b>
       <span
         >de la Universidad Iberoamericana del Ecuador (UNIB.E), en reunión
         ordinaria No.</span
@@ -32,7 +31,7 @@
       <span>fecha</span>
       <input class="form__date" type="date" required />
       <span>, le informa que su propuesta de investigación titulada:</span>
-      <input class="form__tema" type="text" required />
+      <b><span> {{ item.topicStudent.topic.name }}</span></b>
       <div class="form__observaciones">
         <h3>Aprobado con las siguientes observaciones:</h3>
         <textarea id="" cols="30" rows="10"></textarea>
@@ -41,7 +40,7 @@
         <h3 class="firma">Elaborado Por:</h3>
       </div>
       <div class="buttons">
-        <a><button class="primary" mat-raised-button>Enviar</button></a>
+        <a><button type="submit" class="primary" mat-raised-button>Enviar</button></a>
         <a download=""
           ><button class="second" mat-raised-button>Imprimir</button></a
         >
@@ -49,29 +48,3 @@
     </div>
   </mat-card>
 </div>
-
-
-<!-- <mat-card class="example-card" >
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{item.observations}}</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-  </mat-card-header>
-  <img
-    mat-card-image
-    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-    alt="Photo of a Shiba Inu"
-  />
-  <mat-card-content>
-    <p>
-      The Shiba Inu is the smallest of the six original and distinct spitz
-      breeds of dog from Japan. A small, agile dog that copes very well with
-      mountainous terrain, the Shiba Inu was originally bred for hunting.
-    </p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions>
-</mat-card>
- -->
