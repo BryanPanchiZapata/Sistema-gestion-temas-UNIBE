@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="container__form">
+  <mat-card class="container__form">
     <figure class="unibe__form">
       <img src="../../../assets/unibe_form.png" alt="UNIBE" />
     </figure>
@@ -9,11 +9,10 @@
         <input type="number" required />
       </div>
       <div>
-        <span>Quito, DM.</span>
-        <input type="date" required />
+        <span>Quito, DM. {{today | date:'dd-MM-yyyy'}}</span>
       </div>
     </div>
-    <div class="form__texts">
+    <div class="form__texts" *ngFor="let item of approvals">
       <h3>Señor</h3>
       <input
         class="input__name"
@@ -48,5 +47,31 @@
         >
       </div>
     </div>
-  </div>
+  </mat-card>
 </div>
+
+
+<!-- <mat-card class="example-card" >
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{item.observations}}</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+  </mat-card-header>
+  <img
+    mat-card-image
+    src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+    alt="Photo of a Shiba Inu"
+  />
+  <mat-card-content>
+    <p>
+      The Shiba Inu is the smallest of the six original and distinct spitz
+      breeds of dog from Japan. A small, agile dog that copes very well with
+      mountainous terrain, the Shiba Inu was originally bred for hunting.
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>
+ -->

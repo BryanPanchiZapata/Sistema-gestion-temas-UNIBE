@@ -29,9 +29,8 @@ table {
 }
 td,
 th {
-  width: 5%;
+  width: 1%;
 }
-
 @media screen and (max-width: 858px) {
   .container__button {
     flex-direction: column;
@@ -39,7 +38,7 @@ th {
   }
   input {
     width: 100%;
-    padding: .5rem 0;
+    padding: 0.5rem 0;
   }
   .button__topicbanck {
     margin-top: 1rem;

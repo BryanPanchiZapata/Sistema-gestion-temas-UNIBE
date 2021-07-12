@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicService } from 'src/app/services/topic.service';
-import { TopicModel } from '../../models/topic-model';
 
 @Component({
   selector: 'app-topic-banck',
@@ -10,12 +10,15 @@ import { TopicModel } from '../../models/topic-model';
   templateUrl: './topic-banck.component.html',
 })
 export class TopicBanckComponent implements AfterViewInit {
-  public topics: TopicModel[];
-  public topic: TopicModel = {};
-  /*   public topics: TopicModel[] = []; */
+  dataSource = new MatTableDataSource();
 
-  constructor(private topicService: TopicService) {
-    this.topics = [];
+  constructor(private topicService: TopicService, public dialog: MatDialog) {
+    this.topicService.getAllTopic().subscribe((data) => {
+      this.dataSource.data = data;
+    });
+  }
+  openDialog() {
+    this.dialog.open(DialogElementComponent);
   }
   displayedColumns: string[] = [
     'position',
@@ -26,7 +29,6 @@ export class TopicBanckComponent implements AfterViewInit {
     'evaluacion',
     'accion',
   ];
-  dataSource = new MatTableDataSource;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
@@ -41,102 +43,13 @@ export class TopicBanckComponent implements AfterViewInit {
     }
   }
   ngOnInit(): void {
-    this.synch();
-  }
-  synch(): void {
-    this.topicService.getAllTopic().subscribe((data) => console.log(data));
+    this.dataSource.paginator = this.paginator;
   }
 }
 
-/* export interface TopicData {
-  position: number;
-  tema: string;
-  articulacion: string;
-  estado: string;
-  carrera: string;
-  evaluacion: string;
-}
-
-const ELEMENT_DATA: TopicData[] = [
-  {
-    position: 1,
-    tema: 'Titulo proyecto',
-    articulacion: 'Prácticas Laborales',
-    estado: 'En ejecución',
-    carrera: 'Software',
-    evaluacion: 'Aprobado',
-  },
-  {
-    position: 2,
-    tema: 'Titulo proyecto',
-    articulacion: 'Prácticas Laborales',
-    estado: 'En ejecución',
-    carrera: 'Software',
-    evaluacion: 'Aprobado',
-  },
-  {
-    position: 3,
-    tema: 'Titulo proyecto',
-    articulacion: 'Prácticas Laborales',
-    estado: 'En ejecución',
-    carrera: 'Software',
-    evaluacion: 'Aprobado',
-  },
-  {
-    position: 4,
-    tema: 'Titulo proyecto',
-    articulacion: 'Prácticas Laborales',
-    estado: 'En ejecución',
-    carrera: 'Software',
-    evaluacion: 'Aprobado',
-  },
-  {
-    position: 5,
-    tema: 'Titulo proyecto',
-    articulacion: 'Prácticas Laborales',
-    estado: 'En ejecución',
-    carrera: 'Software',
-    evaluacion: 'Aprobado',
-  },
-  {
-    position: 6,
-    tema: 'Titulo proyecto',
-    articulacion: 'Prácticas Laborales',
-    estado: 'En ejecución',
-    carrera: 'Software',
-    evaluacion: 'Aprobado',
-  },
-  {
-    position: 7,
-    tema: 'Titulo proyecto',
-    articulacion: 'Prácticas Laborales',
-    estado: 'En ejecución',
-    carrera: 'Software',
-    evaluacion: 'Aprobado',
-  },
-  {
-    position: 8,
-    tema: 'Titulo proyecto',
-    articulacion: 'Prácticas Laborales',
-    estado: 'En ejecución',
-    carrera: 'Software',
-    evaluacion: 'Aprobado',
-  },
-  {
-    position: 9,
-    tema: 'Titulo proyecto',
-    articulacion: 'Prácticas Laborales',
-    estado: 'En ejecución',
-    carrera: 'Software',
-    evaluacion: 'Aprobado',
-  },
-  {
-    position: 10,
-    tema: 'Titulo proyecto',
-    articulacion: 'Prácticas Laborales',
-    estado: 'En ejecución',
-    carrera: 'Software',
-    evaluacion: 'Aprobado',
-  },
-];
- */
+@Component({
+  selector: 'dialog-element',
+  templateUrl: './dialog-element.component.html',
+  styleUrls: ['./topic-banck.component.css'],
+})
+export class DialogElementComponent {}
