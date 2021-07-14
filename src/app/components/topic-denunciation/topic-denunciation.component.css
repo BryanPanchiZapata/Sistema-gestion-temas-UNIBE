@@ -1,3 +1,21 @@
+.container__career{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.uno{
+
+}
+.dos{
+  width: 30%;
+}
+.container__info{
+  display: flex;
+}
+b{
+  width: 25%;
+}
+
 .container {
   padding: 1rem;
 }
@@ -69,7 +87,6 @@ input {
 }
 
 span {
-  display: block;
   padding: 0.8rem 0;
 }
 span input {
