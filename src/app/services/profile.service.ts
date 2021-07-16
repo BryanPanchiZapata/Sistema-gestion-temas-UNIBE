@@ -6,22 +6,20 @@ import { catchError, map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class TopicApprovalService {
-  private url = 'https://degreetopics-api.herokuapp.com/degreetopics/v1/approval_notification';
+export class ProfileService {
 
-  constructor(private http: HttpClient) { }
-
-  getAllTopicApproval(): Observable<any> {
-    return this.http.get(this.url).pipe(
+  private url = 'https://degreetopics-api.herokuapp.com/degreetopics/v1/academic';
+  constructor(private http: HttpClient) {}
+ /*  getAllAcademic(): Observable<any> {
+    return this.http.get(`${this.url}/academic`).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);
         return error;
       })
     );
-  }
-
-  getProductById(id: String): Observable<any> {
+  } */
+  getByIdAcademic(id: String): Observable<any> {
     return this.http.get(this.url + "/" + id).pipe(
       map(response => response), catchError(error => {
           alert(error.error);

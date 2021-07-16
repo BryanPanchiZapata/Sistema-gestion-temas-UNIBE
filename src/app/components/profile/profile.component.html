@@ -1,31 +1,34 @@
 <div class="container">
-  <div class="container__form">
+  <mat-card class="container__form" *ngFor="let academic of academics">
     <h1 class="title">INFORMACIÓN PERSONAL</h1>
     <div class="container__info">
-        <div class="info__data">
-            <h4>NOMBRES Y APELLIDOS</h4>
-            <h4>IDENTIFICACIÓN DEL SISTEMA </h4>
-            <h4>CONTRASEÑA</h4>
-            <h4>NÚMERO DE CÉDULA</h4>
-            <h4>CORREO ELECTRONICO</h4>
-            <h4>TIPO DE USUARIO</h4>
-            <h4>CARRERA</h4>
-        </div>
-        <div class="info__dinamic">
-            <h4>NOMBRES Y APELLIDOS</h4>
-            <h4>-----------</h4>
-            <h4>CONTRASEÑA</h4>
-            <h4>NÚMERO DE CÉDULA</h4>
-            <h4>CORREO ELECTRONICO</h4>
-            <h4>TIPO DE USUARIO</h4>
-            <h4>CARRERA</h4>
-        </div>
+      <div class="info__data">
+        <h4>NOMBRES Y APELLIDOS</h4>
+        <h4>IDENTIFICACIÓN DEL SISTEMA</h4>
+        <h4>CONTRASEÑA</h4>
+        <h4>NÚMERO DE CÉDULA</h4>
+        <h4>CORREO ELECTRONICO</h4>
+        <h4>TIPO DE USUARIO</h4>
+        <h4>CARRERA</h4>
+      </div>
+      <div class="info__dinamic">
+        <h4>
+          <span>{{ academic.firstName }} </span>
+          <span>{{ academic.lastName }} </span>
+          <span>{{ academic.secondName }} </span>
+          <span>{{ academic.secondLastname }}</span>
+        </h4>
+        <h4>{{ academic.sign }}</h4>
+        <h4>{{ academic.password}}</h4>
+        <h4>{{ academic.ci }}</h4>
+        <h4>{{ academic.email }}</h4>
+        <h4>{{ academic.role }}</h4>
+        <h4>{{ academic.career.name }}</h4>
+      </div>
     </div>
-    
-  </div>
+  </mat-card>
   <div class="buttons">
     <a><button class="primary" mat-raised-button>Editar</button></a>
-    <a download=""
-      ><button class="second" mat-raised-button>Guardar</button></a
-    >
+    <a download=""><button class="second" mat-raised-button>Guardar</button></a>
+  </div>
 </div>

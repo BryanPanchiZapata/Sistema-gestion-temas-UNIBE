@@ -1,27 +1,23 @@
-.container__career{
+.container {
+  padding: 1rem 0;
+}
+.container__data {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: .3rem;
 }
-.uno{
-
-}
-.dos{
+.inputs {
   width: 30%;
+  margin: 0.4rem 0;
 }
-.container__info{
+.container__info {
   display: flex;
 }
-b{
+b {
   width: 25%;
-}
-
-.container {
-  padding: 1rem;
 }
 .container__form {
   width: 70%;
-  border: 2px solid #e1e3e8;
   border-radius: 0.6rem;
   margin: 3rem auto;
   padding: 2rem 1.5rem;
@@ -66,12 +62,7 @@ b{
   font-weight: bold;
 }
 
-.form__inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 90%;
-}
+
 input {
   width: 80%;
   border: 1px solid #767676;
@@ -104,7 +95,6 @@ h4 {
   width: 100%;
   margin: 1rem 0;
 }
-
 .form__selector h4 {
   font-weight: bold;
 }

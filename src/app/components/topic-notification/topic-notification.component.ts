@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TopicApprovalService } from 'src/app/services/topic-approval.service';
-import { TopicApprovalModel } from '../../models/topic-approval-model'
+import { TopicApprovalModel } from '../../models/topic-approval-model';
 
 @Component({
   selector: 'app-topic-notification',
@@ -8,12 +9,16 @@ import { TopicApprovalModel } from '../../models/topic-approval-model'
   styleUrls: ['./topic-notification.component.css'],
 })
 export class TopicNotificationComponent implements OnInit {
-  static END_POINT = 'topic-approval';
+  static END_POINT = 'topic-approval/:id';
+  private readonly id: string | null;
+  public approvals: TopicApprovalModel[];
+  router: any;
 
-  public approvals:TopicApprovalModel[];
-
-  constructor(private topicApprovalService: TopicApprovalService) {
-    this.approvals = [];
+  constructor(
+    private topicApprovalService: TopicApprovalService,
+    private route: ActivatedRoute
+  ) {
+    this.id = this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
@@ -21,11 +26,15 @@ export class TopicNotificationComponent implements OnInit {
   }
 
   synch(): void {
-    this.topicApprovalService.getAllTopicApproval().subscribe((data) => {
-      this.approvals = data;
-      console.log(data);
-    });
+    if (this.id !== null)
+      this.topicApprovalService
+        .getProductById(this.id)
+        .subscribe((data) => (this.approvals = data));
+  }
+
+  navigateToNotification(approvals: TopicApprovalModel): void {
+    this.router.navigate(['/topic-approval/' + approvals.id]);
   }
   today = Date.now();
-    fixedTimezone = this.today;
+  fixedTimezone = this.today;
 }

@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="container__form" *ngFor="let denunciation of denunciations">
+  <mat-card class="container__form" *ngFor="let denunciation of denunciations">
     <figure class="unibe__img">
       <img src="../../../assets/unibe_form.png" alt="UNIBE" />
     </figure>
@@ -9,110 +9,61 @@
     </div>
     <div class="form__data">
       <h4>DATOS GENERALES:</h4>
-      <h4>Valor: $10</h4>
     </div>
+    <div class="container">
+      <p class="container__data">
+        <b>Apellidos:</b>
+        <span class="margen"
+          >{{ denunciation.topicStudent.student.secondName }} 
+        </span>
+        <span class="margen">{{
+          denunciation.topicStudent.student.secondLastname
+        }}</span>
+      </p>
 
-    <p class="container__career">
-      <b>Apellidos:</b>
-      <span class="margen">{{ denunciation.topicStudent.student.secondName }} </span>
-      <span class="margen">{{ denunciation.topicStudent.student.secondLastname }}</span>
-    </p>
+      <p class="container__data">
+        <b>Nombres: </b>
+        <span class="margen"
+          >{{ denunciation.topicStudent.student.firstName }}
+        </span>
+        <span class="margen">{{
+          denunciation.topicStudent.student.lastName
+        }}</span>
+      </p>
 
-    <p class="container__career">
-      <b>Nombres: </b>
-      <span class="margen">{{ denunciation.topicStudent.student.firstName }} </span>
-      <span class="margen">{{ denunciation.topicStudent.student.lastName }}</span>
-    </p>
+      <p class="container__data">
+        <b>Cédula de Identidad: </b>
+        <span class="margen">{{ denunciation.topicStudent.student.ci }} </span>
+      </p>
 
-    <p class="container__career">
-      <b>Cédula de Identidad: </b>
-      <span class="margen">{{ denunciation.topicStudent.student.ci }} </span>
-    </p>
+      <p class="container__data">
+        <b>Carrera: </b>
+        <span class="margen"
+          >{{ denunciation.topicStudent.student.career.name }}
+        </span>
+      </p>
 
-    <p class="container__career">
-      <b>Carrera: </b>
-      <span class="margen">{{ denunciation.topicStudent.student.career.name }} </span>
-    </p>
+      <p class="container__data">
+        <b>Semestre: </b>
+        <span class="margen">{{ denunciation.semesterLevel }} </span>
+      </p>
 
-    <p class="container__career">
-      <b>Semestre: </b>
-      <span class="margen">{{ denunciation.semesterLevel }} </span>
-    </p>
-
-    <div class="container__career">
-      <b>Director (a) de carrera: </b>
-      <input class="dos" type="text" placeholder="Director(a) de carrera" required />
-  </div>
-    <p class="container__career">
-      <b >Ciudad/Fecha: </b>
-
-      <input class="dos" type="text" placeholder="Ciudad" required />
-      <span>{{ today | date: "dd-MM-yyyy" }}</span>
-    </p>
-
-
-
-
-    <!-- 
-    <div class="container__info">
-      <div class="info">
-        <p>Apellidos:</p>
-        <p>Nombres:</p>
-        <p>Cédula de Identidad:</p>
-        <p>Carrera:</p>
-        <p>Semestre:</p>
-        <p>Director (a) de carrera:</p>
-        <p>Ciudad/Fecha:</p>
+      <div class="container__data">
+        <b>Director (a) de carrera: </b>
+        <input
+          class="inputs"
+          type="text"
+          placeholder="Director(a) de carrera"
+          required
+        />
       </div>
-      <div class="data">
-        <span>{{ denunciation.topicStudent.student.secondName }} </span>
-        <span>{{ denunciation.topicStudent.student.secondLastname }}</span>
+      <p class="container__data">
+        <b>Ciudad/Fecha: </b>
 
-        <span>{{ denunciation.topicStudent.student.firstName }} </span>
-        <span>{{ denunciation.topicStudent.student.lastName }}</span>
-
-        <p>{{ denunciation.topicStudent.student.ci }} </p>
-
-        <p>{{ denunciation.topicStudent.student.career.name }} </p>
-
-        <p>{{ denunciation.semesterLevel }} </p>
-
-        <input type="text" placeholder="Director(a) de carrera" required />
-
-        <input type="text" placeholder="Ciudad" required />
+        <input class="inputs" type="text" placeholder="Ciudad" required />
         <span>{{ today | date: "dd-MM-yyyy" }}</span>
-      </div>
-    </div> -->
-
-
-
-
-    <!-- <div class="container__global">
-      <div class="form__info">
-        <p>Apellidos:</p>
-        <p>Nombres:</p>
-        <p>Cédula de Identidad:</p>
-        <p>Carrera:</p>
-        <p>Semestre:</p>
-        <p>Director (a) de carrera:</p>
-        <p>Ciudad/Fecha:</p>
-      </div>
-      <div class="form__inputs">
-        <input type="text" placeholder="Apellidos" required />
-        <input type="text" placeholder="Nombres" required />
-        <input type="number" placeholder="Cédula" required />
-        <input type="text" placeholder="Carrera" required />
-        <input type="text" placeholder="Semestre" required />
-        <input type="text" placeholder="Director de carrera" required />
-        <div class="form__date__city">
-          <input type="text" placeholder="Ciudad" required />
-          <input type="date" required />
-        </div>
-      </div>
-    </div> -->
-
-
-
+      </p>
+    </div>
     <p>De mis consideraciones.</p>
     <p>
       Solicito la evaluación de la propuesta del Trabajo de Titulación o Trabajo
@@ -123,7 +74,8 @@
     </p>
     <p>Los datos de la propuesta se especifican a continuación:</p>
     <div class="form__topic">
-      <h4>Tema:</h4><br>
+      <h4>Tema:</h4>
+      <br />
       <p>{{ denunciation.topicStudent.topic.name }}</p>
       <h4>Línea de investigación:</h4>
       <input class="topic__texts" type="text" name="" id="investagation" />
@@ -166,5 +118,5 @@
         ><button class="second" mat-raised-button>Imprimir</button></a
       >
     </div>
-  </div>
+  </mat-card>
 </div>
