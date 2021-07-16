@@ -11,7 +11,7 @@ import { TopicApprovalModel } from '../../models/topic-approval-model';
 export class TopicNotificationComponent implements OnInit {
   static END_POINT = 'topic-approval/:id';
   private readonly id: string | null;
-  public approvals: TopicApprovalModel[];
+  public approval: TopicApprovalModel;
   router: any;
 
   constructor(
@@ -29,12 +29,13 @@ export class TopicNotificationComponent implements OnInit {
     if (this.id !== null)
       this.topicApprovalService
         .getProductById(this.id)
-        .subscribe((data) => (this.approvals = data));
+        .subscribe((data) => (this.approval = data));
   }
 
-  navigateToNotification(approvals: TopicApprovalModel): void {
+ /*  navigateToNotification(approvals: TopicApprovalModel): void {
     this.router.navigate(['/topic-approval/' + approvals.id]);
-  }
+  } */
+
   today = Date.now();
   fixedTimezone = this.today;
 }
