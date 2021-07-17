@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TopicApprovalService } from 'src/app/services/topic-approval.service';
-import { TopicApprovalModel } from '../../models/topic-approval-model';
+import { TopicStudentModel } from 'src/app/models/topic-student';
+import { TopicStudentService } from 'src/app/services/topic-student.service';
+
 
 @Component({
   selector: 'app-topic-notification',
@@ -11,11 +12,11 @@ import { TopicApprovalModel } from '../../models/topic-approval-model';
 export class TopicNotificationComponent implements OnInit {
   static END_POINT = 'topic-approval/:id';
   private readonly id: string | null;
-  public approval: TopicApprovalModel;
+  public approval : TopicStudentModel;
   router: any;
 
   constructor(
-    private topicApprovalService: TopicApprovalService,
+    private topicStudentService: TopicStudentService,
     private route: ActivatedRoute
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -27,8 +28,8 @@ export class TopicNotificationComponent implements OnInit {
 
   synch(): void {
     if (this.id !== null)
-      this.topicApprovalService
-        .getTopicById(this.id)
+      this.topicStudentService
+        .getTopicStudentById(this.id)
         .subscribe((data) => (this.approval = data));
   }
 
