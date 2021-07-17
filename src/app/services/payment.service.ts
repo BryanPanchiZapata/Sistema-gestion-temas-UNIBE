@@ -6,13 +6,11 @@ import { catchError, map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class TopicService {
-  private url = 'https://degreetopics-api.herokuapp.com/degreetopics/v1/topic';
-
+export class PaymentService {
+  private url = 'https://degreetopics-api.herokuapp.com/degreetopics/v1';
   constructor(private http: HttpClient) {}
-
-  getAllTopic(): Observable<any> {
-    return this.http.get(this.url).pipe(
+  getAllTopicStudent(): Observable<any> {
+    return this.http.get(`${this.url}/student_topic`).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);
@@ -21,5 +19,3 @@ export class TopicService {
     );
   }
 }
-
-/* `${this.url}/administrative` */

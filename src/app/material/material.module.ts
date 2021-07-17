@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatStepperModule} from '@angular/material/stepper';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const material = [
   MatCardModule,
@@ -29,7 +30,8 @@ const material = [
   MatSelectModule,
   MatTabsModule,
   MatProgressSpinnerModule,
-  MatStepperModule
+  MatStepperModule,
+  MatDialogModule
 ];
 
 @NgModule({

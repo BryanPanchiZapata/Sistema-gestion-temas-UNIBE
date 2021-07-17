@@ -5,5 +5,5 @@ export interface TopicModel {
   name?:string;
   topicStatus?:string;
   career_id?:string;
-
 }
+

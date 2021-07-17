@@ -27,19 +27,15 @@ table {
   width: 100%;
   border-radius: 1rem;
 }
-td,
-th {
-  width: 5%;
-}
 
-@media screen and (max-width: 858px) {
+@media screen and (max-width: 920px) {
   .container__button {
     flex-direction: column;
     width: 100%;
   }
   input {
     width: 100%;
-    padding: .5rem 0;
+    padding: 0.5rem 0;
   }
   .button__topicbanck {
     margin-top: 1rem;
@@ -48,24 +44,24 @@ th {
     overflow-x: auto;
   }
   .uno {
-    min-width: 70px;
+    min-width: 90px;
   }
   .dos {
-    min-width: 150px;
+    min-width: 390px;
   }
   .tres {
-    min-width: 150px;
+    min-width: 270px;
   }
   .cuatro {
-    min-width: 120px;
+    min-width: 230px;
   }
   .cinco {
-    min-width: 100px;
+    min-width: 200px;
   }
   .seis {
-    min-width: 130px;
+    min-width: 200px;
   }
   .siete {
-    min-width: 130px;
+    min-width: 150px;
   }
 }

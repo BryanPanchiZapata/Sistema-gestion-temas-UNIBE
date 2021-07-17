@@ -3,7 +3,6 @@
 }
 .container__form {
   width: 70%;
-  border: 2px solid #e1e3e8;
   border-radius: 0.6rem;
   margin: 3rem auto;
   padding: 2rem 1.5rem;
@@ -15,7 +14,7 @@
 .unibe__form img {
   width: 85%;
 }
-.form__inicio{
+.form__inicio {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -35,7 +34,7 @@ input {
   border: 1px solid #767676;
   outline: none;
   border-radius: 0.5rem;
-  padding: .6rem;
+  padding: 0.6rem;
   margin: 0 0.7rem;
 }
 .input__name {
@@ -89,6 +88,16 @@ button {
 .second {
   background: #d7dfe1;
   color: #000;
+}
+
+.example-card {
+  max-width: 400px;
+  margin-inline: auto;
+}
+
+.example-header-image {
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover;
 }
 
 @media screen and (max-width: 960px) {

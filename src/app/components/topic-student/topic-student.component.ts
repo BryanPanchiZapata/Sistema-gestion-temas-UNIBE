@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { TopicService } from 'src/app/services/topic.service';
 
 @Component({
   selector: 'app-topic-student',
@@ -10,7 +11,12 @@ import { MatTableDataSource } from '@angular/material/table';
 export class TopicStudentComponent implements AfterViewInit {
   static END_POINT = 'topic-student';
   displayedColumns: string[] = ['position', 'tema', 'estado'];
-  dataSource = new MatTableDataSource<TopicData>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource();
+  constructor(private topicService: TopicService) {
+    this.topicService.getAllTopic().subscribe((data) => {
+      this.dataSource.data = data;
+    });
+  }
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
@@ -32,7 +38,7 @@ export interface TopicData {
   estado: string;
 }
 
-const ELEMENT_DATA: TopicData[] = [
+/* const ELEMENT_DATA: TopicData[] = [
   {
     position: 1,
     tema: 'Sistema web para la gestión de temas de titulación de la Universidad Iberoamericana del Ecuador',
@@ -59,3 +65,4 @@ const ELEMENT_DATA: TopicData[] = [
     estado: 'En ejecución',
   },
 ];
+ */
