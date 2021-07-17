@@ -19,8 +19,8 @@
           ><img src="../../assets/user.png" alt="UserModel"
         /></a>
         <mat-menu #menu="matMenu">
-          <a class="mat-menu" [routerLink]="['/perfil']"
-            ><button mat-menu-item>Perfil</button></a
+          <a class="mat-menu" [routerLink]="['/profile', user.id]"
+            ><button mat-menu-item>Perfil de usuario</button></a
           >
           <a class="mat-menu" href="#"
             ><button mat-menu-item>Cerrar Sesión</button></a
@@ -41,8 +41,8 @@
       <a class="mat-menu" [routerLink]="['/notificación-de-aprobación-de-tema']"
         ><button mat-menu-item>Notificación de aprobación de tema</button></a
       >
-      <a class="mat-menu" [routerLink]="['/perfil']"
-        ><button mat-menu-item>Perfil</button></a
+      <a class="mat-menu" [routerLink]="['/profile', user.id]"
+        ><button mat-menu-item>Perfil de usuario</button></a
       >
       <a class="mat-menu" href="#"
         ><button mat-menu-item>Cerrar Sesión</button></a

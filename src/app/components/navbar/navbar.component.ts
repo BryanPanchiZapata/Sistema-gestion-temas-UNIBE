@@ -1,3 +1,4 @@
+import { UserModel, UserAcademicModel } from './../../models/user-model';
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 
@@ -7,6 +8,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  user: UserAcademicModel = {};
   constructor(private router: Router) {
   }
 

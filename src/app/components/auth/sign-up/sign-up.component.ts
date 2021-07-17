@@ -1,11 +1,11 @@
 import { Router } from '@angular/router';
 import { AuthService } from './../../../services/auth.service';
 import { CareerService } from './../../../services/career.service';
-import { FormBuilder, FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { UserModel, UserRole } from './../../../models/user-model';
 import { Component, OnInit } from '@angular/core';
 import { CareerModel } from 'src/app/models/career-model';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { MyErrorStateMatcher } from 'src/app/MyErrorStateMatcher';
 
 @Component({
   selector: 'app-sign-up',
@@ -57,9 +57,8 @@ export class SignUpComponent implements OnInit {
   }
 
   onSignUpAdmini() {
-    let user = Object.assign(this.registerForm.value);
     if (this.registerForm.valid) {
-      this.authService.signUpAdmini(user).subscribe(
+      this.authService.signUpAdmini(this.registerForm.value).subscribe(
         data => {
           this.router.navigate(['']);
           this.OnResetForm();
@@ -78,12 +77,5 @@ export class SignUpComponent implements OnInit {
         }
       );
     }
-  }
-}
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }

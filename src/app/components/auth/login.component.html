@@ -2,31 +2,38 @@
   <mat-tab-group class=" mat-elevation-z4" mat-stretch-tabs animationDuration="0ms">
     <mat-tab label="Inicie Sesión">
       <mat-card fxLayout="column" fxLayoutAlign="center center">
-        <form fxLayout="column" class="auth-form"  #loginForm="ngForm">
+        <form fxLayout="column" class="auth-form" [formGroup]="loginForm">
           <mat-form-field appearance="legacy" class="auth-full-width">
             <mat-label>Identificación</mat-label>
             <div fxLayout="row">
-              <input matInput required #ci="ngModel" name="ci" [(ngModel)]="user.ci" placeholder="Ingrese su número de identificación">
-              <mat-icon >person</mat-icon>
+              <input matInput text="text" required formControlName="ci" [errorStateMatcher]="matcher"
+                placeholder="Ingrese el número de su identificación">
+              <mat-icon>person</mat-icon>
             </div>
-            <mat-error *ngIf="!ci.valid || ci.pristine"> La identificación es <strong>requerida</strong></mat-error>
+            <mat-error *ngIf="loginForm.get('ci')?.hasError('required')"> La identificación es
+              <strong>requerida</strong></mat-error>
           </mat-form-field>
           <mat-form-field appearance="legacy" class="auth-full-width">
             <mat-label>Contraseña</mat-label>
             <div fxLayout="row">
-              <input matInput [type]="hide ? 'password' : 'text'" required #password="ngModel" name="password" [(ngModel)]="user.password" placeholder="Ingrese su contraseña">
-              <button mat-icon-button matSuffix class="icon-button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required
+                [errorStateMatcher]="matcher" placeholder="Ingrese su contraseña">
+              <button mat-icon-button matSuffix class="icon-button" (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
             </div>
-            <mat-error *ngIf="!password.valid || password.pristine">La contraseña es <strong>requerida</strong>
+            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">La contraseña es
+              <strong>requerida</strong>
             </mat-error>
           </mat-form-field>
-          <div fxLayout="row" fxFlexAlign="center">
-            <button mat-raised-button class="button" type="button" (click)="login()" [disabled]="!ci.value || !password.value">
+
+          <mat-card-actions fxLayout="row" fxFlexAlign="center">
+            <button mat-raised-button class="button" type="button" (click)="login()" [disabled]="loginForm.invalid">
               Iniciar Sesión
             </button>
-          </div>
+          </mat-card-actions>
+
         </form>
       </mat-card>
     </mat-tab>

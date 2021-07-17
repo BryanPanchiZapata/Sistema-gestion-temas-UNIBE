@@ -1,31 +1,20 @@
-<div class="container">
-  <div class="container__form">
-    <h1 class="title">INFORMACIÓN PERSONAL</h1>
-    <div class="container__info">
-        <div class="info__data">
-            <h4>NOMBRES Y APELLIDOS</h4>
-            <h4>IDENTIFICACIÓN DEL SISTEMA </h4>
-            <h4>CONTRASEÑA</h4>
-            <h4>NÚMERO DE CÉDULA</h4>
-            <h4>CORREO ELECTRONICO</h4>
-            <h4>TIPO DE USUARIO</h4>
-            <h4>CARRERA</h4>
-        </div>
-        <div class="info__dinamic">
-            <h4>NOMBRES Y APELLIDOS</h4>
-            <h4>-----------</h4>
-            <h4>CONTRASEÑA</h4>
-            <h4>NÚMERO DE CÉDULA</h4>
-            <h4>CORREO ELECTRONICO</h4>
-            <h4>TIPO DE USUARIO</h4>
-            <h4>CARRERA</h4>
-        </div>
-    </div>
-    
-  </div>
-  <div class="buttons">
-    <a><button class="primary" mat-raised-button>Editar</button></a>
-    <a download=""
-      ><button class="second" mat-raised-button>Guardar</button></a
-    >
-</div>
+<mat-card fxLayout="column" fxLayoutAlign="center center">
+  <form >
+    <mat-card-header fxLayout="column" fxLayoutAlign="center center">
+        <mat-card-title>Perfil de usuario</mat-card-title>
+        <mat-card-subtitle>{{user.role}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        Text content
+    </mat-card-content>
+    <mat-card-actions align="start">
+      <button mat-raised-button class="button" type="button">
+        Iniciar Sesión
+      </button>
+
+    </mat-card-actions>
+    <mat-card-footer>
+        Footer
+    </mat-card-footer>
+  </form>
+</mat-card>

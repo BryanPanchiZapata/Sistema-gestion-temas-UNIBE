@@ -1,7 +1,9 @@
+import { FormBuilder, Validators } from '@angular/forms';
 import { UserModel } from './../../models/user-model';
 import { Component } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
+import { MyErrorStateMatcher } from 'src/app/MyErrorStateMatcher';
 
 @Component({
   selector: 'app-auth',
@@ -11,18 +13,32 @@ import { Router } from "@angular/router";
 export class LoginComponent {
   public user: UserModel = {};
 
+  matcher = new MyErrorStateMatcher();
+
   hide: boolean = true;
 
-  constructor(private authService: AuthService, private router: Router) {
+  loginForm = this.formBuilder.group({
+    ci: ['', Validators.required],
+    password: ['', Validators.required]
+
+  });
+
+  constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {
+  }
+
+  OnResetForm() {
+    this.loginForm.reset();
   }
 
   login(): void {
-    this.authService.login(this.user).subscribe(
-      data => {
-        localStorage.setItem('user', data.id);
-        this.router.navigate(['']);
-      }
-    )
+    if (this.loginForm.valid) {
+      this.authService.login(this.loginForm.value).subscribe(
+        data => {
+          localStorage.setItem('user', data.id);
+          this.router.navigate(['']);
+          this.loginForm.reset();
+        }
+      )
+    }
   }
-
 }
