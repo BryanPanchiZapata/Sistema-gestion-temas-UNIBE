@@ -7,22 +7,12 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class TopicService {
-  private url = 'https://degreetopics-api.herokuapp.com/degreetopics/v1';
+  private url = 'https://degreetopics-api.herokuapp.com/degreetopics/v1/topic';
 
   constructor(private http: HttpClient) {}
 
   getAllTopic(): Observable<any> {
-    return this.http.get(`${this.url}/topic`).pipe(
-      map((response) => response),
-      catchError((error) => {
-        alert(error.error);
-        return error;
-      })
-    );
-  }
-
-  getAllTopicStudent(): Observable<any> {
-    return this.http.get(`${this.url}/student_topic`).pipe(
+    return this.http.get(this.url).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);

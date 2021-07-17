@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
 import { TopicDenunciationService } from 'src/app/services/topic-denunciation.service';
 
@@ -17,8 +18,11 @@ interface Investigacion {
   styleUrls: ['./topic-denunciation.component.css'],
 })
 export class TopicDenunciationComponent implements OnInit {
-  static END_POINT = 'topic-denunciation';
-  public denunciations:TopicDenunciationModel[];
+  static END_POINT = 'topic-denunciation/:id';
+  private readonly id: string | null;
+  public denunciation: TopicDenunciationModel;
+  router: any;
+
   proyectos: Proyecto[] = [
     { value: 'vinculación-0', viewValue: 'Vinculación' },
     { value: 'investigación-1', viewValue: 'Investigación' },
@@ -33,8 +37,11 @@ export class TopicDenunciationComponent implements OnInit {
     { value: 'propuesta-4', viewValue: 'Propuesta tecnológica ' },
     { value: 'proyecto-5', viewValue: 'Proyecto de investigación' },
   ];
-  constructor(private topicDenunciationService: TopicDenunciationService) {
-    this.denunciations = [];
+  constructor(
+    private topicDenunciationService: TopicDenunciationService,
+    private route: ActivatedRoute
+  ) {
+    this.id = this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit(): void {
@@ -42,11 +49,11 @@ export class TopicDenunciationComponent implements OnInit {
   }
 
   synch(): void {
-    this.topicDenunciationService.getAllTopicDenunciation().subscribe((data) => {
-      this.denunciations = data;
-      console.log(data);
-    });
+    if (this.id !== null)
+      this.topicDenunciationService
+        .getDenunciationById(this.id)
+        .subscribe((data) => (this.denunciation = data));
   }
   today = Date.now();
-    fixedTimezone = this.today;
+  fixedTimezone = this.today;
 }

@@ -28,7 +28,7 @@ export class TopicNotificationComponent implements OnInit {
   synch(): void {
     if (this.id !== null)
       this.topicApprovalService
-        .getProductById(this.id)
+        .getTopicById(this.id)
         .subscribe((data) => (this.approval = data));
   }
 

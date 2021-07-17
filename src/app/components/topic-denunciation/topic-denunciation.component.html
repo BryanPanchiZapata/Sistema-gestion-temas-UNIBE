@@ -1,5 +1,5 @@
 <div class="container">
-  <mat-card class="container__form" *ngFor="let denunciation of denunciations">
+  <mat-card class="container__form">
     <figure class="unibe__img">
       <img src="../../../assets/unibe_form.png" alt="UNIBE" />
     </figure>
@@ -14,7 +14,7 @@
       <p class="container__data">
         <b>Apellidos:</b>
         <span class="margen"
-          >{{ denunciation.topicStudent.student.secondName }} 
+          >{{ denunciation.topicStudent.student.secondName }}
         </span>
         <span class="margen">{{
           denunciation.topicStudent.student.secondLastname

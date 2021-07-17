@@ -8,17 +8,27 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class TopicDenunciationService {
 
-  private url = 'https://degreetopics-api.herokuapp.com/degreetopics/v1';
+  private url = 'https://degreetopics-api.herokuapp.com/degreetopics/v1/topic_denunciation';
 
   constructor(private http: HttpClient) { }
 
-  getAllTopicDenunciation(): Observable<any> {
+/*   getAllTopicDenunciation(): Observable<any> {
     return this.http.get(`${this.url}/topic_denunciation`).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);
         return error;
       })
+    );
+  } */
+
+  getDenunciationById(id: string): Observable<any> {
+    return this.http.get(this.url + "/" + id).pipe(
+      map(response => response), catchError(error => {
+          alert(error.error);
+          return error;
+        }
+      )
     );
   }
 }

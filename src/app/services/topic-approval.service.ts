@@ -21,7 +21,7 @@ export class TopicApprovalService {
     );
   }
 
-  getProductById(id: string): Observable<any> {
+  getTopicById(id: string): Observable<any> {
     return this.http.get(this.url + "/" + id).pipe(
       map(response => response), catchError(error => {
           alert(error.error);
