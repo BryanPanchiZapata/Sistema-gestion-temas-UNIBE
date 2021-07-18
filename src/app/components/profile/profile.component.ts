@@ -1,4 +1,3 @@
-import { CareerModel } from './../../models/career-model';
 import { CareerService } from './../../services/career.service';
 import { Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from './../../services/auth.service';
@@ -15,10 +14,9 @@ import { ActivatedRoute } from '@angular/router';
 export class ProfileComponent implements OnInit {
   hide: boolean = true;
   static END_POINT = 'profile/:id';
-  public readonly id: string | null;
-  public user: UserModel = {};
-  public userAcademic: UserAcademicModel = {};
-  careers: CareerModel[];
+  readonly id: string | null;
+  user: UserModel = {};
+  userAcademic: UserAcademicModel = {};
 
 
   constructor(private route: ActivatedRoute, private authService: AuthService, private careerService: CareerService, private formBuilder: FormBuilder) {
@@ -28,51 +26,47 @@ export class ProfileComponent implements OnInit {
   private isValidEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   profileForm = this.formBuilder.group({
-    ci: ['', Validators.required],
-    email: ['', [Validators.required, Validators.pattern(this.isValidEmail)]],
     firstName: ['', Validators.required],
+    email: ['', [Validators.required, Validators.pattern(this.isValidEmail)]],
     lastName: ['', Validators.required],
     password: ['', [Validators.required, Validators.minLength(8)]],
     secondName: [''],
-    secondLastname: ['']
+    secondLastname: [''],
+    role: ['']
   });
 
-  careerForm = this.formBuilder.group({
-    career: ['', Validators.required]
+  academicForm = this.formBuilder.group({
+    sign: ['']
   });
+
+  private initialValuesProfile(user: UserAcademicModel): void {
+    this.profileForm.patchValue({
+      firstName: this.user.firstName,
+      email: this.user.email,
+      lastName: this.user.lastName,
+      password: this.user.password,
+      secondName: this.user.secondName,
+      secondLastname: this.user.secondLastname,
+      role: this.user.role
+    })
+  }
+
+  private initialValuesAcademic(userAcademic: UserAcademicModel): void {
+    this.profileForm.patchValue({
+      sign: this.userAcademic.sign,
+    })
+  }
 
   matcher = new MyErrorStateMatcher();
 
   ngOnInit(): void {
-
     this.sync();
-
-    this.careerService.getAllCareers().subscribe(
-      data => {
-        this.careers = data;
-      }
-    )
   }
 
-  sync(): void {
-    if (this.id !== null) this.authService.getAcademicById(this.id).subscribe(
-      data => this.userAcademic = data
-    );
-    console.log(this.id)
-    console.log(this.userAcademic)
-  }
-
-  syncAdmini(): void {
-    if (this.id !== null)
-      this.authService.getAdminiById(this.id).subscribe(
-        data => this.user = data
-      );
-  }
-
-  onUpdateAcademic() {
-    let user = Object.assign(this.profileForm.value, this.careerForm.value);
-    if (this.id !== null && this.profileForm.valid && this.careerForm.valid) {
-      this.authService.editProfileAcademic(this.id, user).subscribe(
+  onUpdateProfile() {
+    let user = Object.assign(this.profileForm.value, this.academicForm.value);
+    if (this.id !== null || this.profileForm.valid, this.academicForm.valid) {
+      this.authService.editProfileAcademic(user.id, user).subscribe(
         data => this.userAcademic = data
       );
     }
@@ -85,6 +79,42 @@ export class ProfileComponent implements OnInit {
       );
     }
   }
+  sync() {
+    if (this.id !== null) {
+      this.authService.getUserById(this.id).subscribe(
+        data => {
+          this.user = data;
+          this.initialValuesProfile(this.user);
+          if (this.user.role === "STUDENT" || this.user.role === "CAREER_DIRECTOR") {
+            this.userAcademic = data;
+            this.initialValuesAcademic(this.userAcademic);
+          }
+        }
+      );
+    }
+  }
+
+  // sync() {
+  //   if (this.id !== null) {
+  //     if (this.user.role === "STUDENT" || this.user.role === "CAREER_DIRECTOR") {
+  //       this.authService.getUserById(this.id).subscribe(
+  //         data => {
+  //           this.user = data;
+  //           this.userAcademic = data;
+  //           this.initialValuesProfile(this.user);
+  //           this.initialValuesAcademic(this.userAcademic)
+  //         }
+  //       );
+  //     } else if (this.user.role === "FINANCIAL" || this.user.role === "AUTHORITY") {
+  //       this.authService.getUserById(this.id).subscribe(
+  //         data => {
+  //           this.user = data;
+  //           this.initialValuesProfile(this.user);
+  //         }
+  //       );
+  //     } else {
+  //       alert("Los datos ingresados son incorrectos")
+  //     }
+  //   }
+  // }
 }
-
-

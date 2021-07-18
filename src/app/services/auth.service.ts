@@ -46,6 +46,17 @@ export class AuthService {
     )
   }
 
+  getUserById(id: string):Observable<any> {
+    return this.http.get(this.url + "/" + id).pipe(
+      map(response => response),
+      catchError(error => {
+        alert(error.error)
+        return error
+      }
+      )
+    )
+  }
+
   editProfileAcademic(id: string, user: UserAcademicModel):Observable<any> {
     return this.http.put(`${this.url}/academic/${id}`, user).pipe(
       map(response => response),
@@ -59,28 +70,6 @@ export class AuthService {
 
   editProfileAdmini(id: string, user: UserModel):Observable<any> {
     return this.http.put(`${this.url}/administrative/${id}`, user).pipe(
-      map(response => response),
-      catchError(error => {
-        alert(error.error)
-        return error
-      }
-      )
-    )
-  }
-
-  getAcademicById(id: string):Observable<any> {
-    return this.http.get(this.url + "/academic/" + id).pipe(
-      map(response => response),
-      catchError(error => {
-        alert(error.error)
-        return error
-      }
-      )
-    )
-  }
-
-  getAdminiById(id: string):Observable<any> {
-    return this.http.get(this.url + "/administrative/" + id).pipe(
       map(response => response),
       catchError(error => {
         alert(error.error)

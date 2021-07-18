@@ -41,8 +41,7 @@ export class SignUpComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(8)]],
     secondName: [''],
     secondLastname: [''],
-    role: ['', Validators.required]
-
+    role: ['', Validators.required],
   });
 
   careerForm = this.formBuilder.group({
@@ -56,26 +55,30 @@ export class SignUpComponent implements OnInit {
     this.careerForm.reset();
   }
 
-  onSignUpAdmini() {
-    if (this.registerForm.valid) {
-      this.authService.signUpAdmini(this.registerForm.value).subscribe(
-        data => {
-          this.router.navigate(['']);
-          this.OnResetForm();
-        }
-      );
-    }
-  }
-
-  onSignUpAcademic() {
+  onSignUp() {
     let user = Object.assign(this.registerForm.value, this.careerForm.value);
-    if (this.registerForm.valid, this.careerForm.valid) {
-      this.authService.signUpAcademic(user).subscribe(
-        data => {
-          this.router.navigate(['']);
-          this.OnResetForm();
-        }
-      );
+    if (user.role === "STUDENT" || user.role === "CAREER_DIRECTOR") {
+      if (this.registerForm.valid && this.careerForm.valid) {
+        this.authService.signUpAcademic(user).subscribe(
+          data => {
+            this.router.navigate(['']);
+            this.OnResetForm();
+          }
+        );
+      } else {
+        alert("Los datos ingresados son incorrectos")
+      }
+    } else if (user.role === "FINANCIAL" || user.role === "AUTHORITY") {
+      if (this.registerForm.valid) {
+        this.authService.signUpAdmini(this.registerForm.value).subscribe(
+          data => {
+            this.router.navigate(['']);
+            this.OnResetForm();
+          }
+        );
+      }
+    } else {
+      alert("Los datos ingresados son incorrectos")
     }
   }
 }

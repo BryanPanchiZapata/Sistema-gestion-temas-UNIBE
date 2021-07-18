@@ -1,41 +1,39 @@
 <div class="container" fxLayout="column" fxLayoutAlign="center center">
   <mat-tab-group class=" mat-elevation-z4" mat-stretch-tabs animationDuration="0ms">
     <mat-tab label="Inicie Sesión">
-      <mat-card fxLayout="column" fxLayoutAlign="center center">
-        <form fxLayout="column" class="auth-form" [formGroup]="loginForm">
-          <mat-form-field appearance="legacy" class="auth-full-width">
-            <mat-label>Identificación</mat-label>
-            <div fxLayout="row">
-              <input matInput text="text" required formControlName="ci" [errorStateMatcher]="matcher"
-                placeholder="Ingrese el número de su identificación">
-              <mat-icon>person</mat-icon>
-            </div>
-            <mat-error *ngIf="loginForm.get('ci')?.hasError('required')"> La identificación es
-              <strong>requerida</strong></mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="legacy" class="auth-full-width">
-            <mat-label>Contraseña</mat-label>
-            <div fxLayout="row">
-              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required
-                [errorStateMatcher]="matcher" placeholder="Ingrese su contraseña">
-              <button mat-icon-button matSuffix class="icon-button" (click)="hide = !hide"
-                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-            </div>
-            <mat-error *ngIf="loginForm.get('password')?.hasError('required')">La contraseña es
-              <strong>requerida</strong>
-            </mat-error>
-          </mat-form-field>
-
-          <mat-card-actions fxLayout="row" fxFlexAlign="center">
-            <button mat-raised-button class="button" type="button" (click)="login()" [disabled]="loginForm.invalid">
-              Iniciar Sesión
+      <form fxLayout="column" fxLayoutAlign="center center" class="auth-form" [formGroup]="loginForm">
+        <mat-form-field appearance="legacy" class="auth-full-width">
+          <mat-label>Identificación</mat-label>
+          <div fxLayout="row">
+            <input matInput text="text" required formControlName="ci" [errorStateMatcher]="matcher"
+              placeholder="Ingrese el número de su identificación">
+            <mat-icon>person</mat-icon>
+          </div>
+          <mat-error *ngIf="loginForm.get('ci')?.hasError('required')"> La identificación es
+            <strong>requerida</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="legacy" class="auth-full-width">
+          <mat-label>Contraseña</mat-label>
+          <div fxLayout="row">
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required
+              [errorStateMatcher]="matcher" placeholder="Ingrese su contraseña">
+            <button mat-icon-button matSuffix class="icon-button" (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-          </mat-card-actions>
+          </div>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">La contraseña es
+            <strong>requerida</strong>
+          </mat-error>
+        </mat-form-field>
 
-        </form>
-      </mat-card>
+        <div fxLayout="row" fxFlexAlign="center center">
+          <button mat-raised-button class="button" type="button" (click)="login()" [disabled]="loginForm.invalid">
+            Iniciar Sesión
+          </button>
+        </div>
+      </form>
     </mat-tab>
     <mat-tab label="Regístrese">
       <app-sign-up></app-sign-up>
