@@ -4,7 +4,7 @@ import { AuthService } from './../../services/auth.service';
 import { UserAcademicModel, UserModel } from './../../models/user-model';
 import { Component, OnInit } from '@angular/core';
 import { MyErrorStateMatcher } from 'src/app/MyErrorStateMatcher';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -19,7 +19,13 @@ export class ProfileComponent implements OnInit {
   userAcademic: UserAcademicModel = {};
 
 
-  constructor(private route: ActivatedRoute, private authService: AuthService, private careerService: CareerService, private formBuilder: FormBuilder) {
+  constructor(
+    private route: ActivatedRoute,
+    private authService: AuthService,
+    private careerService: CareerService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
 
@@ -31,29 +37,27 @@ export class ProfileComponent implements OnInit {
     lastName: ['', Validators.required],
     password: ['', [Validators.required, Validators.minLength(8)]],
     secondName: [''],
-    secondLastname: [''],
-    role: ['']
+    secondLastname: ['']
   });
 
   academicForm = this.formBuilder.group({
     sign: ['']
   });
 
-  private initialValuesProfile(user: UserAcademicModel): void {
+  private initialValuesProfile(user: UserModel): void {
     this.profileForm.patchValue({
-      firstName: this.user.firstName,
-      email: this.user.email,
-      lastName: this.user.lastName,
-      password: this.user.password,
-      secondName: this.user.secondName,
-      secondLastname: this.user.secondLastname,
-      role: this.user.role
+      firstName: user.firstName,
+      email: user.email,
+      lastName: user.lastName,
+      password: user.password,
+      secondName: user.secondName,
+      secondLastname: user.secondLastname
     })
   }
 
   private initialValuesAcademic(userAcademic: UserAcademicModel): void {
-    this.profileForm.patchValue({
-      sign: this.userAcademic.sign,
+    this.academicForm.patchValue({
+      sign: userAcademic.sign
     })
   }
 
@@ -63,22 +67,6 @@ export class ProfileComponent implements OnInit {
     this.sync();
   }
 
-  onUpdateProfile() {
-    let user = Object.assign(this.profileForm.value, this.academicForm.value);
-    if (this.id !== null || this.profileForm.valid, this.academicForm.valid) {
-      this.authService.editProfileAcademic(user.id, user).subscribe(
-        data => this.userAcademic = data
-      );
-    }
-  }
-
-  onUpdateAdmini() {
-    if (this.id !== null && this.profileForm.valid) {
-      this.authService.editProfileAdmini(this.id, this.profileForm.value).subscribe(
-        data => this.user = data
-      );
-    }
-  }
   sync() {
     if (this.id !== null) {
       this.authService.getUserById(this.id).subscribe(
@@ -94,27 +82,37 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  // sync() {
-  //   if (this.id !== null) {
-  //     if (this.user.role === "STUDENT" || this.user.role === "CAREER_DIRECTOR") {
-  //       this.authService.getUserById(this.id).subscribe(
-  //         data => {
-  //           this.user = data;
-  //           this.userAcademic = data;
-  //           this.initialValuesProfile(this.user);
-  //           this.initialValuesAcademic(this.userAcademic)
-  //         }
-  //       );
-  //     } else if (this.user.role === "FINANCIAL" || this.user.role === "AUTHORITY") {
-  //       this.authService.getUserById(this.id).subscribe(
-  //         data => {
-  //           this.user = data;
-  //           this.initialValuesProfile(this.user);
-  //         }
-  //       );
-  //     } else {
-  //       alert("Los datos ingresados son incorrectos")
-  //     }
-  //   }
-  // }
+  onCancel() {
+    this.initialValuesAcademic(this.userAcademic);
+    this.initialValuesProfile(this.user);
+  }
+
+  refresh(): void { window.location.reload(); }
+
+  onUpdateProfile() {
+    if (this.id !== null) {
+      let user = Object.assign(this.profileForm.value, this.academicForm.value);
+      if (this.user.role === "STUDENT" || this.user.role === "CAREER_DIRECTOR") {
+        if (this.profileForm.valid && this.academicForm.valid) {
+          this.authService.editProfileAcademic(this.id, user).subscribe(
+            data => this.userAcademic = data
+          );
+          this.refresh();
+          alert("Perfil actualizado");
+        } else {
+          alert("Los datos ingresados son incorrectos")
+        }
+      } else if (this.user.role === "FINANCIAL" || this.user.role === "AUTHORITY") {
+        if (this.profileForm.valid) {
+          this.authService.editProfileAdmini(this.id, this.profileForm.value).subscribe(
+            data => this.user = data
+          );
+        this.refresh();
+          alert("Perfil actualizado")
+        } else {
+          alert("Los datos ingresados son incorrectos")
+        }
+      }
+    }
+  }
 }

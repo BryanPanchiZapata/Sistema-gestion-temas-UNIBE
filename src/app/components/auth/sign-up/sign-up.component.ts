@@ -65,6 +65,7 @@ export class SignUpComponent implements OnInit {
             this.OnResetForm();
           }
         );
+        alert("Se ha registrado con éxito, inicie sesión")
       } else {
         alert("Los datos ingresados son incorrectos")
       }
@@ -76,6 +77,9 @@ export class SignUpComponent implements OnInit {
             this.OnResetForm();
           }
         );
+        alert("Se ha registrado con éxito, inicie sesión")
+      } else {
+        alert("Los datos ingresados son incorrectos")
       }
     } else {
       alert("Los datos ingresados son incorrectos")

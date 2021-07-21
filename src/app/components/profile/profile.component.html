@@ -3,11 +3,11 @@
     <form fxLayout="column" [formGroup]="profileForm">
       <mat-card-header fxLayout="column" fxLayoutAlign="center center">
         <mat-card-title>Perfil de usuario</mat-card-title>
-        <mat-card-subtitle>{{userAcademic.role}}</mat-card-subtitle>
+        <mat-card-subtitle>{{user.role}}</mat-card-subtitle>
         <mat-card-subtitle
-          *ngIf="profileForm.get('role')?.value === 'STUDENT' || profileForm.get('role')?.value === 'CAREER_DIRECTOR'">
+          *ngIf="user.role === 'STUDENT' || user.role === 'CAREER_DIRECTOR'">
           Carrera: {{userAcademic.career?.name}}</mat-card-subtitle>
-        <mat-card-subtitle>Identificación: {{userAcademic.ci}}</mat-card-subtitle>
+        <mat-card-subtitle>Identificación: {{user.ci}}</mat-card-subtitle>
       </mat-card-header>
       <div fxLayout="column" fxLayoutAlign="center center">
         <mat-card-content fxLayout="column" fxLayoutAlign="center center">
@@ -70,14 +70,14 @@
               <strong>mínimo 8 caracteres</strong>
             </mat-error>
           </mat-form-field>
-          <div class="sign" [formGroup]="academicForm" >
-            <img src="" alt="">
+          <form class="sign" [formGroup]="academicForm" *ngIf="user.role === 'STUDENT' || user.role === 'CAREER_DIRECTOR'" >
             <p>Cargue su firma:</p>
-            <input type="file" formControlName="sign">
-          </div>
+            <img src="" alt="">
+            <input te="file" required formControlName="sign">
+          </form>
         </mat-card-content>
         <mat-card-actions align="start">
-          <button mat-raised-button type="submit">
+          <button mat-raised-button type="submit" (click)="onCancel()">
             Cancelar
           </button>
           <button mat-raised-button class="button" type="submit" (click)="onUpdateProfile()">
