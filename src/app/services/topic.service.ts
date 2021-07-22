@@ -22,6 +22,16 @@ export class TopicService {
     );
   }
 
+  getTopicById(id: string): Observable<any> {
+    return this.http.get(this.url +'/'+ id).pipe(
+      map((response) => response),
+      catchError((error) => {
+        alert(error.error);
+        return error;
+      })
+    );
+  }
+
   addTopic(topic: TopicModel): Observable<any> {
     return this.http.post(this.url, topic).pipe(
       map(response => response),
@@ -32,6 +42,26 @@ export class TopicService {
       )
     )
   }
-}
 
-/* `${this.url}/administrative` */
+  deleteTopic(id: string): Observable<any> {
+    return this.http.delete(this.url +'/'+ id).pipe(
+      map(response => response),
+      catchError(error => {
+        alert("No se puede eliminar, el tema está en ejecución o ejecutado")
+        return error
+      }
+      )
+    )
+  }
+
+  updateTopic(id: string, topic: TopicModel): Observable<any> {
+    return this.http.put(this.url +'/'+ id, topic).pipe(
+      map(response => response),
+      catchError(error => {
+        alert(error.error)
+        return error
+      }
+      )
+    )
+  }
+}

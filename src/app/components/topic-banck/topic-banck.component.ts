@@ -18,8 +18,10 @@ export class TopicBanckComponent implements AfterViewInit {
       this.dataSource.data = data;
     });
   }
-  openDialog() {
-    this.dialog.open(AddTopicComponent);
+  openDialog(id: string | null) {
+    this.dialog.open(AddTopicComponent, {
+      data: id
+    });
   }
   displayedColumns: string[] = [
     'position',
@@ -27,7 +29,6 @@ export class TopicBanckComponent implements AfterViewInit {
     'articulacion',
     'estado',
     'carrera',
-    'evaluacion',
     'accion',
   ];
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -46,6 +47,19 @@ export class TopicBanckComponent implements AfterViewInit {
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
   }
+
+  refresh(): void {
+    window.location.reload();
+  }
+
+  onDeleteTopic(id: string): void {
+    this.topicService.deleteTopic(id).subscribe(
+      data => {
+        this.dataSource.data = data;
+        this.refresh();
+      }
+    )
+  }
 }
 
 @Component({
@@ -53,4 +67,4 @@ export class TopicBanckComponent implements AfterViewInit {
   templateUrl: './dialog-element.component.html',
   styleUrls: ['./topic-banck.component.css'],
 })
-export class DialogElementComponent {}
+export class DialogElementComponent { }

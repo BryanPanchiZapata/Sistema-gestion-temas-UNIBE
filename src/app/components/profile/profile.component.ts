@@ -1,4 +1,3 @@
-import { CareerService } from './../../services/career.service';
 import { Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from './../../services/auth.service';
 import { UserAcademicModel, UserModel } from './../../models/user-model';
@@ -23,7 +22,6 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthService,
     private formBuilder: FormBuilder,
-    private router: Router
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }

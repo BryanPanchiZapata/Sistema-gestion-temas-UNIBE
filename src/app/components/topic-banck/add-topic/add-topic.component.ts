@@ -1,11 +1,12 @@
 import { SpinnerService } from './../../../services/spinner.service';
-import { Articulation } from './../../../models/topic-model';
+import { Articulation, TopicModel } from './../../../models/topic-model';
 import { TopicService } from 'src/app/services/topic.service';
 import { MyErrorStateMatcher } from './../../../MyErrorStateMatcher';
 import { CareerService } from './../../../services/career.service';
 import { CareerModel } from './../../../models/career-model';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-topic',
@@ -16,6 +17,7 @@ export class AddTopicComponent implements OnInit {
   response: any = [];
   careers: CareerModel[];
   articulations = Articulation;
+  topic: TopicModel = {};
   matcher = new MyErrorStateMatcher();
 
 
@@ -23,8 +25,10 @@ export class AddTopicComponent implements OnInit {
     private formBuilder: FormBuilder,
     private careerService: CareerService,
     private topicService: TopicService,
-    private spinnerService: SpinnerService
-    ) {
+    private spinnerService: SpinnerService,
+    public dialogRef: MatDialogRef<AddTopicComponent>,
+    @Inject(MAT_DIALOG_DATA) public id: string
+  ) {
   }
 
   ngOnInit(): void {
@@ -34,6 +38,7 @@ export class AddTopicComponent implements OnInit {
       }
     );
     this.spinnerService.hide();
+    this.sync();
 
   }
 
@@ -52,12 +57,46 @@ export class AddTopicComponent implements OnInit {
     description: ['', Validators.required],
   });
 
+  private initialValuesTopic(topic: TopicModel): void {
+    this.topicForm.patchValue({
+      name: topic.name,
+      career: topic.career,
+      articulation: topic.articulation,
+      description: topic.description,
+    })
+  }
+
   onAddTopic() {
-    if (this.topicForm.valid) {
-      this.topicService.addTopic(this.topicForm.value).subscribe(
+    if (this.id !== null) {
+      console.log(this.id);
+      if (this.topicForm.valid) {
+        this.topicService.updateTopic(this.id, this.topicForm.value).subscribe(
+          data => {
+            this.topic = data
+            this.refresh();
+          }
+        );
+      } else {
+        alert("Los datos ingresados son incorrectos")
+      }
+    } else {
+      if (this.topicForm.valid) {
+        this.topicService.addTopic(this.topicForm.value).subscribe(
+          data => {
+            this.onResetForm();
+            this.refresh();
+          }
+        )
+      }
+    }
+  }
+
+  sync() {
+    if (this.id !== null) {
+      this.topicService.getTopicById(this.id).subscribe(
         data => {
-          this.onResetForm();
-          this.refresh();
+          this.topic = data;
+          this.initialValuesTopic(this.topic);
         }
       )
     }
