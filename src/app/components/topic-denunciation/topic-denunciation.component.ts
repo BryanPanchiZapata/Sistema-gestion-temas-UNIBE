@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
-import { TopicDenunciationService } from 'src/app/services/topic-denunciation.service';
+import { TopicStudentModel } from 'src/app/models/topic-student';
+import { TopicStudentService } from 'src/app/services/topic-student.service';
+
 
 interface Proyecto {
   value: string;
@@ -20,7 +21,7 @@ interface Investigacion {
 export class TopicDenunciationComponent implements OnInit {
   static END_POINT = 'topic-denunciation/:id';
   private readonly id: string | null;
-  public denunciation: TopicDenunciationModel;
+  public denunciation: TopicStudentModel;
   router: any;
 
   proyectos: Proyecto[] = [
@@ -38,7 +39,7 @@ export class TopicDenunciationComponent implements OnInit {
     { value: 'proyecto-5', viewValue: 'Proyecto de investigación' },
   ];
   constructor(
-    private topicDenunciationService: TopicDenunciationService,
+    private topicStudentService: TopicStudentService,
     private route: ActivatedRoute
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -50,8 +51,8 @@ export class TopicDenunciationComponent implements OnInit {
 
   synch(): void {
     if (this.id !== null)
-      this.topicDenunciationService
-        .getDenunciationById(this.id)
+      this.topicStudentService
+        .getTopicStudentById(this.id)
         .subscribe((data) => (this.denunciation = data));
   }
   today = Date.now();
