@@ -1,8 +1,11 @@
-import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { AfterViewInit, Component,Inject, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicService } from 'src/app/services/topic.service';
+import { TopicModel } from 'src/app/models/topic-model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
   selector: 'app-topic-banck',
@@ -12,7 +15,11 @@ import { TopicService } from 'src/app/services/topic.service';
 export class TopicBanckComponent implements AfterViewInit {
   dataSource = new MatTableDataSource();
 
-  constructor(private topicService: TopicService, public dialog: MatDialog) {
+  constructor(
+    private topicService: TopicService,
+    public dialog: MatDialog,
+    private route: Router
+  ) {
     this.topicService.getAllTopic().subscribe((data) => {
       this.dataSource.data = data;
     });
@@ -20,6 +27,16 @@ export class TopicBanckComponent implements AfterViewInit {
   openDialog() {
     this.dialog.open(DialogElementComponent);
   }
+
+  openDialogTopic(id: string | null) {
+    this.dialog.open(DialogTopicComponent, {
+      data: id,
+    });
+  }
+  navigateToTopic(topic: TopicModel): void {
+    this.route.navigate(['/topic/' + topic.id]);
+  }
+
   displayedColumns: string[] = [
     'position',
     'tema',
@@ -53,3 +70,33 @@ export class TopicBanckComponent implements AfterViewInit {
   styleUrls: ['./topic-banck.component.css'],
 })
 export class DialogElementComponent {}
+
+@Component({
+  selector: 'dialog-topic',
+  templateUrl: './dialog-topic.component.html',
+  styleUrls: ['./topic-banck.component.css'],
+})
+export class DialogTopicComponent {
+  public topic: TopicModel;
+
+  constructor(
+    private topicService: TopicService,
+    private spinnerService: SpinnerService,
+    public dialogRef: MatDialogRef<DialogTopicComponent>,
+    @Inject(MAT_DIALOG_DATA) public id: string
+  ) {
+    
+  }
+
+  ngOnInit(): void {
+    this.synch();
+  }
+
+  synch(): void {
+    if (this.id !== null)
+      this.topicService
+        .getTopicById(this.id)
+        .subscribe((data) => (this.topic = data));
+    console.log(this.id);
+  }
+}

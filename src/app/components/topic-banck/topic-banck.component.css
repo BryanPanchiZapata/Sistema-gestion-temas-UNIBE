@@ -27,7 +27,12 @@ table {
   width: 100%;
   border-radius: 1rem;
 }
-
+.Open__Dialog__Topic{
+  cursor: pointer;
+}
+span{
+  font-weight: bold;
+}
 @media screen and (max-width: 920px) {
   .container__button {
     flex-direction: column;

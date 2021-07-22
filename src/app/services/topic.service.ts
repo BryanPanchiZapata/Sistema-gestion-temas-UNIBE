@@ -20,6 +20,16 @@ export class TopicService {
       })
     );
   }
+
+  getTopicById(id: string): Observable<any> {
+    return this.http.get(this.url).pipe(
+      map((response) => response),
+      catchError((error) => {
+        alert(error.error);
+        return error;
+      })
+    );
+  }
 }
 
 /* `${this.url}/administrative` */
