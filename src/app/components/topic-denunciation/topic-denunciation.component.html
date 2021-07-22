@@ -14,38 +14,38 @@
       <p class="container__data">
         <b>Apellidos:</b>
         <span class="margen"
-          >{{ denunciation.student.secondName }}
+          >{{ topicStudent.student?.secondName }}
         </span>
         <span class="margen">{{
-          denunciation.student.secondLastname
+          topicStudent.student?.secondLastname
         }}</span>
       </p>
 
       <p class="container__data">
         <b>Nombres: </b>
         <span class="margen"
-          >{{ denunciation.student.firstName }}
+          >{{ topicStudent.student?.firstName }}
         </span>
         <span class="margen">{{
-          denunciation.student.lastName
+          topicStudent.student?.lastName
         }}</span>
       </p>
 
       <p class="container__data">
         <b>Cédula de Identidad: </b>
-        <span class="margen">{{ denunciation.student.ci }} </span>
+        <span class="margen">{{ topicStudent.student?.ci }} </span>
       </p>
 
       <p class="container__data">
         <b>Carrera: </b>
         <span class="margen"
-          >{{ denunciation.student.career.name }}
+          >{{ topicStudent.student?.career?.name }}
         </span>
       </p>
 
       <p class="container__data">
         <b>Semestre: </b>
-        <span class="margen">{{ denunciation.semesterLevel }} </span>
+        <span class="margen"> </span>
       </p>
 
       <div class="container__data">
@@ -69,14 +69,14 @@
       Solicito la evaluación de la propuesta del Trabajo de Titulación o Trabajo
       de Integración Curricular para obtener el título de
       <span>
-        <b>{{ denunciation.student.career.degree }}</b>
+        <b>{{ topicStudent.student?.career?.degree }}</b>
       </span>
     </p>
     <p>Los datos de la propuesta se especifican a continuación:</p>
     <div class="form__topic">
       <h4>Tema:</h4>
       <br />
-      <p>{{ denunciation.topic.name }}</p>
+      <p>{{ topicStudent.topic?.name }}</p>
       <h4>Línea de investigación:</h4>
       <input class="topic__texts" type="text" name="" id="investagation" />
       <h4>
@@ -90,11 +90,7 @@
       <mat-form-field>
         <mat-label>Seleccionar</mat-label>
         <mat-select>
-          <mat-option
-            *ngFor="let proyecto of proyectos"
-            [value]="proyecto.value"
-          >
-            {{ proyecto.viewValue }}
+          <mat-option>
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -102,11 +98,7 @@
       <mat-form-field>
         <mat-label>Seleccionar</mat-label>
         <mat-select>
-          <mat-option
-            *ngFor="let investigacion of investigaciones"
-            [value]="investigacion.value"
-          >
-            {{ investigacion.viewValue }}
+          <mat-option>
           </mat-option>
         </mat-select>
       </mat-form-field>

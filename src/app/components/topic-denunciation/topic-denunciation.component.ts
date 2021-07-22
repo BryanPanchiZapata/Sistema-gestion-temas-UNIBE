@@ -1,7 +1,8 @@
+import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { TopicStudentModel } from 'src/app/models/topic-student';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
+import { TopicStudentModel } from 'src/app/models/topic-student-model';
 
 
 interface Proyecto {
@@ -21,23 +22,9 @@ interface Investigacion {
 export class TopicDenunciationComponent implements OnInit {
   static END_POINT = 'topic-denunciation/:id';
   private readonly id: string | null;
-  public denunciation: TopicStudentModel;
-  router: any;
+  public denunciation: TopicDenunciationModel;
+  public topicStudent: TopicStudentModel = {};
 
-  proyectos: Proyecto[] = [
-    { value: 'vinculación-0', viewValue: 'Vinculación' },
-    { value: 'investigación-1', viewValue: 'Investigación' },
-    { value: 'docencia-2', viewValue: 'Docencia' },
-  ];
-
-  investigaciones: Investigacion[] = [
-    { value: 'emprendimiento-0', viewValue: 'Emprendimiento' },
-    { value: 'modelo de negocio-1', viewValue: 'Modelo de negocio' },
-    { value: 'examne-2', viewValue: 'Examen complexivo' },
-    { value: 'producto-3', viewValue: 'Producto o presentación artística' },
-    { value: 'propuesta-4', viewValue: 'Propuesta tecnológica ' },
-    { value: 'proyecto-5', viewValue: 'Proyecto de investigación' },
-  ];
   constructor(
     private topicStudentService: TopicStudentService,
     private route: ActivatedRoute
@@ -46,14 +33,16 @@ export class TopicDenunciationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.synch();
+    this.sync();
   }
 
-  synch(): void {
+  sync(): void {
     if (this.id !== null)
-      this.topicStudentService
-        .getTopicStudentById(this.id)
-        .subscribe((data) => (this.denunciation = data));
+    this.topicStudentService.getTopicStudentById(this.id).subscribe(
+      data => {
+        this.topicStudent = data;
+      }
+    );
   }
   today = Date.now();
   fixedTimezone = this.today;
