@@ -22,6 +22,7 @@ import { PaymentRegistrationComponent } from "./components/payment-registration/
 import { TopicStudentComponent } from "./components/topic-student/topic-student.component";
 import { SpinnerInterceptor } from './components/interceptor/spinner.interceptor';
 import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
+import { AddTopicComponent } from './components/topic-banck/add-topic/add-topic.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
     LoginComponent,
     PaymentRegistrationComponent,
     TopicStudentComponent,
-    SignUpComponent
+    SignUpComponent,
+    AddTopicComponent
   ],
   imports: [
     BrowserModule,

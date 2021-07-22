@@ -22,7 +22,6 @@ export class ProfileComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
-    private careerService: CareerService,
     private formBuilder: FormBuilder,
     private router: Router
   ) {
@@ -87,7 +86,9 @@ export class ProfileComponent implements OnInit {
     this.initialValuesProfile(this.user);
   }
 
-  refresh(): void { window.location.reload(); }
+  refresh(): void {
+    window.location.reload();
+  }
 
   onUpdateProfile() {
     if (this.id !== null) {

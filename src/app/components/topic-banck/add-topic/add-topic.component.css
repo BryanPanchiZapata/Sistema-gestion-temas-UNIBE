@@ -1,0 +1,23 @@
+form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+mat-form-field {
+  width: 500px;
+  padding-bottom: 5px;
+}
+
+.mat-form-field-xs {
+  width: 264px;
+}
+
+button {
+  margin: 5px;
+}
+
+.button {
+  background-color: var(--primary-color);
+  color: white;
+}

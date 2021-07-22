@@ -1,3 +1,4 @@
+import { AddTopicComponent } from './add-topic/add-topic.component';
 import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -18,7 +19,7 @@ export class TopicBanckComponent implements AfterViewInit {
     });
   }
   openDialog() {
-    this.dialog.open(DialogElementComponent);
+    this.dialog.open(AddTopicComponent);
   }
   displayedColumns: string[] = [
     'position',
