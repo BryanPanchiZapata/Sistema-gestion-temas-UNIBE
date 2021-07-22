@@ -37,8 +37,8 @@ const routes: Routes = [
       {
         path: PaymentRegistrationComponent.END_POINT,
         component: PaymentRegistrationComponent,
-      },
-    ],
+      }
+    ]
   },
   {
     path: 'login',
