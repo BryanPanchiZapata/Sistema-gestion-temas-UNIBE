@@ -23,6 +23,7 @@ import { TopicStudentComponent } from "./components/topic-student/topic-student.
 import { SpinnerInterceptor } from './components/interceptor/spinner.interceptor';
 import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import { AddTopicComponent } from './components/topic-banck/add-topic/add-topic.component';
+import { AssignedTopicComponent } from './components/topic-banck/assigned-topic/assigned-topic.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { AddTopicComponent } from './components/topic-banck/add-topic/add-topic.
     PaymentRegistrationComponent,
     TopicStudentComponent,
     SignUpComponent,
-    AddTopicComponent
+    AddTopicComponent,
+    AssignedTopicComponent
   ],
   imports: [
     BrowserModule,

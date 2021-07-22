@@ -10,7 +10,7 @@ import { TopicStudentService } from 'src/app/services/topic-student.service';
   styleUrls: ['./topic-notification.component.css'],
 })
 export class TopicNotificationComponent implements OnInit {
-  static END_POINT = 'topic-approval/:id';
+  static END_POINT = 'topic-approval';
   private readonly id: string | null;
   public approval : TopicStudentModel;
   router: any;
@@ -19,7 +19,7 @@ export class TopicNotificationComponent implements OnInit {
     private topicStudentService: TopicStudentService,
     private route: ActivatedRoute
   ) {
-    this.id = this.route.snapshot.paramMap.get('id');
+    
   }
 
   ngOnInit(): void {
