@@ -14,13 +14,15 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthService,  } from "./services/auth.service";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
-import { LoginComponent, SignUpComponent } from './components/auth/login.component';
+import { LoginComponent } from './components/auth/login.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TopicService } from "./services/topic.service";
 import { PaymentRegistrationComponent } from "./components/payment-registration/payment-registration.component";
 import { TopicStudentComponent } from "./components/topic-student/topic-student.component";
 import { SpinnerInterceptor } from './components/interceptor/spinner.interceptor';
+import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
+import { AddTopicComponent } from './components/topic-banck/add-topic/add-topic.component';
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { SpinnerInterceptor } from './components/interceptor/spinner.interceptor
     LoginComponent,
     PaymentRegistrationComponent,
     TopicStudentComponent,
-    SignUpComponent
+    SignUpComponent,
+    AddTopicComponent
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@
       type="text"
       placeholder="Buscar..."
     />
-    <button class="button__topicbanck" mat-button (click)="openDialog()">
+    <button class="button__topicbanck" mat-button (click)="openDialog(null)">
       Añadir nuevo tema
     </button>
   </div>
@@ -54,12 +54,12 @@
       </ng-container>
 
       <ng-container matColumnDef="accion">
-        <th class="siete" mat-header-cell *matHeaderCellDef>Acciones</th>
-        <td mat-cell *matCellDef>
-          <button mat-icon-button>
+        <th class="seis" mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let topic">
+          <button mat-icon-button (click)="openDialog(topic.id)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button>
+          <button mat-icon-button (click)="onDeleteTopic(topic.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>

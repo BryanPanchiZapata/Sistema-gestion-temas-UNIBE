@@ -1,0 +1,47 @@
+<form [formGroup]="topicForm" fxLayout="column" fxLayoutAlign="center center">
+  <mat-form-field appearance="legacy" ngClass.xs="mat-form-field-xs">
+    <mat-label>Carrera</mat-label>
+    <mat-select required formControlName="career" [errorStateMatcher]="matcher">
+      <mat-option *ngFor="let career of careers" [value]="career">
+        {{career.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="topicForm.get('career')?.hasError('required')">Campo <strong>obligatorio</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy" ngClass.xs="mat-form-field-xs">
+    <mat-label>Tema</mat-label>
+    <textarea matInput text="text" required formControlName="name" [errorStateMatcher]="matcher"
+      placeholder="Ingrese el nombre del tema"></textarea>
+    <mat-error *ngIf="topicForm.get('name')?.hasError('required')">Campo <strong>obligatorio</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy" ngClass.xs="mat-form-field-xs">
+    <mat-label>Descripción</mat-label>
+    <textarea matInput text="text" required formControlName="description" [errorStateMatcher]="matcher"
+      placeholder="Ingrese la descripción del tema"></textarea>
+    <mat-error *ngIf="topicForm.get('description')?.hasError('required')">Campo <strong>obligatorio</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="legacy" ngClass.xs="mat-form-field-xs">
+    <mat-label>Articulación</mat-label>
+    <mat-select required formControlName="articulation">
+      <mat-option *ngFor="let articulation of articulations | keyvalue" [value]="articulation.value">
+        {{articulation.key}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="topicForm.get('articulation')?.hasError('required')">Campo <strong>obligatorio</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="gappx">
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button mat-dialog-close class="button" type="submit" (click)="onAddTopic()">
+      Guardar
+    </button>
+  </div>
+
+</form>

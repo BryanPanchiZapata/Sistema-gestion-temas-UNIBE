@@ -1,5 +1,6 @@
 import { AfterViewInit, Component,Inject, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AddTopicComponent } from './add-topic/add-topic.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicService } from 'src/app/services/topic.service';
@@ -24,8 +25,10 @@ export class TopicBanckComponent implements AfterViewInit {
       this.dataSource.data = data;
     });
   }
-  openDialog() {
-    this.dialog.open(DialogElementComponent);
+  openDialog(id: string | null) {
+    this.dialog.open(AddTopicComponent, {
+      data: id
+    });
   }
 
   openDialogTopic(id: string | null) {
@@ -43,7 +46,6 @@ export class TopicBanckComponent implements AfterViewInit {
     'articulacion',
     'estado',
     'carrera',
-    'evaluacion',
     'accion',
   ];
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -61,6 +63,19 @@ export class TopicBanckComponent implements AfterViewInit {
   }
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
+  }
+
+  refresh(): void {
+    window.location.reload();
+  }
+
+  onDeleteTopic(id: string): void {
+    this.topicService.deleteTopic(id).subscribe(
+      data => {
+        this.dataSource.data = data;
+        this.refresh();
+      }
+    )
   }
 }
 

@@ -1,0 +1,103 @@
+<form fxLayout="column" [formGroup]="registerForm" fxLayoutAlign="center center">
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" ngClass.xs="mat-form-field-xs">
+    <mat-form-field appearance="legacy">
+      <mat-label>Rol que desempeña</mat-label>
+      <mat-select required formControlName="role">
+        <mat-option *ngFor="let role of userRoles | keyvalue" [value]="role.value">
+          {{role.key}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="registerForm.get('role')?.hasError('required')">Campo <strong>obligatorio</strong>
+      </mat-error>
+    </mat-form-field>
+    <form [formGroup]="careerForm" fxFlex="52" fxFlex.xs="100"
+      *ngIf="registerForm.get('role')?.value === 'STUDENT' || registerForm.get('role')?.value === 'CAREER_DIRECTOR' ">
+      <span fxFlex="8" fxFlex.xs="0"></span>
+      <mat-form-field appearance="legacy">
+        <mat-label>Carrera</mat-label>
+        <mat-select required formControlName="career" [errorStateMatcher]="matcher">
+          <mat-option *ngFor="let career of careers" [value]="career">
+            {{career.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="careerForm.get('career')?.hasError('required')">Campo <strong>obligatorio</strong>
+        </mat-error>
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div *ngIf="registerForm.get('role')?.value !null" fxLayout="column" fxLayoutAlign="center center">
+    <mat-form-field appearance="legacy">
+      <mat-label>Identificación</mat-label>
+      <input matInput text="text" required formControlName="ci" [errorStateMatcher]="matcher"
+        placeholder="Ingrese el número de su identificación">
+      <mat-error *ngIf="registerForm.get('ci')?.hasError('required')">Campo <strong>obligatorio</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" ngClass.xs="mat-form-field-xs">
+      <mat-form-field appearance="legacy">
+        <mat-label>Primer nombre</mat-label>
+        <input matInput text="text" required formControlName="firstName" placeholder="Ingrese su primer nombre"
+          [errorStateMatcher]="matcher">
+        <mat-error *ngIf="registerForm.get('firstName')?.hasError('required')">Campo
+          <strong>obligatorio</strong>
+        </mat-error>
+      </mat-form-field>
+      <span fxFlex="4" fxFlex.xs="0"></span>
+      <mat-form-field appearance="legacy">
+        <mat-label>Segundo Nombre</mat-label>
+        <input matInput text="text" formControlName="secondName" placeholder="Ingrese su segundo nombre">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" ngClass.xs="mat-form-field-xs">
+      <mat-form-field appearance="legacy">
+        <mat-label>Primer Apellido</mat-label>
+        <input matInput text="text" required formControlName="lastName" [errorStateMatcher]="matcher"
+          placeholder="Ingrese su primer apellido">
+        <mat-error *ngIf="registerForm.get('lastName')?.hasError('required')">Campo
+          <strong>obligatorio</strong>
+        </mat-error>
+      </mat-form-field>
+      <span fxFlex="4" fxFlex.xs="0"></span>
+      <mat-form-field appearance="legacy">
+        <mat-label>Segundo Apellido</mat-label>
+        <input matInput text="text" formControlName="secondLastname" placeholder="Ingrese su segundo apellido">
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" ngClass.xs="mat-form-field-xs">
+      <mat-form-field appearance="legacy" fxFlex="50" fxFlex.xs="100">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput type="email" required formControlName="email" [errorStateMatcher]="matcher"
+          placeholder="Ingrese su correo electrónico institucional">
+        <mat-error *ngIf="registerForm.get('email')?.hasError('required')">Campo <strong>obligatorio</strong>
+        </mat-error>
+        <mat-error *ngIf="registerForm.get('email')?.hasError('pattern')">Email <strong>inválido</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <span fxFlex="4" fxFlex.xs="0"></span>
+
+      <mat-form-field appearance="legacy" fxFlex="48" fxFlex.xs="100">
+        <mat-label>Contraseña</mat-label>
+        <input [type]="hide ? 'password' : 'text'" matInput formControlName="password" required
+          [errorStateMatcher]="matcher" placeholder="Ingrese una contraseña">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="registerForm.get('password')?.hasError('required')">Campo
+          <strong>obligatorio</strong>
+        </mat-error>
+        <mat-error *ngIf="registerForm.get('password')?.hasError('minlength')">Se requiere
+          <strong>mínimo 8 caracteres</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button class="button" type="submit" (click)="onSignUp()">
+      Registarse
+    </button>
+  </div>
+</form>
