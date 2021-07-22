@@ -19,7 +19,6 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TopicService } from "./services/topic.service";
 import { PaymentRegistrationComponent } from "./components/payment-registration/payment-registration.component";
-import { TopicStudentComponent } from "./components/topic-student/topic-student.component";
 import { SpinnerInterceptor } from './components/interceptor/spinner.interceptor';
 import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import { AddTopicComponent } from './components/topic-banck/add-topic/add-topic.component';
@@ -36,7 +35,6 @@ import { AddTopicComponent } from './components/topic-banck/add-topic/add-topic.
     ProfileComponent,
     LoginComponent,
     PaymentRegistrationComponent,
-    TopicStudentComponent,
     SignUpComponent,
     AddTopicComponent
   ],
