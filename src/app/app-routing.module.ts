@@ -3,18 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './components/profile/profile.component';
 import { TopicBanckComponent } from './components/topic-banck/topic-banck.component';
 import { TopicNotificationComponent } from './components/topic-notification/topic-notification.component';
-import {LoginComponent} from "./components/auth/login.component";
-import {NavbarComponent} from "./components/navbar/navbar.component";
-import {TopicProposalComponent} from "./components/topic-proposal/topic-proposal.component";
-import {TopicDenunciationComponent} from "./components/topic-denunciation/topic-denunciation.component";
+import { LoginComponent } from './components/auth/login.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { TopicProposalComponent } from './components/topic-proposal/topic-proposal.component';
+import { TopicDenunciationComponent } from './components/topic-denunciation/topic-denunciation.component';
 import { PaymentRegistrationComponent } from './components/payment-registration/payment-registration.component';
-import { TopicStudentComponent } from './components/topic-student/topic-student.component';
 
 const routes: Routes = [
   {
     path: '',
     component: NavbarComponent,
-    children:[
+    children: [
       {
         path: '',
         component: TopicBanckComponent,
@@ -39,16 +38,12 @@ const routes: Routes = [
         path: PaymentRegistrationComponent.END_POINT,
         component: PaymentRegistrationComponent,
       },
-      {
-        path: TopicStudentComponent.END_POINT,
-        component: TopicStudentComponent,
-      },
-    ]
+    ],
   },
   {
     path: 'login',
     component: LoginComponent,
-  }
+  },
 ];
 
 @NgModule({

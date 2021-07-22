@@ -79,12 +79,7 @@ export class TopicBanckComponent implements AfterViewInit {
   }
 }
 
-@Component({
-  selector: 'dialog-element',
-  templateUrl: './dialog-element.component.html',
-  styleUrls: ['./topic-banck.component.css'],
-})
-export class DialogElementComponent {}
+
 
 @Component({
   selector: 'dialog-topic',
