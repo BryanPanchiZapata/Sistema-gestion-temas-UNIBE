@@ -17,7 +17,6 @@ export class ProfileComponent implements OnInit {
   user: UserModel = {};
   userAcademic: UserAcademicModel = {};
 
-
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,
