@@ -1,5 +1,9 @@
 import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { AddTopicComponent } from './add-topic/add-topic.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -27,7 +31,7 @@ export class TopicBanckComponent implements AfterViewInit {
   }
   openDialog(id: string | null) {
     this.dialog.open(AddTopicComponent, {
-      data: id
+      data: id,
     });
   }
 
@@ -70,21 +74,12 @@ export class TopicBanckComponent implements AfterViewInit {
   }
 
   onDeleteTopic(id: string): void {
-    this.topicService.deleteTopic(id).subscribe(
-      data => {
-        this.dataSource.data = data;
-        this.refresh();
-      }
-    )
+    this.topicService.deleteTopic(id).subscribe((data) => {
+      this.dataSource.data = data;
+      this.refresh();
+    });
   }
 }
-
-@Component({
-  selector: 'dialog-element',
-  templateUrl: './dialog-element.component.html',
-  styleUrls: ['./topic-banck.component.css'],
-})
-export class DialogElementComponent { }
 
 @Component({
   selector: 'dialog-topic',
@@ -99,9 +94,7 @@ export class DialogTopicComponent {
     private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogTopicComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(): void {
     this.synch();

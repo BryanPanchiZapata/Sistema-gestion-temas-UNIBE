@@ -16,11 +16,12 @@
     </ng-container>
 
     <ng-container matColumnDef="cedula">
-      <th class="tres" mat-header-cell *matHeaderCellDef>Cédula</th>
-      <td class="pointer"
+      <th class="uno" mat-header-cell *matHeaderCellDef>Cédula</th>
+      <td
+        class="pointer"
         mat-cell
         *matCellDef="let topicStudent"
-        (click)="openDialogTopicStudentAssigned(topicStudent.id)"
+        (click)="openDialogTopicStudentExecuting(topicStudent.id)"
         (click)="navigateToTopic(topicStudent)"
       >
         {{ topicStudent.student?.ci }}
@@ -28,7 +29,7 @@
     </ng-container>
 
     <ng-container matColumnDef="carrera">
-      <th class="cinco" mat-header-cell *matHeaderCellDef>Carrera</th>
+      <th class="uno" mat-header-cell *matHeaderCellDef>Carrera</th>
       <td mat-cell *matCellDef="let topicStudent">
         {{ topicStudent.topic?.career?.name }}
       </td>

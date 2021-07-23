@@ -5,7 +5,7 @@
     mat-stretch-tabs
     animationDuration="0ms"
   >
-    <mat-tab label="Inicie Sesión">
+    <mat-tab label="Disponible">
       <div class="container__button">
         <input
           matInput
@@ -76,8 +76,11 @@
         </table>
       </div>
     </mat-tab>
-    <mat-tab label="Regístrese">
+    <mat-tab label="Ejecutado">
       <app-assigned-topic></app-assigned-topic>
+    </mat-tab>
+    <mat-tab label="En Ejecución">
+      <app-executing-topic></app-executing-topic>
     </mat-tab>
   </mat-tab-group>
   <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>

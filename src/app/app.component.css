@@ -22,6 +22,9 @@
   color: var(--primary-color);
   font-weight: bold;
 }
+.tittle__responsive{
+  display: none;
+}
 .color__logo__white {
   background: #fff;
   height: 55px;
@@ -38,5 +41,13 @@
   .color__logo__Brown h2 {
     font-size: 1.2rem;
     margin-left: 7rem;
+  }
+}
+@media screen and (max-width: 470px) {
+  .tittle{
+    display: none;
+  }
+  .tittle__responsive{
+    display: inline-block;
   }
 }

@@ -1,3 +1,4 @@
+/* Banco de temas */
 .container__topicBanck {
   width: 95%;
   margin-inline: auto;
@@ -10,7 +11,7 @@
 .container__button {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  padding: 1rem;
 }
 .button__topicbanck {
   background: #002858;
@@ -23,17 +24,56 @@ input {
   border-bottom: 1px solid #c6cdde;
   font-size: 0.9rem;
 }
+/* Estilo Tablas */
 table {
   width: 100%;
   border-radius: 1rem;
 }
-.Open__Dialog__Topic{
-  cursor: pointer;
+
+td {
+  text-align: center;
 }
-span{
+td:nth-child(2) {
+  text-align: left;
+}
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
+  padding: 1rem;
+}
+th.mat-header-cell {
+  text-align: center;
+}
+th.mat-header-cell:nth-child(2) {
+  text-align: left;
+}
+.mat-header-cell {
   font-weight: bold;
 }
-@media screen and (max-width: 920px) {
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  padding: 0 1rem;
+}
+.dos {
+  width: 450px;
+}
+.Open__Dialog__Topic {
+  cursor: pointer;
+}
+span {
+  font-weight: bold;
+}
+
+/* Tablas estado ejecutado y en ejecucion */
+.pointer {
+  cursor: pointer;
+}
+.container__info{
+  padding: .7rem 0;
+}
+
+@media screen and (max-width: 1211px) {
   .container__button {
     flex-direction: column;
     width: 100%;
@@ -52,21 +92,18 @@ span{
     min-width: 90px;
   }
   .dos {
-    min-width: 390px;
+    min-width: 410px;
   }
   .tres {
-    min-width: 270px;
+    min-width: 290px;
   }
   .cuatro {
-    min-width: 230px;
+    min-width: 190px;
   }
   .cinco {
-    min-width: 200px;
+    min-width: 180px;
   }
   .seis {
-    min-width: 200px;
-  }
-  .siete {
-    min-width: 150px;
+    min-width: 140px;
   }
 }
