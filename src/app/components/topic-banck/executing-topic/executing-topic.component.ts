@@ -1,5 +1,9 @@
 import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -8,11 +12,11 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
 
 @Component({
-  selector: 'app-assigned-topic',
-  templateUrl: './assigned-topic.component.html',
+  selector: 'app-executing-topic',
+  templateUrl: './executing-topic.component.html',
   styleUrls: ['../topic-banck.component.css'],
 })
-export class AssignedTopicComponent implements AfterViewInit {
+export class ExecutingTopicComponent implements AfterViewInit {
   dataStudent = new MatTableDataSource();
 
   constructor(
@@ -24,8 +28,9 @@ export class AssignedTopicComponent implements AfterViewInit {
       this.dataStudent.data = data;
     });
   }
-  openDialogTopicStudentAssigned(id: string | null) {
-    this.dialog.open(DialogStatusAssignedComponent, {
+
+  openDialogTopicStudentExecuting(id: string | null) {
+    this.dialog.open(DialogStatusExecutingComponent, {
       data: id,
     });
   }
@@ -61,21 +66,18 @@ export class AssignedTopicComponent implements AfterViewInit {
   }
 }
 
-
-
-
 @Component({
-  selector: 'dialog-status-assigned',
-  templateUrl: './dialog-status-assigned.component.html',
+  selector: 'dialog-status-executing',
+  templateUrl: './dialog-status-executing.component.html',
   styleUrls: ['../topic-banck.component.css'],
 })
-export class DialogStatusAssignedComponent {
+export class DialogStatusExecutingComponent {
   public topicStudent: TopicStudentModel;
 
   constructor(
     private topicService: TopicStudentService,
     private spinnerService: SpinnerService,
-    public dialogRef: MatDialogRef<DialogStatusAssignedComponent>,
+    public dialogRef: MatDialogRef<DialogStatusExecutingComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
   ) {}
 
