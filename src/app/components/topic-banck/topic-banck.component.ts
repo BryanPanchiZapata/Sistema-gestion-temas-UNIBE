@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, ViewChild, OnInit } from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
@@ -17,7 +17,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
   styleUrls: ['./topic-banck.component.css'],
   templateUrl: './topic-banck.component.html',
 })
-export class TopicBanckComponent implements AfterViewInit {
+export class TopicBanckComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource();
 
   constructor(
@@ -25,10 +25,8 @@ export class TopicBanckComponent implements AfterViewInit {
     public dialog: MatDialog,
     private route: Router
   ) {
-    this.topicService.getAllTopic().subscribe((data) => {
-      this.dataSource.data = data;
-    });
   }
+
   openDialog(id: string | null) {
     this.dialog.open(AddTopicComponent, {
       data: id,
@@ -42,6 +40,11 @@ export class TopicBanckComponent implements AfterViewInit {
   }
   navigateToTopic(topic: TopicModel): void {
     this.route.navigate(['/topic/' + topic.id]);
+  }
+  sync() {
+    this.topicService.getAllTopic().subscribe((data) => {
+      this.dataSource.data = data;
+    });
   }
 
   displayedColumns: string[] = [
@@ -67,16 +70,13 @@ export class TopicBanckComponent implements AfterViewInit {
   }
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
-  }
-
-  refresh(): void {
-    window.location.reload();
+    this.sync();
   }
 
   onDeleteTopic(id: string): void {
     this.topicService.deleteTopic(id).subscribe((data) => {
       this.dataSource.data = data;
-      this.refresh();
+      this.sync();
     });
   }
 }
@@ -97,10 +97,10 @@ export class DialogTopicComponent {
   ) {}
 
   ngOnInit(): void {
-    this.synch();
+    this.sync();
   }
 
-  synch(): void {
+  sync(): void {
     if (this.id !== null)
       this.topicService
         .getTopicById(this.id)

@@ -46,10 +46,6 @@ export class AddTopicComponent implements OnInit {
     this.topicForm.reset();
   }
 
-  refresh(): void {
-    window.location.reload();
-  }
-
   topicForm = this.formBuilder.group({
     name: ['', Validators.required],
     career: ['', Validators.required],
@@ -73,7 +69,7 @@ export class AddTopicComponent implements OnInit {
         this.topicService.updateTopic(this.id, this.topicForm.value).subscribe(
           data => {
             this.topic = data
-            this.refresh();
+            this.sync();
           }
         );
       } else {
@@ -84,7 +80,7 @@ export class AddTopicComponent implements OnInit {
         this.topicService.addTopic(this.topicForm.value).subscribe(
           data => {
             this.onResetForm();
-            this.refresh();
+            this.sync();
           }
         )
       }
