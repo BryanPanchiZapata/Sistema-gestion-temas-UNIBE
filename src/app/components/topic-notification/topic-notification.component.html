@@ -24,19 +24,19 @@
         <p><strong>Carrera:</strong> {{topicStudent.topic?.career?.name}}</p>
         <p><strong>Tema:</strong> {{topicStudent.topic?.name}}</p>
       </div>
-      <form>
+      <form [formGroup]="evaluationForm">
         <mat-form-field class="form-evaluation" appearance="legacy">
           <mat-label>Evaluación de la Propuesta de Tema</mat-label>
-          <mat-select required [formControl]="evaluationControl">
+          <mat-select required formControlName="topicEvaluation">
             <mat-option *ngFor="let evaluation of evaluations | keyvalue" [value]="evaluation.value">
               {{evaluation.key}}
             </mat-option>
           </mat-select>
-          <mat-error *ngIf="evaluationControl.hasError('required')">Campo <strong>obligatorio</strong>
+          <mat-error *ngIf="evaluationForm.get('topicEvaluation')?.hasError('required')">Campo <strong>obligatorio</strong>
           </mat-error>
         </mat-form-field>
       </form>
-      <button [disabled]="evaluationControl.invalid" class="primary" mat-raised-button matStepperNext
+      <button class="primary" mat-raised-button matStepperNext
         (click)="onEvaluationProposal()">Siguiente</button>
     </div>
   </mat-step>
@@ -76,14 +76,14 @@
             <input class="input" type="text" placeholder="01-2020" required />
             fecha
             <input class="form__date" type="date" required />, le informa que su propuesta de investigación titulada:
-            <b> {{ topicStudent.topic?.name }}</b> ha sido: <b>aprobado.</b>
+            <b> {{ topicStudent.topic?.name }}</b> ha sido:
           </p>
-
-          <div *ngIf="topicStudent.topicEvaluation === 'APROBADO_CON_OBSERVACIONES'">
+          <div *ngIf="evaluationForm.get('topicEvaluation')?.value === 'APROBADO'"><b>APROBADO</b></div>
+          <div *ngIf="evaluationForm.get('topicEvaluation')?.value === 'APROBADO_CON_OBSERVACIONES'">
             <p>Aprobado con las siguientes observaciones:</p>
             <textarea cols="20" rows="10"></textarea>
           </div>
-          <div *ngIf="topicStudent.topicEvaluation === 'REPROBABO'">
+          <div *ngIf="evaluationForm.get('topicEvaluation')?.value === 'REPROBABO'">
             <p>No ha sido aprobado por los siguientes motivos:</p>
             <textarea cols="20" rows="10"></textarea>
           </div>

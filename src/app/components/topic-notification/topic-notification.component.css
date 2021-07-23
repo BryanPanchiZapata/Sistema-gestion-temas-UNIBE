@@ -93,7 +93,7 @@ textarea {
     justify-content: center;
   }
   .unibe__form img {
-    width: 500px;
+    width: 100%;
     height: auto;
   }
   .firma {
@@ -116,7 +116,7 @@ textarea {
     justify-content: center;
   }
   .unibe__form img {
-    width: 320px;
+    width: 85vw;
     height: auto;
   }
   .form__carrera {

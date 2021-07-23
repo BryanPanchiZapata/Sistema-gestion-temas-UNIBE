@@ -1,5 +1,5 @@
 import { TopicEvaluation } from './../../models/topic-student-model';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormBuilder } from '@angular/forms';
 import { TopicApprovalModel, Titles } from './../../models/topic-approval-model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -21,7 +21,7 @@ export class TopicNotificationComponent implements OnInit {
 
   constructor(
     private topicStudentService: TopicStudentService,
-    private route: ActivatedRoute
+    private formBuilder: FormBuilder,
   ) {
   }
 
@@ -29,9 +29,9 @@ export class TopicNotificationComponent implements OnInit {
     Validators.required,
   ]);
 
-  evaluationControl = new FormControl('', [
-    Validators.required,
-  ]);
+  evaluationForm = this.formBuilder.group({
+    topicEvaluation: ['', Validators.required,]
+  });
 
   ngOnInit(): void {
   }
@@ -56,13 +56,11 @@ export class TopicNotificationComponent implements OnInit {
 
 
   onEvaluationProposal() {
-    // if (this.id !== null)
-    // if (this.evaluationControl.valid)
-    //   this.topicStudentService.evaluationProposal(data.id, this.evaluationControl.value).subscribe(
-    //     data => {
-    //       this.topicStudent = data;
-    //     }
-    //   )
+    if (this.evaluationForm.valid)
+      if (this.topicStudent.id)
+        this.topicStudentService.evaluationProposal(this.topicStudent.id, this.evaluationForm.value).subscribe();
+    console.log(this.topicStudent.id);
+    console.log(this.evaluationForm.value);
   }
 
   monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]

@@ -43,7 +43,7 @@ export class TopicStudentService {
   }
 
   evaluationProposal(id: string, topicStudent: TopicStudentModel): Observable<any> {
-    return this.http.post(this.url + '/' + id, topicStudent).pipe(
+    return this.http.patch(this.url + '/' + id, topicStudent).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);
