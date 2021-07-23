@@ -1,3 +1,4 @@
+import { FormControl, Validators } from '@angular/forms';
 import { TopicApprovalModel } from './../../models/topic-approval-model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -15,8 +16,6 @@ export class TopicNotificationComponent implements OnInit {
   public approval: TopicApprovalModel;
   public topicStudent: TopicStudentModel = {};
 
-  router: any;
-
   constructor(
     private topicStudentService: TopicStudentService,
     private route: ActivatedRoute
@@ -24,20 +23,33 @@ export class TopicNotificationComponent implements OnInit {
 
   }
 
+  ciStudentControl = new FormControl('', [
+    Validators.required,
+  ]);
+
   ngOnInit(): void {
-    this.sync();
   }
 
-  sync(): void {
-    this.topicStudentService
-      .getTopicStudentById("10a59c8c-ba96-4afe-bb36-1eba22cf173b")
-      .subscribe((data) => (this.approval = data));
+  onFindByStudent() {
+    if (this.ciStudentControl.valid)
+    this.topicStudentService.getTopicStudentByStudent(this.ciStudentControl.value).subscribe(
+      data => {
+        this.topicStudent = data;
+      }
+    )
+  }
+  refresh(): void {
+    window.location.reload();
   }
 
-  /*  navigateToNotification(approvals: TopicApprovalModel): void {
-     this.router.navigate(['/topic-approval/' + approvals.id]);
-   } */
+  onReset() {
+    this.ciStudentControl.reset();
+    this.refresh();
+  }
 
-  today = Date.now();
-  fixedTimezone = this.today;
+  monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+  year = new Date().getFullYear();
+  monthNumber = new Date().getMonth();
+  month = this.monthNames[this.monthNumber]
+  day = new Date().getDay();
 }

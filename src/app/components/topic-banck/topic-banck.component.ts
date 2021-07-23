@@ -1,4 +1,4 @@
-import { AfterViewInit, Component,Inject, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddTopicComponent } from './add-topic/add-topic.component';
 import { MatPaginator } from '@angular/material/paginator';
@@ -84,7 +84,7 @@ export class TopicBanckComponent implements AfterViewInit {
   templateUrl: './dialog-element.component.html',
   styleUrls: ['./topic-banck.component.css'],
 })
-export class DialogElementComponent {}
+export class DialogElementComponent { }
 
 @Component({
   selector: 'dialog-topic',
@@ -100,7 +100,7 @@ export class DialogTopicComponent {
     public dialogRef: MatDialogRef<DialogTopicComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
   ) {
-    
+
   }
 
   ngOnInit(): void {
@@ -112,6 +112,5 @@ export class DialogTopicComponent {
       this.topicService
         .getTopicById(this.id)
         .subscribe((data) => (this.topic = data));
-    console.log(this.id);
   }
 }

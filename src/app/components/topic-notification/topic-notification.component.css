@@ -1,65 +1,88 @@
-.container {
+mat-card {
+  padding: 3.5rem;
+  width: 800px;
+}
+
+mat-form-field {
+  width: 315px;
+}
+
+.find-student {
+  width: 350px;
+  text-align: justify;
+}
+
+.mat-card-lt-sm {
   padding: 1rem;
 }
-.container__form {
-  width: 70%;
-  border-radius: 0.6rem;
-  margin: 3rem auto;
-  padding: 2rem 1.5rem;
-}
+
 .unibe__form {
   text-align: center;
   padding: 1.5rem;
 }
+
 .unibe__form img {
   width: 85%;
 }
+
 .form__inicio {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   align-items: flex-end;
 }
+
 .form__oficio {
   font-weight: bold;
 }
+
 .form__texts {
   padding: 1.5rem 0;
   line-height: 4rem;
 }
+
 h3 {
   margin: 0;
 }
-input {
+
+.input {
   border: 1px solid #767676;
   outline: none;
   border-radius: 0.5rem;
   padding: 0.6rem;
   margin: 0 0.7rem;
 }
+
 .input__name {
   margin: 0;
   width: 50%;
 }
+
 .spacing {
   padding: 1rem 0;
 }
+
 span {
   font-size: 1rem;
 }
+
 .form__carrera {
   width: 35%;
 }
+
 .form__date {
   margin: 0;
 }
+
 .form__tema {
   width: 60%;
   margin: 0;
 }
+
 .form__observaciones {
   padding: 2rem 0;
 }
+
 textarea {
   outline: none;
   border-radius: 0.4rem;
@@ -67,27 +90,18 @@ textarea {
   resize: none;
   padding: 1rem;
 }
+
 .firma {
   border-bottom: 1px solid #000;
   width: 30%;
   padding-bottom: 5rem;
   font-weight: bold;
 }
-.buttons {
-  padding: 2rem 0;
-  display: flex;
-  justify-content: space-around;
-}
-button {
-  padding: 0 3rem;
-}
+
 .primary {
   background: #002858;
   color: #fff;
-}
-.second {
-  background: #d7dfe1;
-  color: #000;
+  margin: 0.7rem;
 }
 
 .example-card {
@@ -122,7 +136,7 @@ button {
     justify-content: center;
   }
   .unibe__form img {
-    width: 400px;
+    width: 320px;
   }
   .input__name {
     width: 100%;
@@ -135,5 +149,8 @@ button {
   }
   .firma {
     width: 70%;
+  }
+  .form__inicio {
+    align-items: flex-start;
   }
 }
