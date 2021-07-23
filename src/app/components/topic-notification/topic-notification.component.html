@@ -1,6 +1,6 @@
 <mat-stepper linear #stepper fxLayout="column" fxLayoutAlign="center center">
   <mat-step [stepControl]="ciStudentControl">
-    <ng-template matStepLabel>Evaluación de Propuesta de Tema</ng-template>
+    <ng-template matStepLabel>Evaluación</ng-template>
     <form fxLayout="column" fxLayoutAlign="center center">
       <mat-form-field class="form-evaluation" appearance="fill">
         <mat-label>Identificación del estudiante</mat-label>
@@ -41,15 +41,14 @@
     </div>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Notificación de aprobación</ng-template>
-    <ng-template matStepContent>
+    <ng-template matStepLabel>Notificación</ng-template>
       <mat-card class="container__form" ngClass.lt-sm="mat-card-lt-sm">
         <figure class="unibe__form">
           <img src="../../../assets/unibe_form.png" alt="UNIBE" />
         </figure>
         <div class="form__inicio">
           <div>
-            <p class="form__oficio">OFICIO N°</p>
+            <p><b>OFICIO N°</b></p>
             <input class="input" type="number" required />
           </div>
           <div>
@@ -99,5 +98,4 @@
           </mat-card-actions>
         </div>
       </mat-card>
-    </ng-template>
   </mat-step>
