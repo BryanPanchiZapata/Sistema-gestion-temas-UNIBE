@@ -1,15 +1,29 @@
-mat-card {
-  padding: 3.5rem;
-  width: 800px;
-}
-
-mat-form-field {
-  width: 315px;
+.form-evaluation {
+  width: 305px;
 }
 
 .find-student {
   width: 350px;
   text-align: justify;
+}
+
+.container__form p{
+  font-family: Arial;
+  line-height: 30px;
+  text-align: justify;
+}
+
+button {
+  margin: 0.7rem;
+}
+
+.button-icon {
+  margin: 0;
+}
+
+mat-card {
+  padding: 3.5rem;
+  width: 800px;
 }
 
 .mat-card-lt-sm {
@@ -23,6 +37,7 @@ mat-form-field {
 
 .unibe__form img {
   width: 85%;
+  height: auto;
 }
 
 .form__inicio {
@@ -41,10 +56,6 @@ mat-form-field {
   line-height: 4rem;
 }
 
-h3 {
-  margin: 0;
-}
-
 .input {
   border: 1px solid #767676;
   outline: none;
@@ -53,34 +64,8 @@ h3 {
   margin: 0 0.7rem;
 }
 
-.input__name {
-  margin: 0;
-  width: 50%;
-}
-
-.spacing {
-  padding: 1rem 0;
-}
-
-span {
-  font-size: 1rem;
-}
-
-.form__carrera {
-  width: 35%;
-}
-
 .form__date {
   margin: 0;
-}
-
-.form__tema {
-  width: 60%;
-  margin: 0;
-}
-
-.form__observaciones {
-  padding: 2rem 0;
 }
 
 textarea {
@@ -94,24 +79,12 @@ textarea {
 .firma {
   border-bottom: 1px solid #000;
   width: 30%;
-  padding-bottom: 5rem;
   font-weight: bold;
 }
 
 .primary {
   background: #002858;
   color: #fff;
-  margin: 0.7rem;
-}
-
-.example-card {
-  max-width: 400px;
-  margin-inline: auto;
-}
-
-.example-header-image {
-  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
-  background-size: cover;
 }
 
 @media screen and (max-width: 960px) {
@@ -123,7 +96,8 @@ textarea {
     justify-content: center;
   }
   .unibe__form img {
-    width: 80%;
+    width: 500px;
+    height: auto;
   }
   .firma {
     width: 50%;
@@ -137,15 +111,10 @@ textarea {
   }
   .unibe__form img {
     width: 320px;
-  }
-  .input__name {
-    width: 100%;
+    height: auto;
   }
   .form__carrera {
     width: 70%;
-  }
-  .form__tema {
-    width: 100%;
   }
   .firma {
     width: 70%;
