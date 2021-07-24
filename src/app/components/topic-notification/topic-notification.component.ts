@@ -59,8 +59,6 @@ export class TopicNotificationComponent implements OnInit {
     if (this.evaluationForm.valid)
       if (this.topicStudent.id)
         this.topicStudentService.evaluationProposal(this.topicStudent.id, this.evaluationForm.value).subscribe();
-    console.log(this.topicStudent.id);
-    console.log(this.evaluationForm.value);
   }
 
   monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]

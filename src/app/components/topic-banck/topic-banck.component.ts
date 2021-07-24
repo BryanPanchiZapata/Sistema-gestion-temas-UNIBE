@@ -28,8 +28,11 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
   }
 
   openDialog(id: string | null) {
-    this.dialog.open(AddTopicComponent, {
+    const dialogRef = this.dialog.open(AddTopicComponent, {
       data: id,
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.sync();
     });
   }
 
@@ -94,7 +97,7 @@ export class DialogTopicComponent {
     private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogTopicComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.sync();

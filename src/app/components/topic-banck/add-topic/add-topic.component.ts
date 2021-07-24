@@ -1,3 +1,4 @@
+import { TopicBanckComponent } from './../topic-banck.component';
 import { SpinnerService } from './../../../services/spinner.service';
 import { Articulation, TopicModel } from './../../../models/topic-model';
 import { TopicService } from 'src/app/services/topic.service';
@@ -27,7 +28,7 @@ export class AddTopicComponent implements OnInit {
     private topicService: TopicService,
     private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<AddTopicComponent>,
-    @Inject(MAT_DIALOG_DATA) public id: string
+    @Inject(MAT_DIALOG_DATA) public id: string,
   ) {
   }
 
@@ -63,24 +64,20 @@ export class AddTopicComponent implements OnInit {
   }
 
   onAddTopic() {
-    if (this.id !== null) {
-      console.log(this.id);
-      if (this.topicForm.valid) {
+    if (this.topicForm.valid) {
+      if (this.id !== null) {
         this.topicService.updateTopic(this.id, this.topicForm.value).subscribe(
           data => {
             this.topic = data
-            this.sync();
+            this.onResetForm();
+            this.dialogRef.close();
           }
         );
       } else {
-        alert("Los datos ingresados son incorrectos")
-      }
-    } else {
-      if (this.topicForm.valid) {
         this.topicService.addTopic(this.topicForm.value).subscribe(
           data => {
             this.onResetForm();
-            this.sync();
+            this.dialogRef.close();
           }
         )
       }
