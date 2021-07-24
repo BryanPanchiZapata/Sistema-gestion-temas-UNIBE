@@ -61,7 +61,7 @@
           <p>Quito, D.M. {{day}} de {{month}} del {{year}}</p>
         </div>
         <mat-form-field appearance="fill">
-          <mat-label>Trato</mat-label>
+          <mat-label>Trato/título</mat-label>
           <input matInput type="text" [formControl]="tratamientoControl" placeholder="Ej: Señor" required/>
           <mat-error *ngIf="tratamientoControl.hasError('required')">Campo
             <strong>obligatorio</strong>
@@ -113,7 +113,7 @@
         <img class="firma">
         <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
           <button mat-raised-button>Imprimir</button>
-          <button type="submit" class="primary" mat-raised-button>
+          <button type="submit" class="primary" mat-raised-button (click)="onCreateNotification()">
             Enviar
           </button>
         </mat-card-actions>
