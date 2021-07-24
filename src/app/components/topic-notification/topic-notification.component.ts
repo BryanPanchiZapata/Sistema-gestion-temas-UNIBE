@@ -1,10 +1,11 @@
 import { TopicEvaluation } from './../../models/topic-student-model';
 import { FormControl, Validators, FormBuilder } from '@angular/forms';
-import { TopicApprovalModel, Titles } from './../../models/topic-approval-model';
+import { TopicApprovalModel } from './../../models/topic-approval-model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
+import { MatStepper } from '@angular/material/stepper';
 
 
 @Component({
@@ -17,7 +18,6 @@ export class TopicNotificationComponent implements OnInit {
   public approval: TopicApprovalModel;
   public topicStudent: TopicStudentModel = {};
   public evaluations = TopicEvaluation;
-  public titles = Titles;
 
   constructor(
     private topicStudentService: TopicStudentService,
@@ -32,6 +32,17 @@ export class TopicNotificationComponent implements OnInit {
   evaluationForm = this.formBuilder.group({
     topicEvaluation: ['', Validators.required,]
   });
+
+  notificationForm = this.formBuilder.group({
+    documentNumber: ['', Validators.required],
+    meetingDate: ['', Validators.required],
+    meetingNumber: ['', Validators.required],
+    observations: ['', Validators.required],
+  })
+
+  tratamientoControl = new FormControl('', [
+    Validators.required,
+  ]);
 
   ngOnInit(): void {
   }
@@ -55,10 +66,14 @@ export class TopicNotificationComponent implements OnInit {
   }
 
 
-  onEvaluationProposal() {
+  onEvaluationProposal(stepper: MatStepper) {
     if (this.evaluationForm.valid)
       if (this.topicStudent.id)
-        this.topicStudentService.evaluationProposal(this.topicStudent.id, this.evaluationForm.value).subscribe();
+        this.topicStudentService.evaluationProposal(this.topicStudent.id, this.evaluationForm.value).subscribe(
+          data => {
+            stepper.next();
+          }
+        );
   }
 
   monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]

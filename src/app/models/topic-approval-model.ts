@@ -9,9 +9,3 @@ export interface TopicApprovalModel {
   observations?: Text,
   topicStudent: TopicStudentModel
 }
-
-export enum Titles{
-  'Señor' = '1',
-  'Señora' = '2',
-  'Señorita' = '3'
-}
