@@ -53,22 +53,6 @@ mat-card {
   width: 100%;
 }
 
-.input {
-  border: 1px solid #767676;
-  outline: none;
-  border-radius: 0.5rem;
-  padding: 0.6rem;
-  margin: 0 0.7rem;
-}
-
-textarea {
-  outline: none;
-  border-radius: 0.4rem;
-  width: 100%;
-  resize: none;
-  padding: 1rem;
-}
-
 .firma {
   border-bottom: 1px solid #000;
   width: 30%;
@@ -115,13 +99,8 @@ textarea {
     width: 85vw;
     height: auto;
   }
-  .form__carrera {
-    width: 70%;
-  }
+
   .firma {
     width: 70%;
-  }
-  .form__inicio {
-    align-items: flex-start;
   }
 }

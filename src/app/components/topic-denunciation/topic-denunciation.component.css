@@ -27,7 +27,8 @@ b {
   padding: 1.5rem;
 }
 .unibe__img img {
-  width: 80%;
+  width: 85%;
+  height: auto;
 }
 
 .form__title {
@@ -131,7 +132,8 @@ button {
     justify-content: center;
   }
   .unibe__img img {
-    width: 80%;
+    width: 100%;
+    height: auto;
   }
   .firma {
     width: 50%;
@@ -144,7 +146,8 @@ button {
     justify-content: center;
   }
   .unibe__img img {
-    width: 400px;
+    width: 85vw;
+    height: auto;
   }
   .form__title h2 {
     font-size: 1rem;
