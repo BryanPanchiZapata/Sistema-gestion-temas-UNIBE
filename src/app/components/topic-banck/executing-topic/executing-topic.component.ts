@@ -14,7 +14,7 @@ import { TopicStudentService } from 'src/app/services/topic-student.service';
 @Component({
   selector: 'app-executing-topic',
   templateUrl: './executing-topic.component.html',
-  styleUrls: ['../topic-banck.component.css'],
+  styleUrls: ['./assigned-topic.component.css']
 })
 export class ExecutingTopicComponent implements AfterViewInit {
   dataStudent = new MatTableDataSource();
@@ -69,7 +69,7 @@ export class ExecutingTopicComponent implements AfterViewInit {
 @Component({
   selector: 'dialog-status-executing',
   templateUrl: './dialog-status-executing.component.html',
-  styleUrls: ['../topic-banck.component.css'],
+  styleUrls: ['./assigned-topic.component.css']
 })
 export class DialogStatusExecutingComponent {
   public topicStudent: TopicStudentModel;

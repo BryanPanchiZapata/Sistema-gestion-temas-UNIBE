@@ -1,29 +1,43 @@
-<div>
+<div class="container__info">
+  <div>
   <span>Nombres del estudiante: </span>
-  <label>{{ topicStudent.student?.firstName }}</label> 
-  <label>{{ topicStudent.student?.secondName }}</label> 
-  <label>{{ topicStudent.student?.lastName }}</label> 
-  <label>{{ topicStudent.student?.secondLastname }}</label> 
+  <label>{{ topicStudent.student?.firstName }} </label>
+  <label> {{ topicStudent.student?.secondName }} </label>
+  <label> {{ topicStudent.student?.lastName }} </label>
+  <label> {{ topicStudent.student?.secondLastname }} </label>
+</div>
+  <span class="skip"></span>
+  <div>
   <span>Cédula: </span>
-  <label>{{ topicStudent.student?.ci}}</label>
+  <label>{{ topicStudent.student?.ci }}</label>
+</div>
 </div>
 
-<div>
-  <span>Tema: </span> <label>{{ topicStudent.topic?.name}}</label>
+<div class="container__info">
+  <span>Tema: </span> <label>{{ topicStudent.topic?.name }}</label>
 </div>
 
-<div>
-    <span>Carrera: </span> <label>{{ topicStudent.topic?.career?.name }}</label>
-    <span>Evaluación: </span> <label>{{ topicStudent.topicEvaluation}}</label>
-    <span>Articulación: </span> <label>{{ topicStudent.topic?.articulation}}</label>
+<div class="container__info">
+  <span>Carrera: </span> <label>{{ topicStudent.topic?.career?.name }}</label>
+  <span class="skip"></span>
+  <span> Evaluación: </span> <label>{{ topicStudent.topicEvaluation }}</label>
+  <span class="skip"></span>
+  <span> Articulación: </span>
+  <label>{{ topicStudent.topic?.articulation }}</label>
 </div>
 
-<div>
-    <span>Estado de tema: </span> <label>{{ topicStudent.topic?.topicStatus}}</label>
-    <span>Pago: </span> <label>{{ topicStudent.paymentDenunciation}}</label>
-    <span>Fecha: </span> <label>{{ topicStudent.assignedDate}}</label>
+<div class="container__info">
+  <span>Estado de tema: </span>
+  <label>{{ topicStudent.topic?.topicStatus }} </label
+  ><span class="skip"></span> <span>Pago: </span>
+
+  <label> {{ topicStudent.paymentDenunciation }} </label
+  ><span class="skip"></span> <span>Fecha: </span>
+
+  <label> {{ topicStudent.assignedDate }} </label>
 </div>
 
-<div>
-  <span>Descripción del tema: </span> <label>{{ topicStudent.topic?.description}}</label>
+<div class="container__info">
+  <span>Descripción del tema: </span>
+  <label>{{ topicStudent.topic?.description }}</label>
 </div>

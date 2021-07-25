@@ -8,7 +8,7 @@ import { AddTopicComponent } from './add-topic/add-topic.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicService } from 'src/app/services/topic.service';
-import { TopicModel } from 'src/app/models/topic-model';
+import { TopicModel, TopicStatus } from 'src/app/models/topic-model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SpinnerService } from 'src/app/services/spinner.service';
 
@@ -19,6 +19,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 })
 export class TopicBanckComponent implements AfterViewInit {
   dataSource = new MatTableDataSource();
+
 
   constructor(
     private topicService: TopicService,
@@ -67,11 +68,19 @@ export class TopicBanckComponent implements AfterViewInit {
   }
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.sync();
+   
   }
 
   refresh(): void {
     window.location.reload();
   }
+
+   sync(): void {
+      this.topicService
+        .getTopicsByStatus("DISPONIBLE")
+        .subscribe((data) => (this.dataSource = data));
+  } 
 
   onDeleteTopic(id: string): void {
     this.topicService.deleteTopic(id).subscribe((data) => {
@@ -97,14 +106,15 @@ export class DialogTopicComponent {
   ) {}
 
   ngOnInit(): void {
-    this.synch();
+    this.sync();
   }
 
-  synch(): void {
+  sync(): void {
     if (this.id !== null)
       this.topicService
         .getTopicById(this.id)
         .subscribe((data) => (this.topic = data));
     console.log(this.id);
   }
+
 }

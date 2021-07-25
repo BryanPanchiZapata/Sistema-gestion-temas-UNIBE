@@ -10,7 +10,7 @@ import { TopicStudentService } from 'src/app/services/topic-student.service';
 @Component({
   selector: 'app-assigned-topic',
   templateUrl: './assigned-topic.component.html',
-  styleUrls: ['../topic-banck.component.css'],
+  styleUrls: ['./assigned-topic.component.css']
 })
 export class AssignedTopicComponent implements AfterViewInit {
   dataStudent = new MatTableDataSource();
@@ -67,7 +67,7 @@ export class AssignedTopicComponent implements AfterViewInit {
 @Component({
   selector: 'dialog-status-assigned',
   templateUrl: './dialog-status-assigned.component.html',
-  styleUrls: ['../topic-banck.component.css'],
+  styleUrls: ['./assigned-topic.component.css'],
 })
 export class DialogStatusAssignedComponent {
   public topicStudent: TopicStudentModel;

@@ -1,9 +1,10 @@
 <div class="container__info">
   <span>Nombres del estudiante: </span>
-  <label>{{ topicStudent.student?.firstName }}</label>
-  <label>{{ topicStudent.student?.secondName }}</label>
-  <label>{{ topicStudent.student?.lastName }}</label>
-  <label>{{ topicStudent.student?.secondLastname }}</label>
+  <label>{{ topicStudent.student?.firstName }} </label>
+  <label> {{ topicStudent.student?.secondName }} </label>
+  <label> {{ topicStudent.student?.lastName }} </label>
+  <label> {{ topicStudent.student?.secondLastname }} </label>
+  <span class="skip"></span>
   <span>Cédula: </span>
   <label>{{ topicStudent.student?.ci }}</label>
 </div>
@@ -14,16 +15,22 @@
 
 <div class="container__info">
   <span>Carrera: </span> <label>{{ topicStudent.topic?.career?.name }}</label>
-  <span>Evaluación: </span> <label>{{ topicStudent.topicEvaluation }}</label>
-  <span>Articulación: </span>
+  <span class="skip"></span>
+  <span> Evaluación: </span> <label>{{ topicStudent.topicEvaluation }}</label>
+  <span class="skip"></span>
+  <span> Articulación: </span>
   <label>{{ topicStudent.topic?.articulation }}</label>
 </div>
 
 <div class="container__info">
   <span>Estado de tema: </span>
-  <label>{{ topicStudent.topic?.topicStatus }}</label> <span>Pago: </span>
-  <label>{{ topicStudent.paymentDenunciation }}</label> <span>Fecha: </span>
-  <label>{{ topicStudent.assignedDate }}</label>
+  <label>{{ topicStudent.topic?.topicStatus }} </label
+  ><span class="skip"></span> <span>Pago: </span>
+
+  <label> {{ topicStudent.paymentDenunciation }} </label
+  ><span class="skip"></span> <span>Fecha: </span>
+
+  <label> {{ topicStudent.assignedDate }} </label>
 </div>
 
 <div class="container__info">
