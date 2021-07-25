@@ -1,8 +1,11 @@
+import { TopicEvaluation } from './../../models/topic-student-model';
+import { FormControl, Validators, FormBuilder } from '@angular/forms';
 import { TopicApprovalModel } from './../../models/topic-approval-model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
+import { MatStepper } from '@angular/material/stepper';
 
 
 @Component({
@@ -14,30 +17,68 @@ export class TopicNotificationComponent implements OnInit {
   static END_POINT = 'topic-approval';
   public approval: TopicApprovalModel;
   public topicStudent: TopicStudentModel = {};
-
-  router: any;
+  public evaluations = TopicEvaluation;
 
   constructor(
     private topicStudentService: TopicStudentService,
-    private route: ActivatedRoute
+    private formBuilder: FormBuilder,
   ) {
-
   }
+
+  ciStudentControl = new FormControl('', [
+    Validators.required,
+  ]);
+
+  evaluationForm = this.formBuilder.group({
+    topicEvaluation: ['', Validators.required,]
+  });
+
+  notificationForm = this.formBuilder.group({
+    documentNumber: ['', Validators.required],
+    meetingDate: ['', Validators.required],
+    meetingNumber: ['', Validators.required],
+    observations: ['', Validators.required],
+  })
+
+  tratamientoControl = new FormControl('', [
+    Validators.required,
+  ]);
 
   ngOnInit(): void {
-    this.sync();
   }
 
-  sync(): void {
-    this.topicStudentService
-      .getTopicStudentById("10a59c8c-ba96-4afe-bb36-1eba22cf173b")
-      .subscribe((data) => (this.approval = data));
+  refresh(): void {
+    window.location.reload();
   }
 
-  /*  navigateToNotification(approvals: TopicApprovalModel): void {
-     this.router.navigate(['/topic-approval/' + approvals.id]);
-   } */
+  onReset() {
+    this.ciStudentControl.reset();
+    this.refresh();
+  }
 
-  today = Date.now();
-  fixedTimezone = this.today;
+  onFindByStudent() {
+    if (this.ciStudentControl.valid)
+      this.topicStudentService.getTopicStudentByStudent(this.ciStudentControl.value).subscribe(
+        data => {
+          this.topicStudent = data;
+        }
+      )
+  }
+
+
+  onEvaluationProposal(stepper: MatStepper) {
+    if (this.evaluationForm.valid)
+      if (this.topicStudent.id)
+        this.topicStudentService.evaluationProposal(this.topicStudent.id, this.evaluationForm.value).subscribe(
+          data => {
+            stepper.next();
+          }
+        );
+  }
+
+  monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+  year = new Date().getFullYear();
+  monthNumber = new Date().getMonth();
+  month = this.monthNames[this.monthNumber]
+  day = new Date().getDay();
 }

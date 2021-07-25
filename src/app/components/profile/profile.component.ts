@@ -83,10 +83,6 @@ export class ProfileComponent implements OnInit {
     this.initialValuesProfile(this.user);
   }
 
-  refresh(): void {
-    window.location.reload();
-  }
-
   onUpdateProfile() {
     if (this.id !== null) {
       let user = Object.assign(this.profileForm.value, this.academicForm.value);
@@ -95,7 +91,7 @@ export class ProfileComponent implements OnInit {
           this.authService.editProfileAcademic(this.id, user).subscribe(
             data => this.userAcademic = data
           );
-          this.refresh();
+          this.sync();
           alert("Perfil actualizado");
         } else {
           alert("Los datos ingresados son incorrectos")
@@ -105,7 +101,7 @@ export class ProfileComponent implements OnInit {
           this.authService.editProfileAdmini(this.id, this.profileForm.value).subscribe(
             data => this.user = data
           );
-        this.refresh();
+        this.sync();
           alert("Perfil actualizado")
         } else {
           alert("Los datos ingresados son incorrectos")

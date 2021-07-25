@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  ViewChild,
+  OnInit,
+} from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
@@ -17,22 +23,21 @@ import { SpinnerService } from 'src/app/services/spinner.service';
   styleUrls: ['./topic-banck.component.css'],
   templateUrl: './topic-banck.component.html',
 })
-export class TopicBanckComponent implements AfterViewInit {
+export class TopicBanckComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource();
-
 
   constructor(
     private topicService: TopicService,
     public dialog: MatDialog,
     private route: Router
-  ) {
-    this.topicService.getAllTopic().subscribe((data) => {
-      this.dataSource.data = data;
-    });
-  }
+  ) {}
+
   openDialog(id: string | null) {
-    this.dialog.open(AddTopicComponent, {
+    const dialogRef = this.dialog.open(AddTopicComponent, {
       data: id,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.sync();
     });
   }
 
@@ -43,6 +48,11 @@ export class TopicBanckComponent implements AfterViewInit {
   }
   navigateToTopic(topic: TopicModel): void {
     this.route.navigate(['/topic/' + topic.id]);
+  }
+  sync() {
+    this.topicService.getAllTopic().subscribe((data) => {
+      this.dataSource.data = data;
+    });
   }
 
   displayedColumns: string[] = [
@@ -68,24 +78,19 @@ export class TopicBanckComponent implements AfterViewInit {
   }
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
-    this.sync();
-   
+    this.syncStatus();
   }
 
-  refresh(): void {
-    window.location.reload();
+  syncStatus(): void {
+    this.topicService
+      .getTopicsByStatus('DISPONIBLE')
+      .subscribe((data) => (this.dataSource = data));
   }
-
-   sync(): void {
-      this.topicService
-        .getTopicsByStatus("DISPONIBLE")
-        .subscribe((data) => (this.dataSource = data));
-  } 
 
   onDeleteTopic(id: string): void {
     this.topicService.deleteTopic(id).subscribe((data) => {
       this.dataSource.data = data;
-      this.refresh();
+      this.sync();
     });
   }
 }
@@ -114,7 +119,5 @@ export class DialogTopicComponent {
       this.topicService
         .getTopicById(this.id)
         .subscribe((data) => (this.topic = data));
-    console.log(this.id);
   }
-
 }

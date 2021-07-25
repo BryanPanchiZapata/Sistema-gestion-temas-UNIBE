@@ -14,7 +14,6 @@ export interface TopicStudentModel {
 export enum TopicEvaluation {
   'Aprobado' = 'APROBADO',
   'Aprobado con observaciones' = 'APROBADO_CON_OBSERVACIONES',
-  'No presentado' = 'NO_PRESENTADO',
   'Reprobado' = 'REPROBABO'
 }
 

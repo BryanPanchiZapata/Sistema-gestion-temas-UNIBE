@@ -1,63 +1,123 @@
-<div class="container">
-  <mat-card class="container__form">
-    <figure class="unibe__form">
-      <img src="../../../assets/unibe_form.png" alt="UNIBE" />
-    </figure>
-    <div class="form__inicio">
-      <div>
-        <span class="form__oficio">OFICIO N°</span>
-        <input type="number" required />
-      </div>
-      <div>
-        <span>Quito, DM. {{ today | date: "dd-MM-yyyy" }}</span>
-      </div>
-    </div>
-    <!-- (click)="navigateToNotification()" -->
-    <div
-      class="form__texts"
-    >
-      <h3>Señor</h3>
-      <b
-        ><span>{{ topicStudent.student?.firstName }} </span>
-        <span>{{ topicStudent.student?.lastName }} </span>
-        <span>{{ topicStudent.student?.secondName }} </span>
-        <span>{{ topicStudent.student?.secondLastname }}</span></b
-      >
+<mat-stepper linear #stepper fxLayout="column" fxLayoutAlign="center center">
+  <mat-step [stepControl]="evaluationForm">
+    <ng-template matStepLabel>Evaluación</ng-template>
+    <form fxLayout="column" fxLayoutAlign="center center">
+      <mat-form-field class="form-evaluation" appearance="fill">
+        <mat-label>Identificación del estudiante</mat-label>
+        <input matInput text="text" [formControl]="ciStudentControl" required
+          placeholder="Ingrese el número de identificación" />
+        <mat-error *ngIf="ciStudentControl.hasError('required')">Campo <strong>obligatorio</strong>
+        </mat-error>
+        <button class="button-icon" *ngIf="ciStudentControl" matSuffix mat-icon-button (click)="onFindByStudent()">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button class="button-icon" *ngIf="ciStudentControl" matSuffix mat-icon-button (click)="onReset()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </form>
 
-      <h3 class="spacing">Presente.</h3>
-      <h3>De nuestras consideraciones:</h3>
-      <span>Por medio de la presente el Comité de Grado de la Carrera de </span>
-      <b
-        ><span>{{ topicStudent.student?.career?.degree }} </span></b
-      >
-      <span
-        >de la Universidad Iberoamericana del Ecuador (UNIB.E), en reunión
-        ordinaria No.</span
-      >
-      <input type="number" placeholder="01-2020" required />
-      <span>fecha </span>
-      <input class="form__date" type="date" required />
-      <span>, le informa que su propuesta de investigación titulada:</span>
-      <b
-        ><span> {{ topicStudent.topic?.name }}</span></b
-      ><span> ha sido:</span>
-      <div class="form__observaciones">
-        <h3>Aprobado con las siguientes observaciones:</h3>
-        <textarea id="" cols="30" rows="10"></textarea>
-        <h3>No ha sido aprobado por los siguientes motivos:</h3>
-        <textarea id="" cols="30" rows="10"></textarea>
-        <h3 class="firma">Elaborado Por:</h3>
+    <div *ngIf="topicStudent.student?.ci" fxLayout="column" fxLayoutAlign="center center">
+      <div class="find-student" fxLayout="column" fxLayoutAlign="start start">
+        <p><strong>Estudiante:</strong> {{topicStudent.student?.firstName}} {{topicStudent.student?.secondName}}
+          {{topicStudent.student?.lastName}} {{topicStudent.student?.secondLastname}}</p>
+        <p><strong>Carrera:</strong> {{topicStudent.topic?.career?.name}}</p>
+        <p><strong>Tema:</strong> {{topicStudent.topic?.name}}</p>
       </div>
-      <div class="buttons">
-        <a
-          ><button type="submit" class="primary" mat-raised-button>
-            Enviar
-          </button></a
-        >
-        <a download=""
-          ><button class="second" mat-raised-button>Imprimir</button></a
-        >
-      </div>
+      <form [formGroup]="evaluationForm" fxLayout="column" fxLayoutAlign="center center">
+        <mat-form-field class="form-evaluation" appearance="legacy">
+          <mat-label>Evaluación de la Propuesta de Tema</mat-label>
+          <mat-select required formControlName="topicEvaluation">
+            <mat-option *ngFor="let evaluation of evaluations | keyvalue" [value]="evaluation.value">
+              {{evaluation.key}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="evaluationForm.get('topicEvaluation')?.hasError('required')">Campo
+            <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+        <button class="primary" mat-raised-button (click)="onEvaluationProposal(stepper)">Siguiente</button>
+      </form>
     </div>
-  </mat-card>
-</div>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Notificación</ng-template>
+    <mat-card class="container__form" ngClass.lt-sm="mat-card-lt-sm">
+      <figure class="unibe__form">
+        <img src="../../../assets/unibe_form.png" alt="UNIBE" />
+      </figure>
+      <form [formGroup]="notificationForm">
+        <div fxLayout="column" fxLayoutAlign="center end">
+          <p>
+            <strong>OFICIO N° </strong>
+            <mat-form-field appearance="fill">
+              <input matInput formControlName="documentNumber" type="text" required />
+              <mat-error *ngIf="notificationForm.get('documentNumber')?.hasError('required')">Campo
+                <strong>obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </p>
+          <p>Quito, D.M. {{day}} de {{month}} del {{year}}</p>
+        </div>
+        <mat-form-field appearance="fill">
+          <mat-label>Trato</mat-label>
+          <input matInput type="text" [formControl]="tratamientoControl" placeholder="Ej: Señor" required/>
+          <mat-error *ngIf="tratamientoControl.hasError('required')">Campo
+            <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <p><b>{{ topicStudent.student?.firstName }} {{ topicStudent.student?.secondName }} {{
+              topicStudent.student?.lastName }} {{ topicStudent.student?.secondLastname }}</b></p>
+          <p class="spacing">Presente.</p>
+          <p>De nuestras consideraciones:</p>
+          <p>Por medio de la presente el Comité de Grado de la Carrera de
+            <b>{{ topicStudent.student?.career?.degree }}</b>
+            de la Universidad Iberoamericana del Ecuador (UNIB.E), en reunión
+            ordinaria No.
+            <mat-form-field appearance="fill">
+              <input matInput formControlName="meetingNumber" type="text" required />
+              <mat-error *ngIf="notificationForm.get('meetingNumber')?.hasError('required')">Campo
+                <strong>obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+            fecha
+            <mat-form-field appearance="fill">
+              <input matInput formControlName="meetingDate" type="date" required />
+              <mat-error *ngIf="notificationForm.get('meetingDate')?.hasError('required')">Campo
+                <strong>obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+            , le informa que su propuesta de investigación titulada:
+            <b> {{ topicStudent.topic?.name }}</b> ha sido:
+          </p>
+        </div>
+        <div class="observations">
+          <p *ngIf="evaluationForm.get('topicEvaluation')?.value === 'APROBADO'"><b>APROBADO</b></p>
+          <p *ngIf="evaluationForm.get('topicEvaluation')?.value === 'APROBADO_CON_OBSERVACIONES'">Aprobado con las
+            siguientes observaciones:</p>
+          <p *ngIf="evaluationForm.get('topicEvaluation')?.value === 'REPROBABO'">No ha sido aprobado por los siguientes
+            motivos:
+          </p>
+
+          <mat-form-field appearance="fill">
+            <textarea matInput formControlName="observations" cols="5" rows="10" type="text"
+              *ngIf="evaluationForm.get('topicEvaluation')?.value !== 'APROBADO'"></textarea>
+            <mat-error *ngIf="notificationForm.get('observations')?.hasError('required')">Campo
+              <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <p>Elaborado por:</p>
+        <img class="firma">
+        <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+          <button mat-raised-button>Imprimir</button>
+          <button type="submit" class="primary" mat-raised-button>
+            Enviar
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </mat-step>
+</mat-stepper>
