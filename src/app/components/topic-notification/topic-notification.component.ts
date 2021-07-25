@@ -19,12 +19,26 @@ export class TopicNotificationComponent implements OnInit {
   public topicStudent: TopicStudentModel = {};
   public evaluations = TopicEvaluation;
 
+  monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+  year = new Date().getFullYear();
+  monthNumber = new Date().getMonth();
+  month = this.monthNames[this.monthNumber]
+  now = Date.now();
+  day = new Date(this.now).getDate();
+
   constructor(
     private topicStudentService: TopicStudentService,
     private formBuilder: FormBuilder,
     private notificationApprovalSrv: TopicApprovalService
   ) {
   }
+
+  notificationForm = this.formBuilder.group({
+    documentNumber: ['', Validators.required],
+    meetingDate: ['', Validators.required],
+    meetingNumber: ['', Validators.required],
+    observations: ['', Validators.required],
+  });
 
   ciStudentControl = new FormControl('', [
     Validators.required,
@@ -60,7 +74,7 @@ export class TopicNotificationComponent implements OnInit {
   }
 
   onEvaluationProposal(stepper: MatStepper) {
-    if (this.evaluationForm.valid)
+    if (this.evaluationForm.valid && this.tratamientoControl.valid)
       if (this.topicStudent.id)
         this.topicStudentService.evaluationProposal(this.topicStudent.id, this.evaluationForm.value).subscribe(
           data => {
@@ -69,18 +83,10 @@ export class TopicNotificationComponent implements OnInit {
         );
   }
 
-  notificationForm = this.formBuilder.group({
-    documentNumber: ['', Validators.required],
-    meetingDate: ['', Validators.required],
-    meetingNumber: ['', Validators.required],
-    observations: ['', Validators.required],
-  });
-
-  monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-  year = new Date().getFullYear();
-  monthNumber = new Date().getMonth();
-  month = this.monthNames[this.monthNumber]
-  day = new Date().getDay();
+  onCancel(stepper: MatStepper) {
+    this.notificationForm.reset();
+    stepper.previous();
+  }
 
   onCreateNotification() {
     if (this.notificationForm.valid) {

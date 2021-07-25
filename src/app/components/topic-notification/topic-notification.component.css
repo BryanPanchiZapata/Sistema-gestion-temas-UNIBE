@@ -35,14 +35,10 @@ mat-card {
   width: 100vw;
 }
 
-.unibe__form {
-  text-align: center;
-  padding: 1.5rem;
-}
-
-.unibe__form img {
+.container__form img {
   width: 85%;
   height: auto;
+  margin: 20px;
 }
 
 .container__form mat-form-field {
@@ -54,13 +50,22 @@ mat-card {
 }
 
 .firma {
-  border-bottom: 1px solid #000;
-  width: 30%;
-  font-weight: bold;
+  width: 200px;
+}
+
+.firma img {
+  width: 85px;
+  margin: 0;
+}
+.firma p {
+  margin: 0;
+  width: 200px;
+  text-align: center;
+  border-top: 1px solid #000;
 }
 
 .primary {
-  background: #002858;
+  background-color: var(--primary-color);
   color: #fff;
 }
 
@@ -68,16 +73,16 @@ mat-card {
   .container__form {
     width: 100%;
   }
-  .unibe__form {
-    display: flex;
-    justify-content: center;
-  }
-  .unibe__form img {
+
+  .container__form img {
     width: 100%;
     height: auto;
+    margin: 20px;
   }
-  .firma {
-    width: 50%;
+
+  .firma img{
+    width: 85px;
+    margin: 0;
   }
 }
 
@@ -91,16 +96,14 @@ mat-card {
     width: 100%;
   }
 
-  .unibe__form {
-    display: flex;
-    justify-content: center;
-  }
-  .unibe__form img {
-    width: 85vw;
+  .container__form img {
+    width: 95vw;
     height: auto;
+    margin: 10px;
   }
 
-  .firma {
-    width: 70%;
+  .firma img{
+    width: 85px;
+    margin: 0;
   }
 }
