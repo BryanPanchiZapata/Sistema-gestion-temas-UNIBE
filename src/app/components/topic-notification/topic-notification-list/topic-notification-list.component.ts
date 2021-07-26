@@ -31,8 +31,10 @@ export class TopicNotificationListComponent implements AfterViewInit, OnInit {
     'Número_de_documento',
     'Cédula',
     'Nombre_del_Estudiante',
+    'Carrera',
     'Tema',
     'Estado',
+    'Evaluacion',
     'Observaciones',
     'Acciones',
   ];

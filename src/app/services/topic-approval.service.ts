@@ -23,7 +23,7 @@ export class TopicApprovalService {
     );
   }
 
-  getTopicById(id: string): Observable<any> {
+  getTopicNotificationById(id: string): Observable<any> {
     return this.http.get(this.url + "/" + id).pipe(
       map(response => response), catchError(error => {
         alert(error.error);

@@ -9,6 +9,7 @@ import { TopicProposalComponent } from './components/topic-proposal/topic-propos
 import { TopicDenunciationComponent } from './components/topic-denunciation/topic-denunciation.component';
 import { PaymentRegistrationComponent } from './components/payment-registration/payment-registration.component';
 import { TopicNotificationListComponent } from './components/topic-notification/topic-notification-list/topic-notification-list.component';
+import { TopicNotificationReadComponent } from './components/topic-notification/topic-notification-read/topic-notification-read.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: TopicNotificationComponent.END_POINT,
         component: TopicNotificationComponent,
+      },
+      {
+        path: TopicNotificationReadComponent.END_POINT,
+        component: TopicNotificationReadComponent,
       },
       {
         path: TopicNotificationListComponent.END_POINT,

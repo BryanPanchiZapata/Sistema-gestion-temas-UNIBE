@@ -1,0 +1,38 @@
+<h2>fghgfh</h2>
+
+<mat-card
+  class="container__form juegos"
+  ngClass.lt-sm="mat-card-lt-sm"
+  fxLayout="column"
+  fxLayoutAlign="center center"
+>
+  <img src="../../../assets/unibe_form.png" alt="UNIBE" />
+  <div fxLayout="column" fxLayoutAlign="center end">
+    <p>
+      <strong>OFICIO N° </strong>
+    </p>
+    <p>Quito, D.M. {{ day }} de {{ month }} del {{ year }}</p>
+  </div>
+
+  <span>Señor: </span>
+  <div>
+    <p>
+      <b
+        >{{ topicNotification.topicStudent?.student?.firstName }}
+        {{ topicNotification.topicStudent?.student?.secondName }}
+        {{ topicNotification.topicStudent?.student?.lastName }}
+        {{ topicNotification.topicStudent?.student?.secondLastname }}</b
+      >
+    </p>
+    <p class="spacing">Presente.</p>
+    <p>De nuestras consideraciones:</p>
+    <p>
+      Por medio de la presente el Comité de Grado de la Carrera de
+      <b>{{ topicNotification.topicStudent?.student?.career?.degree }}</b>
+      de la Universidad Iberoamericana del Ecuador (UNIB.E), en reunión
+      ordinaria No.() fecha (), le informa que su propuesta de investigación
+      titulada:
+      <b> {{ topicNotification.topicStudent?.topic?.name }}</b> ha sido:
+    </p>
+  </div>
+</mat-card>

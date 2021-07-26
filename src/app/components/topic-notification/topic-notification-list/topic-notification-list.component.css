@@ -32,9 +32,10 @@ table {
 td {
   text-align: center;
 }
-td:nth-child(4) {
-  text-align: left;
+td:nth-child(5) {
+  text-align: justify;
 }
+
 th.mat-header-cell:first-of-type,
 td.mat-cell:first-of-type,
 td.mat-footer-cell:first-of-type {
@@ -43,9 +44,7 @@ td.mat-footer-cell:first-of-type {
 th.mat-header-cell {
   text-align: center;
 }
-th.mat-header-cell:nth-child(4) {
-  text-align: left;
-}
+
 .mat-header-cell {
   font-weight: bold;
 }
@@ -62,19 +61,25 @@ td.mat-footer-cell {
   width: 190px;
 }
 .tres {
-  width: 320px;
+  width: 420px;
 }
 .cuatro {
-  width: 800px;
+  width: 200px;
 }
 .cinco {
-  width: 180px;
+  width: 980px;
 }
 .seis {
-  width: 440px;
+  width: 140px;
 }
 .siete {
   width: 230px;
+}
+.ocho {
+  width: 730px;
+}
+.nueve {
+  width: 330px;
 }
 
 
@@ -103,15 +108,21 @@ td.mat-footer-cell {
     min-width: 180px;
   }
   .cuatro {
-    min-width: 490px;
+    min-width: 190px;
   }
   .cinco {
-    min-width: 180px;
+    min-width: 580px;
   }
   .seis {
-    min-width: 440px;
+    min-width: 140px;
   }
   .siete {
     min-width: 140px;
+  }
+  .ocho {
+    min-width: 600px;
+  }
+  .nueve {
+    min-width: 330px;
   }
 }

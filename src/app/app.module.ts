@@ -25,6 +25,7 @@ import { AddTopicComponent } from './components/topic-banck/add-topic/add-topic.
 import { AssignedTopicComponent } from './components/topic-banck/assigned-topic/assigned-topic.component';
 import { ExecutingTopicComponent } from './components/topic-banck/executing-topic/executing-topic.component';
 import { TopicNotificationListComponent } from './components/topic-notification/topic-notification-list/topic-notification-list.component';
+import { TopicNotificationReadComponent } from './components/topic-notification/topic-notification-read/topic-notification-read.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { TopicNotificationListComponent } from './components/topic-notification/
     AddTopicComponent,
     AssignedTopicComponent,
     ExecutingTopicComponent,
-    TopicNotificationListComponent
+    TopicNotificationListComponent,
+    TopicNotificationReadComponent
   ],
   imports: [
     BrowserModule,

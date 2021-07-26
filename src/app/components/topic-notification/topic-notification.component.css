@@ -13,8 +13,11 @@
   text-align: justify;
 }
 
-.container__form ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex{
-  padding: 0 .75em 0 .75em;
+.container__form
+  ::ng-deep
+  .mat-form-field-appearance-fill
+  .mat-form-field-flex {
+  padding: 0 0.75em 0 0.75em;
 }
 
 button {
@@ -86,7 +89,7 @@ small {
     margin: 20px;
   }
 
-  .firma img{
+  .firma img {
     width: 85px;
     margin: 0;
   }
@@ -108,7 +111,7 @@ small {
     margin: 10px;
   }
 
-  .firma img{
+  .firma img {
     width: 85px;
     margin: 0;
   }
