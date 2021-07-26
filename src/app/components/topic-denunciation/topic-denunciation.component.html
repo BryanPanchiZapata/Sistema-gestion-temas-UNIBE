@@ -1,114 +1,131 @@
-<div class="container">
-  <mat-card class="container__form">
-    <figure class="unibe__img">
-      <img src="../../../assets/unibe_form.png" alt="UNIBE" />
-    </figure>
+<div id="denunciation" fxLayout="column" fxLayoutAlign="center center">
+  <mat-card class="container__form" ngClass.lt-sm="mat-card-lt-sm" fxLayout="column" fxLayoutAlign="center center">
+    <img src="../../../assets/unibe_form.png" alt="UNIBE" />
+    <h2 class="form__title">DENUNCIA DE TEMA Y MODALIDAD DE INVESTIGACIÓN</h2>
+    <form [formGroup]="denunciationForm">
+      <div class="data-general">
+        <h4>DATOS GENERALES:</h4>
+        <p>
+          <b>Apellidos:</b>
+          {{ topicStudent.student?.lastName}} {{ topicStudent.student?.secondLastname }}
+        </p>
 
-    <div class="form__title">
-      <h2>DENUNCIA DE TEMA Y MODALIDAD DE INVESTIGACIÓN</h2>
-    </div>
-    <div class="form__data">
-      <h4>DATOS GENERALES:</h4>
-    </div>
-    <div class="container">
-      <p class="container__data">
-        <b>Apellidos:</b>
-        <span class="margen"
-          >{{ topicStudent.student?.secondName }}
-        </span>
-        <span class="margen">{{
-          topicStudent.student?.secondLastname
-        }}</span>
-      </p>
+        <p>
+          <b>Nombres: </b>
+          {{ topicStudent.student?.firstName }}
+          {{ topicStudent.student?.secondName }}
 
-      <p class="container__data">
-        <b>Nombres: </b>
-        <span class="margen"
-          >{{ topicStudent.student?.firstName }}
-        </span>
-        <span class="margen">{{
-          topicStudent.student?.lastName
-        }}</span>
-      </p>
+        </p>
 
-      <p class="container__data">
-        <b>Cédula de Identidad: </b>
-        <span class="margen">{{ topicStudent.student?.ci }} </span>
-      </p>
+        <p>
+          <b>Cédula de Identidad: </b>
+          {{ topicStudent.student?.ci}}
+        </p>
 
-      <p class="container__data">
-        <b>Carrera: </b>
-        <span class="margen"
-          >{{ topicStudent.student?.career?.name }}
-        </span>
-      </p>
+        <p>
+          <b>Carrera: </b>
+          {{ topicStudent.student?.career?.name }}
+        </p>
 
-      <p class="container__data">
-        <b>Semestre: </b>
-        <span class="margen"> </span>
-      </p>
+        <p>
+          <b>Semestre: </b>
+          <mat-form-field appearance="fill">
+            <mat-select required formControlName="semesterLevel" placeholder="Seleccione">
+              <mat-option *ngFor="let level of semesterLevels | keyvalue" [value]="level.value">
+                {{level.key}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="denunciationForm.get('semesterLevel')?.hasError('required')">Campo
+              <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+        </p>
 
-      <div class="container__data">
-        <b>Director (a) de carrera: </b>
-        <input
-          class="inputs"
-          type="text"
-          placeholder="Director(a) de carrera"
-          required
-        />
+        <p>
+          <b>Director (a) de carrera: </b>
+          Traer dato de academicUser
+        </p>
+
+        <p>
+          <b>Ciudad/Fecha: </b>
+          <mat-form-field appearance="fill">
+            <input matInput type="text" formControlName="ciudad" placeholder="Ingrese la ciudad" required />
+            <mat-error *ngIf="denunciationForm.get('ciudad')?.hasError('required')">Campo
+              <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+          {{day}} de {{month}} del {{year}}
+        </p>
+
+        <p>De mis consideraciones.</p>
+        <p>
+          Solicito la evaluación de la propuesta del Trabajo de Titulación o Trabajo
+          de Integración Curricular para obtener el título de
+          <b>{{ topicStudent.student?.career?.degree }}</b>.
+        </p>
+        <p>Los datos de la propuesta se especifican a continuación:</p>
+        <h4>Tema:</h4>
+        <p>{{ topicStudent.topic?.name }}</p>
       </div>
-      <p class="container__data">
-        <b>Ciudad/Fecha: </b>
-
-        <input class="inputs" type="text" placeholder="Ciudad" required />
-        <span>{{ today | date: "dd-MM-yyyy" }}</span>
-      </p>
-    </div>
-    <p>De mis consideraciones.</p>
-    <p>
-      Solicito la evaluación de la propuesta del Trabajo de Titulación o Trabajo
-      de Integración Curricular para obtener el título de
-      <span>
-        <b>{{ topicStudent.student?.career?.degree }}</b>
-      </span>
-    </p>
-    <p>Los datos de la propuesta se especifican a continuación:</p>
-    <div class="form__topic">
-      <h4>Tema:</h4>
-      <br />
-      <p>{{ topicStudent.topic?.name }}</p>
       <h4>Línea de investigación:</h4>
-      <input class="topic__texts" type="text" name="" id="investagation" />
+      <mat-form-field appearance="fill">
+        <mat-select required formControlName="investigationLine" placeholder="Seleccione">
+          <mat-option *ngFor="let level of semesterLevels | keyvalue" [value]="level.value">
+            {{level.key}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="denunciationForm.get('investigationLine')?.hasError('required')">Campo
+          <strong>obligatorio</strong>
+        </mat-error>
+      </mat-form-field>
       <h4>
         Título del proyecto de la universidad con el cual se articula el tema
         propuesto:
       </h4>
-      <input class="topic__texts" type="text" name="" id="" />
-    </div>
-    <div class="form__selector">
+      <div class="form-field-max">
+        <mat-form-field appearance="fill">
+          <textarea matInput type="text" formControlName="articulationTopic"
+            placeholder="Ingrese el nombre del proyecto de Articulación" required></textarea>
+          <mat-error *ngIf="denunciationForm.get('articulationTopic')?.hasError('required')">Campo
+            <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
       <h4>Tipo de proyecto:</h4>
-      <mat-form-field>
+      <mat-form-field appearance="fill">
         <mat-label>Seleccionar</mat-label>
-        <mat-select>
-          <mat-option>
-          </mat-option>
+        <mat-select required formControlName="investigationModality" placeholder="Seleccione">
+          <mat-option *ngFor="let modality of investigationModalitys | keyvalue" [value]="modality.value">
+            {{modality.key}}</mat-option>
         </mat-select>
+        <mat-error *ngIf="denunciationForm.get('investigationModality')?.hasError('required')">Campo
+          <strong>obligatorio</strong>
+        </mat-error>
       </mat-form-field>
+
       <h4>Modalidad de investigación:</h4>
-      <mat-form-field>
+      <mat-form-field appearance="fill">
         <mat-label>Seleccionar</mat-label>
-        <mat-select>
-          <mat-option>
-          </mat-option>
+        <mat-select required formControlName="projectType" placeholder="Seleccione">
+          <mat-option *ngFor="let projectType of projectTypes | keyvalue" [value]="projectType.value">
+            {{projectType.key}}</mat-option>
         </mat-select>
+        <mat-error *ngIf="denunciationForm.get('projectType')?.hasError('required')">Campo
+          <strong>obligatorio</strong>
+        </mat-error>
       </mat-form-field>
-    </div>
-    <h3 class="firma">Solicitado por:</h3>
-    <div class="buttons">
-      <a><button class="primary" mat-raised-button>Enviar</button></a>
-      <a download=""
-        ><button class="second" mat-raised-button>Imprimir</button></a
-      >
-    </div>
+
+      <h3>Solicitado por:</h3>
+      <div class="firma" fxLayout="column" fxLayoutAlign="center center">
+        <img [src]="topicStudent.student?.sign" alt="">
+        <p>{{ topicStudent.student?.firstName }} {{topicStudent.student?.lastName }}</p>
+      </div>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button (click)="onCancel()">Cancelar</button>
+        <button type="submit" class="primary" mat-raised-button (click)="onCreateDenunciation()">
+          Enviar
+        </button>
+        <button (click)="print('denunciation')" >Imprimir</button>
+      </mat-card-actions>
+    </form>
   </mat-card>
 </div>

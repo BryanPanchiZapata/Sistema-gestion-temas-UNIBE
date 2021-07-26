@@ -7,5 +7,6 @@ export interface TopicApprovalModel {
   meetingDate?: string,
   meetingNumber?: string,
   observations?: Text,
-  topicStudent: TopicStudentModel
+  topicStudent?: TopicStudentModel,
+  trato?: string
 }

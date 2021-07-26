@@ -1,165 +1,90 @@
-.container {
-  padding: 1rem 0;
-}
-.container__data {
-  display: flex;
-  align-items: center;
-  gap: .3rem;
-}
-.inputs {
-  width: 30%;
-  margin: 0.4rem 0;
-}
-.container__info {
-  display: flex;
-}
-b {
-  width: 25%;
-}
-.container__form {
-  width: 70%;
-  border-radius: 0.6rem;
-  margin: 3rem auto;
-  padding: 2rem 1.5rem;
-}
-.unibe__img {
-  text-align: center;
-  padding: 1.5rem;
-}
-.unibe__img img {
-  width: 80%;
+.container__form p {
+  font-family: Arial;
+  line-height: 30px;
+  text-align: justify;
+  margin: 0;
 }
 
-.form__title {
-  text-align: center;
-  font-weight: bold;
+.data-general ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  padding: 0 .75em 0 .75em;
+  height: 34px;
 }
 
-.form__data {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem 0;
-}
-.form__data h4:first-child {
-  font-weight: bold;
-}
-.form__data h4:nth-child(2) {
-  border: 1px solid #000;
-  padding: 0.4rem;
-  border-radius: 0.3rem;
+mat-card {
+  padding: 3.5rem;
+  width: 800px;
 }
 
-.container__global {
-  display: flex;
-  padding: 1rem 0;
-}
-
-.form__info {
-  display: flex;
-  flex-direction: column;
-  gap: 2.4rem;
-  width: 30%;
-  font-weight: bold;
-}
-
-
-input {
-  width: 80%;
-  border: 1px solid #767676;
-  outline: none;
-  border-radius: 0.5rem;
-  padding: 0.6rem;
-}
-
-.form__date__city {
-  display: flex;
-  gap: 1rem;
-  width: 80%;
-}
-
-span {
-  padding: 0.8rem 0;
-}
-span input {
+.form-field-max mat-form-field {
   width: 100%;
-  margin: 0.5rem 0;
+}
+
+.mat-card-lt-sm {
+  padding: 1rem;
+  width: 100vw;
+}
+
+.container__form img {
+  width: 85%;
+  height: auto;
+  margin: 20px;
 }
 
 h4 {
-  margin: 0;
-}
-.form__topic h4 {
-  font-weight: bold;
-}
-.topic__texts {
-  width: 100%;
-  margin: 1rem 0;
-}
-.form__selector h4 {
   font-weight: bold;
 }
 
 .firma {
-  border-bottom: 1px solid #000;
-  width: 30%;
-  padding: 2rem 0 5rem 0;
-  font-weight: bold;
+  width: 200px;
 }
-.buttons {
-  padding: 2rem 0;
-  display: flex;
-  justify-content: space-around;
+
+.firma img {
+  width: 85px;
+  margin: 0;
 }
+.firma p {
+  margin: 0;
+  width: 200px;
+  text-align: center;
+  border-top: 1px solid #000;
+}
+
 button {
-  padding: 0 3rem;
+  margin: 0.7rem;
 }
+
 .primary {
-  background: #002858;
+  background-color: var(--primary-color);
   color: #fff;
-}
-.second {
-  background: #d7dfe1;
-  color: #000;
 }
 
 @media screen and (max-width: 960px) {
   .container__form {
     width: 100%;
   }
-  .unibe__img {
-    display: flex;
-    justify-content: center;
+  .container__form img {
+    width: 100%;
+    height: auto;
+    margin: 20px;
   }
-  .unibe__img img {
-    width: 80%;
-  }
-  .firma {
-    width: 50%;
+  .firma img {
+    margin: 0;
+    width: 85px;
   }
 }
 
 @media screen and (max-width: 700px) {
-  .unibe__img {
-    display: flex;
-    justify-content: center;
-  }
-  .unibe__img img {
-    width: 400px;
-  }
-  .form__title h2 {
-    font-size: 1rem;
-  }
-  .form__info {
+  mat-card {
+    padding: 0;
     width: 100%;
   }
-  input {
-    width: 100%;
+  .container__form img {
+    width: 95vw;
+    height: auto;
+    margin: 10px;
   }
-  .form__date__city {
-    flex-direction: column;
-    width: 100%;
-  }
-  .firma {
-    width: 70%;
+  .firma img {
+    width: 85px;
+    margin: 0;
   }
 }

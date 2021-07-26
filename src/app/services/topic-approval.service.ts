@@ -1,3 +1,4 @@
+import { TopicApprovalModel } from './../models/topic-approval-model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -25,9 +26,19 @@ export class TopicApprovalService {
   getTopicById(id: string): Observable<any> {
     return this.http.get(this.url + "/" + id).pipe(
       map(response => response), catchError(error => {
-          alert(error.error);
-          return error;
-        }
+        alert(error.error);
+        return error;
+      }
+      )
+    );
+  }
+
+  createNotification(notification: TopicApprovalModel): Observable<any> {
+    return this.http.post(this.url, notification).pipe(
+      map(response => response), catchError(error => {
+        alert(error.error);
+        return error;
+      }
       )
     );
   }

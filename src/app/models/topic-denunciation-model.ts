@@ -7,7 +7,9 @@ export interface TopicDenunciationModel {
   investigationModality?: InvestigationModality,
   projectType?: ProjectType,
   semesterLevel?: string,
-  topicStudent?: TopicStudentModel
+  topicStudent?: TopicStudentModel,
+  ciudad? : string,
+  articulationTopic?: string
 }
 
 export enum InvestigationModality {
