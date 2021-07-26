@@ -1,5 +1,5 @@
 <section class="container__topicBanck">
-  <h1 class="title">Banco de Temas</h1>
+  <h1 class="title">Notificaciones de aprobación de tema</h1>
   <div class="container__button">
     <input
       matInput
@@ -7,7 +7,13 @@
       type="text"
       placeholder="Buscar..."
     />
-    <button class="button__topicbanck" mat-button>Nueva Notificación</button>
+    <button
+      class="button__topicbanck"
+      mat-button
+      [routerLink]="['topic-approval/create']"
+    >
+      Nueva Notificación
+    </button>
   </div>
 
   <div class="mat-elevation-z8 responsive">

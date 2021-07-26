@@ -17,6 +17,7 @@ import { TopicApprovalService } from 'src/app/services/topic-approval.service';
 })
 export class TopicNotificationListComponent implements AfterViewInit, OnInit {
   dataApprovalNotification = new MatTableDataSource();
+  static END_POINT = 'topic-approval';
   constructor(
     private topicApprovalService: TopicApprovalService,
     private route: Router
