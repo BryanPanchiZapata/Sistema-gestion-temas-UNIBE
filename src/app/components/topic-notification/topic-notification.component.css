@@ -49,6 +49,11 @@ mat-card {
   width: 100%;
 }
 
+small {
+  color: #f44336;
+  font-size: 75%;
+}
+
 .firma {
   width: 200px;
 }
@@ -57,6 +62,7 @@ mat-card {
   width: 85px;
   margin: 0;
 }
+
 .firma p {
   margin: 0;
   width: 200px;

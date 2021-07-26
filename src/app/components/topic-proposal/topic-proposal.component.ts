@@ -1,3 +1,4 @@
+import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopicProposalComponent implements OnInit {
   static END_POINT = 'topic-proposal';
-  constructor() { }
+  constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
   }
 
+
+
+ proposalForm = this.formBuilder.group({
+  objectives: ['', Validators.required],
+  studyJustification: ['', Validators.required],
+  topicDescription: ['', Validators.required],
+ })
 }

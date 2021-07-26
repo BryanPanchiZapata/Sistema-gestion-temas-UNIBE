@@ -1,4 +1,4 @@
-<div fxLayout="column" fxLayoutAlign="center center">
+<div id="denunciation" fxLayout="column" fxLayoutAlign="center center">
   <mat-card class="container__form" ngClass.lt-sm="mat-card-lt-sm" fxLayout="column" fxLayoutAlign="center center">
     <img src="../../../assets/unibe_form.png" alt="UNIBE" />
     <h2 class="form__title">DENUNCIA DE TEMA Y MODALIDAD DE INVESTIGACIÓN</h2>
@@ -48,8 +48,8 @@
         <p>
           <b>Ciudad/Fecha: </b>
           <mat-form-field appearance="fill">
-            <input matInput type="text" [formControl]="ciudadCtrl" placeholder="Ingrese la ciudad" required />
-            <mat-error *ngIf="ciudadCtrl.hasError('required')">Campo
+            <input matInput type="text" formControlName="ciudad" placeholder="Ingrese la ciudad" required />
+            <mat-error *ngIf="denunciationForm.get('ciudad')?.hasError('required')">Campo
               <strong>obligatorio</strong>
             </mat-error>
           </mat-form-field>
@@ -82,9 +82,9 @@
       </h4>
       <div class="form-field-max">
         <mat-form-field appearance="fill">
-          <textarea matInput type="text" [formControl]="articulationProject"
+          <textarea matInput type="text" formControlName="articulationTopic"
             placeholder="Ingrese el nombre del proyecto de Articulación" required></textarea>
-          <mat-error *ngIf="articulationProject.hasError('required')">Campo
+          <mat-error *ngIf="denunciationForm.get('articulationTopic')?.hasError('required')">Campo
             <strong>obligatorio</strong>
           </mat-error>
         </mat-form-field>
@@ -124,6 +124,7 @@
         <button type="submit" class="primary" mat-raised-button (click)="onCreateDenunciation()">
           Enviar
         </button>
+        <button (click)="print('denunciation')" >Imprimir</button>
       </mat-card-actions>
     </form>
   </mat-card>

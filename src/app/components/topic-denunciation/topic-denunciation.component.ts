@@ -52,15 +52,9 @@ export class TopicDenunciationComponent implements OnInit {
     investigationModality: ['', Validators.required],
     projectType: ['', Validators.required],
     semesterLevel: ['', Validators.required],
+    ciudad: ['', Validators.required],
+    articulationTopic: ['', Validators.required],
   });
-
-  articulationProject = new FormControl('', [
-    Validators.required
-  ])
-
-  ciudadCtrl = new FormControl('', [
-    Validators.required
-  ])
 
   ngOnInit(): void {
     this.sync();
@@ -75,14 +69,24 @@ export class TopicDenunciationComponent implements OnInit {
       );
   }
 
+  print(elementPrint: string) {
+    const printContent = document.getElementById(elementPrint);
+    const WindowPrt = window.open('', '', 'left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0');
+    if(printContent) WindowPrt?.document.write(printContent.innerHTML);
+    WindowPrt?.document.close();
+    WindowPrt?.focus();
+    WindowPrt?.print();
+    WindowPrt?.close();
+  }
+
   onCancel() {
     this.denunciationForm.reset();
     this.router.navigate(['']);
   }
 
   onCreateDenunciation() {
-    if (this.denunciationForm.valid && this.articulationProject.valid && this.ciudadCtrl.valid) {
-      let denunciation = Object.assign(this.denunciationForm.value, {topicStudent: this.topicStudent})
+    if (this.denunciationForm.valid) {
+      let denunciation = Object.assign(this.denunciationForm.value, { topicStudent: this.topicStudent })
       this.topicDenunciationSvr.createDenunciation(denunciation).subscribe(
         data => {
           this.denunciation = data
