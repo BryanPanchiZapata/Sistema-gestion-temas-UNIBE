@@ -9,11 +9,11 @@ import { TopicStudentService } from 'src/app/services/topic-student.service';
 import { TopicService } from 'src/app/services/topic.service';
 
 @Component({
-  selector: 'app-assigned-topic',
-  templateUrl: './assigned-topic.component.html',
-  styleUrls: ['./assigned-topic.component.css']
+  selector: 'app-executed-topic',
+  templateUrl: './executed-topic.component.html',
+  styleUrls: ['./executed-topic.component.css']
 })
-export class AssignedTopicComponent implements AfterViewInit {
+export class ExecutedTopicComponent implements AfterViewInit {
   dataStudent = new MatTableDataSource();
 
   constructor(
@@ -74,7 +74,7 @@ export class AssignedTopicComponent implements AfterViewInit {
 @Component({
   selector: 'dialog-status-assigned',
   templateUrl: './dialog-status-assigned.component.html',
-  styleUrls: ['./assigned-topic.component.css'],
+  styleUrls: ['./executed-topic.component.css'],
 })
 export class DialogStatusAssignedComponent {
   public topicStudent: TopicStudentModel;

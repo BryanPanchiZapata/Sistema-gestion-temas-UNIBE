@@ -22,7 +22,7 @@ import { PaymentRegistrationComponent } from "./components/payment-registration/
 import { SpinnerInterceptor } from './components/interceptor/spinner.interceptor';
 import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import { AddTopicComponent } from './components/topic-banck/add-topic/add-topic.component';
-import { AssignedTopicComponent } from './components/topic-banck/assigned-topic/assigned-topic.component';
+import { ExecutedTopicComponent } from './components/topic-banck/executed-topic/executed-topic.component';
 import { ExecutingTopicComponent } from './components/topic-banck/executing-topic/executing-topic.component';
 import { TopicNotificationListComponent } from './components/topic-notification/topic-notification-list/topic-notification-list.component';
 import { TopicNotificationReadComponent } from './components/topic-notification/topic-notification-read/topic-notification-read.component';
@@ -41,7 +41,7 @@ import { TopicNotificationReadComponent } from './components/topic-notification/
     PaymentRegistrationComponent,
     SignUpComponent,
     AddTopicComponent,
-    AssignedTopicComponent,
+    ExecutedTopicComponent,
     ExecutingTopicComponent,
     TopicNotificationListComponent,
     TopicNotificationReadComponent
