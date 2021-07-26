@@ -1,0 +1,85 @@
+<section class="container__topicBanck">
+  <h1 class="title">Banco de Temas</h1>
+  <div class="container__button">
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      type="text"
+      placeholder="Buscar..."
+    />
+    <button class="button__topicbanck" mat-button>Nueva Notificación</button>
+  </div>
+
+  <div class="mat-elevation-z8 responsive">
+    <table mat-table recycleRows [dataSource]="dataApprovalNotification">
+      <ng-container matColumnDef="Número_de_documento">
+        <th class="uno" mat-header-cell *matHeaderCellDef>
+          Número de documento
+        </th>
+        <td mat-cell *matCellDef="let topicApproval">
+          {{ topicApproval.documentNumber }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Cédula">
+        <th class="dos" mat-header-cell *matHeaderCellDef>Cédula</th>
+        <td
+          class="Open__Dialog__Topic"
+          mat-cell
+          *matCellDef="let topicApproval"
+        >
+          {{ topicApproval.topicStudent?.student?.ci }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Nombre_del_Estudiante">
+        <th class="tres" mat-header-cell *matHeaderCellDef>
+          Nombre del Estudiante
+        </th>
+        <td mat-cell *matCellDef="let topicApproval">
+          {{ topicApproval.topicStudent?.student?.firstName }}
+          {{ topicApproval.topicStudent?.student?.lastName }}
+          {{ topicApproval.topicStudent?.student?.secondName }}
+          {{ topicApproval.topicStudent?.student?.secondLastname }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Tema">
+        <th class="cuatro" mat-header-cell *matHeaderCellDef>Tema</th>
+        <td mat-cell *matCellDef="let topicApproval">
+          {{ topicApproval.topicStudent?.topic?.name }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Estado">
+        <th class="cinco" mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let topicApproval">
+          {{ topicApproval.topicStudent?.topic?.topicStatus }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Observaciones">
+        <th class="seis" mat-header-cell *matHeaderCellDef>Observaciones</th>
+        <td mat-cell *matCellDef="let topicApproval">
+          {{ topicApproval.observations }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Acciones">
+        <th class="siete" mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let topicApproval">
+          <button mat-icon-button>
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+</section>

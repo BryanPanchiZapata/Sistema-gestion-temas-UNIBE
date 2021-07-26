@@ -1,16 +1,16 @@
 <div class="container__info">
   <div>
-  <span>Nombres del estudiante: </span>
-  <label>{{ topicStudent.student?.firstName }} </label>
-  <label> {{ topicStudent.student?.secondName }} </label>
-  <label> {{ topicStudent.student?.lastName }} </label>
-  <label> {{ topicStudent.student?.secondLastname }} </label>
-</div>
+    <p>
+      <b>Nombres del estudiante:</b> {{ topicStudent.student?.firstName }}
+      {{ topicStudent.student?.secondName }}
+      {{ topicStudent.student?.lastName }}
+      {{ topicStudent.student?.secondLastname }}
+    </p>
+  </div>
   <span class="skip"></span>
   <div>
-  <span>Cédula: </span>
-  <label>{{ topicStudent.student?.ci }}</label>
-</div>
+    <p><b>Cédula:</b> {{ topicStudent.student?.ci }}</p>
+  </div>
 </div>
 
 <div class="container__info">

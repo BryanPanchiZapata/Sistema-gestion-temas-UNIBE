@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
+import { TopicService } from 'src/app/services/topic.service';
 
 @Component({
   selector: 'app-assigned-topic',
@@ -17,6 +18,7 @@ export class AssignedTopicComponent implements AfterViewInit {
 
   constructor(
     private topicStudentService: TopicStudentService,
+    private topicService: TopicService,
     public dialog: MatDialog,
     private route: Router
   ) {
@@ -58,10 +60,15 @@ export class AssignedTopicComponent implements AfterViewInit {
   }
   ngOnInit(): void {
     this.dataStudent.paginator = this.paginator;
+    this.syncStatus();
+  }
+
+  syncStatus(): void {
+    this.topicStudentService
+      .getTopicsByStatus('EJECUTADO')
+      .subscribe((data) => (this.dataStudent = data));
   }
 }
-
-
 
 
 @Component({

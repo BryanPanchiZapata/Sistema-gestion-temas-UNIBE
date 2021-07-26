@@ -25,7 +25,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 })
 export class TopicBanckComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource();
-
+  expression : boolean = false;
   constructor(
     private topicService: TopicService,
     public dialog: MatDialog,

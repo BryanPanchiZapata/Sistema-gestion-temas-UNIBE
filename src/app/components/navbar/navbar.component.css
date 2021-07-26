@@ -27,6 +27,7 @@
 }
 .btn__bar {
   display: none;
+  color: #fff;
 }
 .mat-menu {
   text-decoration: none;

@@ -7,17 +7,14 @@
         >
       </button>
       <button mat-button>
-        <a
-          class="title__nav"
-          [routerLink]="['/topic-approval']"
+        <a class="title__nav" [routerLink]="['/topic-approval']"
           >Notificaciones de aprobación de tema</a
         >
       </button>
 
       <li>
         <a class="title__nav" [matMenuTriggerFor]="menu"
-          ><img src="../../assets/user.png" alt="UserModel"
-        /></a>
+          ><mat-icon>account_circle</mat-icon></a>
         <mat-menu #menu="matMenu">
           <a class="mat-menu" [routerLink]="['/profile', user.id]"
             ><button mat-menu-item>Perfil de usuario</button></a
@@ -28,12 +25,14 @@
         </mat-menu>
       </li>
     </ul>
-    <img
+    <mat-icon
       class="btn__bar"
       [matMenuTriggerFor]="bar__responsive"
       src="../../assets/menu.png"
       alt="menu"
-    />
+    >
+      menu</mat-icon
+    >
     <mat-menu #bar__responsive="matMenu">
       <a class="mat-menu" [routerLink]="['topic-banck']"
         ><button mat-menu-item>Banco de temas</button></a
