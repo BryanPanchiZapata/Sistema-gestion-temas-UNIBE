@@ -1,4 +1,7 @@
-import { TopicEvaluation, TopicStudentModel } from './../models/topic-student-model';
+import {
+  TopicEvaluation,
+  TopicStudentModel,
+} from './../models/topic-student-model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -14,6 +17,16 @@ export class TopicStudentService {
 
   getAllTopicStudent(): Observable<any> {
     return this.http.get(this.url).pipe(
+      map((response) => response),
+      catchError((error) => {
+        alert(error.error);
+        return error;
+      })
+    );
+  }
+
+  getTopicsByStatus(topicStatus: string): Observable<any> {
+    return this.http.get(this.url + /topic_status/ + topicStatus).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);
@@ -42,7 +55,10 @@ export class TopicStudentService {
     );
   }
 
-  evaluationProposal(id: string, topicStudent: TopicStudentModel): Observable<any> {
+  evaluationProposal(
+    id: string,
+    topicStudent: TopicStudentModel
+  ): Observable<any> {
     return this.http.patch(this.url + '/' + id, topicStudent).pipe(
       map((response) => response),
       catchError((error) => {

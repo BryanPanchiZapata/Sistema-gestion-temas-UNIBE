@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { TopicModel } from '../models/topic-model';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +41,28 @@ export class TopicApprovalService {
       }
       )
     );
+  }
+
+
+  deleteTopic(id: string): Observable<any> {
+    return this.http.delete(this.url +'/'+ id).pipe(
+      map(response => response),
+      catchError(error => {
+        alert("No se puede eliminar, el tema está en ejecución o ejecutado")
+        return error
+      }
+      )
+    )
+  }
+
+  updateTopic(id: string, topic: TopicModel): Observable<any> {
+    return this.http.put(this.url +'/'+ id, topic).pipe(
+      map(response => response),
+      catchError(error => {
+        alert(error.error)
+        return error
+      }
+      )
+    )
   }
 }

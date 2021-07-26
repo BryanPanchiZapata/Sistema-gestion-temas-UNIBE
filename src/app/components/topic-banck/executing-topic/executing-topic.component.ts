@@ -10,17 +10,19 @@ import { Router } from '@angular/router';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
+import { TopicService } from 'src/app/services/topic.service';
 
 @Component({
   selector: 'app-executing-topic',
   templateUrl: './executing-topic.component.html',
-  styleUrls: ['../topic-banck.component.css'],
+  styleUrls: ['./assigned-topic.component.css']
 })
 export class ExecutingTopicComponent implements AfterViewInit {
   dataStudent = new MatTableDataSource();
 
   constructor(
     private topicStudentService: TopicStudentService,
+    public topicService: TopicService,
     public dialog: MatDialog,
     private route: Router
   ) {
@@ -63,13 +65,20 @@ export class ExecutingTopicComponent implements AfterViewInit {
   }
   ngOnInit(): void {
     this.dataStudent.paginator = this.paginator;
+    this.syncStatus()
+  }
+
+  syncStatus(): void {
+    this.topicStudentService
+      .getTopicsByStatus('EN_EJECUCION')
+      .subscribe((data) => (this.dataStudent = data));
   }
 }
 
 @Component({
   selector: 'dialog-status-executing',
   templateUrl: './dialog-status-executing.component.html',
-  styleUrls: ['../topic-banck.component.css'],
+  styleUrls: ['./assigned-topic.component.css']
 })
 export class DialogStatusExecutingComponent {
   public topicStudent: TopicStudentModel;

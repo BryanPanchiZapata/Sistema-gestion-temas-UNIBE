@@ -33,9 +33,6 @@ table {
 td {
   text-align: center;
 }
-td:nth-child(2) {
-  text-align: left;
-}
 th.mat-header-cell:first-of-type,
 td.mat-cell:first-of-type,
 td.mat-footer-cell:first-of-type {
@@ -43,9 +40,6 @@ td.mat-footer-cell:first-of-type {
 }
 th.mat-header-cell {
   text-align: center;
-}
-th.mat-header-cell:nth-child(2) {
-  text-align: left;
 }
 .mat-header-cell {
   font-weight: bold;
@@ -55,14 +49,17 @@ td.mat-cell,
 td.mat-footer-cell {
   padding: 0 1rem;
 }
-.dos {
-  width: 450px;
-}
 .Open__Dialog__Topic {
   cursor: pointer;
 }
 span {
   font-weight: bold;
+}
+.pointer {
+  cursor: pointer;
+}
+.container__info {
+  padding: 0.7rem 0;
 }
 
 @media screen and (max-width: 1211px) {
@@ -84,10 +81,10 @@ span {
     min-width: 90px;
   }
   .dos {
-    min-width: 410px;
+    min-width: 10px;
   }
   .tres {
-    min-width: 290px;
+    min-width: 20px;
   }
   .cuatro {
     min-width: 190px;
@@ -97,5 +94,17 @@ span {
   }
   .seis {
     min-width: 140px;
+  }
+}
+
+@media screen and (max-width: 870px) {
+  .container__info {
+    padding: 0;
+  }
+  span {
+    padding: 0.3rem 0;
+  }
+  .skip {
+    display: block;
   }
 }

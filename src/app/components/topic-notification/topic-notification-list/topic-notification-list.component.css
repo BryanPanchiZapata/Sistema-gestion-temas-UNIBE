@@ -1,4 +1,3 @@
-/* Banco de temas */
 .container__topicBanck {
   width: 95%;
   margin-inline: auto;
@@ -33,7 +32,7 @@ table {
 td {
   text-align: center;
 }
-td:nth-child(2) {
+td:nth-child(4) {
   text-align: left;
 }
 th.mat-header-cell:first-of-type,
@@ -44,7 +43,7 @@ td.mat-footer-cell:first-of-type {
 th.mat-header-cell {
   text-align: center;
 }
-th.mat-header-cell:nth-child(2) {
+th.mat-header-cell:nth-child(4) {
   text-align: left;
 }
 .mat-header-cell {
@@ -55,15 +54,29 @@ td.mat-cell,
 td.mat-footer-cell {
   padding: 0 1rem;
 }
+
+.uno {
+  width: 200px;
+}
 .dos {
-  width: 450px;
+  width: 190px;
 }
-.Open__Dialog__Topic {
-  cursor: pointer;
+.tres {
+  width: 320px;
 }
-span {
-  font-weight: bold;
+.cuatro {
+  width: 800px;
 }
+.cinco {
+  width: 180px;
+}
+.seis {
+  width: 440px;
+}
+.siete {
+  width: 230px;
+}
+
 
 @media screen and (max-width: 1211px) {
   .container__button {
@@ -81,21 +94,24 @@ span {
     overflow-x: auto;
   }
   .uno {
-    min-width: 90px;
+    min-width: 190px;
   }
   .dos {
-    min-width: 410px;
+    min-width: 170px;
   }
   .tres {
-    min-width: 290px;
+    min-width: 180px;
   }
   .cuatro {
-    min-width: 190px;
+    min-width: 490px;
   }
   .cinco {
     min-width: 180px;
   }
   .seis {
+    min-width: 440px;
+  }
+  .siete {
     min-width: 140px;
   }
 }

@@ -24,6 +24,7 @@ import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import { AddTopicComponent } from './components/topic-banck/add-topic/add-topic.component';
 import { AssignedTopicComponent } from './components/topic-banck/assigned-topic/assigned-topic.component';
 import { ExecutingTopicComponent } from './components/topic-banck/executing-topic/executing-topic.component';
+import { TopicNotificationListComponent } from './components/topic-notification/topic-notification-list/topic-notification-list.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { ExecutingTopicComponent } from './components/topic-banck/executing-topi
     SignUpComponent,
     AddTopicComponent,
     AssignedTopicComponent,
-    ExecutingTopicComponent
+    ExecutingTopicComponent,
+    TopicNotificationListComponent
   ],
   imports: [
     BrowserModule,

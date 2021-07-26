@@ -15,7 +15,7 @@ import { MatStepper } from '@angular/material/stepper';
   styleUrls: ['./topic-notification.component.css'],
 })
 export class TopicNotificationComponent implements OnInit {
-  static END_POINT = 'topic-approval';
+  static END_POINT = 'topic-approval/create';
   public approval: TopicApprovalModel;
   public topicStudent: TopicStudentModel = {};
   public evaluations = TopicEvaluation;

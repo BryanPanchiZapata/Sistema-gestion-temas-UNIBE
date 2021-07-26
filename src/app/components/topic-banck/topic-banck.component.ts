@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, Inject, ViewChild, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  ViewChild,
+  OnInit,
+} from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
@@ -8,7 +14,7 @@ import { AddTopicComponent } from './add-topic/add-topic.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicService } from 'src/app/services/topic.service';
-import { TopicModel } from 'src/app/models/topic-model';
+import { TopicModel, TopicStatus } from 'src/app/models/topic-model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SpinnerService } from 'src/app/services/spinner.service';
 
@@ -19,19 +25,18 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 })
 export class TopicBanckComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource();
-
+  expression : boolean = false;
   constructor(
     private topicService: TopicService,
     public dialog: MatDialog,
     private route: Router
-  ) {
-  }
+  ) {}
 
   openDialog(id: string | null) {
     const dialogRef = this.dialog.open(AddTopicComponent, {
       data: id,
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       this.sync();
     });
   }
@@ -73,7 +78,13 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
   }
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
-    this.sync();
+    this.syncStatus();
+  }
+
+  syncStatus(): void {
+    this.topicService
+      .getTopicsByStatus('DISPONIBLE')
+      .subscribe((data) => (this.dataSource = data));
   }
 
   onDeleteTopic(id: string): void {
@@ -97,7 +108,7 @@ export class DialogTopicComponent {
     private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogTopicComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.sync();
