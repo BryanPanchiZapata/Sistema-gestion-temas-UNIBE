@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TopicApprovalModel } from 'src/app/models/topic-approval-model';
+import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { TopicApprovalService } from 'src/app/services/topic-approval.service';
 
 @Component({
@@ -11,8 +12,9 @@ import { TopicApprovalService } from 'src/app/services/topic-approval.service';
 export class TopicNotificationReadComponent implements OnInit {
   static END_POINT = 'topic-approval/:id';
   public topicNotification: TopicApprovalModel;
+  public topicStudent: TopicStudentModel;
   private readonly id: string | null;
-  route: any;
+
 
   monthNames = [
     'Enero',
@@ -36,7 +38,7 @@ export class TopicNotificationReadComponent implements OnInit {
 
   constructor(
     private notificationApprovalSrv: TopicApprovalService,
-    private router: Router
+    private route: ActivatedRoute,
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
