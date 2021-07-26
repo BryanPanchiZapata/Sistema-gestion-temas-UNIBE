@@ -25,6 +25,9 @@
   font-weight: 500;
   cursor: pointer;
 }
+.account{
+  font-size: 2.2rem;
+}
 .btn__bar {
   display: none;
   color: #fff;

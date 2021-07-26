@@ -14,7 +14,7 @@
 
       <li>
         <a class="title__nav" [matMenuTriggerFor]="menu"
-          ><mat-icon>account_circle</mat-icon></a>
+          ><mat-icon class="account">account_circle</mat-icon></a>
         <mat-menu #menu="matMenu">
           <a class="mat-menu" [routerLink]="['/profile', user.id]"
             ><button mat-menu-item>Perfil de usuario</button></a
