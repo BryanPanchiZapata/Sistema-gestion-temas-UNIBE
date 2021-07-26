@@ -55,34 +55,32 @@ export class SignUpComponent implements OnInit {
     this.careerForm.reset();
   }
 
+  refresh(): void {
+    window.location.reload();
+  }
+
   onSignUp() {
     let user = Object.assign(this.registerForm.value, this.careerForm.value);
     if (user.role === "STUDENT" || user.role === "CAREER_DIRECTOR") {
       if (this.registerForm.valid && this.careerForm.valid) {
         this.authService.signUpAcademic(user).subscribe(
           data => {
-            this.router.navigate(['']);
+            this.refresh();
             this.OnResetForm();
           }
         );
-        alert("Se ha registrado con éxito, inicie sesión")
       } else {
-        alert("Los datos ingresados son incorrectos")
+        this.careerForm.controls.career.markAsTouched();
       }
     } else if (user.role === "FINANCIAL" || user.role === "AUTHORITY") {
       if (this.registerForm.valid) {
         this.authService.signUpAdmini(this.registerForm.value).subscribe(
           data => {
-            this.router.navigate(['']);
+            this.refresh();
             this.OnResetForm();
           }
         );
-        alert("Se ha registrado con éxito, inicie sesión")
-      } else {
-        alert("Los datos ingresados son incorrectos")
       }
-    } else {
-      alert("Los datos ingresados son incorrectos")
     }
   }
 }
