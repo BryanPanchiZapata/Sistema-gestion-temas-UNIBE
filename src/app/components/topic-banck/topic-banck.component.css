@@ -44,9 +44,7 @@ td.mat-footer-cell:first-of-type {
 th.mat-header-cell {
   text-align: center;
 }
-th.mat-header-cell:nth-child(2) {
-  text-align: left;
-}
+
 .mat-header-cell {
   font-weight: bold;
 }
