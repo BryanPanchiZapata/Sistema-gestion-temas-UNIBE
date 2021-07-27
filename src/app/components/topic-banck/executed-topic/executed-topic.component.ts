@@ -88,6 +88,7 @@ export class DialogStatusAssignedComponent {
 
   ngOnInit(): void {
     this.synch();
+    this.spinnerService.hide();
   }
 
   synch(): void {
@@ -95,6 +96,5 @@ export class DialogStatusAssignedComponent {
       this.topicService
         .getTopicStudentById(this.id)
         .subscribe((data) => (this.topicStudent = data));
-    console.log(this.id);
   }
 }

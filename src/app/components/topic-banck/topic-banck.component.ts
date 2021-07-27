@@ -24,7 +24,6 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 })
 export class TopicBanckComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource();
-  expression: boolean = false;
 
   constructor(
     private spinnerService: SpinnerService,
@@ -47,7 +46,6 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     this.dialog.open(DialogTopicComponent, {
       data: id,
     });
-    this.spinnerService.hide();
   }
 
   displayedColumns: string[] = [
@@ -100,12 +98,14 @@ export class DialogTopicComponent {
 
   constructor(
     private topicService: TopicService,
+    private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogTopicComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
   ) { }
 
   ngOnInit(): void {
     this.sync();
+    this.spinnerService.hide();
   }
 
   sync(): void {

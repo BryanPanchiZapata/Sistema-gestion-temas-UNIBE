@@ -1,43 +1,43 @@
 <div class="container__info">
   <div>
     <p>
-      <b>Nombres del estudiante:</b> {{ topicStudent.student?.firstName }}
-      {{ topicStudent.student?.secondName }}
-      {{ topicStudent.student?.lastName }}
-      {{ topicStudent.student?.secondLastname }}
+      <b>Nombres del estudiante:</b> {{ topicStudent?.student?.firstName }}
+      {{ topicStudent?.student?.secondName }}
+      {{ topicStudent?.student?.lastName }}
+      {{ topicStudent?.student?.secondLastname }}
     </p>
   </div>
   <span class="skip"></span>
   <div>
-    <p><b>Cédula:</b> {{ topicStudent.student?.ci }}</p>
+    <p><b>Cédula:</b> {{ topicStudent?.student?.ci }}</p>
   </div>
 </div>
 
 <div class="container__info">
-  <span>Tema: </span> <label>{{ topicStudent.topic?.name }}</label>
+  <span>Tema: </span> <label>{{ topicStudent?.topic?.name }}</label>
 </div>
 
 <div class="container__info">
-  <span>Carrera: </span> <label>{{ topicStudent.topic?.career?.name }}</label>
+  <span>Carrera: </span> <label>{{ topicStudent?.topic?.career?.name }}</label>
   <span class="skip"></span>
-  <span> Evaluación: </span> <label>{{ topicStudent.topicEvaluation }}</label>
+  <span> Evaluación: </span> <label>{{ topicStudent?.topicEvaluation }}</label>
   <span class="skip"></span>
   <span> Articulación: </span>
-  <label>{{ topicStudent.topic?.articulation }}</label>
+  <label>{{ topicStudent?.topic?.articulation }}</label>
 </div>
 
 <div class="container__info">
   <span>Estado de tema: </span>
-  <label>{{ topicStudent.topic?.topicStatus }} </label
+  <label>{{ topicStudent?.topic?.topicStatus }} </label
   ><span class="skip"></span> <span>Pago: </span>
 
-  <label> {{ topicStudent.paymentDenunciation }} </label
+  <label> {{ topicStudent?.paymentDenunciation }} </label
   ><span class="skip"></span> <span>Fecha: </span>
 
-  <label> {{ topicStudent.assignedDate }} </label>
+  <label> {{ topicStudent?.assignedDate }} </label>
 </div>
 
 <div class="container__info">
   <span>Descripción del tema: </span>
-  <label>{{ topicStudent.topic?.description }}</label>
+  <label>{{ topicStudent?.topic?.description }}</label>
 </div>

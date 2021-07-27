@@ -10,7 +10,7 @@ import { TopicApprovalService } from 'src/app/services/topic-approval.service';
   styleUrls: ['../topic-notification.component.css'],
 })
 export class TopicNotificationReadComponent implements OnInit {
-  static END_POINT = 'topic-approval/:id';
+  static END_POINT = 'topic-approval/read/:id';
   public topicNotification: TopicApprovalModel;
   public topicStudent: TopicStudentModel;
   public evaluations = TopicEvaluation;

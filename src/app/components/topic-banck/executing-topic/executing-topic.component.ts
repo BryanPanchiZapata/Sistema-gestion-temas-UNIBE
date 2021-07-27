@@ -36,9 +36,9 @@ export class ExecutingTopicComponent implements AfterViewInit {
       data: id,
     });
   }
-  navigateToTopic(topic: TopicStudentModel): void {
+/*   navigateToTopic(topic: TopicStudentModel): void {
     this.route.navigate(['/topicStudent/' + topic.id]);
-  }
+  } */
 
   displayedColumns: string[] = [
     'position',
@@ -85,12 +85,14 @@ export class DialogStatusExecutingComponent {
 
   constructor(
     private topicService: TopicStudentService,
+    private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogStatusExecutingComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
   ) {}
 
   ngOnInit(): void {
     this.synch();
+    this.spinnerService.hide();
   }
 
   synch(): void {
@@ -98,6 +100,5 @@ export class DialogStatusExecutingComponent {
       this.topicService
         .getTopicStudentById(this.id)
         .subscribe((data) => (this.topicStudent = data));
-    console.log(this.id);
   }
 }
