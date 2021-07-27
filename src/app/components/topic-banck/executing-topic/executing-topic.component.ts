@@ -70,7 +70,7 @@ export class ExecutingTopicComponent implements AfterViewInit {
 
   syncStatus(): void {
     this.topicStudentService
-      .getTopicsByStatus('EN_EJECUCION')
+      .getTopicsByStatus('En ejecución')
       .subscribe((data) => (this.dataStudent = data));
   }
 }
@@ -85,7 +85,6 @@ export class DialogStatusExecutingComponent {
 
   constructor(
     private topicService: TopicStudentService,
-    private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogStatusExecutingComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
   ) {}

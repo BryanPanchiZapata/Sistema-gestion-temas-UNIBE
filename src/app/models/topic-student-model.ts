@@ -12,12 +12,12 @@ export interface TopicStudentModel {
 }
 
 export enum TopicEvaluation {
-  'Aprobado' = 'APROBADO',
-  'Aprobado con observaciones' = 'APROBADO_CON_OBSERVACIONES',
-  'Reprobado' = 'REPROBABO'
+  'Aprobado' = 'Aprobado',
+  'Aprobado con observaciones' = 'Aprobado con observaciones',
+  'Reprobado' = 'Reprobado'
 }
 
 export enum PaymentDenunciation {
-  'No pagado' = 'NO_PAGADO',
-  'Pagado' = 'PAGADO'
+  'No pagado' = 'No pagado',
+  'Pagado' = 'Pagado'
 }

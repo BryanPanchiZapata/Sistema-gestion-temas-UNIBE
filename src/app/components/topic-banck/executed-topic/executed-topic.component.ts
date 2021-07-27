@@ -65,7 +65,7 @@ export class ExecutedTopicComponent implements AfterViewInit {
 
   syncStatus(): void {
     this.topicStudentService
-      .getTopicsByStatus('EJECUTADO')
+      .getTopicsByStatus('Ejecutado')
       .subscribe((data) => (this.dataStudent = data));
   }
 }

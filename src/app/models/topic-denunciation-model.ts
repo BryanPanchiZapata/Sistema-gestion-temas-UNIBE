@@ -3,7 +3,7 @@ import { TopicStudentModel } from 'src/app/models/topic-student-model';
 export interface TopicDenunciationModel {
   id?: string
   date?: string,
-  investigationLine?: string
+  investigationLine?: InvestigationLine,
   investigationModality?: InvestigationModality,
   projectType?: ProjectType,
   semesterLevel?: string,
@@ -13,25 +13,37 @@ export interface TopicDenunciationModel {
 }
 
 export enum InvestigationModality {
-  'Emprendimiento' = 'EMPRENDIMIENTO',
-  'Examen Complexivo' = 'EXAMEN_COMPLEXIVO',
-  'Modelo de Negocio' = 'MODELO_DE_NEGOCIO',
-  'Producto o Presentación Artística' = 'PRODUCTO_O_PRESENTACION_ARTISTICA',
-  'Propuesta Tecnológica' = 'PROPUESTA_TECNOLOGICA',
-  'Proyecto de Investigación' = 'PROYECTO_DE_INVESTIGACION'
+  'Emprendimiento' = 'Emprendimiento',
+  'Examen Complexivo' = 'Examen Complexivo',
+  'Modelo de Negocio' = 'Modelo de Negocio',
+  'Producto o Presentación Artística' = 'Producto o Presentación Artística',
+  'Propuesta Tecnológica' = 'Propuesta Tecnológica',
+  'Proyecto de Investigación' = 'Proyecto de Investigación'
 }
 
 export enum ProjectType {
-  'Docencia' = 'DOCENCIA',
-  'Investigación' = 'INVESTIGACION',
-  'Vinculación' = 'VINCULACION'
+  'Docencia' = 'Docencia',
+  'Investigación' = 'Investigación',
+  'Vinculación' = 'Vinculación'
 }
 
 export enum SemesterLevel {
-  'Sexto' = 'SEXTO',
-  'Séptimo' = 'SEPTIMO',
-  'Octavo' = 'OCTAVO',
-  'Noveno' = 'NOVENO',
-  'Décimo' = 'DECIMO'
+  'Sexto' = 'Sexto',
+  'Séptimo' = 'Séptimo',
+  'Octavo' = 'Octavo',
+  'Noveno' = 'Noveno',
+  'Décimo' = 'Décimo'
+
+}
+
+export enum InvestigationLine {
+  'Gestión educacional' = 'Gestión educacional',
+  'Educación universitaria' = 'Educación universitaria',
+  'Comportamiento humano' = 'Comportamiento humano',
+  'Gestión organizacional, emprendimiento, TIC e innovación' = 'Gestión organizacional, emprendimiento, TIC e innovación',
+  'Salud y desarrollo humano integral' = 'Salud y desarrollo humano integral',
+  'Cultura, arte, medios de comunicación y sociedad' = 'Cultura, arte, medios de comunicación y sociedad',
+  'Sustentabilidad y desarrollo sustentable' = 'Sustentabilidad y desarrollo sustentable',
+  'Estado, derecho y justicia' = 'Estado, derecho y justicia'
 
 }

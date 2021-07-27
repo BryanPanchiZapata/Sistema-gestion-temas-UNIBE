@@ -24,6 +24,11 @@
   margin-inline: auto;
 }
 
+.textarea {
+  background-color: rgba(0,0,0,.04);
+  border-radius: 4px 4px 0 0;
+}
+
 button {
   margin: 0.7rem;
 }

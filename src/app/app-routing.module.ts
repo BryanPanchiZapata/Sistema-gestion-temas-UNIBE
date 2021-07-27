@@ -25,16 +25,16 @@ const routes: Routes = [
         component: TopicDenunciationComponent,
       },
       {
-        path: TopicNotificationComponent.END_POINT,
-        component: TopicNotificationComponent,
-      },
-      {
         path: TopicNotificationReadComponent.END_POINT,
         component: TopicNotificationReadComponent,
       },
       {
         path: TopicNotificationListComponent.END_POINT,
         component: TopicNotificationListComponent,
+      },
+      {
+        path: TopicNotificationComponent.END_POINT,
+        component: TopicNotificationComponent,
       },
       {
         path: TopicProposalComponent.END_POINT,
@@ -47,8 +47,8 @@ const routes: Routes = [
       {
         path: PaymentRegistrationComponent.END_POINT,
         component: PaymentRegistrationComponent,
-      }
-    ]
+      },
+    ],
   },
   {
     path: 'login',

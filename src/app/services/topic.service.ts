@@ -1,4 +1,4 @@
-import { TopicModel, TopicStatus } from './../models/topic-model';
+import { TopicModel } from './../models/topic-model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -23,7 +23,7 @@ export class TopicService {
   }
 
   getTopicsByStatus(topicStatus: string): Observable<any> {
-    return this.http.get(this.url + /topic_status/ + topicStatus).pipe(
+    return this.http.get(this.url + '/topic_status/' + topicStatus).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);

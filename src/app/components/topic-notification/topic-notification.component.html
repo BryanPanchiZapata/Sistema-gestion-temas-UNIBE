@@ -28,7 +28,7 @@
         <mat-form-field class="form-evaluation" appearance="legacy">
           <mat-label>Evaluación de la Propuesta de Tema</mat-label>
           <mat-select required formControlName="topicEvaluation">
-            <mat-option *ngFor="let evaluation of evaluations | keyvalue" [value]="evaluation.value">
+            <mat-option *ngFor="let evaluation of evaluations | keyvalue" [value]="evaluation.key">
               {{evaluation.key}}
             </mat-option>
           </mat-select>
@@ -36,7 +36,9 @@
             <strong>obligatorio</strong>
           </mat-error>
         </mat-form-field>
-        <button class="primary" mat-raised-button (click)="onEvaluationProposal(stepper)">Siguiente</button>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <button class="primary" mat-raised-button (click)="onEvaluationProposal(stepper)">Siguiente</button>
+        </div>
       </form>
     </div>
   </mat-step>
@@ -92,16 +94,16 @@
           </p>
         </div>
         <div class="observations">
-          <p *ngIf="evaluationForm.get('topicEvaluation')?.value === 'APROBADO'"><b>APROBADO</b></p>
-          <p *ngIf="evaluationForm.get('topicEvaluation')?.value === 'APROBADO_CON_OBSERVACIONES'">Aprobado con las
+          <p *ngIf="evaluationForm.get('topicEvaluation')?.value === 'Aprobado'"><b>APROBADO</b></p>
+          <p *ngIf="evaluationForm.get('topicEvaluation')?.value === 'Aprobado con observaciones'">Aprobado con las
             siguientes observaciones:</p>
-          <p *ngIf="evaluationForm.get('topicEvaluation')?.value === 'REPROBABO'">No ha sido aprobado por los siguientes
+          <p *ngIf="evaluationForm.get('topicEvaluation')?.value === 'Reprobado'">No ha sido aprobado por los siguientes
             motivos:
           </p>
 
-          <div >
-            <textarea matInput [formControl]="observations" cols="5" rows="10" type="text"
-              *ngIf="evaluationForm.get('topicEvaluation')?.value !== 'APROBADO'"></textarea>
+          <div>
+            <textarea class="textarea" matInput [formControl]="observations" cols="5" rows="10" type="text"
+              *ngIf="evaluationForm.get('topicEvaluation')?.value !== 'Aprobado'"></textarea>
             <small *ngIf="observations?.invalid && (observations?.dirty || observations?.touched)">Campo
               <strong>obligatorio</strong>
             </small>
@@ -114,7 +116,7 @@
         </div>
         <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
           <button mat-raised-button (click)="onCancel(stepper)">Cancelar</button>
-          <button type="submit" class="primary" mat-raised-button (click)="onCreateNotification(stepper)">
+          <button type="submit" class="primary" mat-raised-button (click)="onCreateNotification()">
             Enviar
           </button>
         </mat-card-actions>
