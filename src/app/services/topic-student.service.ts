@@ -1,7 +1,4 @@
-import {
-  TopicEvaluation,
-  TopicStudentModel,
-} from './../models/topic-student-model';
+import { TopicStudentModel } from './../models/topic-student-model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -13,7 +10,7 @@ import { catchError, map } from 'rxjs/operators';
 export class TopicStudentService {
   private url =
     'https://degreetopics-api.herokuapp.com/degreetopics/v1/student_topic';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAllTopicStudent(): Observable<any> {
     return this.http.get(this.url).pipe(
@@ -26,7 +23,7 @@ export class TopicStudentService {
   }
 
   getTopicsByStatus(topicStatus: string): Observable<any> {
-    return this.http.get(this.url + /topic_status/ + topicStatus).pipe(
+    return this.http.get(this.url + '/topic_status/' + topicStatus).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);

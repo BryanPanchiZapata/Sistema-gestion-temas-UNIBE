@@ -1,4 +1,3 @@
-import { MyErrorStateMatcher } from './../../MyErrorStateMatcher';
 import { TopicApprovalService } from './../../services/topic-approval.service';
 import { TopicEvaluation } from './../../models/topic-student-model';
 import { FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -97,8 +96,8 @@ export class TopicNotificationComponent implements OnInit {
     stepper.previous();
   }
 
-  onCreateNotification(stepper: MatStepper) {
-    if (this.topicStudent.topicEvaluation === 'APROBADO') {
+  onCreateNotification() {
+    if (this.topicStudent.topicEvaluation === 'Aprobado') {
       if (this.notificationForm.valid) {
         let notification = Object.assign(this.notificationForm.value, { topicStudent: this.topicStudent })
         this.notificationApprovalSrv.createNotification(notification).subscribe(
@@ -106,11 +105,11 @@ export class TopicNotificationComponent implements OnInit {
             this.approval = data
             this.resetForms();
             this.ciStudentControl.reset();
-            stepper.previous();
+            alert("La notificación ha sido enviada")
           }
         )
       }
-    } else {
+    } else if(this.topicStudent.topicEvaluation === 'Reprobado' || this.topicStudent.topicEvaluation === 'Aprobado con observaciones'){
       if (this.notificationForm.valid && this.observations.valid) {
         let notification = Object.assign(this.notificationForm.value, { topicStudent: this.topicStudent, observations: this.observations.value })
         this.notificationApprovalSrv.createNotification(notification).subscribe(
@@ -118,7 +117,7 @@ export class TopicNotificationComponent implements OnInit {
             this.approval = data;
             this.resetForms();
             this.ciStudentControl.reset();
-            stepper.previous();
+            alert("La notificación ha sido enviada")
           }
         )
 

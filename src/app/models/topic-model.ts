@@ -4,19 +4,13 @@ export interface TopicModel {
   articulation?:Articulation;
   description?:Text;
   name?:string;
-  topicStatus?:TopicStatus;
+  topicStatus?:string;
   career?:CareerModel;
 }
 
 export enum Articulation {
-  'Investigación' = 'INVESTIGACION',
-  'Prácticas Laborales' = 'PRACTICAS_LABORALES',
-  'Proyecto Integrador de Saberes' = 'PROYECTO_INTEGRADOR_SABERES',
-  'Prácticas de Servicio Comunitario' = 'P_SERVICIO_COMUNITARIO'
-}
-
-export enum TopicStatus {
-  'Disponible' = 'DISPONIBLE',
-  'Ejecutado' = 'EJECUTADO',
-  'En ejecución' = 'EN_EJECUCION'
+  'Investigación' = 'Investigación',
+  'Prácticas Laborales' = 'Prácticas Laborales',
+  'Proyecto Integrador de Saberes' = 'Proyecto Integrador de Saberes',
+  'Prácticas de Servicio Comunitario' = 'Prácticas de Servicio Comunitario'
 }

@@ -38,9 +38,8 @@ export class AddTopicComponent implements OnInit {
         this.careers = data;
       }
     );
-    this.spinnerService.hide();
     this.sync();
-
+    this.spinnerService.hide();
   }
 
   onResetForm() {
@@ -70,14 +69,17 @@ export class AddTopicComponent implements OnInit {
           data => {
             this.topic = data
             this.onResetForm();
+            this.spinnerService.hide();
             this.dialogRef.close();
           }
         );
       } else {
         this.topicService.addTopic(this.topicForm.value).subscribe(
           data => {
+            this.topic = data
             this.onResetForm();
             this.dialogRef.close();
+            this.spinnerService.hide();
           }
         )
       }

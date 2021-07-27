@@ -24,12 +24,12 @@ const routes: Routes = [
         component: TopicDenunciationComponent,
       },
       {
-        path: TopicNotificationComponent.END_POINT,
-        component: TopicNotificationComponent,
-      },
-      {
         path: TopicNotificationListComponent.END_POINT,
         component: TopicNotificationListComponent,
+      },
+      {
+        path: TopicNotificationComponent.END_POINT,
+        component: TopicNotificationComponent,
       },
       {
         path: TopicProposalComponent.END_POINT,
@@ -55,4 +55,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

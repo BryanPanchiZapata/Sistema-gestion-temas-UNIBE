@@ -14,8 +14,7 @@ import { AddTopicComponent } from './add-topic/add-topic.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicService } from 'src/app/services/topic.service';
-import { TopicModel, TopicStatus } from 'src/app/models/topic-model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { TopicModel } from 'src/app/models/topic-model';
 import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
@@ -25,19 +24,22 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 })
 export class TopicBanckComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource();
-  expression : boolean = false;
+  expression: boolean = false;
+
   constructor(
+    private spinnerService: SpinnerService,
     private topicService: TopicService,
-    public dialog: MatDialog,
-    private route: Router
-  ) {}
+    public dialog: MatDialog
+  ) { }
 
   openDialog(id: string | null) {
     const dialogRef = this.dialog.open(AddTopicComponent, {
-      data: id,
+      data: id
     });
+
     dialogRef.afterClosed().subscribe((result) => {
       this.sync();
+      this.spinnerService.hide();
     });
   }
 
@@ -45,14 +47,7 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     this.dialog.open(DialogTopicComponent, {
       data: id,
     });
-  }
-  navigateToTopic(topic: TopicModel): void {
-    this.route.navigate(['/topic/' + topic.id]);
-  }
-  sync() {
-    this.topicService.getAllTopic().subscribe((data) => {
-      this.dataSource.data = data;
-    });
+    this.spinnerService.hide();
   }
 
   displayedColumns: string[] = [
@@ -78,12 +73,12 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
   }
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
-    this.syncStatus();
+    this.sync();
   }
 
-  syncStatus(): void {
+  sync(): void {
     this.topicService
-      .getTopicsByStatus('DISPONIBLE')
+      .getTopicsByStatus('Disponible')
       .subscribe((data) => (this.dataSource = data));
   }
 
@@ -105,10 +100,9 @@ export class DialogTopicComponent {
 
   constructor(
     private topicService: TopicService,
-    private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogTopicComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.sync();
@@ -118,6 +112,9 @@ export class DialogTopicComponent {
     if (this.id !== null)
       this.topicService
         .getTopicById(this.id)
-        .subscribe((data) => (this.topic = data));
+        .subscribe(
+          data => {
+            this.topic = data
+          });
   }
 }

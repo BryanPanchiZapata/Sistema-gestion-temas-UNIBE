@@ -1,5 +1,5 @@
 import { TopicDenunciationService } from './../../services/topic-denunciation.service';
-import { SemesterLevel, InvestigationModality, ProjectType } from './../../models/topic-denunciation-model';
+import { SemesterLevel, InvestigationModality, ProjectType, InvestigationLine } from './../../models/topic-denunciation-model';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
 import { Component, OnInit } from '@angular/core';
@@ -30,6 +30,7 @@ export class TopicDenunciationComponent implements OnInit {
   public semesterLevels = SemesterLevel;
   public investigationModalitys = InvestigationModality;
   public projectTypes = ProjectType;
+  public investigationLine = InvestigationLine;
 
   constructor(
     private topicStudentService: TopicStudentService,
@@ -90,6 +91,7 @@ export class TopicDenunciationComponent implements OnInit {
       this.topicDenunciationSvr.createDenunciation(denunciation).subscribe(
         data => {
           this.denunciation = data
+          alert("La denuncia de tema ha sido enviada")
         }
       )
     }
