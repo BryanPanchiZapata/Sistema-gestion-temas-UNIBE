@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TopicApprovalModel } from 'src/app/models/topic-approval-model';
-import { TopicStudentModel } from 'src/app/models/topic-student-model';
+import { TopicEvaluation, TopicStudentModel } from 'src/app/models/topic-student-model';
 import { TopicApprovalService } from 'src/app/services/topic-approval.service';
 
 @Component({
@@ -13,6 +13,7 @@ export class TopicNotificationReadComponent implements OnInit {
   static END_POINT = 'topic-approval/:id';
   public topicNotification: TopicApprovalModel;
   public topicStudent: TopicStudentModel;
+  public evaluations = TopicEvaluation;
   private readonly id: string | null;
 
 
