@@ -23,7 +23,7 @@ export class TopicDenunciationService {
     );
   } */
 
-  getDenunciationById(id: string): Observable<any> {
+  getTopicDenunciationById(id: string): Observable<any> {
     return this.http.get(this.url + "/" + id).pipe(
       map(response => response), catchError(error => {
           alert(error.error);

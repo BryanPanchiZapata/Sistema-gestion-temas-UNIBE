@@ -1,0 +1,82 @@
+<div id="denunciation" fxLayout="column" fxLayoutAlign="center center">
+  <mat-card
+    class="container__form"
+    ngClass.lt-sm="mat-card-lt-sm"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+  >
+    <img src="../../../assets/unibe_form.png" alt="UNIBE" />
+    <h2 class="form__title">DENUNCIA DE TEMA Y MODALIDAD DE INVESTIGACIÓN</h2>
+
+    <div class="data-general">
+      <h4>DATOS GENERALES:</h4>
+      <p>
+        <b>Apellidos:</b>
+        {{ denunciation?.topicStudent?.student?.lastName }}
+        {{ denunciation?.topicStudent?.student?.secondLastname }}
+      </p>
+
+      <p>
+        <b>Nombres: </b>
+        {{ denunciation?.topicStudent?.student?.firstName }}
+        {{ denunciation?.topicStudent?.student?.secondName }}
+      </p>
+
+      <p>
+        <b>Cédula de Identidad: </b>
+        {{ denunciation?.topicStudent?.student?.ci }}
+      </p>
+
+      <p>
+        <b>Carrera: </b>
+        {{ denunciation?.topicStudent?.student?.career?.name }}
+      </p>
+
+      <p>
+        <b>Semestre: </b>
+      </p>
+
+      <p>
+        <b>Director (a) de carrera: </b>
+        Traer dato de academicUser
+      </p>
+
+      <p>
+        <b>Ciudad/Fecha: </b>
+
+        {{ day }} de {{ month }} del {{ year }}
+      </p>
+
+      <p>De mis consideraciones.</p>
+      <p>
+        Solicito la evaluación de la propuesta del Trabajo de Titulación o
+        Trabajo de Integración Curricular para obtener el título de
+        <b>{{ denunciation?.topicStudent?.student?.career?.degree }}</b
+        >.
+      </p>
+      <p>Los datos de la propuesta se especifican a continuación:</p>
+      <h4>Tema:</h4>
+      <p>{{ denunciation?.topicStudent?.topic?.name }}</p>
+
+      <h4>Línea de investigación:</h4>
+      <p>{{ denunciation?.investigationLine }}</p>
+      <h4>
+        Título del proyecto de la universidad con el cual se articula el tema
+        propuesto:
+      </h4>
+      <p>{{ denunciation?.articulationTopic }}</p>
+      <h4>Tipo de proyecto:</h4>
+      <p>{{ denunciation?.projectType }}</p>
+      <h4>Modalidad de investigación:</h4>
+      <p>{{ denunciation?.investigationModality }}</p>
+      <h4>Solicitado por:</h4>
+      <div class="firma" fxLayout="column" fxLayoutAlign="center center">
+        <img [src]="denunciation?.topicStudent?.student?.sign" alt="" />
+        <p>
+          {{ denunciation?.topicStudent?.student?.firstName }}
+          {{ denunciation?.topicStudent?.student?.lastName }}
+        </p>
+      </div>
+    </div>
+  </mat-card>
+</div>
