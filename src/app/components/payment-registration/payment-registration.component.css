@@ -20,14 +20,30 @@ input {
 table {
   width: 100%;
 }
-.uno {
-  width: 15%;
-}
-.dos {
-  width: 25%;
-}
 .btn{
   min-width: 120px;
+}
+
+td {
+  text-align: center;
+}
+
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
+  padding: 1rem;
+}
+th.mat-header-cell {
+  text-align: center;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+}
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  padding: 0 1rem;
 }
 @media screen and (max-width: 920px) {
   input {
@@ -44,9 +60,12 @@ table {
     min-width: 150px;
   }
   .tres {
-    min-width: 250px;
+    min-width: 230px;
   }
   .cuatro {
+    min-width: 200px;
+  }
+  .cinco {
     min-width: 150px;
   }
 }

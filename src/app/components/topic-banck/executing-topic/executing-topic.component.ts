@@ -39,13 +39,13 @@ export class ExecutingTopicComponent implements AfterViewInit {
 
   displayedColumns: string[] = [
     'position',
+    'tema',
+    'articulacion',
+    'pago',
     'cedula',
     'carrera',
-    'evaluacion',
-    'articulacion',
-    'estado',
-    'pago',
     'fecha',
+    'evaluacion',
   ];
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

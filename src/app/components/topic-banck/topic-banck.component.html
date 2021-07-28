@@ -48,24 +48,22 @@
             <td mat-cell *matCellDef="let topic">{{ topic.articulation }}</td>
           </ng-container>
 
-          <ng-container matColumnDef="estado">
-            <th class="cuatro" mat-header-cell *matHeaderCellDef>Estado</th>
-            <td mat-cell *matCellDef="let topic">{{ topic.topicStatus }}</td>
-          </ng-container>
-
           <ng-container matColumnDef="carrera">
             <th class="cinco" mat-header-cell *matHeaderCellDef>Carrera</th>
             <td mat-cell *matCellDef="let topic">{{ topic.career.name }}</td>
           </ng-container>
 
           <ng-container matColumnDef="accion">
-            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <th class="seis" mat-header-cell *matHeaderCellDef>Acciones</th>
             <td mat-cell *matCellDef="let topic">
               <button mat-icon-button (click)="openDialog(topic.id)">
                 <mat-icon>edit</mat-icon>
               </button>
               <button mat-icon-button (click)="onDeleteTopic(topic.id)">
                 <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-button>
+                <mat-icon>check</mat-icon>
               </button>
             </td>
           </ng-container>

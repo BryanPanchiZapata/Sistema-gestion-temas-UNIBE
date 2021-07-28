@@ -18,7 +18,7 @@ export class PaymentRegistrationComponent implements AfterViewInit {
       this.dataSource.data = data;
     });
   }
-  displayedColumns: string[] = ['position', 'cedula', 'estudiante', 'estado'];
+  displayedColumns: string[] = ['position', 'cedula', 'estudiante', 'carrera', 'estado'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {

@@ -17,6 +17,7 @@
   background: #002858;
   color: #fff;
 }
+
 input {
   width: 50%;
   border: none;
@@ -34,7 +35,7 @@ td {
   text-align: center;
 }
 td:nth-child(2) {
-  text-align: left;
+  text-align: justify;
 }
 th.mat-header-cell:first-of-type,
 td.mat-cell:first-of-type,
@@ -94,6 +95,6 @@ span {
     min-width: 180px;
   }
   .seis {
-    min-width: 140px;
+    min-width: 190px;
   }
 }
