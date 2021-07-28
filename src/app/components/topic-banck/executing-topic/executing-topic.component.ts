@@ -15,7 +15,7 @@ import { TopicService } from 'src/app/services/topic.service';
 @Component({
   selector: 'app-executing-topic',
   templateUrl: './executing-topic.component.html',
-  styleUrls: ['./assigned-topic.component.css']
+  styleUrls: ['./executing-topic.component.css'],
 })
 export class ExecutingTopicComponent implements AfterViewInit {
   dataStudent = new MatTableDataSource();
@@ -36,9 +36,6 @@ export class ExecutingTopicComponent implements AfterViewInit {
       data: id,
     });
   }
-/*   navigateToTopic(topic: TopicStudentModel): void {
-    this.route.navigate(['/topicStudent/' + topic.id]);
-  } */
 
   displayedColumns: string[] = [
     'position',
@@ -65,7 +62,7 @@ export class ExecutingTopicComponent implements AfterViewInit {
   }
   ngOnInit(): void {
     this.dataStudent.paginator = this.paginator;
-    this.syncStatus()
+    this.syncStatus();
   }
 
   syncStatus(): void {
@@ -78,7 +75,7 @@ export class ExecutingTopicComponent implements AfterViewInit {
 @Component({
   selector: 'dialog-status-executing',
   templateUrl: './dialog-status-executing.component.html',
-  styleUrls: ['./assigned-topic.component.css']
+  styleUrls: ['./executing-topic.component.css'],
 })
 export class DialogStatusExecutingComponent {
   public topicStudent: TopicStudentModel;
@@ -91,11 +88,11 @@ export class DialogStatusExecutingComponent {
   ) {}
 
   ngOnInit(): void {
-    this.synch();
+    this.sync();
     this.spinnerService.hide();
   }
 
-  synch(): void {
+  sync(): void {
     if (this.id !== null)
       this.topicService
         .getTopicStudentById(this.id)

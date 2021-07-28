@@ -1,43 +1,37 @@
 <div class="container__info">
-  <div>
     <p>
       <b>Nombres del estudiante:</b> {{ topicStudent?.student?.firstName }}
       {{ topicStudent?.student?.secondName }}
       {{ topicStudent?.student?.lastName }}
       {{ topicStudent?.student?.secondLastname }}
     </p>
-  </div>
   <span class="skip"></span>
-  <div>
     <p><b>Cédula:</b> {{ topicStudent?.student?.ci }}</p>
-  </div>
 </div>
 
 <div class="container__info">
-  <span>Tema: </span> <label>{{ topicStudent?.topic?.name }}</label>
+  <p class="space"><b>Tema:</b> {{ topicStudent?.topic?.name }}</p>
 </div>
 
 <div class="container__info">
-  <span>Carrera: </span> <label>{{ topicStudent?.topic?.career?.name }}</label>
+  <p><b>Carrera:</b> {{ topicStudent?.topic?.career?.name }}</p>
   <span class="skip"></span>
-  <span> Evaluación: </span> <label>{{ topicStudent?.topicEvaluation }}</label>
+  <p><b>Evaluación:</b> {{ topicStudent?.topicEvaluation }}</p>
   <span class="skip"></span>
-  <span> Articulación: </span>
-  <label>{{ topicStudent?.topic?.articulation }}</label>
+  <p><b>Articulación:</b> {{ topicStudent?.topic?.articulation }}</p>
 </div>
 
 <div class="container__info">
-  <span>Estado de tema: </span>
-  <label>{{ topicStudent?.topic?.topicStatus }} </label
-  ><span class="skip"></span> <span>Pago: </span>
-
-  <label> {{ topicStudent?.paymentDenunciation }} </label
-  ><span class="skip"></span> <span>Fecha: </span>
-
-  <label> {{ topicStudent?.assignedDate }} </label>
+  <p><b>Estado de tema:</b> {{ topicStudent?.topic?.topicStatus }}</p>
+  <span class="skip"></span>
+  <p><b>Pago:</b> {{ topicStudent?.paymentDenunciation }}</p>
+  <span class="skip"></span>
+  <p><b>Fecha:</b> {{ topicStudent?.assignedDate }}</p>
 </div>
 
 <div class="container__info">
-  <span>Descripción del tema: </span>
-  <label>{{ topicStudent?.topic?.description }}</label>
+  <p class="space"><b>Descripción del tema:</b> {{ topicStudent?.topic?.description }}</p>
 </div>
+
+<a href="">Denuncia de tema y modalidad de investigación</a>
+<a href="">Notificación de aprobación de tema</a>

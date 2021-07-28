@@ -26,6 +26,7 @@ import { ExecutedTopicComponent } from './components/topic-banck/executed-topic/
 import { ExecutingTopicComponent } from './components/topic-banck/executing-topic/executing-topic.component';
 import { TopicNotificationListComponent } from './components/topic-notification/topic-notification-list/topic-notification-list.component';
 import { TopicNotificationReadComponent } from './components/topic-notification/topic-notification-read/topic-notification-read.component';
+import { TopicDenunciationReadComponent } from './components/topic-denunciation/topic-denunciation-read/topic-denunciation-read.component';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { TopicNotificationReadComponent } from './components/topic-notification/
     ExecutedTopicComponent,
     ExecutingTopicComponent,
     TopicNotificationListComponent,
-    TopicNotificationReadComponent
+    TopicNotificationReadComponent,
+    TopicDenunciationReadComponent
   ],
   imports: [
     BrowserModule,

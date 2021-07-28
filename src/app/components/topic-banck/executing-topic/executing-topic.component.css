@@ -62,10 +62,9 @@ span {
   padding: 0.7rem 0;
 }
 
-.container__info:first-child{
-  display: flex;
-  gap: 2rem;
-} 
+.space{
+  width: 600px;
+}
 
 @media screen and (max-width: 1211px) {
   .container__button {
@@ -113,4 +112,8 @@ span {
   .skip {
     display: block;
   }
+  .space{
+    width: 100%;
+  }
+  
 }
