@@ -39,12 +39,20 @@
       </p>
       <p>{{ topicNotification?.observations }}</p>
 
-      <div class="firma" fxLayout="column" fxLayoutAlign="center center">
-        <img [src]="topicStudent?.student?.sign" alt="" />
-        <p>
-          {{ topicNotification?.topicStudent?.student?.firstName }}
-          {{ topicNotification?.topicStudent?.student?.lastName }}
-        </p>
+      <div class="firma" fxLayout="row" fxLayoutAlign="center start" fxLayout.lt-sm="column"
+        fxLayoutAlign.lt-sm="center center">
+        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+          <h4>Elaborado por:</h4>
+          <p>Traer datos de director de carrera</p>
+        </div>
+        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+          <h4>Recibido por:</h4>
+          <p>{{ topicStudent.student?.firstName }} {{topicStudent.student?.lastName }}</p>
+        </div>
+        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+          <h4>Entregar a:</h4>
+          <p>Secretaría de Administración y Registro</p>
+        </div>
       </div>
     </div>
     <div class="no-print" fxLayout="row" fxLayoutAlign="center center">

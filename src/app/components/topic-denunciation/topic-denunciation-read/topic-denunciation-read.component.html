@@ -1,10 +1,5 @@
 <div id="denunciation" fxLayout="column" fxLayoutAlign="center center">
-  <mat-card
-    class="container__form"
-    ngClass.lt-sm="mat-card-lt-sm"
-    fxLayout="column"
-    fxLayoutAlign="center center"
-  >
+  <mat-card class="container__form" ngClass.lt-sm="mat-card-lt-sm" fxLayout="column" fxLayoutAlign="center center">
     <img src="../../../assets/unibe_form.png" alt="UNIBE" />
     <h2 class="form__title">DENUNCIA DE TEMA Y MODALIDAD DE INVESTIGACIÓN</h2>
 
@@ -51,8 +46,7 @@
       <p>
         Solicito la evaluación de la propuesta del Trabajo de Titulación o
         Trabajo de Integración Curricular para obtener el título de
-        <b>{{ denunciation?.topicStudent?.student?.career?.degree }}</b
-        >.
+        <b>{{ denunciation?.topicStudent?.student?.career?.degree }}</b>.
       </p>
       <p>Los datos de la propuesta se especifican a continuación:</p>
       <h4>Tema:</h4>
@@ -70,12 +64,20 @@
       <h4>Modalidad de investigación:</h4>
       <p>{{ denunciation?.investigationModality }}</p>
       <h4>Solicitado por:</h4>
-      <div class="firma" fxLayout="column" fxLayoutAlign="center center">
-        <img [src]="denunciation?.topicStudent?.student?.sign" alt="" />
-        <p>
-          {{ denunciation?.topicStudent?.student?.firstName }}
-          {{ denunciation?.topicStudent?.student?.lastName }}
-        </p>
+      <div class="firma" fxLayout="row" fxLayoutAlign="center start" fxLayout.lt-sm="column"
+        fxLayoutAlign.lt-sm="center center">
+        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+          <h4>Solicitado por:</h4>
+          <p>{{ topicStudent.student?.firstName }} {{topicStudent.student?.lastName }}</p>
+        </div>
+        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+          <h4>Recibido por:</h4>
+          <p>Traer datos de director de carrera</p>
+        </div>
+        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+          <h4>Entregar a:</h4>
+          <p>Secretaría de Administración y Registro</p>
+        </div>
       </div>
     </div>
   </mat-card>

@@ -93,18 +93,6 @@
       <h4>Tipo de proyecto:</h4>
       <mat-form-field appearance="fill">
         <mat-label>Seleccionar</mat-label>
-        <mat-select required formControlName="investigationModality" placeholder="Seleccione">
-          <mat-option *ngFor="let modality of investigationModalitys | keyvalue" [value]="modality.value">
-            {{modality.key}}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="denunciationForm.get('investigationModality')?.hasError('required')">Campo
-          <strong>obligatorio</strong>
-        </mat-error>
-      </mat-form-field>
-
-      <h4>Modalidad de investigación:</h4>
-      <mat-form-field appearance="fill">
-        <mat-label>Seleccionar</mat-label>
         <mat-select required formControlName="projectType" placeholder="Seleccione">
           <mat-option *ngFor="let projectType of projectTypes | keyvalue" [value]="projectType.value">
             {{projectType.key}}</mat-option>
@@ -114,17 +102,41 @@
         </mat-error>
       </mat-form-field>
 
-      <h3>Solicitado por:</h3>
-      <div class="firma" fxLayout="column" fxLayoutAlign="center center">
-        <img [src]="topicStudent.student?.sign" alt="">
-        <p>{{ topicStudent.student?.firstName }} {{topicStudent.student?.lastName }}</p>
+      <h4>Modalidad de investigación:</h4>
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccionar</mat-label>
+        <mat-select required formControlName="investigationModality" placeholder="Seleccione">
+          <mat-option *ngFor="let modality of investigationModalitys | keyvalue" [value]="modality.value">
+            {{modality.key}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="denunciationForm.get('investigationModality')?.hasError('required')">Campo
+          <strong>obligatorio</strong>
+        </mat-error>
+      </mat-form-field>
+
+
+      <div class="firma" fxLayout="row" fxLayoutAlign="center start" fxLayout.lt-sm="column"
+        fxLayoutAlign.lt-sm="center center">
+        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+          <h4>Solicitado por:</h4>
+          <p>{{ topicStudent.student?.firstName }} {{topicStudent.student?.lastName }}</p>
+        </div>
+        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+          <h4>Recibido por:</h4>
+          <p>Traer datos de director de carrera</p>
+        </div>
+        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+          <h4>Entregar a:</h4>
+          <p>Secretaría de Administración y Registro</p>
+        </div>
       </div>
+
       <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
         <button mat-raised-button (click)="onCancel()">Cancelar</button>
         <button type="submit" class="primary" mat-raised-button (click)="onCreateDenunciation()">
           Enviar
         </button>
-        <button (click)="print('denunciation')" >Imprimir</button>
+        <button (click)="print('denunciation')">Imprimir</button>
       </mat-card-actions>
     </form>
   </mat-card>
