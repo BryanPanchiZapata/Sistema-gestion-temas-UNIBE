@@ -62,6 +62,17 @@ export class TopicStudentService {
     );
   }
 
+  paymentDenunciation(ci: string, payment: String): Observable<any> {
+    return this.http.patch(this.url + '/student/' + ci, payment).pipe(
+      map((response) => response),
+      catchError((error) => {
+        alert(error.error);
+        return error;
+      })
+    );
+  }
+
+
   evaluationProposal(
     id: string,
     topicStudent: TopicStudentModel
