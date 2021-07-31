@@ -1,10 +1,20 @@
 <section class="container__topicBanck">
   <h1 class="title">Registro de Pago</h1>
   <div class="container__button">
-    <input matInput (keyup)="applyFilter($event)" type="text" placeholder="Buscar..." />
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      type="text"
+      placeholder="Buscar..."
+    />
   </div>
   <div class="mat-elevation-z8 responsive">
-    <table class="example-table mat-elevation-z8" mat-table recycleRows [dataSource]="dataSource">
+    <table
+      class="example-table mat-elevation-z8"
+      mat-table
+      recycleRows
+      [dataSource]="dataSource"
+    >
       <ng-container matColumnDef="position">
         <th class="uno" mat-header-cell *matHeaderCellDef>No.</th>
         <td mat-cell *matCellDef="let topicStudent; let indice = index">
@@ -14,7 +24,9 @@
 
       <ng-container matColumnDef="cedula">
         <th class="dos" mat-header-cell *matHeaderCellDef>Cédula</th>
-        <td mat-cell *matCellDef="let topicStudent">{{ topicStudent?.student?.ci}}</td>
+        <td mat-cell *matCellDef="let topicStudent">
+          {{ topicStudent?.student?.ci }}
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="estudiante">
@@ -31,10 +43,19 @@
         </td>
       </ng-container>
 
+      <ng-container matColumnDef="carrera">
+        <th class="cinco" mat-header-cell *matHeaderCellDef>Carrera</th>
+        <td mat-cell *matCellDef="let topicStudent">
+          <p>{{ topicStudent?.topic?.career?.name }}</p>
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="estado">
         <th class="cinco" mat-header-cell *matHeaderCellDef>Estado</th>
         <td mat-cell *matCellDef="let topicStudent">
-          <button class="btn" color="primary" mat-raised-button>{{ topicStudent?.paymentDenunciation }}</button>
+          <button class="btn" color="primary" mat-raised-button>
+            {{ topicStudent?.paymentDenunciation }}
+          </button>
         </td>
       </ng-container>
 
