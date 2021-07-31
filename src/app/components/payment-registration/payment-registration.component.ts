@@ -1,7 +1,7 @@
+import { TopicStudentService } from 'src/app/services/topic-student.service';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { PaymentService } from 'src/app/services/payment.service';
 
 @Component({
   selector: 'app-payment-registration',
@@ -13,8 +13,8 @@ export class PaymentRegistrationComponent implements AfterViewInit {
 
   dataSource = new MatTableDataSource();
 
-  constructor(private paymentService: PaymentService) {
-    this.paymentService.getAllTopicStudent().subscribe((data) => {
+  constructor(private topicStudentSvr: TopicStudentService) {
+    this.topicStudentSvr.getAllTopicStudent().subscribe((data) => {
       this.dataSource.data = data;
     });
   }

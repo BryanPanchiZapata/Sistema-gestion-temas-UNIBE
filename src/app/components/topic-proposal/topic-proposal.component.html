@@ -1,32 +1,47 @@
-<div class="container">
-  <div class="container__form">
-    <figure class="unibe__form">
-      <img src="../../../assets/unibe_form.png" alt="UNIBE" />
-    </figure>
-    <div>
-        <h2 class="form__title">PROPUESTA DE TEMA</h2>
-        <div class="form__texts">
-            <h4>Tema de trabajo de titulación:</h4>
-            <textarea name="" id="count" #count cols="30" rows="10"></textarea>
-            <input Type="button" value="Contar las palabras">
-            <h4>Descripción breve del tema:</h4>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
+<div id="proposal" fxLayout="column" fxLayoutAlign="center center">
+  <mat-card class="container__form" ngClass.lt-sm="mat-card-lt-sm" fxLayout="column" fxLayoutAlign="center center">
+    <img src="../../../assets/unibe_form.png" alt="UNIBE" />
+    <h2 class="form__title">PROPUESTA DE TEMA</h2>
+    <form [formGroup]="proposalForm">
+      <div fxLayout="column" fxLayoutAlign="center start">
+        <h4>Tema de trabajo de titulación:</h4>
+        <p>
 
-            <h4>Objetivos generales y específicos:</h4>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
+        </p>
 
-            <h4>Justificación breve del estudio:</h4>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-        </div>
+        <h4>Descripción breve del tema:</h4>
+        <mat-form-field appearance="fill">
+          <textarea matInput formControlName="topicDescription" id="topicDescription" type="text" required></textarea>
+          <mat-error *ngIf="proposalForm.get('topicDescription')?.hasError('required')">Campo
+            <strong>obligatorio</strong>
+          </mat-error>
+          <mat-hint align="end">{{proposalForm.controls.topicDescription.value.length}} / 500</mat-hint>
+        </mat-form-field>
 
-    </div>
+        <h4>Objetivos generales y específicos:</h4>
+        <mat-form-field appearance="fill">
+          <textarea matInput formControlName="objectives" id="objectives" type="text" required></textarea>
+          <mat-error *ngIf="proposalForm.get('objectives')?.hasError('required')">Campo
+            <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
 
-    <h3 class="firma">Elaborado Por:</h3>
-      <div class="buttons">
-        <a><button class="primary" mat-raised-button>Enviar</button></a>
-        <a download=""
-          ><button class="second" mat-raised-button>Imprimir</button></a
-        >
+        <h4>Justificación breve del estudio:</h4>
+        <mat-form-field appearance="fill">
+          <textarea matInput formControlName="studyJustification" id="studyJustification" type="text"
+            required></textarea>
+          <mat-error *ngIf="proposalForm.get('studyJustification')?.hasError('required')">Campo
+            <strong>obligatorio</strong>
+          </mat-error>
+          <mat-hint align="end">{{proposalForm.controls.studyJustification.value.length}} / 500</mat-hint>
+        </mat-form-field>
       </div>
-  </div>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button (click)="onCancel()">Cancelar</button>
+        <button type="submit" class="primary" mat-raised-button (click)="onCreateProposal()">
+          Enviar
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
 </div>

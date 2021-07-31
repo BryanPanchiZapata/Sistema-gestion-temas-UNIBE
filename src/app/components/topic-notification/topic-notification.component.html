@@ -109,11 +109,23 @@
             </small>
           </div>
         </div>
-        <p>Elaborado por:</p>
-        <div class="firma" fxLayout="column" fxLayoutAlign="center center">
-          <img [src]="topicStudent.student?.sign" alt="">
-          <p>{{ topicStudent.student?.firstName }} {{topicStudent.student?.lastName }}</p>
+
+        <div class="firma" fxLayout="row" fxLayoutAlign="center start" fxLayout.lt-sm="column"
+          fxLayoutAlign.lt-sm="center center">
+          <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+            <h4>Elaborado por:</h4>
+            <p>Traer datos de director de carrera</p>
+          </div>
+          <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+            <h4>Recibido por:</h4>
+            <p>{{ topicStudent.student?.firstName }} {{topicStudent.student?.lastName }}</p>
+          </div>
+          <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+            <h4>Entregar a:</h4>
+            <p>Secretaría de Administración y Registro</p>
+          </div>
         </div>
+
         <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
           <button mat-raised-button (click)="onCancel(stepper)">Cancelar</button>
           <button type="submit" class="primary" mat-raised-button (click)="onCreateNotification()">

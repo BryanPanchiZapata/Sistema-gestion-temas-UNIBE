@@ -12,8 +12,18 @@
 }
 
 mat-card {
-  padding: 3.5rem;
+  padding: 1cm 3cm 1cm 3cm;
   width: 800px;
+}
+
+.mat-card-lt-sm {
+  padding: 1rem;
+  width: 100vw;
+}
+
+.container__form img {
+  width: 100%;
+  margin: 0 0 1cm 0;
 }
 .investigationLine {
   width: 60%;
@@ -23,35 +33,13 @@ mat-card {
   width: 100%;
 }
 
-.mat-card-lt-sm {
-  padding: 1rem;
-  width: 100vw;
-}
-
-.container__form img {
-  width: 85%;
-  height: auto;
-  margin: 20px;
-}
-
 h4 {
   font-weight: bold;
   margin: 0;
 }
 
-.firma {
-  width: 200px;
-}
-
-.firma img {
-  width: 85px;
-  margin: 0;
-}
 .firma p {
-  margin: 0;
-  width: 200px;
   text-align: center;
-  border-top: 1px solid #000;
 }
 
 button {
@@ -63,18 +51,15 @@ button {
   color: #fff;
 }
 
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}
+
 @media screen and (max-width: 960px) {
   .container__form {
     width: 100%;
-  }
-  .container__form img {
-    width: 100%;
-    height: auto;
-    margin: 20px;
-  }
-  .firma img {
-    margin: 0;
-    width: 85px;
   }
 }
 
@@ -82,14 +67,5 @@ button {
   mat-card {
     padding: 0;
     width: 100%;
-  }
-  .container__form img {
-    width: 95vw;
-    height: auto;
-    margin: 10px;
-  }
-  .firma img {
-    width: 85px;
-    margin: 0;
   }
 }

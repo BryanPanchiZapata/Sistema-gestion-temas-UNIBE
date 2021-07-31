@@ -1,20 +1,10 @@
 <section class="container__topicBanck">
   <h1 class="title">Registro de Pago</h1>
   <div class="container__button">
-    <input
-      matInput
-      (keyup)="applyFilter($event)"
-      type="text"
-      placeholder="Buscar..."
-    />
+    <input matInput (keyup)="applyFilter($event)" type="text" placeholder="Buscar..." />
   </div>
   <div class="mat-elevation-z8 responsive">
-    <table
-      class="example-table mat-elevation-z8"
-      mat-table
-      recycleRows
-      [dataSource]="dataSource"
-    >
+    <table class="example-table mat-elevation-z8" mat-table recycleRows [dataSource]="dataSource">
       <ng-container matColumnDef="position">
         <th class="uno" mat-header-cell *matHeaderCellDef>No.</th>
         <td mat-cell *matCellDef="let topicStudent; let indice = index">
@@ -32,26 +22,19 @@
           Nombre estudiante
         </th>
         <td mat-cell *matCellDef="let topicStudent">
-         <span>{{ topicStudent?.student?.firstName }} </span>
-         <span>{{ topicStudent?.student?.lastName }} </span>
-         <span>{{ topicStudent?.student?.secondName }} </span>
-         <span>{{ topicStudent?.student?.secondLastname }}</span> 
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="carrera">
-        <th class="cuatro" mat-header-cell *matHeaderCellDef>
-          Carrera
-        </th>
-        <td mat-cell *matCellDef="let topicStudent">
-         <span>{{ topicStudent?.topic?.career?.name }} </span>
+          <p>
+            {{ topicStudent?.student?.lastName }}
+            {{ topicStudent?.student?.secondLastname }}
+            {{ topicStudent?.student?.firstName }}
+            {{ topicStudent?.student?.secondName }}
+          </p>
         </td>
       </ng-container>
 
       <ng-container matColumnDef="estado">
         <th class="cinco" mat-header-cell *matHeaderCellDef>Estado</th>
         <td mat-cell *matCellDef="let topicStudent">
-          <button class="btn" color="primary" mat-raised-button>{{ topicStudent.paymentDenunciation }}</button>
+          <button class="btn" color="primary" mat-raised-button>{{ topicStudent?.paymentDenunciation }}</button>
         </td>
       </ng-container>
 
