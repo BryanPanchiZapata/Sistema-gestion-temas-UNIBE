@@ -1,6 +1,6 @@
 import { SpinnerService } from './../../services/spinner.service';
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
@@ -14,3 +14,5 @@ export class SpinnerInterceptor implements HttpInterceptor {
     );
   }
 }
+
+export const spinnerInterceptor = [{provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true}]

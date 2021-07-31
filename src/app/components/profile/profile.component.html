@@ -3,7 +3,18 @@
     <form fxLayout="column" [formGroup]="profileForm">
       <mat-card-header fxLayout="column" fxLayoutAlign="center center">
         <mat-card-title>Perfil de usuario</mat-card-title>
-        <mat-card-subtitle>{{user.role}}</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="user.role === 'STUDENT'">
+          Estudiante
+        </mat-card-subtitle>
+        <mat-card-subtitle *ngIf="user.role === 'CAREER_DIRECTOR'">
+          Director de Carrera
+        </mat-card-subtitle>
+        <mat-card-subtitle *ngIf="user.role === 'FINANCIAL'">
+          Dirección Financiera
+        </mat-card-subtitle>
+        <mat-card-subtitle *ngIf="user.role === 'AUTHORITY'">
+          Autoridad
+        </mat-card-subtitle>
         <mat-card-subtitle
           *ngIf="user.role === 'STUDENT' || user.role === 'CAREER_DIRECTOR'">
           Carrera: {{userAcademic.career?.name}}</mat-card-subtitle>
@@ -70,11 +81,6 @@
               <strong>mínimo 8 caracteres</strong>
             </mat-error>
           </mat-form-field>
-          <form class="sign" [formGroup]="academicForm" *ngIf="user.role === 'STUDENT' || user.role === 'CAREER_DIRECTOR'" >
-            <p>Cargue su firma:</p>
-            <img src="" alt="">
-            <input te="file" required formControlName="sign">
-          </form>
         </mat-card-content>
         <mat-card-actions align="start">
           <button mat-raised-button type="submit" (click)="onCancel()">

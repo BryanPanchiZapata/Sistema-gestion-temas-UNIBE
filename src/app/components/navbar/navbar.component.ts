@@ -1,4 +1,5 @@
-import { UserModel, UserAcademicModel } from './../../models/user-model';
+import { AuthService } from './../../services/auth.service';
+import { UserAcademicModel } from './../../models/user-model';
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 
@@ -9,15 +10,22 @@ import {Router} from "@angular/router";
 })
 export class NavbarComponent implements OnInit {
   user: UserAcademicModel = {};
-  constructor(private router: Router) {
-  }
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    ) {  }
 
   ngOnInit(): void {
-    this.canBeActivate();
+    // this.canBeActivate();
   }
 
-  canBeActivate(): void {
-    if (localStorage.getItem('user') === '' || localStorage.getItem('user') === null)
-      this.router.navigate(['/login'])
+  // canBeActivate(): void {
+  //   if (this.authService.getToken() === '' || this.authService.getToken() === null)
+  //     this.router.navigate(['/login'])
+  // }
+
+  logOut() {
+    this.authService.logOut();
+    window.location.reload();
   }
 }

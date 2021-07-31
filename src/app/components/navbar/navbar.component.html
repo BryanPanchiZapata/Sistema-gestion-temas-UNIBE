@@ -10,7 +10,7 @@
         >
       </button>
       <button mat-button>
-        <a class="title__nav" routerLink="/topic-denunciation/:id"
+        <a class="title__nav" routerLink="/topic-denunciation"
           >Denuncia de tema y modalidad</a
         >
       </button>
@@ -53,7 +53,7 @@
         ><button mat-menu-item>Notificación de aprobación de tema</button></a
       >
 
-      <a class="mat-menu" routerLink="/topic-denunciation/:id"
+      <a class="mat-menu" routerLink="/topic-denunciation"
         ><button mat-menu-item>Denuncia de tema y modalidad</button></a
       >
       <a class="mat-menu" routerLink="/topic-proposal"
@@ -67,7 +67,7 @@
         ><button mat-menu-item>Perfil de usuario</button></a
       >
       <a class="mat-menu" href="#"
-        ><button mat-menu-item>Cerrar Sesión</button></a
+        ><button mat-menu-item (click)="logOut()">Cerrar Sesión</button></a
       >
     </mat-menu>
   </nav>

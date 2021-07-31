@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { jsPDF } from 'jspdf';
 import { TopicApprovalModel } from 'src/app/models/topic-approval-model';
 import { TopicEvaluation, TopicStudentModel } from 'src/app/models/topic-student-model';
 import { TopicApprovalService } from 'src/app/services/topic-approval.service';
@@ -57,14 +56,14 @@ export class TopicNotificationReadComponent implements OnInit {
 
   @ViewChild('notification', {static: false}) el!: ElementRef;
 
-  makePdf() {
-    let pdf = new jsPDF('p', 'pt', 'a4');
-    pdf.html(this.el.nativeElement, {
-      callback: (pdf) => {
-        pdf.save("notification.pdf");
-      }
-    })
-  }
+  // makePdf() {
+  //   let pdf = new jsPDF('p', 'pt', 'a4');
+  //   pdf.html(this.el.nativeElement, {
+  //     callback: (pdf) => {
+  //       pdf.save("notification.pdf");
+  //     }
+  //   })
+  // }
 
   ngOnInit(): void {
     this.sync();

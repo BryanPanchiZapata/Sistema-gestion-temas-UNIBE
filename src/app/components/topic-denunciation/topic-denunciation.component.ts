@@ -23,7 +23,7 @@ interface Investigacion {
   styleUrls: ['./topic-denunciation.component.css'],
 })
 export class TopicDenunciationComponent implements OnInit {
-  static END_POINT = 'topic-denunciation/:id';
+  static END_POINT = 'topic-denunciation';
   private readonly id: string | null;
   public denunciation: TopicDenunciationModel;
   public topicStudent: TopicStudentModel = {};

@@ -34,9 +34,13 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe(
         data => {
-          localStorage.setItem('user', data.id);
-          this.router.navigate(['']);
-          this.loginForm.reset();
+          if (this.authService.getRole() === 'FINANCIAL') {
+            this.router.navigate(['/payment-registration']);
+            this.loginForm.reset();
+          } else {
+            this.router.navigate(['']);
+            this.loginForm.reset();
+          }
         }
       )
     }

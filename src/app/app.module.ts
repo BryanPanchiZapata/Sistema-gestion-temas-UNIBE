@@ -1,3 +1,4 @@
+import { tokenInterceptor } from './components/interceptors/token-user.interceptor';
 import { SpinnerModule } from './components/spinner/spinner.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,14 +13,14 @@ import { TopicProposalComponent } from './components/topic-proposal/topic-propos
 import { TopicNotificationComponent } from './components/topic-notification/topic-notification.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { AuthService,  } from "./services/auth.service";
-import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthService, } from "./services/auth.service";
+import { HttpClientModule } from "@angular/common/http";
 import { LoginComponent } from './components/auth/login.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TopicService } from "./services/topic.service";
 import { PaymentRegistrationComponent } from "./components/payment-registration/payment-registration.component";
-import { SpinnerInterceptor } from './components/interceptor/spinner.interceptor';
+import { spinnerInterceptor } from './components/interceptors/spinner.interceptor';
 import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 import { AddTopicComponent } from './components/topic-banck/add-topic/add-topic.component';
 import { ExecutedTopicComponent } from './components/topic-banck/executed-topic/executed-topic.component';
@@ -62,8 +63,9 @@ import { TopicDenunciationReadComponent } from './components/topic-denunciation/
   providers: [
     AuthService,
     TopicService,
-    { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }
+    spinnerInterceptor,
+    tokenInterceptor
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
