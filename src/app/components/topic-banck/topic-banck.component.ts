@@ -1,3 +1,7 @@
+import { UserAcademicModel } from './../../models/user-model';
+import { AuthService } from './../../services/auth.service';
+import { TopicStudentModel } from 'src/app/models/topic-student-model';
+import { TopicStudentService } from 'src/app/services/topic-student.service';
 import {
   AfterViewInit,
   Component,
@@ -24,11 +28,15 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 })
 export class TopicBanckComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource();
+  topicStudent: TopicStudentModel = {};
+  student: UserAcademicModel = {};
 
   constructor(
     private spinnerService: SpinnerService,
     private topicService: TopicService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private topicStudentSvr: TopicStudentService,
+    private authServices: AuthService
   ) { }
 
   openDialog(id: string | null) {
@@ -71,12 +79,31 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
     this.sync();
+    this.getDataUser();
   }
 
   sync(): void {
     this.topicService
       .getTopicsByStatus('Disponible')
       .subscribe((data) => (this.dataSource = data));
+  }
+
+  getDataUser() {
+    this.authServices.profileUser().subscribe(
+      data => {
+        this.student = data;
+      }
+    );
+  }
+
+  chooseTopic(topic: TopicModel) {
+    let topicStudent = Object.assign({topic:topic, student:this.student});
+    this.topicStudentSvr.assigmentTopic(topicStudent).subscribe(
+      data => {
+        this.topicStudent = data;
+        this.sync();
+      }
+    )
   }
 
   onDeleteTopic(id: string): void {
