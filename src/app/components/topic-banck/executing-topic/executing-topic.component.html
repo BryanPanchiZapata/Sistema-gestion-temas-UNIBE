@@ -71,6 +71,11 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="accion">
+      <th class="ocho" mat-header-cell *matHeaderCellDef>Acción</th>
+      <button class="button__topicbanck" mat-button>Ejecución</button>
+    </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
