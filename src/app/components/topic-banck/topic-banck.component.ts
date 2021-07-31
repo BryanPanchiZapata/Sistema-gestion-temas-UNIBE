@@ -52,7 +52,6 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     'position',
     'tema',
     'articulacion',
-    'estado',
     'carrera',
     'accion',
   ];

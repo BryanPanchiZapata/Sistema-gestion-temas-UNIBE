@@ -15,59 +15,59 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="cedula">
-      <th class="uno" mat-header-cell *matHeaderCellDef>Cédula</th>
+    <ng-container matColumnDef="tema">
+      <th class="dos" mat-header-cell *matHeaderCellDef>Tema</th>
       <td
-        class="pointer"
         mat-cell
         *matCellDef="let topicStudent"
+        class="pointer"
         (click)="openDialogTopicStudentExecuting(topicStudent.id)"
       >
-        {{ topicStudent.student?.ci }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="carrera">
-      <th class="uno" mat-header-cell *matHeaderCellDef>Carrera</th>
-      <td mat-cell *matCellDef="let topicStudent">
-        {{ topicStudent.topic?.career?.name }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="evaluacion">
-      <th class="cinco" mat-header-cell *matHeaderCellDef>
-        Evaluación de tema
-      </th>
-      <td mat-cell *matCellDef="let topicStudent">
-        {{ topicStudent.topicEvaluation }}
+        {{ topicStudent.topic?.name }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="articulacion">
-      <th class="cinco" mat-header-cell *matHeaderCellDef>Articulación</th>
+      <th class="tres" mat-header-cell *matHeaderCellDef>Articulación</th>
       <td mat-cell *matCellDef="let topicStudent">
         {{ topicStudent.topic?.articulation }}
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="estado">
-      <th class="cinco" mat-header-cell *matHeaderCellDef>Estado de tema</th>
-      <td mat-cell *matCellDef="let topicStudent">
-        {{ topicStudent.topic?.topicStatus }}
-      </td>
-    </ng-container>
-
     <ng-container matColumnDef="pago">
-      <th class="cinco" mat-header-cell *matHeaderCellDef>Pago</th>
+      <th class="cuatro" mat-header-cell *matHeaderCellDef>Pago</th>
       <td mat-cell *matCellDef="let topicStudent">
         {{ topicStudent.paymentDenunciation }}
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="cedula">
+      <th class="cinco" mat-header-cell *matHeaderCellDef>Cédula</th>
+      <td mat-cell *matCellDef="let topicStudent">
+        {{ topicStudent.student?.ci }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="carrera">
+      <th class="seis" mat-header-cell *matHeaderCellDef>Carrera</th>
+      <td mat-cell *matCellDef="let topicStudent">
+        {{ topicStudent.topic?.career?.name }}
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="fecha">
-      <th class="cuatro" mat-header-cell *matHeaderCellDef>Fecha</th>
+      <th class="siete" mat-header-cell *matHeaderCellDef>
+        Fecha de asignación
+      </th>
       <td mat-cell *matCellDef="let topicStudent">
         {{ topicStudent.assignedDate }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="evaluacion">
+      <th class="ocho" mat-header-cell *matHeaderCellDef>Evaluación de tema</th>
+      <td mat-cell *matCellDef="let topicStudent">
+        {{ topicStudent.topicEvaluation }}
       </td>
     </ng-container>
 

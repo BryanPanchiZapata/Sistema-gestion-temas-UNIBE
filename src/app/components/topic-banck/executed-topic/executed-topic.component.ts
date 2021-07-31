@@ -1,5 +1,9 @@
 import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -11,7 +15,7 @@ import { TopicService } from 'src/app/services/topic.service';
 @Component({
   selector: 'app-executed-topic',
   templateUrl: './executed-topic.component.html',
-  styleUrls: ['./executed-topic.component.css']
+  styleUrls: ['./executed-topic.component.css'],
 })
 export class ExecutedTopicComponent implements AfterViewInit {
   dataStudent = new MatTableDataSource();
@@ -37,13 +41,13 @@ export class ExecutedTopicComponent implements AfterViewInit {
 
   displayedColumns: string[] = [
     'position',
+    'tema',
+    'articulacion',
+    'pago',
     'cedula',
     'carrera',
-    'evaluacion',
-    'articulacion',
-    'estado',
-    'pago',
     'fecha',
+    'evaluacion',
   ];
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -69,7 +73,6 @@ export class ExecutedTopicComponent implements AfterViewInit {
       .subscribe((data) => (this.dataStudent = data));
   }
 }
-
 
 @Component({
   selector: 'dialog-status-assigned',
