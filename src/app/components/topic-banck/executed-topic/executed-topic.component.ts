@@ -1,3 +1,5 @@
+import { AuthService } from './../../../services/auth.service';
+import { UserAcademicModel } from './../../../models/user-model';
 import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
 import {
   MatDialog,
@@ -10,7 +12,6 @@ import { Router } from '@angular/router';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
-import { TopicService } from 'src/app/services/topic.service';
 
 @Component({
   selector: 'app-executed-topic',
@@ -19,17 +20,42 @@ import { TopicService } from 'src/app/services/topic.service';
 })
 export class ExecutedTopicComponent implements AfterViewInit {
   dataStudent = new MatTableDataSource();
+  academic: UserAcademicModel = {};
 
   constructor(
     private topicStudentService: TopicStudentService,
-    private topicService: TopicService,
     public dialog: MatDialog,
-    private route: Router
-  ) {
-    this.topicStudentService.getAllTopicStudent().subscribe((data) => {
-      this.dataStudent.data = data;
-    });
+    private route: Router,
+    private authServices: AuthService
+  ) {  }
+
+  ngOnInit(): void {
+    this.dataStudent.paginator = this.paginator;
+    this.getDataUser();
+    this.sync();
   }
+
+
+  getDataUser() {
+    this.authServices.profileUser().subscribe(
+      data => {
+        this.academic = data;
+      }
+    );
+  }
+
+  sync() {
+    console.log(this.academic.career?.id);
+    if(this.academic.career?.id){
+      this.topicStudentService.getTopicStudentsByCareer(this.academic.career?.id, "Ejecutado")
+    }
+    this.topicStudentService
+      .getTopicsByStatus('Ejecutado')
+      .subscribe(data => {
+        this.dataStudent = data
+      });
+  }
+
   openDialogTopicStudentAssigned(id: string | null) {
     this.dialog.open(DialogStatusAssignedComponent, {
       data: id,
@@ -62,16 +88,6 @@ export class ExecutedTopicComponent implements AfterViewInit {
       this.dataStudent.paginator.firstPage();
     }
   }
-  ngOnInit(): void {
-    this.dataStudent.paginator = this.paginator;
-    this.syncStatus();
-  }
-
-  syncStatus(): void {
-    this.topicStudentService
-      .getTopicsByStatus('Ejecutado')
-      .subscribe((data) => (this.dataStudent = data));
-  }
 }
 
 @Component({
@@ -87,7 +103,7 @@ export class DialogStatusAssignedComponent {
     private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogStatusAssignedComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.synch();

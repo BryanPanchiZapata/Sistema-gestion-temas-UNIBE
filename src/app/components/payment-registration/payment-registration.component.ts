@@ -17,7 +17,7 @@ export class PaymentRegistrationComponent implements AfterViewInit, OnInit {
   }
 
   sync() {
-    this.topicStudentSvr.getAllTopicStudent().subscribe((data) => {
+    this.topicStudentSvr.getTopicsByStatus("En ejecución").subscribe((data) => {
       this.dataSource.data = data;
     });
   }

@@ -22,7 +22,7 @@
       </mat-card-header>
       <div fxLayout="column" fxLayoutAlign="center center">
         <mat-card-content fxLayout="column" fxLayoutAlign="center center">
-          <div class="warning">
+          <div class="warning" *ngIf="user.role === 'CAREER_DIRECTOR' || user.role === 'STUDENT'">
             <small>Advertencia: Los datos que ingrese en este apartado se mostrarán en los documentos que se generen a
               su nombre.</small>
           </div>
@@ -83,7 +83,7 @@
           </mat-form-field>
         </mat-card-content>
         <mat-card-actions align="start">
-          <button mat-raised-button type="submit" (click)="onCancel()">
+          <button mat-raised-button type="submit" [disabled]="!profileForm.dirty" (click)="onCancel()">
             Cancelar
           </button>
           <button mat-raised-button class="button" type="submit" (click)="onUpdateProfile()">

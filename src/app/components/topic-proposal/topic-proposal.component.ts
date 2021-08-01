@@ -16,9 +16,9 @@ export class TopicProposalComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private topicStudentSvr: TopicStudentService) {
-    this.topicStudentSvr.getAllTopicStudent().subscribe((data) => {
-      this.proposal = data;
-    });
+    // this.topicStudentSvr.getAllTopicStudent().subscribe((data) => {
+    //   this.proposal = data;
+    // });
   }
 
   proposalForm = this.formBuilder.group({

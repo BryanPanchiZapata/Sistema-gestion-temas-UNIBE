@@ -12,8 +12,8 @@ export class TopicStudentService {
     'https://degreetopics-api.herokuapp.com/degreetopics/v1/student_topic';
   constructor(private http: HttpClient) { }
 
-  getAllTopicStudent(): Observable<any> {
-    return this.http.get(this.url).pipe(
+  getTopicStudentsByCareer(career: string, topicStatus: string): Observable<any> {
+    return this.http.get(this.url + '/career/' + career + '/topic_status/' + topicStatus).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);
@@ -52,8 +52,8 @@ export class TopicStudentService {
     );
   }
 
-  getTopicStudentByStudent(ci: string): Observable<any> {
-    return this.http.get(this.url + '/student/' + ci).pipe(
+  getTopicStudentByStudent(ci: string, career: string): Observable<any> {
+    return this.http.get(this.url + '/student/' + ci+ '/student/' + career).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);
@@ -78,16 +78,6 @@ export class TopicStudentService {
     topicStudent: TopicStudentModel
   ): Observable<any> {
     return this.http.patch(this.url + '/' + id, topicStudent).pipe(
-      map((response) => response),
-      catchError((error) => {
-        alert(error.error);
-        return error;
-      })
-    );
-  }
-
-  getTopicDenunciationById(id: string): Observable<any> {
-    return this.http.get(this.url).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);

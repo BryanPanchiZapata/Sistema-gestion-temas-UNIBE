@@ -1,3 +1,5 @@
+import { AuthService } from './../../../services/auth.service';
+import { UserAcademicModel } from './../../../models/user-model';
 import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
 import {
   MatDialog,
@@ -19,17 +21,13 @@ import { TopicService } from 'src/app/services/topic.service';
 })
 export class ExecutingTopicComponent implements AfterViewInit {
   dataStudent = new MatTableDataSource();
+  academic: UserAcademicModel = {};
 
   constructor(
     private topicStudentService: TopicStudentService,
-    public topicService: TopicService,
     public dialog: MatDialog,
-    private route: Router
-  ) {
-    this.topicStudentService.getAllTopicStudent().subscribe((data) => {
-      this.dataStudent.data = data;
-    });
-  }
+    private authServices: AuthService
+  ) {  }
 
   openDialogTopicStudentExecuting(id: string | null) {
     this.dialog.open(DialogStatusExecutingComponent, {
@@ -62,13 +60,28 @@ export class ExecutingTopicComponent implements AfterViewInit {
   }
   ngOnInit(): void {
     this.dataStudent.paginator = this.paginator;
-    this.syncStatus();
+    this.getDataUser();
+    this.sync();
   }
 
-  syncStatus(): void {
+  getDataUser() {
+    this.authServices.profileUser().subscribe(
+      data => {
+        this.academic = data;
+      }
+    );
+  }
+
+  sync() {
+    console.log(this.academic.career?.id);
+    if(this.academic.career?.id){
+      this.topicStudentService.getTopicStudentsByCareer(this.academic.career?.id, 'En ejecución')
+    }
     this.topicStudentService
       .getTopicsByStatus('En ejecución')
-      .subscribe((data) => (this.dataStudent = data));
+      .subscribe(data => {
+        this.dataStudent = data
+      });
   }
 }
 

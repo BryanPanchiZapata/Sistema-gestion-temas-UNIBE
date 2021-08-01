@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { AuthService } from './../../services/auth.service';
 import { UserAcademicModel } from './../../models/user-model';
 import {Component, OnInit} from '@angular/core';
@@ -9,20 +10,16 @@ import {Router} from "@angular/router";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  user: UserAcademicModel = {};
+  role: String | null;
+
   constructor(
     private router: Router,
     private authService: AuthService,
     ) {  }
 
   ngOnInit(): void {
-    // this.canBeActivate();
+    this.role = this.authService.getRole();
   }
-
-  // canBeActivate(): void {
-  //   if (this.authService.getToken() === '' || this.authService.getToken() === null)
-  //     this.router.navigate(['/login'])
-  // }
 
   logOut() {
     this.authService.logOut();

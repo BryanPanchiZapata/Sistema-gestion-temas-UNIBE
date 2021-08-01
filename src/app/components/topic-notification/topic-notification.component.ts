@@ -1,3 +1,5 @@
+import { AuthService } from './../../services/auth.service';
+import { UserAcademicModel } from './../../models/user-model';
 import { TopicApprovalService } from './../../services/topic-approval.service';
 import { TopicEvaluation } from './../../models/topic-student-model';
 import { FormControl, Validators, FormBuilder } from '@angular/forms';
@@ -19,6 +21,7 @@ export class TopicNotificationComponent implements OnInit {
   public topicStudent: TopicStudentModel = {};
   public evaluations = TopicEvaluation;
   stepper: MatStepper;
+  academic: UserAcademicModel = {};
 
   monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
   year = new Date().getFullYear();
@@ -30,7 +33,8 @@ export class TopicNotificationComponent implements OnInit {
   constructor(
     private topicStudentService: TopicStudentService,
     private formBuilder: FormBuilder,
-    private notificationApprovalSrv: TopicApprovalService
+    private notificationApprovalSrv: TopicApprovalService,
+    private authServices: AuthService
   ) {
   }
 
@@ -56,6 +60,14 @@ export class TopicNotificationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getDataUser() {
+    this.authServices.profileUser().subscribe(
+      data => {
+        this.academic = data;
+      }
+    );
+  }
+
   refresh(): void {
     window.location.reload();
   }
@@ -72,8 +84,9 @@ export class TopicNotificationComponent implements OnInit {
   }
 
   onFindByStudent() {
+    if(this.academic.career?.id)
     if (this.ciStudentControl.valid)
-      this.topicStudentService.getTopicStudentByStudent(this.ciStudentControl.value).subscribe(
+      this.topicStudentService.getTopicStudentByStudent(this.ciStudentControl.value, this.academic.career?.id).subscribe(
         data => {
           this.topicStudent = data;
           this.resetForms();

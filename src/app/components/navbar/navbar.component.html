@@ -1,23 +1,23 @@
 <div class="container__nav">
   <nav class="nav">
     <ul class="nav__ul">
-      <button mat-button>
+      <button mat-button *ngIf="role === 'STUDENT' || role === 'CAREER_DIRECTOR' || role === 'AUTHORITY'">
         <a class="title__nav" routerLink="/">Banco de temas</a>
       </button>
       <button mat-button>
-        <a class="title__nav" routerLink="/topic-approval"
+        <a class="title__nav" routerLink="/topic-approval" *ngIf="role === 'CAREER_DIRECTOR'"
           >Notificaciones de aprobación de tema</a
         >
       </button>
-      <button mat-button>
+      <button mat-button *ngIf="role === 'STUDENT'">
         <a class="title__nav" routerLink="/topic-denunciation"
           >Denuncia de tema y modalidad</a
         >
       </button>
-      <button mat-button>
+      <button mat-button *ngIf="role === 'STUDENT'">
         <a class="title__nav" routerLink="/topic-proposal">Propuesta de tema</a>
       </button>
-      <button mat-button>
+      <button mat-button *ngIf="role === 'FINANCIAL'">
         <a class="title__nav" routerLink="/payment-registration"
           >Registro de pago</a
         >
@@ -46,20 +46,20 @@
       menu</mat-icon
     >
     <mat-menu #bar__responsive="matMenu">
-      <a class="mat-menu" routerLink="/"
+      <a class="mat-menu" routerLink="/" *ngIf="role === 'STUDENT' || role === 'CAREER_DIRECTOR' || role === 'AUTHORITY'"
         ><button mat-menu-item>Banco de temas</button></a
       >
-      <a class="mat-menu" routerLink="/topic-approval"
+      <a class="mat-menu" routerLink="/topic-approval" *ngIf="role === 'CAREER_DIRECTOR'"
         ><button mat-menu-item>Notificación de aprobación de tema</button></a
       >
 
-      <a class="mat-menu" routerLink="/topic-denunciation"
+      <a class="mat-menu" routerLink="/topic-denunciation" *ngIf="role === 'STUDENT'"
         ><button mat-menu-item>Denuncia de tema y modalidad</button></a
       >
-      <a class="mat-menu" routerLink="/topic-proposal"
+      <a class="mat-menu" routerLink="/topic-proposal" *ngIf="role === 'STUDENT'"
         ><button mat-menu-item>Propuesta de tema</button></a
       >
-      <a class="mat-menu" routerLink="/payment-registration"
+      <a class="mat-menu" routerLink="/payment-registration" *ngIf="role === 'FINANCIAL'"
         ><button mat-menu-item>Registro de pago</button></a
       >
 
