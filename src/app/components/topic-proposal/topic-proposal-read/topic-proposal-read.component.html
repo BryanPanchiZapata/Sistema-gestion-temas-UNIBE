@@ -1,0 +1,25 @@
+<div id="proposal" fxLayout="column" fxLayoutAlign="center center">
+  <mat-card
+    class="container__form"
+    ngClass.lt-sm="mat-card-lt-sm"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+  >
+    <img src="../../../assets/unibe_form.png" alt="UNIBE" />
+    <h2 class="form__title">PROPUESTA DE TEMA</h2>
+
+    <div fxLayout="column" fxLayoutAlign="center start">
+      <h4>Tema de trabajo de titulación:</h4>
+      <p>{{ proposal?.topicStudent?.topic?.name }}</p>
+
+      <h4>Descripción breve del tema:</h4>
+      <p>{{ proposal?.topicDescription }}</p>
+
+      <h4>Objetivos generales y específicos:</h4>
+      <p>{{ proposal?.objectives }}</p>
+
+      <h4>Justificación breve del estudio:</h4>
+      <p>{{ proposal?.studyJustification }}</p>
+    </div>
+  </mat-card>
+</div>

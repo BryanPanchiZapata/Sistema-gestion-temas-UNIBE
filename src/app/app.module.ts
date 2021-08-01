@@ -28,6 +28,7 @@ import { ExecutingTopicComponent } from './components/topic-banck/executing-topi
 import { TopicNotificationListComponent } from './components/topic-notification/topic-notification-list/topic-notification-list.component';
 import { TopicNotificationReadComponent } from './components/topic-notification/topic-notification-read/topic-notification-read.component';
 import { TopicDenunciationReadComponent } from './components/topic-denunciation/topic-denunciation-read/topic-denunciation-read.component';
+import { TopicProposalReadComponent } from './components/topic-proposal/topic-proposal-read/topic-proposal-read.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { TopicDenunciationReadComponent } from './components/topic-denunciation/
     TopicNotificationListComponent,
     TopicNotificationReadComponent,
     TopicDenunciationReadComponent,
-    ChangeTopicComponent
+    ChangeTopicComponent,
+    TopicProposalReadComponent
   ],
   imports: [
     BrowserModule,

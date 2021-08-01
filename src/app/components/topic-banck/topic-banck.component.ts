@@ -186,14 +186,18 @@ export class ChangeTopicComponent implements OnInit {
     this.getDataUser();
     console.log(this.academic);
     this.spinnerService.hide();
-
   }
+
   getDataUser() {
     this.authService.profileUser().subscribe(
       data => {
         this.academic = data;
       }
     );
+  }
+
+  deleteAssignment() {
+
   }
 
 }

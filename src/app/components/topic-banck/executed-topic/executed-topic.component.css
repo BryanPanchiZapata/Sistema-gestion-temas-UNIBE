@@ -73,7 +73,9 @@ span {
 .space{
   width: 600px;
 }
-
+a{
+  color: #000;
+}
 @media screen and (max-width: 1211px) {
   .container__button {
     flex-direction: column;

@@ -73,6 +73,9 @@ span {
 .space{
   width: 600px;
 }
+a{
+  color: #000;
+}
 
 @media screen and (max-width: 1211px) {
   .container__button {
@@ -84,7 +87,7 @@ span {
     padding: 0.5rem 0;
   }
   .button__topicbanck {
-    margin-top: 1rem;
+    background: #002858;
   }
   .responsive {
     overflow-x: auto;

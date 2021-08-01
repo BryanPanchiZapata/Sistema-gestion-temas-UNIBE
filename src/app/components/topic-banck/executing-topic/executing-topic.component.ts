@@ -44,6 +44,7 @@ export class ExecutingTopicComponent implements AfterViewInit {
     'carrera',
     'fecha',
     'evaluacion',
+    'accion'
   ];
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
