@@ -1,3 +1,5 @@
+import { UserAcademicModel } from './../../../models/user-model';
+import { AuthService } from './../../../services/auth.service';
 import { TopicBanckComponent } from './../topic-banck.component';
 import { SpinnerService } from './../../../services/spinner.service';
 import { Articulation, TopicModel } from './../../../models/topic-model';
@@ -19,6 +21,7 @@ export class AddTopicComponent implements OnInit {
   careers: CareerModel[];
   articulations = Articulation;
   topic: TopicModel = {};
+  academic: UserAcademicModel = {};
   matcher = new MyErrorStateMatcher();
 
 
@@ -27,19 +30,24 @@ export class AddTopicComponent implements OnInit {
     private careerService: CareerService,
     private topicService: TopicService,
     private spinnerService: SpinnerService,
+    private authService: AuthService,
     public dialogRef: MatDialogRef<AddTopicComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string,
   ) {
   }
 
   ngOnInit(): void {
-    this.careerService.getAllCareers().subscribe(
+    this.getDataUser();
+    this.sync()
+    this.spinnerService.hide();
+  }
+
+  getDataUser() {
+    this.authService.profileUser().subscribe(
       data => {
-        this.careers = data;
+        this.academic = data;
       }
     );
-    this.sync();
-    this.spinnerService.hide();
   }
 
   onResetForm() {
@@ -48,7 +56,6 @@ export class AddTopicComponent implements OnInit {
 
   topicForm = this.formBuilder.group({
     name: ['', Validators.required],
-    career: ['', Validators.required],
     articulation: ['', Validators.required],
     description: ['', Validators.required],
   });
@@ -56,7 +63,6 @@ export class AddTopicComponent implements OnInit {
   private initialValuesTopic(topic: TopicModel): void {
     this.topicForm.patchValue({
       name: topic.name,
-      career: topic.career,
       articulation: topic.articulation,
       description: topic.description,
     })
@@ -74,7 +80,10 @@ export class AddTopicComponent implements OnInit {
           }
         );
       } else {
-        this.topicService.addTopic(this.topicForm.value).subscribe(
+        let topic = Object.assign(this.topicForm.value, {career: this.academic.career})
+        console.log(topic);
+
+        this.topicService.addTopic(topic).subscribe(
           data => {
             this.topic = data
             this.onResetForm();

@@ -16,9 +16,17 @@ export class TopicProposalService {
   getTopicProposalById(id: string): Observable<any> {
     return this.http.get(this.url + "/" + id).pipe(
       map(response => response), catchError(error => {
-          alert(error.error);
-          return error;
-        }
+        return error;
+      }
+      )
+    );
+  }
+
+  getTopicProposalByStudent(): Observable<any> {
+    return this.http.get(this.url).pipe(
+      map(response => response), catchError(error => {
+        return error;
+      }
       )
     );
   }

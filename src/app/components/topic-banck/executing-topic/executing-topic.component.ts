@@ -1,3 +1,10 @@
+import { TopicProposalModel } from 'src/app/models/topic-proposal-model';
+import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
+import { TopicApprovalModel } from 'src/app/models/topic-approval-model';
+import { TopicProposalService } from 'src/app/services/topic-proposal.service';
+import { TopicDenunciationService } from 'src/app/services/topic-denunciation.service';
+import { TopicApprovalService } from 'src/app/services/topic-approval.service';
+import { TopicService } from 'src/app/services/topic.service';
 import { AuthService } from './../../../services/auth.service';
 import { UserAcademicModel } from './../../../models/user-model';
 import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
@@ -25,7 +32,8 @@ export class ExecutingTopicComponent implements AfterViewInit {
   constructor(
     private topicStudentService: TopicStudentService,
     public dialog: MatDialog,
-    private authServices: AuthService
+    private authServices: AuthService,
+    private topicService: TopicService,
   ) {
   }
 
@@ -33,6 +41,7 @@ export class ExecutingTopicComponent implements AfterViewInit {
     this.dataStudent.paginator = this.paginator;
     this.getDataUser();
   }
+
 
 
   getDataUser() {
@@ -90,6 +99,14 @@ export class ExecutingTopicComponent implements AfterViewInit {
       this.dataStudent.paginator.firstPage();
     }
   }
+
+  onChangeToExecuted(id: string) {
+    this.topicService.changeToExecuted(id).subscribe(
+      data => {
+        this.sync();
+      }
+    )
+  }
 }
 
 @Component({
@@ -99,13 +116,22 @@ export class ExecutingTopicComponent implements AfterViewInit {
 })
 export class DialogStatusExecutingComponent {
   public topicStudent: TopicStudentModel;
+  approvalNotification: TopicApprovalModel = {};
+  denunciation: TopicDenunciationModel = {};
+  proposal: TopicProposalModel = {};
+  haveNotification = false;
+  haveDenunciation = false;
+  haveProposal = false;
 
   constructor(
     private topicService: TopicStudentService,
     private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogStatusExecutingComponent>,
-    @Inject(MAT_DIALOG_DATA) public id: string
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public id: string,
+    private approvalNotificationSrv: TopicApprovalService,
+    private denunciationSvr: TopicDenunciationService,
+    private proposalSvr: TopicProposalService,
+  ) { }
 
   ngOnInit(): void {
     this.sync();
@@ -116,6 +142,43 @@ export class DialogStatusExecutingComponent {
     if (this.id !== null)
       this.topicService
         .getTopicStudentById(this.id)
-        .subscribe((data) => (this.topicStudent = data));
+        .subscribe(
+          data => {
+            this.topicStudent = data;
+            this.getApprovalNotificationById();
+            this.getDenunciationById();
+            this.getProposalById();
+          }
+        );
+  }
+
+  getApprovalNotificationById() {
+    if (this.topicStudent.id)
+      this.approvalNotificationSrv.getTopicNotificationById(this.topicStudent.id).subscribe(
+        data => {
+          this.approvalNotification = data;
+          this.haveNotification = true;
+        }
+      )
+  }
+
+  getDenunciationById() {
+    if (this.topicStudent.id)
+      this.denunciationSvr.getTopicDenunciationById(this.topicStudent.id).subscribe(
+        data => {
+          this.denunciation = data;
+          this.haveDenunciation = true;
+        }
+      )
+  }
+
+  getProposalById() {
+    if (this.topicStudent.topic?.id)
+      this.proposalSvr.getTopicProposalById(this.topicStudent.topic.id).subscribe(
+        data => {
+          this.proposal = data;
+          this.haveProposal = true;
+        }
+      )
   }
 }

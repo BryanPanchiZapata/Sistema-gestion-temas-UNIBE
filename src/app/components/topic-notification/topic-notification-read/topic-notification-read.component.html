@@ -1,66 +1,68 @@
-<mat-card id="notification" #notification class="container__form" ngClass.lt-sm="mat-card-lt-sm" fxLayout="column"
-  fxLayoutAlign="center center">
-  <img src="../../../assets/unibe_form.png" alt="UNIBE" />
-  <div>
-    <div fxLayout="column" fxLayoutAlign="center end">
-      <p><strong>OFICIO N° </strong>{{ topicNotification?.documentNumber }}</p>
-      <p>Quito, D.M. {{ day }} de {{ month }} del {{ year }}</p>
-    </div>
+<mat-card fxLayout="column" fxLayoutAlign="center center" ngClass.lt-sm="mat-card-lt-sm">
+  <div id="notification" #notification class="container__form">
+    <img src="../../../assets/unibe_form.png" alt="UNIBE" />
+    <div>
+      <div fxLayout="column" fxLayoutAlign="center end">
+        <p><strong>OFICIO N° </strong>{{ topicNotification?.documentNumber }}</p>
+        <p>Quito, D.M. {{ day }} de {{ month }} del {{ year }}</p>
+      </div>
 
-    <div fxLayout="column" fxLayoutAlign="start start">
-      <p>{{topicNotification?.trato}}</p>
-      <p>
-        <b>{{ topicNotification?.topicStudent?.student?.firstName }}
-          {{ topicNotification?.topicStudent?.student?.secondName }}
-          {{ topicNotification?.topicStudent?.student?.lastName }}
-          {{ topicNotification?.topicStudent?.student?.secondLastname }}</b>
-      </p>
-      <p class="spacing">Presente.</p>
-      <p>De nuestras consideraciones:</p>
-      <p>
-        Por medio de la presente el Comité de Grado de la Carrera de
-        <b>{{ topicNotification?.topicStudent?.student?.career?.name }}</b>
-        de la Universidad Iberoamericana del Ecuador (UNIB.E), en reunión
-        ordinaria No.<b>{{ topicNotification?.meetingNumber }}</b> fecha:
-        <b>{{ topicNotification?.date }}</b>, le informa que su propuesta de investigación titulada:
-        <b> {{ topicNotification?.topicStudent?.topic?.name }}</b> ha sido:
-      </p>
-      <p *ngIf="topicNotification?.topicStudent?.topicEvaluation === 'Aprobado'">
-        <b>APROBADO</b>
-      </p>
-      <p *ngIf="
+      <div fxLayout="column" fxLayoutAlign="start start">
+        <p>{{topicNotification?.trato}}</p>
+        <p>
+          <b>{{ topicNotification?.topicStudent?.student?.firstName }}
+            {{ topicNotification?.topicStudent?.student?.secondName }}
+            {{ topicNotification?.topicStudent?.student?.lastName }}
+            {{ topicNotification?.topicStudent?.student?.secondLastname }}</b>
+        </p>
+        <p class="spacing">Presente.</p>
+        <p>De nuestras consideraciones:</p>
+        <p>
+          Por medio de la presente el Comité de Grado de la Carrera de
+          <b>{{ topicNotification?.topicStudent?.student?.career?.name }}</b>
+          de la Universidad Iberoamericana del Ecuador (UNIB.E), en reunión
+          ordinaria No.<b>{{ topicNotification?.meetingNumber }}</b> fecha:
+          <b>{{ topicNotification?.date }}</b>, le informa que su propuesta de investigación titulada:
+          <b> {{ topicNotification?.topicStudent?.topic?.name }}</b> ha sido:
+        </p>
+        <p *ngIf="topicNotification?.topicStudent?.topicEvaluation === 'Aprobado'">
+          <b>APROBADO</b>
+        </p>
+        <p *ngIf="
         topicNotification?.topicStudent?.topicEvaluation ===
         'Aprobado con observaciones'
       ">
-        Aprobado con las siguientes observaciones:
-      </p>
-      <p *ngIf="topicNotification?.topicStudent?.topicEvaluation === 'Reprobado'">
-        No ha sido aprobado por los siguientes motivos:
-      </p>
-      <p>{{ topicNotification?.observations }}</p>
+          Aprobado con las siguientes observaciones:
+        </p>
+        <p *ngIf="topicNotification?.topicStudent?.topicEvaluation === 'Reprobado'">
+          No ha sido aprobado por los siguientes motivos:
+        </p>
+        <p>{{ topicNotification?.observations }}</p>
 
-      <div class="firma" fxLayout="row" fxLayoutAlign="center start" fxLayout.lt-sm="column"
-        fxLayoutAlign.lt-sm="center center">
-        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
-          <h4>Elaborado por:</h4>
-          <p>Traer datos de director de carrera</p>
-        </div>
-        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
-          <h4>Recibido por:</h4>
-          <p>{{ topicStudent.student?.firstName }} {{topicStudent.student?.lastName }}</p>
-        </div>
-        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
-          <h4>Entregar a:</h4>
-          <p>Secretaría de Administración y Registro</p>
+        <div class="firma" fxLayout="row" fxLayoutAlign="center start" fxLayout.lt-sm="column"
+          fxLayoutAlign.lt-sm="center center">
+          <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+            <h4>Elaborado por:</h4>
+            <p>Traer datos de director de carrera</p>
+          </div>
+          <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+            <h4>Recibido por:</h4>
+            <p>{{ topicStudent.student?.firstName }} {{topicStudent.student?.lastName }}</p>
+          </div>
+          <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+            <h4>Entregar a:</h4>
+            <p>Secretaría de Administración y Registro</p>
+          </div>
         </div>
       </div>
+
     </div>
-    <div class="no-print" fxLayout="row" fxLayoutAlign="center center">
-      <button mat-raised-button>Salir</button>
-      <button mat-raised-button color="warn">Borrar</button>
-      <button type="submit" class="primary" mat-raised-button>
-        Imprimir
-      </button>
-    </div>
+  </div>
+  <div class="no-print" fxLayout="row" fxLayoutAlign="center center">
+    <button mat-raised-button>Salir</button>
+    <button mat-raised-button class="secondary">Borrar</button>
+    <button type="submit" class="primary" mat-raised-button>
+      Imprimir
+    </button>
   </div>
 </mat-card>

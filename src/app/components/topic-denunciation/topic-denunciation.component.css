@@ -51,6 +51,10 @@ button {
   color: #fff;
 }
 
+.secondary {
+  background-color: var(--secondary-color);
+}
+
 @media print {
   .no-print {
     display: none !important;

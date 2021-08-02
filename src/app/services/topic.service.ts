@@ -23,7 +23,7 @@ export class TopicService {
   }
 
   getTopicsByCareer(career: string): Observable<any> {
-    return this.http.get(this.url+'/career/'+career).pipe(
+    return this.http.get(this.url + '/career/' + career).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);
@@ -33,7 +33,7 @@ export class TopicService {
   }
 
   getTopicById(id: string): Observable<any> {
-    return this.http.get(this.url +'/'+ id).pipe(
+    return this.http.get(this.url + '/' + id).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);
@@ -54,7 +54,7 @@ export class TopicService {
   }
 
   deleteTopic(id: string): Observable<any> {
-    return this.http.delete(this.url +'/'+ id).pipe(
+    return this.http.delete(this.url + '/' + id).pipe(
       map(response => response),
       catchError(error => {
         alert("No se puede eliminar, el tema está en ejecución o ejecutado")
@@ -65,7 +65,18 @@ export class TopicService {
   }
 
   updateTopic(id: string, topic: TopicModel): Observable<any> {
-    return this.http.put(this.url +'/'+ id, topic).pipe(
+    return this.http.put(this.url + '/' + id, topic).pipe(
+      map(response => response),
+      catchError(error => {
+        alert(error.error)
+        return error
+      }
+      )
+    )
+  }
+
+  changeToExecuted(id: string) {
+    return this.http.patch(this.url + '/' + id, 'Ejecutado').pipe(
       map(response => response),
       catchError(error => {
         alert(error.error)

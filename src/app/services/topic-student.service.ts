@@ -44,26 +44,24 @@ export class TopicStudentService {
 
   getTopicStudentById(id: string): Observable<any> {
     return this.http.get(this.url + '/' + id).pipe(
-      map((response) => response),
-      catchError((error) => {
-        alert(error.error);
+      map((response) => response), catchError(error => {
         return error;
-      })
+      }
+      )
     );
   }
 
   getTopicStudentByStudentId(): Observable<any> {
     return this.http.get(this.url + '/student').pipe(
-      map((response) => response),
-      catchError((error) => {
-        alert(error.error);
+      map((response) => response), catchError(error => {
         return error;
-      })
+      }
+      )
     );
   }
 
   getTopicStudentByStudent(ci: string, career: string): Observable<any> {
-    return this.http.get(this.url + '/student/' + ci+ '/student/' + career).pipe(
+    return this.http.get(this.url + '/student/' + ci + '/student/' + career).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);
@@ -83,11 +81,18 @@ export class TopicStudentService {
   }
 
 
-  evaluationProposal(
-    id: string,
-    topicStudent: TopicStudentModel
-  ): Observable<any> {
+  evaluationProposal(id: string, topicStudent: TopicStudentModel): Observable<any> {
     return this.http.patch(this.url + '/' + id, topicStudent).pipe(
+      map((response) => response),
+      catchError((error) => {
+        alert(error.error);
+        return error;
+      })
+    );
+  }
+
+  deleteAssigment(id:string) {
+    return this.http.delete(this.url + '/' + id).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);

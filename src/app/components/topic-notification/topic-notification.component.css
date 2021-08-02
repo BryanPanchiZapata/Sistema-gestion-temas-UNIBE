@@ -20,6 +20,10 @@
   padding: 0 0.75em 0 0.75em;
 }
 
+.secondary {
+  background-color: var(--secondary-color);
+}
+
 .conatiner__card {
   margin-inline: auto;
 }

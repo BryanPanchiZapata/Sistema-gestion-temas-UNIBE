@@ -13,22 +13,20 @@ export class TopicDenunciationService {
 
   constructor(private http: HttpClient) { }
 
-/*   getAllTopicDenunciation(): Observable<any> {
-    return this.http.get(`${this.url}/topic_denunciation`).pipe(
-      map((response) => response),
-      catchError((error) => {
-        alert(error.error);
-        return error;
-      })
-    );
-  } */
-
   getTopicDenunciationById(id: string): Observable<any> {
     return this.http.get(this.url + "/" + id).pipe(
       map(response => response), catchError(error => {
-          alert(error.error);
-          return error;
-        }
+        return error;
+      }
+      )
+    );
+  }
+
+  getTopicDenunciationByStudentId(): Observable<any> {
+    return this.http.get(this.url).pipe(
+      map(response => response), catchError(error => {
+        return error;
+      }
       )
     );
   }
@@ -36,9 +34,19 @@ export class TopicDenunciationService {
   createDenunciation(topicDenunciation: TopicDenunciationModel): Observable<any> {
     return this.http.post(this.url, topicDenunciation).pipe(
       map(response => response), catchError(error => {
-          alert(error.error);
-          return error;
-        }
+        alert(error.error);
+        return error;
+      }
+      )
+    );
+  }
+
+  deleteDenunciation(id: string): Observable<any> {
+    return this.http.delete(this.url + '/' + id).pipe(
+      map(response => response), catchError(error => {
+        alert(error.error);
+        return error;
+      }
       )
     );
   }

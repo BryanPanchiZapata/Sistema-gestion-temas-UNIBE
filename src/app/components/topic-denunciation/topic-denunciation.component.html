@@ -42,7 +42,7 @@
 
         <p>
           <b>Director (a) de carrera: </b>
-          Traer dato de academicUser
+          {{academicUser?.firstName}} {{academicUser?.secondName}} {{academicUser?.lastName}} {{academicUser?.secondLastname}}
         </p>
 
         <p>
@@ -119,11 +119,11 @@
         fxLayoutAlign.lt-sm="center center">
         <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
           <h4>Solicitado por:</h4>
-          <p>{{ topicStudent.student?.firstName }} {{topicStudent.student?.lastName }}</p>
+          <p>{{ topicStudent?.student?.firstName }} {{ topicStudent?.student?.secondName }} {{topicStudent?.student?.lastName }} {{ topicStudent?.student?.secondLastname }}</p>
         </div>
         <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
           <h4>Recibido por:</h4>
-          <p>Traer datos de director de carrera</p>
+          <p>{{academicUser?.firstName}} {{academicUser?.secondName}} {{academicUser?.lastName}} {{academicUser?.secondLastname}}</p>
         </div>
         <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
           <h4>Entregar a:</h4>
@@ -133,10 +133,9 @@
 
       <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
         <button mat-raised-button (click)="onCancel()">Cancelar</button>
-        <button type="submit" class="primary" mat-raised-button (click)="onCreateDenunciation()" [routerLink]="['/topic-denunciation/read/' + topicStudent.id]">
+        <button type="submit" class="primary" mat-raised-button (click)="onCreateDenunciation()">
           Enviar
         </button>
-        <button (click)="print('denunciation')">Imprimir</button>
       </mat-card-actions>
     </form>
   </mat-card>
