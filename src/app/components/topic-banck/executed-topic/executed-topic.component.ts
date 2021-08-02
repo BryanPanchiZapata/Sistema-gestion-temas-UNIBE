@@ -38,9 +38,7 @@ export class ExecutedTopicComponent implements AfterViewInit {
       data: id,
     });
   }
-  navigateToTopic(topic: TopicStudentModel): void {
-    this.route.navigate(['/topicStudent/' + topic.id]);
-  }
+ 
 
   displayedColumns: string[] = [
     'position',
