@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
-import { TopicService } from 'src/app/services/topic.service';
 import { MatSort } from '@angular/material/sort';
 
 @Component({
@@ -28,7 +27,6 @@ export class ExecutedTopicComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   constructor(
     private topicStudentService: TopicStudentService,
-    public topicService: TopicService,
     public dialog: MatDialog,
     private route: Router,
     private authServices: AuthService
