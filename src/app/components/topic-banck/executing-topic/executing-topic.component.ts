@@ -26,8 +26,8 @@ export class ExecutingTopicComponent implements AfterViewInit {
   constructor(
     private topicStudentService: TopicStudentService,
     public dialog: MatDialog,
-    private authServices: AuthService
-  ) {  }
+    private authService: AuthService
+  ) { }
 
   openDialogTopicStudentExecuting(id: string | null) {
     this.dialog.open(DialogStatusExecutingComponent, {
@@ -62,27 +62,27 @@ export class ExecutingTopicComponent implements AfterViewInit {
   ngOnInit(): void {
     this.dataStudent.paginator = this.paginator;
     this.getDataUser();
-    this.sync();
   }
 
   getDataUser() {
-    this.authServices.profileUser().subscribe(
+    this.authService.profileUser().subscribe(
       data => {
         this.academic = data;
+        this.sync();
       }
     );
   }
 
   sync() {
-    console.log(this.academic.career?.id);
-    if(this.academic.career?.id){
+    if (this.academic.career?.id) {
       this.topicStudentService.getTopicStudentsByCareer(this.academic.career?.id, 'En ejecución')
+    } else {
+      this.topicStudentService
+        .getTopicsByStatus('En ejecución')
+        .subscribe(data => {
+          this.dataStudent = data
+        });
     }
-    this.topicStudentService
-      .getTopicsByStatus('En ejecución')
-      .subscribe(data => {
-        this.dataStudent = data
-      });
   }
 }
 
@@ -99,7 +99,7 @@ export class DialogStatusExecutingComponent {
     private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogStatusExecutingComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.sync();

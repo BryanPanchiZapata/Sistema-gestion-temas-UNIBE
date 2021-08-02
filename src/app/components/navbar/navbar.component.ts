@@ -1,6 +1,5 @@
 import { Observable } from 'rxjs';
 import { AuthService } from './../../services/auth.service';
-import { UserAcademicModel } from './../../models/user-model';
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 
@@ -19,6 +18,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.role = this.authService.getRole();
+  }
+
+  navigateDenunciation() {
+    // if()
   }
 
   logOut() {

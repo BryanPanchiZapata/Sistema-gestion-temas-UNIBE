@@ -58,13 +58,14 @@ export class TopicNotificationComponent implements OnInit {
   ]);
 
   ngOnInit(): void {
+    this.getDataUser();
   }
 
   getDataUser() {
     this.authServices.profileUser().subscribe(
       data => {
         this.academic = data;
-      }
+        this.onFindByStudent();      }
     );
   }
 

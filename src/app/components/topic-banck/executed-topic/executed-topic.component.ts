@@ -27,12 +27,11 @@ export class ExecutedTopicComponent implements AfterViewInit {
     public dialog: MatDialog,
     private route: Router,
     private authServices: AuthService
-  ) {  }
+  ) { }
 
   ngOnInit(): void {
     this.dataStudent.paginator = this.paginator;
     this.getDataUser();
-    this.sync();
   }
 
 
@@ -40,20 +39,21 @@ export class ExecutedTopicComponent implements AfterViewInit {
     this.authServices.profileUser().subscribe(
       data => {
         this.academic = data;
+        this.sync();
       }
     );
   }
 
   sync() {
-    console.log(this.academic.career?.id);
-    if(this.academic.career?.id){
+    if (this.academic.career?.id) {
       this.topicStudentService.getTopicStudentsByCareer(this.academic.career?.id, "Ejecutado")
+    } else {
+      this.topicStudentService
+        .getTopicsByStatus('Ejecutado')
+        .subscribe(data => {
+          this.dataStudent = data
+        });
     }
-    this.topicStudentService
-      .getTopicsByStatus('Ejecutado')
-      .subscribe(data => {
-        this.dataStudent = data
-      });
   }
 
   openDialogTopicStudentAssigned(id: string | null) {

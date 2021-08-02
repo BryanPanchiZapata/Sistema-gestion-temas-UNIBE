@@ -1,3 +1,5 @@
+import { TopicProposalService } from 'src/app/services/topic-proposal.service';
+import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { Router } from '@angular/router';
 import { TopicProposalModel } from './../../models/topic-proposal-model';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
@@ -11,14 +13,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopicProposalComponent implements OnInit {
   static END_POINT = 'topic-proposal';
-  public proposal: TopicProposalModel = {}
+  public topicStudent: TopicStudentModel = {};
+  public proposalM: TopicProposalModel;
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
+    private topicProposalSrv: TopicProposalService,
     private topicStudentSvr: TopicStudentService) {
-    // this.topicStudentSvr.getAllTopicStudent().subscribe((data) => {
-    //   this.proposal = data;
-    // });
+    this.topicStudentSvr.getTopicStudentByStudentId().subscribe((data) => {
+      this.topicStudent = data;
+    });
   }
 
   proposalForm = this.formBuilder.group({
@@ -26,7 +30,9 @@ export class TopicProposalComponent implements OnInit {
     studyJustification: ['', Validators.required],
     topicDescription: ['', Validators.required],
   });
+
   ngOnInit(): void {
+
   }
 
   onCancel() {
@@ -35,7 +41,14 @@ export class TopicProposalComponent implements OnInit {
   }
 
   onCreateProposal() {
-
+    if (this.proposalForm.valid) {
+      let proposal = Object.assign(this.proposalForm.value, { topicStudent: this.topicStudent })
+      this.topicProposalSrv.createProposal(proposal).subscribe(
+        data => {
+          alert("La propuesta de tema ha sido enviada")
+        }
+      )
+    }
   }
 
 }

@@ -52,6 +52,16 @@ export class TopicStudentService {
     );
   }
 
+  getTopicStudentByStudentId(): Observable<any> {
+    return this.http.get(this.url + '/student').pipe(
+      map((response) => response),
+      catchError((error) => {
+        alert(error.error);
+        return error;
+      })
+    );
+  }
+
   getTopicStudentByStudent(ci: string, career: string): Observable<any> {
     return this.http.get(this.url + '/student/' + ci+ '/student/' + career).pipe(
       map((response) => response),

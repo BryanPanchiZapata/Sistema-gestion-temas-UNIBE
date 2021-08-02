@@ -133,7 +133,7 @@
 
       <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
         <button mat-raised-button (click)="onCancel()">Cancelar</button>
-        <button type="submit" class="primary" mat-raised-button (click)="onCreateDenunciation()">
+        <button type="submit" class="primary" mat-raised-button (click)="onCreateDenunciation()" [routerLink]="['/topic-denunciation/read/' + topicStudent.id]">
           Enviar
         </button>
         <button (click)="print('denunciation')">Imprimir</button>

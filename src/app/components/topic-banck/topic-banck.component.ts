@@ -86,7 +86,6 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this.role = this.authService.getRole();
     this.getDataUser();
-    this.sync();
     this.dataSource.paginator = this.paginator;
   }
 
@@ -94,26 +93,28 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     this.authService.profileUser().subscribe(
       data => {
         this.academic = data;
+        this.sync();
       }
     );
   }
 
   sync() {
-    console.log(this.academic.career?.id);
     if (this.academic.career?.id) {
       this.topicService.getTopicsByCareer(this.academic.career?.id).subscribe(
         data => {
           this.dataSource = data
         }
       )
-    }
-    this.topicService
+    }else{
+      this.topicService
       .getTopicsByStatus()
       .subscribe(
         data => {
           this.dataSource = data;
         }
       );
+    }
+
   }
 
   chooseTopic(topic: TopicModel) {
