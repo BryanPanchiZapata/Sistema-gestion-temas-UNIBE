@@ -1,3 +1,5 @@
+import { AuthService } from './../../../services/auth.service';
+import { UserAcademicModel } from './../../../models/user-model';
 import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
 import {
   MatDialog,
@@ -20,19 +22,15 @@ import { MatSort } from '@angular/material/sort';
 })
 export class ExecutingTopicComponent implements AfterViewInit {
   dataStudent = new MatTableDataSource();
+  academic: UserAcademicModel = {};
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(
     private topicStudentService: TopicStudentService,
-    public topicService: TopicService,
     public dialog: MatDialog,
-    private route: Router
-  ) {
-    this.topicStudentService.getAllTopicStudent().subscribe((data) => {
-      this.dataStudent.data = data;
-    });
-  }
+    private authService: AuthService
+  ) { }
 
   openDialogTopicStudentExecuting(id: string | null) {
     this.dialog.open(DialogStatusExecutingComponent, {
@@ -66,13 +64,28 @@ export class ExecutingTopicComponent implements AfterViewInit {
   }
   ngOnInit(): void {
     this.dataStudent.paginator = this.paginator;
-    this.syncStatus();
+    this.getDataUser();
   }
 
-  syncStatus(): void {
-    this.topicStudentService
-      .getTopicsByStatus('En ejecución')
-      .subscribe((data) => (this.dataStudent = data));
+  getDataUser() {
+    this.authService.profileUser().subscribe(
+      data => {
+        this.academic = data;
+        this.sync();
+      }
+    );
+  }
+
+  sync() {
+    if (this.academic.career?.id) {
+      this.topicStudentService.getTopicStudentsByCareer(this.academic.career?.id, 'En ejecución')
+    } else {
+      this.topicStudentService
+        .getTopicsByStatus('En ejecución')
+        .subscribe(data => {
+          this.dataStudent = data
+        });
+    }
   }
 }
 
@@ -89,7 +102,7 @@ export class DialogStatusExecutingComponent {
     private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogStatusExecutingComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.sync();

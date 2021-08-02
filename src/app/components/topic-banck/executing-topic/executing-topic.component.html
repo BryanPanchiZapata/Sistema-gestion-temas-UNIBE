@@ -21,7 +21,7 @@
         mat-cell
         *matCellDef="let topicStudent"
         class="pointer"
-        (click)="openDialogTopicStudentExecuting(topicStudent.id)"
+        (click)="openDialogTopicStudentExecuting(topicStudent?.id)"
       >
         {{ topicStudent.topic?.name }}
       </td>

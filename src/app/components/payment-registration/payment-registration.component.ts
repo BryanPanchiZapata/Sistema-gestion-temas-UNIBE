@@ -1,5 +1,5 @@
 import { TopicStudentService } from 'src/app/services/topic-student.service';
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -8,18 +8,34 @@ import { MatTableDataSource } from '@angular/material/table';
   templateUrl: './payment-registration.component.html',
   styleUrls: ['./payment-registration.component.css'],
 })
-export class PaymentRegistrationComponent implements AfterViewInit {
+export class PaymentRegistrationComponent implements AfterViewInit, OnInit {
   static END_POINT = 'payment-registration';
 
   dataSource = new MatTableDataSource();
 
   constructor(private topicStudentSvr: TopicStudentService) {
-    this.topicStudentSvr.getAllTopicStudent().subscribe((data) => {
+  }
+
+  sync() {
+    this.topicStudentSvr.getTopicsByStatus("En ejecución").subscribe((data) => {
       this.dataSource.data = data;
     });
   }
+
+  ngOnInit() {
+    this.sync();
+  }
+
   displayedColumns: string[] = ['position', 'cedula', 'estudiante', 'carrera', 'estado'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  paymentdenunciation(ciStudent: string) {
+    this.topicStudentSvr.paymentDenunciation(ciStudent, "Pagado").subscribe(
+      data => {
+        this.sync();
+      }
+    )
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

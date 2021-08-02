@@ -1,3 +1,7 @@
+import { UserAcademicModel } from './../../models/user-model';
+import { AuthService } from './../../services/auth.service';
+import { TopicStudentModel } from 'src/app/models/topic-student-model';
+import { TopicStudentService } from 'src/app/services/topic-student.service';
 import {
   AfterViewInit,
   Component,
@@ -27,11 +31,18 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+
+  topicStudent: TopicStudentModel = {};
+  academic: UserAcademicModel = {};
+  role: String | null;
   constructor(
     private spinnerService: SpinnerService,
     private topicService: TopicService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private topicStudentSvr: TopicStudentService,
+    private authService: AuthService
   ) {}
+ 
 
   openDialog(id: string | null) {
     const dialogRef = this.dialog.open(AddTopicComponent, {
@@ -48,6 +59,10 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     this.dialog.open(DialogTopicComponent, {
       data: id,
     });
+  }
+
+  openConfirmChangeTopic() {
+    this.dialog.open(ChangeTopicComponent);
   }
 
   displayedColumns: string[] = [
@@ -73,14 +88,47 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
+    this.role = this.authService.getRole();
+    this.getDataUser();
     this.dataSource.paginator = this.paginator;
-    this.sync();
   }
 
-  sync(): void {
-    this.topicService
-      .getTopicsByStatus('Disponible')
-      .subscribe((data) => (this.dataSource = data));
+  getDataUser() {
+    this.authService.profileUser().subscribe(
+      data => {
+        this.academic = data;
+        this.sync();
+      }
+    );
+  }
+
+  sync() {
+    if (this.academic.career?.id) {
+      this.topicService.getTopicsByCareer(this.academic.career?.id).subscribe(
+        data => {
+          this.dataSource = data
+        }
+      )
+    }else{
+      this.topicService
+      .getTopicsByStatus()
+      .subscribe(
+        data => {
+          this.dataSource = data;
+        }
+      );
+    }
+
+  }
+
+  chooseTopic(topic: TopicModel) {
+    let topicStudent = Object.assign({ topic: topic, student: this.academic });
+    this.topicStudentSvr.assigmentTopic(topicStudent).subscribe(
+      data => {
+        this.topicStudent = data;
+        this.sync();
+      }
+    )
   }
 
   onDeleteTopic(id: string): void {
@@ -117,4 +165,41 @@ export class DialogTopicComponent {
         this.topic = data;
       });
   }
+}
+@Component({
+  selector: 'change-topic',
+  styleUrls: ['./topic-banck.component.css'],
+  templateUrl: './change-topic.component.html',
+})
+export class ChangeTopicComponent implements OnInit {
+  academic: UserAcademicModel = {};
+
+  constructor(
+    public dialogRef: MatDialogRef<ChangeTopicComponent>,
+    private authService: AuthService,
+    private spinnerService: SpinnerService,
+  ) { }
+
+  // onCancel() {
+  //   this.dialogRef.close();
+  // }
+
+  ngOnInit() {
+    this.getDataUser();
+    console.log(this.academic);
+    this.spinnerService.hide();
+  }
+
+  getDataUser() {
+    this.authService.profileUser().subscribe(
+      data => {
+        this.academic = data;
+      }
+    );
+  }
+
+  deleteAssignment() {
+
+  }
+
 }

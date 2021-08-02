@@ -14,8 +14,15 @@
   padding: 1rem;
 }
 .button__topicbanck {
-  background: #002858;
+  background-color: var(--primary-color);
   color: #fff;
+}
+
+.button_secondary {
+  background-color: var(--secondary-color);
+}
+button {
+  margin: 5px;
 }
 
 input {
@@ -72,9 +79,6 @@ span {
   input {
     width: 100%;
     padding: 0.5rem 0;
-  }
-  .button__topicbanck {
-    margin-top: 1rem;
   }
   .responsive {
     overflow-x: auto;

@@ -1,3 +1,4 @@
+import { TopicProposalModel } from './../models/topic-proposal-model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -14,6 +15,16 @@ export class TopicProposalService {
 
   getTopicProposalById(id: string): Observable<any> {
     return this.http.get(this.url + "/" + id).pipe(
+      map(response => response), catchError(error => {
+          alert(error.error);
+          return error;
+        }
+      )
+    );
+  }
+
+  createProposal(proposal: TopicProposalModel) {
+    return this.http.post(this.url, proposal).pipe(
       map(response => response), catchError(error => {
           alert(error.error);
           return error;

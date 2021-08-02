@@ -52,8 +52,9 @@
 
       <ng-container matColumnDef="estado">
         <th class="cinco" mat-header-cell *matHeaderCellDef>Estado</th>
-        <td mat-cell *matCellDef="let topicStudent">
-          <button class="btn" color="primary" mat-raised-button>
+        <td mat-cell *matCellDef="let topicStudent" >
+          <button class="btn" color="primary" mat-raised-button (click)="paymentdenunciation(topicStudent.student.ci)"
+          [disabled]="topicStudent?.paymentDenunciation === 'Pagado'">
             {{ topicStudent?.paymentDenunciation }}
           </button>
         </td>
