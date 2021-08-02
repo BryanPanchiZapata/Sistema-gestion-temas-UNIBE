@@ -11,11 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TopicProposalComponent implements OnInit {
   static END_POINT = 'topic-proposal';
-  public proposal: TopicProposalModel = {}
-
-  constructor(private formBuilder: FormBuilder,
+  public proposal: TopicProposalModel = {};
+  private contador = 0;
+  constructor(
+    private formBuilder: FormBuilder,
     private router: Router,
-    private topicStudentSvr: TopicStudentService) {
+    private topicStudentSvr: TopicStudentService
+  ) {
     this.topicStudentSvr.getAllTopicStudent().subscribe((data) => {
       this.proposal = data;
     });
@@ -26,16 +28,23 @@ export class TopicProposalComponent implements OnInit {
     studyJustification: ['', Validators.required],
     topicDescription: ['', Validators.required],
   });
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+
+/*    countWords() {
+    let texto = document.getElementById("count")?.innerText;
+    texto = texto.replace(/\r?\n/g, ' ');
+    texto = texto.replace(/[ ]+/g, ' ');
+    texto = texto.replace(/^ /, '');
+    texto = texto.replace(/ $/, '');
+    let textoTroceado = texto.split(' ');
+    let numeroPalabras = textoTroceado.length;
+    alert(numeroPalabras);
+  }   */
 
   onCancel() {
     this.proposalForm.reset();
     this.router.navigate(['']);
   }
 
-  onCreateProposal() {
-
-  }
-
+  onCreateProposal() {}
 }

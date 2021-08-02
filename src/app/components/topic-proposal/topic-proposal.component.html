@@ -20,7 +20,7 @@
 
         <h4>Objetivos generales y específicos:</h4>
         <mat-form-field appearance="fill">
-          <textarea matInput formControlName="objectives" id="objectives" type="text" required></textarea>
+          <textarea id="count" matInput formControlName="objectives" id="objectives" type="text" required></textarea>
           <mat-error *ngIf="proposalForm.get('objectives')?.hasError('required')">Campo
             <strong>obligatorio</strong>
           </mat-error>

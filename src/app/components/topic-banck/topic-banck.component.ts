@@ -15,6 +15,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicService } from 'src/app/services/topic.service';
 import { TopicModel } from 'src/app/models/topic-model';
+import { MatSort } from '@angular/material/sort';
 import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
@@ -24,16 +25,17 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 })
 export class TopicBanckComponent implements AfterViewInit, OnInit {
   dataSource = new MatTableDataSource();
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   constructor(
     private spinnerService: SpinnerService,
     private topicService: TopicService,
     public dialog: MatDialog
-  ) { }
+  ) {}
 
   openDialog(id: string | null) {
     const dialogRef = this.dialog.open(AddTopicComponent, {
-      data: id
+      data: id,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -55,11 +57,12 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     'carrera',
     'accion',
   ];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -68,6 +71,7 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
     this.sync();
@@ -100,7 +104,7 @@ export class DialogTopicComponent {
     private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogTopicComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.sync();
@@ -109,11 +113,8 @@ export class DialogTopicComponent {
 
   sync(): void {
     if (this.id !== null)
-      this.topicService
-        .getTopicById(this.id)
-        .subscribe(
-          data => {
-            this.topic = data
-          });
+      this.topicService.getTopicById(this.id).subscribe((data) => {
+        this.topic = data;
+      });
   }
 }
