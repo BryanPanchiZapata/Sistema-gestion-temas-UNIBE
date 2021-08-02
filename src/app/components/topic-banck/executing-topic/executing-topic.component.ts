@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
-import { TopicService } from 'src/app/services/topic.service';
 
 @Component({
   selector: 'app-executing-topic',
@@ -20,14 +19,46 @@ import { TopicService } from 'src/app/services/topic.service';
   styleUrls: ['./executing-topic.component.css'],
 })
 export class ExecutingTopicComponent implements AfterViewInit {
-  dataStudent = new MatTableDataSource();
   academic: UserAcademicModel = {};
+  dataStudent = new MatTableDataSource();
 
   constructor(
     private topicStudentService: TopicStudentService,
     public dialog: MatDialog,
-    private authService: AuthService
-  ) { }
+    private authServices: AuthService
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.dataStudent.paginator = this.paginator;
+    this.getDataUser();
+  }
+
+
+  getDataUser() {
+    this.authServices.profileUser().subscribe(
+      data => {
+        this.academic = data;
+        this.sync();
+      }
+    );
+  }
+
+  sync() {
+    if (this.academic.career?.id) {
+      this.topicStudentService.getTopicStudentsByCareer(this.academic.career?.id, "En ejecución").subscribe(
+        data => {
+          this.dataStudent = data
+        }
+      )
+    } else {
+      this.topicStudentService
+        .getTopicsByStatus('En ejecución')
+        .subscribe(data => {
+          this.dataStudent = data
+        });
+    }
+  }
 
   openDialogTopicStudentExecuting(id: string | null) {
     this.dialog.open(DialogStatusExecutingComponent, {
@@ -59,31 +90,6 @@ export class ExecutingTopicComponent implements AfterViewInit {
       this.dataStudent.paginator.firstPage();
     }
   }
-  ngOnInit(): void {
-    this.dataStudent.paginator = this.paginator;
-    this.getDataUser();
-  }
-
-  getDataUser() {
-    this.authService.profileUser().subscribe(
-      data => {
-        this.academic = data;
-        this.sync();
-      }
-    );
-  }
-
-  sync() {
-    if (this.academic.career?.id) {
-      this.topicStudentService.getTopicStudentsByCareer(this.academic.career?.id, 'En ejecución')
-    } else {
-      this.topicStudentService
-        .getTopicsByStatus('En ejecución')
-        .subscribe(data => {
-          this.dataStudent = data
-        });
-    }
-  }
 }
 
 @Component({
@@ -99,7 +105,7 @@ export class DialogStatusExecutingComponent {
     private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogStatusExecutingComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.sync();
