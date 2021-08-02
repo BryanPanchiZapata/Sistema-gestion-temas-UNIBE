@@ -8,8 +8,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
+import { UserAcademicModel } from 'src/app/models/user-model';
+import { AuthService } from 'src/app/services/auth.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
+import { TopicService } from 'src/app/services/topic.service';
 
 @Component({
   selector: 'app-executing-topic',
@@ -17,23 +20,13 @@ import { TopicStudentService } from 'src/app/services/topic-student.service';
   styleUrls: ['./executing-topic.component.css'],
 })
 export class ExecutingTopicComponent implements AfterViewInit {
-<<<<<<< HEAD
-=======
   academic: UserAcademicModel = {};
->>>>>>> mirelly
   dataStudent = new MatTableDataSource();
 
   constructor(
     private topicStudentService: TopicStudentService,
     public topicService: TopicService,
     public dialog: MatDialog,
-<<<<<<< HEAD
-    private route: Router
-  ) {
-    this.topicStudentService.getAllTopicStudent().subscribe((data) => {
-      this.dataStudent.data = data;
-    });
-=======
     private authServices: AuthService
   ) {
   }
@@ -67,7 +60,6 @@ export class ExecutingTopicComponent implements AfterViewInit {
           this.dataStudent = data
         });
     }
->>>>>>> mirelly
   }
 
   openDialogTopicStudentExecuting(id: string | null) {
@@ -100,19 +92,6 @@ export class ExecutingTopicComponent implements AfterViewInit {
       this.dataStudent.paginator.firstPage();
     }
   }
-<<<<<<< HEAD
-  ngOnInit(): void {
-    this.dataStudent.paginator = this.paginator;
-    this.syncStatus();
-  }
-
-  syncStatus(): void {
-    this.topicStudentService
-      .getTopicsByStatus('En ejecución')
-      .subscribe((data) => (this.dataStudent = data));
-  }
-=======
->>>>>>> mirelly
 }
 
 @Component({
