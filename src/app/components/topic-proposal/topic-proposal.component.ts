@@ -6,6 +6,7 @@ import { TopicStudentService } from 'src/app/services/topic-student.service';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-topic-proposal',
   templateUrl: './topic-proposal.component.html',
@@ -16,10 +17,12 @@ export class TopicProposalComponent implements OnInit {
   public topicStudent: TopicStudentModel = {};
   public proposalM: TopicProposalModel;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private router: Router,
     private topicProposalSrv: TopicProposalService,
-    private topicStudentSvr: TopicStudentService) {
+    private topicStudentSvr: TopicStudentService
+  ) {
     this.topicStudentSvr.getTopicStudentByStudentId().subscribe((data) => {
       this.topicStudent = data;
     });
@@ -32,16 +35,16 @@ export class TopicProposalComponent implements OnInit {
   });
   ngOnInit(): void {}
 
-/*    countWords() {
-    let texto = document.getElementById("count")?.innerText;
+  countWords() {
+   let texto = (<HTMLInputElement>document.getElementById('topicDescription')).value
     texto = texto.replace(/\r?\n/g, ' ');
     texto = texto.replace(/[ ]+/g, ' ');
     texto = texto.replace(/^ /, '');
     texto = texto.replace(/ $/, '');
     let textoTroceado = texto.split(' ');
     let numeroPalabras = textoTroceado.length;
-    alert(numeroPalabras);
-  }   */
+    console.log(numeroPalabras);
+  }
 
   onCancel() {
     this.proposalForm.reset();
@@ -50,13 +53,12 @@ export class TopicProposalComponent implements OnInit {
 
   onCreateProposal() {
     if (this.proposalForm.valid) {
-      let proposal = Object.assign(this.proposalForm.value, { topicStudent: this.topicStudent })
-      this.topicProposalSrv.createProposal(proposal).subscribe(
-        data => {
-          alert("La propuesta de tema ha sido enviada")
-        }
-      )
+      let proposal = Object.assign(this.proposalForm.value, {
+        topicStudent: this.topicStudent,
+      });
+      this.topicProposalSrv.createProposal(proposal).subscribe((data) => {
+        alert('La propuesta de tema ha sido enviada');
+      });
     }
   }
-
 }

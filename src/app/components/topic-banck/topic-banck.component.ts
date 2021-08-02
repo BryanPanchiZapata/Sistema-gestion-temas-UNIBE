@@ -28,10 +28,17 @@ import { SpinnerService } from 'src/app/services/spinner.service';
   templateUrl: './topic-banck.component.html',
 })
 export class TopicBanckComponent implements AfterViewInit, OnInit {
-  dataSource = new MatTableDataSource();
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  displayedColumns: string[] = [
+    'position',
+    'tema',
+    'articulacion',
+    'carrera',
+    'accion',
+  ];
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
+  dataSource = new MatTableDataSource();
+  value = '';
   topicStudent: TopicStudentModel = {};
   academic: UserAcademicModel = {};
   role: String | null;
@@ -42,7 +49,6 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     private topicStudentSvr: TopicStudentService,
     private authService: AuthService
   ) {}
- 
 
   openDialog(id: string | null) {
     const dialogRef = this.dialog.open(AddTopicComponent, {
@@ -65,27 +71,19 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     this.dialog.open(ChangeTopicComponent);
   }
 
-  displayedColumns: string[] = [
-    'position',
-    'tema',
-    'articulacion',
-    'carrera',
-    'accion',
-  ];
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
+   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
+  } 
 
   ngOnInit(): void {
     this.role = this.authService.getRole();
@@ -93,48 +91,46 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
+/*   handleSearch(value: string) {
+    this.filtro_valor = value;
+    console.log(value);
+  }
+  filtro_valor = ''; */
+
   getDataUser() {
-    this.authService.profileUser().subscribe(
-      data => {
-        this.academic = data;
-        this.sync();
-      }
-    );
+    this.authService.profileUser().subscribe((data) => {
+      this.academic = data;
+      this.sync();
+    });
   }
 
   sync() {
     if (this.academic.career?.id) {
-      this.topicService.getTopicsByCareer(this.academic.career?.id).subscribe(
-        data => {
-          this.dataSource = data
-        }
-      )
-    }else{
       this.topicService
-      .getTopicsByStatus()
-      .subscribe(
-        data => {
+        .getTopicsByCareer(this.academic.career?.id)
+        .subscribe((data) => {
           this.dataSource = data;
-        }
-      );
+        });
+    } else {
+      this.topicService.getTopicsByStatus().subscribe((data) => {
+        this.dataSource = data;
+      });
     }
-
   }
 
   chooseTopic(topic: TopicModel) {
     let topicStudent = Object.assign({ topic: topic, student: this.academic });
-    this.topicStudentSvr.assigmentTopic(topicStudent).subscribe(
-      data => {
-        this.topicStudent = data;
-        this.sync();
-      }
-    )
+    this.topicStudentSvr.assigmentTopic(topicStudent).subscribe((data) => {
+      this.topicStudent = data;
+      this.sync();
+    });
   }
 
   onDeleteTopic(id: string): void {
     this.topicService.deleteTopic(id).subscribe((data) => {
       this.dataSource.data = data;
       this.sync();
+      this.value = '';
     });
   }
 }
@@ -177,8 +173,8 @@ export class ChangeTopicComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ChangeTopicComponent>,
     private authService: AuthService,
-    private spinnerService: SpinnerService,
-  ) { }
+    private spinnerService: SpinnerService
+  ) {}
 
   // onCancel() {
   //   this.dialogRef.close();
@@ -191,15 +187,10 @@ export class ChangeTopicComponent implements OnInit {
   }
 
   getDataUser() {
-    this.authService.profileUser().subscribe(
-      data => {
-        this.academic = data;
-      }
-    );
+    this.authService.profileUser().subscribe((data) => {
+      this.academic = data;
+    });
   }
 
-  deleteAssignment() {
-
-  }
-
+  deleteAssignment() {}
 }

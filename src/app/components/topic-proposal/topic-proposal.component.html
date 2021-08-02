@@ -11,12 +11,15 @@
 
         <h4>Descripción breve del tema:</h4>
         <mat-form-field appearance="fill">
+
           <textarea matInput formControlName="topicDescription" id="topicDescription" type="text" required></textarea>
           <mat-error *ngIf="proposalForm.get('topicDescription')?.hasError('required')">Campo
             <strong>obligatorio</strong>
           </mat-error>
           <mat-hint align="end">{{proposalForm.controls.topicDescription.value.length}} / 500</mat-hint>
         </mat-form-field>
+
+        <input Type="button" value="Contar" (click)="countWords()">
 
         <h4>Objetivos generales y específicos:</h4>
         <mat-form-field appearance="fill">
