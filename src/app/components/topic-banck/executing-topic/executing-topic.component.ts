@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
-import { TopicService } from 'src/app/services/topic.service';
 
 @Component({
   selector: 'app-executing-topic',
@@ -18,17 +17,57 @@ import { TopicService } from 'src/app/services/topic.service';
   styleUrls: ['./executing-topic.component.css'],
 })
 export class ExecutingTopicComponent implements AfterViewInit {
+<<<<<<< HEAD
+=======
+  academic: UserAcademicModel = {};
+>>>>>>> mirelly
   dataStudent = new MatTableDataSource();
 
   constructor(
     private topicStudentService: TopicStudentService,
     public topicService: TopicService,
     public dialog: MatDialog,
+<<<<<<< HEAD
     private route: Router
   ) {
     this.topicStudentService.getAllTopicStudent().subscribe((data) => {
       this.dataStudent.data = data;
     });
+=======
+    private authServices: AuthService
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.dataStudent.paginator = this.paginator;
+    this.getDataUser();
+  }
+
+
+  getDataUser() {
+    this.authServices.profileUser().subscribe(
+      data => {
+        this.academic = data;
+        this.sync();
+      }
+    );
+  }
+
+  sync() {
+    if (this.academic.career?.id) {
+      this.topicStudentService.getTopicStudentsByCareer(this.academic.career?.id, "En ejecución").subscribe(
+        data => {
+          this.dataStudent = data
+        }
+      )
+    } else {
+      this.topicStudentService
+        .getTopicsByStatus('En ejecución')
+        .subscribe(data => {
+          this.dataStudent = data
+        });
+    }
+>>>>>>> mirelly
   }
 
   openDialogTopicStudentExecuting(id: string | null) {
@@ -61,6 +100,7 @@ export class ExecutingTopicComponent implements AfterViewInit {
       this.dataStudent.paginator.firstPage();
     }
   }
+<<<<<<< HEAD
   ngOnInit(): void {
     this.dataStudent.paginator = this.paginator;
     this.syncStatus();
@@ -71,6 +111,8 @@ export class ExecutingTopicComponent implements AfterViewInit {
       .getTopicsByStatus('En ejecución')
       .subscribe((data) => (this.dataStudent = data));
   }
+=======
+>>>>>>> mirelly
 }
 
 @Component({

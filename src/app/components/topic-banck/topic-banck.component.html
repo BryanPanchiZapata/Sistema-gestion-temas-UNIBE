@@ -62,7 +62,7 @@
       </div>
       <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
     </mat-tab>
-    <mat-tab label="En Ejecución" *ngIf="role !== 'STUDENT'">
+    <mat-tab label="En ejecución" *ngIf="role !== 'STUDENT'">
       <app-executing-topic></app-executing-topic>
     </mat-tab>
     <mat-tab label="Ejecutado" *ngIf="role !== 'STUDENT'">

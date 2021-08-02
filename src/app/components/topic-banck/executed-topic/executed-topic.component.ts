@@ -49,7 +49,11 @@ export class ExecutedTopicComponent implements AfterViewInit {
 
   sync() {
     if (this.academic.career?.id) {
-      this.topicStudentService.getTopicStudentsByCareer(this.academic.career?.id, "Ejecutado")
+      this.topicStudentService.getTopicStudentsByCareer(this.academic.career?.id, "Ejecutado").subscribe(
+        data => {
+          this.dataStudent = data
+        }
+      )
     } else {
       this.topicStudentService
         .getTopicsByStatus('Ejecutado')
