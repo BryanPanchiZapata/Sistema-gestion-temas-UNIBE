@@ -1,13 +1,10 @@
-import { TopicModel } from 'src/app/models/topic-model';
-import { TopicProposalModel } from 'src/app/models/topic-proposal-model';
-import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
-import { TopicApprovalModel } from 'src/app/models/topic-approval-model';
 import { TopicProposalService } from 'src/app/services/topic-proposal.service';
 import { TopicDenunciationService } from 'src/app/services/topic-denunciation.service';
 import { TopicApprovalService } from 'src/app/services/topic-approval.service';
-import { TopicService } from 'src/app/services/topic.service';
-import { AuthService } from './../../../services/auth.service';
-import { UserAcademicModel } from './../../../models/user-model';
+import { TopicProposalModel } from 'src/app/models/topic-proposal-model';
+import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
+import { TopicApprovalModel } from 'src/app/models/topic-approval-model';
+import { TopicModel } from 'src/app/models/topic-model';
 import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
 import {
   MatDialog,
@@ -17,8 +14,11 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
+import { UserAcademicModel } from 'src/app/models/user-model';
+import { AuthService } from 'src/app/services/auth.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
+import { TopicService } from 'src/app/services/topic.service';
 
 @Component({
   selector: 'app-executing-topic',
@@ -34,10 +34,10 @@ export class ExecutingTopicComponent implements AfterViewInit {
 
   constructor(
     private topicStudentService: TopicStudentService,
+    public topicService: TopicService,
     public dialog: MatDialog,
     private authService: AuthService,
-    private topicStudentSvr: TopicStudentService,
-    private topicService: TopicService,
+    private topicStudentSvr: TopicStudentService
   ) {
   }
 

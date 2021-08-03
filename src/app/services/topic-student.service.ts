@@ -12,6 +12,16 @@ export class TopicStudentService {
     'https://degreetopics-api.herokuapp.com/degreetopics/v1/student_topic';
   constructor(private http: HttpClient) { }
 
+  getAllTopicStudent(): Observable<any> {
+    return this.http.get(this.url).pipe(
+      map((response) => response),
+      catchError((error) => {
+        alert(error.error);
+        return error;
+      })
+    );
+  }
+
   getTopicStudentsByCareer(career: string, topicStatus: string): Observable<any> {
     return this.http.get(this.url + '/career/' + career + '/topic_status/' + topicStatus).pipe(
       map((response) => response),
@@ -85,7 +95,7 @@ export class TopicStudentService {
     return this.http.patch(this.url + '/' + id, topicStudent).pipe(
       map((response) => response),
       catchError((error) => {
-        alert(error.error);
+        alert("El estudiante aún no ha presentado la Propuesta de Tema");
         return error;
       })
     );

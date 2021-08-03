@@ -25,6 +25,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicService } from 'src/app/services/topic.service';
 import { TopicModel } from 'src/app/models/topic-model';
+import { MatSort } from '@angular/material/sort';
 import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
@@ -33,8 +34,18 @@ import { SpinnerService } from 'src/app/services/spinner.service';
   templateUrl: './topic-banck.component.html',
 })
 export class TopicBanckComponent implements AfterViewInit, OnInit {
+  displayedColumns: string[] = [
+    'position',
+    'tema',
+    'articulacion',
+    'carrera',
+    'accion',
+  ];
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   dataSource = new MatTableDataSource();
   approvalNotification: TopicApprovalModel = {};
+  value = '';
   topicStudent: TopicStudentModel = {};
   academic: UserAcademicModel = {};
   denunciation: TopicDenunciationModel = {};
@@ -104,7 +115,7 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
 
   openDialog(id: string | null) {
     const dialogRef = this.dialog.open(AddTopicComponent, {
-      data: id
+      data: id,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -123,20 +134,12 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     this.dialog.open(ChangeTopicComponent);
   }
 
-  displayedColumns: string[] = [
-    'position',
-    'tema',
-    'articulacion',
-    'carrera',
-    'accion',
-  ];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
+   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -145,13 +148,17 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     }
   }
 
+/*   handleSearch(value: string) {
+    this.filtro_valor = value;
+    console.log(value);
+  }
+  filtro_valor = ''; */
+
   getDataUser() {
-    this.authService.profileUser().subscribe(
-      data => {
-        this.academic = data;
-        this.sync();
-      }
-    );
+    this.authService.profileUser().subscribe((data) => {
+      this.academic = data;
+      this.sync();
+    });
   }
 
   sync() {
@@ -170,7 +177,6 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
           }
         );
     }
-
   }
 
   chooseTopic(topic: TopicModel) {
@@ -188,6 +194,7 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     this.topicService.deleteTopic(id).subscribe((data) => {
       this.dataSource.data = data;
       this.sync();
+      this.value = '';
     });
   }
 }
@@ -205,7 +212,7 @@ export class DialogTopicComponent {
     private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogTopicComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.sync();
@@ -214,12 +221,9 @@ export class DialogTopicComponent {
 
   sync(): void {
     if (this.id !== null)
-      this.topicService
-        .getTopicById(this.id)
-        .subscribe(
-          data => {
-            this.topic = data
-          });
+      this.topicService.getTopicById(this.id).subscribe((data) => {
+        this.topic = data;
+      });
   }
 }
 
@@ -259,5 +263,4 @@ export class ChangeTopicComponent implements OnInit {
         }
       )
   }
-
 }

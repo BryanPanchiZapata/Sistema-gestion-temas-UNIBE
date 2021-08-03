@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-executed-topic',
@@ -22,6 +23,8 @@ export class ExecutedTopicComponent implements AfterViewInit {
   dataStudent = new MatTableDataSource();
   academic: UserAcademicModel = {};
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   constructor(
     private topicStudentService: TopicStudentService,
     public dialog: MatDialog,
@@ -65,9 +68,7 @@ export class ExecutedTopicComponent implements AfterViewInit {
       data: id,
     });
   }
-  navigateToTopic(topic: TopicStudentModel): void {
-    this.route.navigate(['/topicStudent/' + topic.id]);
-  }
+ 
 
   displayedColumns: string[] = [
     'position',
@@ -79,10 +80,11 @@ export class ExecutedTopicComponent implements AfterViewInit {
     'fecha',
     'evaluacion',
   ];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+
 
   ngAfterViewInit() {
     this.dataStudent.paginator = this.paginator;
+    this.dataStudent.sort = this.sort;
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

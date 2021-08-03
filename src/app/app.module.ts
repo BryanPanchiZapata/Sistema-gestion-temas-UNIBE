@@ -31,6 +31,8 @@ import { TopicNotificationListComponent } from './components/topic-notification/
 import { TopicNotificationReadComponent } from './components/topic-notification/topic-notification-read/topic-notification-read.component';
 import { TopicDenunciationReadComponent } from './components/topic-denunciation/topic-denunciation-read/topic-denunciation-read.component';
 import { TopicProposalReadComponent } from './components/topic-proposal/topic-proposal-read/topic-proposal-read.component';
+import { SearchComponent } from './components/search/search.component';
+import { SearchPipe } from './components/pipe/search.pipe';
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { TopicProposalReadComponent } from './components/topic-proposal/topic-pr
     TopicNotificationReadComponent,
     TopicDenunciationReadComponent,
     ChangeTopicComponent,
-    TopicProposalReadComponent
+    TopicProposalReadComponent,
+    SearchComponent,
+    SearchPipe,
   ],
   imports: [
     BrowserModule,

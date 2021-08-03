@@ -31,6 +31,7 @@
     <mat-icon class="btn__bar" [matMenuTriggerFor]="bar__responsive" src="../../assets/menu.png" alt="menu">
       menu</mat-icon>
     <mat-menu #bar__responsive="matMenu">
+      <a class="mat-menu" routerLink="/profile"><button mat-menu-item><mat-icon class="account">account_circle</mat-icon> {{user?.firstName}} {{user?.lastName}} </button></a>
       <a class="mat-menu" routerLink="/"
         *ngIf="role === 'STUDENT' || role === 'CAREER_DIRECTOR' || role === 'AUTHORITY'"><button mat-menu-item>Banco de
           temas</button></a>
@@ -43,9 +44,7 @@
           tema</button></a>
       <a class="mat-menu" routerLink="/payment-registration" *ngIf="role === 'FINANCIAL'"><button mat-menu-item>Registro
           de pago</button></a>
-
-      <a class="mat-menu" routerLink="/profile"><button mat-menu-item>Perfil de usuario</button></a>
-      <a class="mat-menu" href="#"><button mat-menu-item (click)="logOut()">Cerrar Sesión</button></a>
+      <a class="mat-menu"><button mat-menu-item (click)="logOut()">Cerrar Sesión</button></a>
     </mat-menu>
   </nav>
 </div>

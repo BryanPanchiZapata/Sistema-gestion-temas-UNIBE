@@ -1,5 +1,10 @@
 <div class="container__button">
-  <input matInput (keyup)="applyFilter($event)" type="text" placeholder="Buscar..." />
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    type="text"
+    placeholder="Buscar..."
+  #input/>
 </div>
 <div class="mat-elevation-z8 responsive">
   <table mat-table recycleRows [dataSource]="dataStudent">
