@@ -19,8 +19,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicService } from 'src/app/services/topic.service';
 import { TopicModel } from 'src/app/models/topic-model';
-import { MatSort } from '@angular/material/sort';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-topic-banck',
@@ -37,11 +37,12 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
   ];
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  dataSource = new MatTableDataSource();
-  value = '';
+  topic: TopicStudentModel[] = [];
+  dataSource: MatTableDataSource<TopicStudentModel[]>;
   topicStudent: TopicStudentModel = {};
   academic: UserAcademicModel = {};
   role: String | null;
+
   constructor(
     private spinnerService: SpinnerService,
     private topicService: TopicService,
@@ -49,6 +50,7 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     private topicStudentSvr: TopicStudentService,
     private authService: AuthService
   ) {}
+  filterPost = '';
 
   openDialog(id: string | null) {
     const dialogRef = this.dialog.open(AddTopicComponent, {
@@ -72,30 +74,18 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-   applyFilter(event: Event) {
+  applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  } 
+  }
 
   ngOnInit(): void {
     this.role = this.authService.getRole();
     this.getDataUser();
-    this.dataSource.paginator = this.paginator;
   }
-
-/*   handleSearch(value: string) {
-    this.filtro_valor = value;
-    console.log(value);
-  }
-  filtro_valor = ''; */
 
   getDataUser() {
     this.authService.profileUser().subscribe((data) => {
@@ -130,7 +120,6 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     this.topicService.deleteTopic(id).subscribe((data) => {
       this.dataSource.data = data;
       this.sync();
-      this.value = '';
     });
   }
 }
