@@ -29,7 +29,6 @@ export class ProfileComponent implements OnInit {
     firstName: ['', Validators.required],
     email: ['', [Validators.required, Validators.pattern(this.isValidEmail)]],
     lastName: ['', Validators.required],
-    password: [[''], [ Validators.minLength(8)]],
     secondName: [''],
     secondLastname: ['']
   });
