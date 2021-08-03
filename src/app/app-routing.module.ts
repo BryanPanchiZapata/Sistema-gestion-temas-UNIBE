@@ -1,3 +1,4 @@
+import { TopicProposalReadComponent } from './components/topic-proposal/topic-proposal-read/topic-proposal-read.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -45,6 +46,10 @@ const routes: Routes = [
       {
         path: TopicProposalComponent.END_POINT,
         component: TopicProposalComponent, canActivate: [guard], data: {expectedRol: ['STUDENT']}
+      },
+      {
+        path: TopicProposalReadComponent.END_POINT,
+        component: TopicProposalReadComponent, canActivate: [guard], data: {expectedRol: ['STUDENT', 'CAREER_DIRECTOR','AUTHORITY']}
       },
       {
         path: ProfileComponent.END_POINT,

@@ -3,7 +3,7 @@ import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { Router } from '@angular/router';
 import { TopicProposalModel } from './../../models/topic-proposal-model';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
-import { FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
 export class TopicProposalComponent implements OnInit {
   static END_POINT = 'topic-proposal';
   public topicStudent: TopicStudentModel = {};
-  public proposalM: TopicProposalModel;
+  public proposalM: TopicProposalModel = {};
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
@@ -25,18 +25,43 @@ export class TopicProposalComponent implements OnInit {
     });
   }
 
+  get objectivesSpecific() {
+    return this.proposalForm.get('objectivesSpecific') as FormArray
+  }
+
   proposalForm = this.formBuilder.group({
-    objectives: ['', Validators.required],
+    objectiveGeneral: ['', Validators.required],
+    objectivesSpecific: this.formBuilder.array([]),
     studyJustification: ['', Validators.required],
     topicDescription: ['', Validators.required],
   });
 
-  ngOnInit(): void {
+  addObjectivesSpecific() {
+    const objectiveSpecificFormGroup = this.formBuilder.group({
+      objectivesSpecific: '',
+    });
+    this.objectivesSpecific.push(objectiveSpecificFormGroup);
+  }
 
+  removeObjectivesSpecific(indice: number) {
+    this.objectivesSpecific.removeAt(indice);
+  }
+
+  ngOnInit(): void {
+    this.sync();
+  }
+
+  sync() {
+    this.topicStudentSvr.getTopicStudentByStudentId().subscribe(
+      data => {
+        this.topicStudent = data;
+      }
+    )
   }
 
   onCancel() {
     this.proposalForm.reset();
+    this.objectivesSpecific.controls.splice(0, this.objectivesSpecific.length)
     this.router.navigate(['']);
   }
 
@@ -45,6 +70,7 @@ export class TopicProposalComponent implements OnInit {
       let proposal = Object.assign(this.proposalForm.value, { topicStudent: this.topicStudent })
       this.topicProposalSrv.createProposal(proposal).subscribe(
         data => {
+          this.router.navigate(['topic-proposal/read/' + this.topicStudent.topic?.id])
           alert("La propuesta de tema ha sido enviada")
         }
       )

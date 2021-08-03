@@ -15,11 +15,21 @@
       <h4>Descripción breve del tema:</h4>
       <p>{{ proposal?.topicDescription }}</p>
 
-      <h4>Objetivos generales y específicos:</h4>
-      <p>{{ proposal?.objectives }}</p>
+      <h4>Objetivo generals:</h4>
+      <p>{{ proposal?.objectiveGeneral }}</p>
+
+      <h4>Objetivos específicos:</h4>
+      <li *ngFor="let objetive of proposal?.objectivesSpecific">{{ objetive }}</li>
 
       <h4>Justificación breve del estudio:</h4>
       <p>{{ proposal?.studyJustification }}</p>
     </div>
   </mat-card>
+</div>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <button mat-raised-button routerLink="/">Salir</button>
+  <button mat-raised-button class="secondary" (click)="onDeleteProposal()">Borrar</button>
+  <button type="submit" class="primary" mat-raised-button (click)="print('proposal')">
+    Imprimir
+  </button>
 </div>

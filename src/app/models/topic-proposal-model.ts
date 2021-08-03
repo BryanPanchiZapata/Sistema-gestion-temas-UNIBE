@@ -2,8 +2,9 @@ import { TopicStudentModel } from "./topic-student-model";
 
 export interface TopicProposalModel {
   id?: string,
-  objectives?: string,
+  objectiveGeneral?: string,
+  objectivesSpecific?: string[],
   studyJustification?: string,
   topicDescription?: string,
-  topicStudent?: TopicStudentModel
+  topicStudent?: TopicStudentModel,
 }

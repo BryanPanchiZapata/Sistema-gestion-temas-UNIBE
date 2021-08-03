@@ -61,10 +61,10 @@ export class TopicStudentService {
   }
 
   getTopicStudentByStudent(ci: string, career: string): Observable<any> {
-    return this.http.get(this.url + '/student/' + ci + '/student/' + career).pipe(
+    return this.http.get(this.url + '/student/' + ci + '/career/' + career).pipe(
       map((response) => response),
       catchError((error) => {
-        alert(error.error);
+        alert("Estudiante no encontrado");
         return error;
       })
     );

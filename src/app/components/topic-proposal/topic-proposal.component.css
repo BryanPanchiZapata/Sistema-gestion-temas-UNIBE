@@ -11,6 +11,10 @@ mat-form-field {
   width: 100%;
 }
 
+.objective {
+  width: 100%;
+}
+
 mat-card {
   padding: 1cm 3cm 1cm 3cm;
   width: 800px;
@@ -19,6 +23,9 @@ mat-card {
 .mat-card-lt-sm {
   padding: 1rem;
   width: 100vw;
+}
+.no-margin-left {
+  margin-left: 0;
 }
 
 .container__form img {
@@ -38,6 +45,10 @@ button {
 .primary {
   background-color: var(--primary-color);
   color: #fff;
+}
+
+.secondary {
+  background-color: var(--secondary-color);
 }
 
 @media screen and (max-width: 960px) {

@@ -18,6 +18,10 @@ h1 {
   color: #fff;
 }
 
+a {
+  color: black;
+}
+
 .button_secondary {
   background-color: var(--secondary-color);
 }

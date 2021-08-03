@@ -6,30 +6,56 @@
       <div fxLayout="column" fxLayoutAlign="center start">
         <h4>Tema de trabajo de titulación:</h4>
         <p>
-
+          {{topicStudent?.topic?.name}}
         </p>
 
         <h4>Descripción breve del tema:</h4>
         <mat-form-field appearance="fill">
-          <textarea matInput formControlName="topicDescription" id="topicDescription" type="text" required></textarea>
+          <textarea matInput formControlName="topicDescription" id="topicDescription" type="text" cols="100" wrap="hard"
+            autocapitalize="sentences" required></textarea>
           <mat-error *ngIf="proposalForm.get('topicDescription')?.hasError('required')">Campo
             <strong>obligatorio</strong>
           </mat-error>
           <mat-hint align="end">{{proposalForm.controls.topicDescription.value.length}} / 500</mat-hint>
         </mat-form-field>
 
-        <h4>Objetivos generales y específicos:</h4>
+        <h4>Objetivo general:</h4>
         <mat-form-field appearance="fill">
-          <textarea matInput formControlName="objectives" id="objectives" type="text" required></textarea>
-          <mat-error *ngIf="proposalForm.get('objectives')?.hasError('required')">Campo
+          <textarea matInput formControlName="objectiveGeneral" id="objectiveGeneral" type="text" cols="100" wrap="hard"
+            autocapitalize="sentences" required>
+          </textarea>
+          <mat-error *ngIf="proposalForm.get('objectiveGeneral')?.hasError('required')">Campo
             <strong>obligatorio</strong>
           </mat-error>
         </mat-form-field>
 
+        <h4>Objetivos específicos:</h4>
+        <button class="secondary no-margin-left" mat-raised-button (click)="addObjectivesSpecific()">
+          <mat-icon>add</mat-icon>Agregar
+        </button>
+        <div formArrayName="objectivesSpecific" class="objective" *ngFor="let objective of objectivesSpecific.controls; let i = index">
+          <div [formGroupName]="i">
+            <mat-label [attr.for]="'objetive'+i">Objetivo específico</mat-label>
+            <mat-form-field appearance="fill">
+              <textarea matInput [attr.id]="'objective'+i" formControlName="objectivesSpecific" type="text" cols="100"
+                wrap="hard" autocapitalize="sentences" required>
+                </textarea>
+              <mat-error *ngIf="proposalForm.get('objectivesSpecific')?.hasError('required')">Campo
+                <strong>obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+            <div>
+              <button mat-raised-button class="no-margin-left" (click)="removeObjectivesSpecific(i)">
+                <mat-icon>remove</mat-icon>Remover
+              </button>
+            </div>
+          </div>
+        </div>
+
         <h4>Justificación breve del estudio:</h4>
         <mat-form-field appearance="fill">
-          <textarea matInput formControlName="studyJustification" id="studyJustification" type="text"
-            required></textarea>
+          <textarea matInput formControlName="studyJustification" id="studyJustification" cols="100" wrap="hard"
+            autocapitalize="sentences" type="text" required></textarea>
           <mat-error *ngIf="proposalForm.get('studyJustification')?.hasError('required')">Campo
             <strong>obligatorio</strong>
           </mat-error>

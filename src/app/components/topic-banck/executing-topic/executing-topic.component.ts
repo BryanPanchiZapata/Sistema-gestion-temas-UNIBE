@@ -1,3 +1,4 @@
+import { TopicModel } from 'src/app/models/topic-model';
 import { TopicProposalModel } from 'src/app/models/topic-proposal-model';
 import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
 import { TopicApprovalModel } from 'src/app/models/topic-approval-model';
@@ -15,7 +16,6 @@ import {
 } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
@@ -26,26 +26,50 @@ import { TopicStudentService } from 'src/app/services/topic-student.service';
   styleUrls: ['./executing-topic.component.css'],
 })
 export class ExecutingTopicComponent implements AfterViewInit {
+  role: String | null;
   academic: UserAcademicModel = {};
+  topicStudent: TopicStudentModel = {};
+  haveTopic = false;
   dataStudent = new MatTableDataSource();
 
   constructor(
     private topicStudentService: TopicStudentService,
     public dialog: MatDialog,
-    private authServices: AuthService,
+    private authService: AuthService,
+    private topicStudentSvr: TopicStudentService,
     private topicService: TopicService,
   ) {
   }
 
   ngOnInit(): void {
+    this.role = this.authService.getRole();
     this.dataStudent.paginator = this.paginator;
     this.getDataUser();
+    this.onFindTopicbyStudent();
   }
 
+  onFindTopicbyStudent() {
+    this.topicStudentSvr.getTopicStudentByStudentId().subscribe(
+      data => {
+        this.topicStudent = data;
+        this.haveTopic = true;
+      }
+    )
+  }
 
+  chooseTopic(topic: TopicModel) {
+    let topicStudent = Object.assign({ topic: topic, student: this.academic });
+    this.topicStudentSvr.assigmentTopic(topicStudent).subscribe(
+      data => {
+        this.topicStudent = data;
+        this.sync();
+        this.onFindTopicbyStudent();
+      }
+    )
+  }
 
   getDataUser() {
-    this.authServices.profileUser().subscribe(
+    this.authService.profileUser().subscribe(
       data => {
         this.academic = data;
         this.sync();

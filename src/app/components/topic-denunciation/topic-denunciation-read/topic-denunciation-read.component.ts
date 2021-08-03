@@ -15,7 +15,7 @@ import { TopicDenunciationService } from 'src/app/services/topic-denunciation.se
 export class TopicDenunciationReadComponent implements OnInit {
   static END_POINT = 'topic-denunciation/read/:id';
   private readonly id: string | null;
-  public denunciation: TopicDenunciationModel;
+  public denunciation: TopicDenunciationModel = {};
   public topicStudent: TopicStudentModel;
   public academicUser: UserAcademicModel = {};
 
