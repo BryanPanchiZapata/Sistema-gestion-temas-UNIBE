@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { UserAcademicModel } from './../../models/user-model';
 import { TopicApprovalService } from './../../services/topic-approval.service';
@@ -34,7 +35,8 @@ export class TopicNotificationComponent implements OnInit {
     private topicStudentService: TopicStudentService,
     private formBuilder: FormBuilder,
     private notificationApprovalSrv: TopicApprovalService,
-    private authServices: AuthService
+    private authServices: AuthService,
+    private router: Router,
   ) {
   }
 
@@ -65,7 +67,8 @@ export class TopicNotificationComponent implements OnInit {
     this.authServices.profileUser().subscribe(
       data => {
         this.academic = data;
-        this.onFindByStudent();      }
+        this.onFindByStudent();
+      }
     );
   }
 
@@ -85,14 +88,14 @@ export class TopicNotificationComponent implements OnInit {
   }
 
   onFindByStudent() {
-    if(this.academic.career?.id)
-    if (this.ciStudentControl.valid)
-      this.topicStudentService.getTopicStudentByStudent(this.ciStudentControl.value, this.academic.career?.id).subscribe(
-        data => {
-          this.topicStudent = data;
-          this.resetForms();
-        }
-      )
+    if (this.academic.career?.id)
+      if (this.ciStudentControl.valid)
+        this.topicStudentService.getTopicStudentByStudent(this.ciStudentControl.value, this.academic.career?.id).subscribe(
+          data => {
+            this.topicStudent = data;
+            this.resetForms();
+          }
+        )
   }
 
   onEvaluationProposal(stepper: MatStepper) {
@@ -119,11 +122,12 @@ export class TopicNotificationComponent implements OnInit {
             this.approval = data
             this.resetForms();
             this.ciStudentControl.reset();
-            alert("La notificación ha sido enviada")
+            alert("La notificación ha sido enviada");
+            this.router.navigate(['topic-approval/read/' + this.topicStudent.id]);
           }
         )
       }
-    } else if(this.topicStudent.topicEvaluation === 'Reprobado' || this.topicStudent.topicEvaluation === 'Aprobado con observaciones'){
+    } else if (this.topicStudent.topicEvaluation === 'Reprobado' || this.topicStudent.topicEvaluation === 'Aprobado con observaciones') {
       if (this.notificationForm.valid && this.observations.valid) {
         let notification = Object.assign(this.notificationForm.value, { topicStudent: this.topicStudent, observations: this.observations.value })
         this.notificationApprovalSrv.createNotification(notification).subscribe(
@@ -131,7 +135,8 @@ export class TopicNotificationComponent implements OnInit {
             this.approval = data;
             this.resetForms();
             this.ciStudentControl.reset();
-            alert("La notificación ha sido enviada")
+            alert("La notificación ha sido enviada");
+            this.router.navigate(['topic-approval/read/' + this.topicStudent.id]);
           }
         )
 

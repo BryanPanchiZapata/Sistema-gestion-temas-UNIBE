@@ -52,7 +52,7 @@ export class TopicDenunciationReadComponent implements OnInit {
         });
   }
 
-  onDeleteNotification() {
+  onDeleteDenunciation() {
     if(this.denunciation?.id)
     this.denunciationSrv.deleteDenunciation(this.denunciation?.id).subscribe(
       data => {

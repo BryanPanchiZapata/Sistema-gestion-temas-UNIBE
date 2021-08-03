@@ -5,7 +5,7 @@ import { SemesterLevel, InvestigationModality, ProjectType, InvestigationLine } 
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
 

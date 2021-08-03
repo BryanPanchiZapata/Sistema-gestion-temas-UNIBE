@@ -22,9 +22,6 @@ export class TopicNotificationListComponent implements AfterViewInit, OnInit {
     private topicApprovalService: TopicApprovalService,
     private route: Router
   ) {
-    this.topicApprovalService.getAllTopicApproval().subscribe((data) => {
-      this.dataApprovalNotification.data = data;
-    });
   }
 
   displayedColumns: string[] = [
@@ -54,11 +51,18 @@ export class TopicNotificationListComponent implements AfterViewInit, OnInit {
   }
   ngOnInit(): void {
     this.dataApprovalNotification.paginator = this.paginator;
+    this.sync()
   }
 
-  onDeleteTopic(id: string): void {
-    this.topicApprovalService.deleteTopic(id).subscribe((data) => {
+  sync() {
+    this.topicApprovalService.getAllTopicApproval().subscribe((data) => {
       this.dataApprovalNotification.data = data;
+    });
+  }
+  onDeleteTopic(id: string): void {
+    this.topicApprovalService.deleteNotification(id).subscribe((data) => {
+      this.dataApprovalNotification.data = data;
+      this.sync()
     });
   }
 }
