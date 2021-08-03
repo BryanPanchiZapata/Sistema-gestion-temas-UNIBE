@@ -16,7 +16,6 @@
           <mat-error *ngIf="proposalForm.get('topicDescription')?.hasError('required')">Campo
             <strong>obligatorio</strong>
           </mat-error>
-          <mat-hint align="end">{{proposalForm.controls.topicDescription.value.length}} / 500</mat-hint>
         </mat-form-field>
 
         <h4>Objetivo general:</h4>
@@ -46,7 +45,6 @@
           <mat-error *ngIf="proposalForm.get('studyJustification')?.hasError('required')">Campo
             <strong>obligatorio</strong>
           </mat-error>
-          <mat-hint align="end">{{proposalForm.controls.studyJustification.value.length}} / 500</mat-hint>
         </mat-form-field>
       </div>
       <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
