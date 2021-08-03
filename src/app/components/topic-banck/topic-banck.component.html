@@ -1,86 +1,156 @@
-<section class="container__topicBanck">
-  <h1 class="title">Banco de Temas</h1>
-  <mat-tab-group
-    class="mat-elevation-z4"
-    mat-stretch-tabs
-    animationDuration="0ms"
-  >
-    <mat-tab label="Disponible">
-      <div class="container__button">
-        <input
-          matInput
-          (keyup)="applyFilter($event)"
-          type="text"
-          placeholder="Buscar..."
-        />
-        <button
-          class="button__topicbanck"
-          mat-button
-          (click)="openDialog(null)"
-        >
-          Añadir nuevo tema
+<div>
+  <section class="container__topicBanck"
+    *ngIf="role === 'CAREER_DIRECTOR' || role === 'AUTHORITY' || (role === 'STUDENT' && haveTopic === false)">
+    <h1>Banco de Temas {{academic?.career?.name}}</h1>
+    <mat-tab-group class="mat-elevation-z4" mat-stretch-tabs animationDuration="0ms">
+      <mat-tab label="Disponible">
+        <div class="container__button">
+          <input matInput (keyup)="applyFilter($event)" [(ngModel)]="value" placeholder="Buscar..." />
+          <button class="button_secondary" mat-button (click)="openDialog(null)" *ngIf="role === 'CAREER_DIRECTOR'">
+            Añadir nuevo tema
+          </button>
+
+
+          <button class="button_secondary" mat-button (click)="openConfirmChangeTopic()" *ngIf="role === 'STUDENT'">
+            Eliminar selección
+          </button>
+        </div>
+
+        <div class="mat-elevation-z8 responsive">
+          <table mat-table recycleRows [dataSource]="dataSource">
+            <ng-container matColumnDef="position">
+              <th class="uno" mat-header-cell *matHeaderCellDef>No.</th>
+              <td mat-cell *matCellDef="let topic; let indice = index">
+                {{ indice + 1 + paginator.pageIndex * paginator.pageSize }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="tema">
+              <th class="dos" mat-header-cell *matHeaderCellDef>Tema</th>
+              <td class="Open__Dialog__Topic" mat-cell *matCellDef="let topic" (click)="openDialogTopic(topic.id)">
+                {{ topic.name }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="articulacion">
+              <th class="tres" mat-header-cell *matHeaderCellDef>Articulación</th>
+              <td mat-cell *matCellDef="let topic">{{ topic?.articulation }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="carrera">
+              <th class="cinco" mat-header-cell *matHeaderCellDef>Carrera</th>
+              <td mat-cell *matCellDef="let topic">{{ topic?.career?.name }}</td>
+            </ng-container>
+
+            <<<<<<< HEAD <ng-container matColumnDef="accion">
+              <th class="seis" mat-header-cell *matHeaderCellDef>Acciones</th>
+              <td mat-cell *matCellDef="let topic">
+                <button mat-icon-button (click)="openDialogTopic(topic?.id)" *ngIf="role === 'AUTHORITY'">
+                  <mat-icon>library_books </mat-icon>
+                </button>
+                <button mat-icon-button (click)="openDialog(topic.id)" *ngIf="role === 'CAREER_DIRECTOR'">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="onDeleteTopic(topic.id)" *ngIf="role === 'CAREER_DIRECTOR'">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <button class="button__topicbanck" *ngIf="role === 'STUDENT'" mat-button (click)="chooseTopic(topic)">
+                  Seleccionar tema
+                </button>
+              </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+      </mat-tab>
+      <mat-tab label="En ejecución" *ngIf="role === 'STUDENT' || role === 'CAREER_DIRECTOR' || role === 'AUTHORITY'">
+        <app-executing-topic></app-executing-topic>
+      </mat-tab>
+      <mat-tab label="Ejecutado" *ngIf="role === 'CAREER_DIRECTOR' || role === 'AUTHORITY'">
+        <app-executed-topic></app-executed-topic>
+      </mat-tab>
+    </mat-tab-group>
+  </section>
+  <section fxLayout="column" fxLayoutAlign="start start" fxLayoutGap="gappx" fxFlex="100" class="topic-selected"
+    ngClass.lt-sm="topic-selected-xs" *ngIf="role === 'STUDENT' && haveTopic === true">
+    <div>
+      <h1>Tema de trabajo de Titulación</h1>
+      <p>{{topicStudent?.topic?.name}}</p>
+      <h2>Descripción del tema:</h2>
+      <p>{{topicStudent?.topic?.description}}</p>
+      <div fxLayout="row" fxLayout.lt-sm="column">
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <h2>Nombre del estudiante:</h2>
+          <p>{{topicStudent?.student?.firstName}} {{topicStudent?.student?.secondName}}
+            {{topicStudent?.student?.lastName}} {{topicStudent?.student?.secondLastname}} </p>
+        </div>
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <h2>Carrera:</h2>
+          <p>{{topicStudent?.student?.career?.name}}</p>
+        </div>
+      </div>
+      <ng-container matColumnDef="accion">
+        <th class="seis" mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let topic">
+          <button mat-icon-button (click)="openDialogTopic(topic.id)" *ngIf="role === 'AUTHORITY'">
+            <mat-icon>library_books </mat-icon>
+          </button>
+          <button mat-icon-button (click)="openDialog(topic.id)" *ngIf="role === 'CAREER_DIRECTOR'">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="onDeleteTopic(topic.id)" *ngIf="role === 'CAREER_DIRECTOR'">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button class="button__topicbanck" *ngIf="role === 'STUDENT'" mat-button (click)="chooseTopic(topic)">
+            Seleccionar tema
+          </button>
+        </td>
+      </ng-container>
+
+      <div fxLayout="row" fxLayout.lt-sm="column">
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <h2>Articulación:</h2>
+          <p>{{topicStudent?.topic?.articulation}}</p>
+        </div>
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <h2>Fecha de asignación:</h2>
+          <p>{{topicStudent?.assignedDate}}</p>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayout.lt-sm="column">
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <h2>Estado del tema:</h2>
+          <p>{{topicStudent?.topic?.topicStatus}}</p>
+        </div>
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <h2>Estado de pago de Denuncia de tema:</h2>
+          <p>{{topicStudent?.paymentDenunciation}}</p>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayout.lt-sm="column">
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <h2>Evaluación de la propuesta de tema:</h2>
+          <p>{{topicStudent?.topicEvaluation}}</p>
+        </div>
+        <div fxFlex="50" fxFlex.lt-sm="100">
+          <h2>Documentos:</h2>
+          <p><a [href]="['topic-approval/read/' + topicStudent?.id]" *ngIf="haveNotification === true">Notificación de
+              aprobación de tema</a></p>
+          <p><a [href]="['/topic-denunciation/read/' + topicStudent?.id]" *ngIf="haveDenunciation === true">Denuncia de
+              tema y modalidad de
+              investigación</a></p>
+          <p><a [href]="['topic-proposal/read/' + topicStudent?.topic?.id]" *ngIf="haveProposal === true">Propuesta de
+              tema</a></p>
+        </div>
+      </div>
+      <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx">
+        <button class="button__topicbanck" mat-button (click)="openConfirmChangeTopic()" *ngIf="role === 'STUDENT'">
+          Escoger otro tema
         </button>
       </div>
-
-      <div class="mat-elevation-z8 responsive">
-        <table mat-table recycleRows [dataSource]="dataSource">
-          <ng-container matColumnDef="position">
-            <th class="uno" mat-header-cell *matHeaderCellDef>No.</th>
-            <td mat-cell *matCellDef="let topic; let indice = index">
-              {{ indice + 1 + paginator.pageIndex * paginator.pageSize }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="tema">
-            <th class="dos" mat-header-cell *matHeaderCellDef>Tema</th>
-            <td
-              class="Open__Dialog__Topic"
-              mat-cell
-              *matCellDef="let topic"
-              (click)="openDialogTopic(topic.id)"
-            >
-              {{ topic.name }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="articulacion">
-            <th class="tres" mat-header-cell *matHeaderCellDef>Articulación</th>
-            <td mat-cell *matCellDef="let topic">{{ topic.articulation }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="estado">
-            <th class="cuatro" mat-header-cell *matHeaderCellDef>Estado</th>
-            <td mat-cell *matCellDef="let topic">{{ topic.topicStatus }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="carrera">
-            <th class="cinco" mat-header-cell *matHeaderCellDef>Carrera</th>
-            <td mat-cell *matCellDef="let topic">{{ topic.career.name }}</td>
-          </ng-container>
-
-          <ng-container matColumnDef="accion">
-            <th mat-header-cell *matHeaderCellDef>Acciones</th>
-            <td mat-cell *matCellDef="let topic">
-              <button mat-icon-button (click)="openDialog(topic.id)">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-icon-button (click)="onDeleteTopic(topic.id)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-        </table>
-      </div>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
-    </mat-tab>
-    <mat-tab label="En Ejecución">
-      <app-executing-topic></app-executing-topic>
-    </mat-tab>
-    <mat-tab label="Ejecutado">
-      <app-executed-topic></app-executed-topic>
-    </mat-tab>
-  </mat-tab-group>
-</section>
+    </div>
+  </section>
+</div>

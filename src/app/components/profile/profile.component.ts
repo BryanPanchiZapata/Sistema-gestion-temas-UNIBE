@@ -12,8 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   hide: boolean = true;
-  static END_POINT = 'profile/:id';
-  readonly id: string | null;
+  static END_POINT = 'profile';
   user: UserModel = {};
   userAcademic: UserAcademicModel = {};
 
@@ -22,7 +21,6 @@ export class ProfileComponent implements OnInit {
     private authService: AuthService,
     private formBuilder: FormBuilder,
   ) {
-    this.id = this.route.snapshot.paramMap.get('id');
   }
 
   private isValidEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -31,13 +29,8 @@ export class ProfileComponent implements OnInit {
     firstName: ['', Validators.required],
     email: ['', [Validators.required, Validators.pattern(this.isValidEmail)]],
     lastName: ['', Validators.required],
-    password: ['', [Validators.required, Validators.minLength(8)]],
     secondName: [''],
     secondLastname: ['']
-  });
-
-  academicForm = this.formBuilder.group({
-    sign: ['']
   });
 
   private initialValuesProfile(user: UserModel): void {
@@ -45,15 +38,8 @@ export class ProfileComponent implements OnInit {
       firstName: user.firstName,
       email: user.email,
       lastName: user.lastName,
-      password: user.password,
       secondName: user.secondName,
       secondLastname: user.secondLastname
-    })
-  }
-
-  private initialValuesAcademic(userAcademic: UserAcademicModel): void {
-    this.academicForm.patchValue({
-      sign: userAcademic.sign
     })
   }
 
@@ -64,49 +50,28 @@ export class ProfileComponent implements OnInit {
   }
 
   sync() {
-    if (this.id !== null) {
-      this.authService.getUserById(this.id).subscribe(
-        data => {
-          this.user = data;
-          this.initialValuesProfile(this.user);
-          if (this.user.role === "STUDENT" || this.user.role === "CAREER_DIRECTOR") {
-            this.userAcademic = data;
-            this.initialValuesAcademic(this.userAcademic);
-          }
+    this.authService.profileUser().subscribe(
+      data => {
+        this.user = data;
+        this.initialValuesProfile(this.user);
+        if (this.user.role === "STUDENT" || this.user.role === "CAREER_DIRECTOR") {
+          this.userAcademic = data;
         }
-      );
-    }
+      }
+    );
   }
 
   onCancel() {
-    this.initialValuesAcademic(this.userAcademic);
     this.initialValuesProfile(this.user);
   }
 
   onUpdateProfile() {
-    if (this.id !== null) {
-      let user = Object.assign(this.profileForm.value, this.academicForm.value);
-      if (this.user.role === "STUDENT" || this.user.role === "CAREER_DIRECTOR") {
-        if (this.profileForm.valid && this.academicForm.valid) {
-          this.authService.editProfileAcademic(this.id, user).subscribe(
-            data => this.userAcademic = data
-          );
-          this.sync();
-          alert("Perfil actualizado");
-        } else {
-          alert("Los datos ingresados son incorrectos")
-        }
-      } else if (this.user.role === "FINANCIAL" || this.user.role === "AUTHORITY") {
-        if (this.profileForm.valid) {
-          this.authService.editProfileAdmini(this.id, this.profileForm.value).subscribe(
-            data => this.user = data
-          );
-        this.sync();
-          alert("Perfil actualizado")
-        } else {
-          alert("Los datos ingresados son incorrectos")
-        }
-      }
+    if (this.profileForm.valid) {
+      this.authService.editProfile(this.profileForm.value).subscribe(
+        data => this.user = data
+      );
+      this.sync();
+      alert("Perfil actualizado")
     }
   }
 }

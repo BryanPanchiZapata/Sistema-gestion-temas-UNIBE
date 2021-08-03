@@ -1,6 +1,7 @@
-import { UserModel, UserAcademicModel } from './../../models/user-model';
-import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import { UserModel } from './../../models/user-model';
+import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
+import { AuthService } from './../../services/auth.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -8,16 +9,30 @@ import {Router} from "@angular/router";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  user: UserAcademicModel = {};
-  constructor(private router: Router) {
+  role: String | null;
+  denunciation: TopicDenunciationModel = {};
+  user: UserModel = {};
+
+  constructor(
+    private authService: AuthService,
+  ) {
+  }
+
+  getInfoUser() {
+    this.authService.profileUser().subscribe(
+      data =>{
+        this.user = data;
+      }
+    )
   }
 
   ngOnInit(): void {
-    this.canBeActivate();
+    this.role = this.authService.getRole();
+    this.getInfoUser();
   }
 
-  canBeActivate(): void {
-    if (localStorage.getItem('user') === '' || localStorage.getItem('user') === null)
-      this.router.navigate(['/login'])
+  logOut() {
+    this.authService.logOut();
+    window.location.reload();
   }
 }

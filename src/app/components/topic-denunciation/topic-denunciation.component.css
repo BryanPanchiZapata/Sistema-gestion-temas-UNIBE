@@ -38,19 +38,8 @@ h4 {
   margin: 0;
 }
 
-.firma {
-  width: 200px;
-}
-
-.firma img {
-  width: 85px;
-  margin: 0;
-}
 .firma p {
-  margin: 0;
-  width: 200px;
   text-align: center;
-  border-top: 1px solid #000;
 }
 
 button {
@@ -60,6 +49,10 @@ button {
 .primary {
   background-color: var(--primary-color);
   color: #fff;
+}
+
+.secondary {
+  background-color: var(--secondary-color);
 }
 
 @media print {
@@ -72,21 +65,11 @@ button {
   .container__form {
     width: 100%;
   }
-
-  .firma img {
-    margin: 0;
-    width: 85px;
-  }
 }
 
 @media screen and (max-width: 700px) {
   mat-card {
     padding: 0;
     width: 100%;
-  }
-
-  .firma img {
-    width: 85px;
-    margin: 0;
   }
 }

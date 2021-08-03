@@ -22,6 +22,16 @@ export class TopicStudentService {
     );
   }
 
+  getTopicStudentsByCareer(career: string, topicStatus: string): Observable<any> {
+    return this.http.get(this.url + '/career/' + career + '/topic_status/' + topicStatus).pipe(
+      map((response) => response),
+      catchError((error) => {
+        alert(error.error);
+        return error;
+      })
+    );
+  }
+
   getTopicsByStatus(topicStatus: string): Observable<any> {
     return this.http.get(this.url + '/topic_status/' + topicStatus).pipe(
       map((response) => response),
@@ -32,8 +42,46 @@ export class TopicStudentService {
     );
   }
 
+  assigmentTopic(topicStudent: TopicStudentModel): Observable<any> {
+    return this.http.post(this.url, topicStudent).pipe(
+      map((response) => response),
+      catchError((error) => {
+        alert(error.error);
+        return error;
+      })
+    );
+  }
+
   getTopicStudentById(id: string): Observable<any> {
     return this.http.get(this.url + '/' + id).pipe(
+      map((response) => response), catchError(error => {
+        return error;
+      }
+      )
+    );
+  }
+
+  getTopicStudentByStudentId(): Observable<any> {
+    return this.http.get(this.url + '/student').pipe(
+      map((response) => response), catchError(error => {
+        return error;
+      }
+      )
+    );
+  }
+
+  getTopicStudentByStudent(ci: string, career: string): Observable<any> {
+    return this.http.get(this.url + '/student/' + ci + '/career/' + career).pipe(
+      map((response) => response),
+      catchError((error) => {
+        alert("Estudiante no encontrado");
+        return error;
+      })
+    );
+  }
+
+  paymentDenunciation(ci: string, payment: String): Observable<any> {
+    return this.http.patch(this.url + '/student/' + ci, payment).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);
@@ -42,31 +90,19 @@ export class TopicStudentService {
     );
   }
 
-  getTopicStudentByStudent(ci: string): Observable<any> {
-    return this.http.get(this.url + '/student/' + ci).pipe(
-      map((response) => response),
-      catchError((error) => {
-        alert(error.error);
-        return error;
-      })
-    );
-  }
 
-  evaluationProposal(
-    id: string,
-    topicStudent: TopicStudentModel
-  ): Observable<any> {
+  evaluationProposal(id: string, topicStudent: TopicStudentModel): Observable<any> {
     return this.http.patch(this.url + '/' + id, topicStudent).pipe(
       map((response) => response),
       catchError((error) => {
-        alert(error.error);
+        alert("El estudiante aún no ha presentado la Propuesta de Tema");
         return error;
       })
     );
   }
 
-  getTopicDenunciationById(id: string): Observable<any> {
-    return this.http.get(this.url).pipe(
+  deleteAssigment(id:string) {
+    return this.http.delete(this.url + '/' + id).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);

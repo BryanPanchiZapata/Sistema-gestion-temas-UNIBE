@@ -1,14 +1,4 @@
 <form [formGroup]="topicForm" fxLayout="column" fxLayoutAlign="center center">
-  <mat-form-field appearance="legacy" ngClass.xs="mat-form-field-xs">
-    <mat-label>Carrera</mat-label>
-    <mat-select required formControlName="career" [errorStateMatcher]="matcher">
-      <mat-option *ngFor="let career of careers" [value]="career">
-        {{career.name}}
-      </mat-option>
-    </mat-select>
-    <mat-error *ngIf="topicForm.get('career')?.hasError('required')">Campo <strong>obligatorio</strong>
-    </mat-error>
-  </mat-form-field>
 
   <mat-form-field appearance="legacy" ngClass.xs="mat-form-field-xs">
     <mat-label>Tema</mat-label>

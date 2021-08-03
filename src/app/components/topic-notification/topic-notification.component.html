@@ -17,12 +17,12 @@
       </mat-form-field>
     </form>
 
-    <div *ngIf="topicStudent.student?.ci" fxLayout="column" fxLayoutAlign="center center">
+    <div *ngIf="topicStudent?.student?.ci" fxLayout="column" fxLayoutAlign="center center">
       <div class="find-student" fxLayout="column" fxLayoutAlign="start start">
-        <p><strong>Estudiante:</strong> {{topicStudent.student?.firstName}} {{topicStudent.student?.secondName}}
-          {{topicStudent.student?.lastName}} {{topicStudent.student?.secondLastname}}</p>
-        <p><strong>Carrera:</strong> {{topicStudent.topic?.career?.name}}</p>
-        <p><strong>Tema:</strong> {{topicStudent.topic?.name}}</p>
+        <p><strong>Estudiante:</strong> {{topicStudent?.student?.firstName}} {{topicStudent?.student?.secondName}}
+          {{topicStudent?.student?.lastName}} {{topicStudent?.student?.secondLastname}}</p>
+        <p><strong>Carrera:</strong> {{topicStudent?.topic?.career?.name}}</p>
+        <p><strong>Tema:</strong> {{topicStudent?.topic?.name}}</p>
       </div>
       <form [formGroup]="evaluationForm" fxLayout="column" fxLayoutAlign="center center">
         <mat-form-field class="form-evaluation" appearance="legacy">
@@ -68,12 +68,12 @@
           </mat-error>
         </mat-form-field>
         <div>
-          <p><b>{{ topicStudent.student?.firstName }} {{ topicStudent.student?.secondName }} {{
-              topicStudent.student?.lastName }} {{ topicStudent.student?.secondLastname }}</b></p>
+          <p><b>{{ topicStudent?.student?.firstName }} {{ topicStudent?.student?.secondName }} {{
+              topicStudent?.student?.lastName }} {{ topicStudent?.student?.secondLastname }}</b></p>
           <p class="spacing">Presente.</p>
           <p>De nuestras consideraciones:</p>
           <p>Por medio de la presente el Comité de Grado de la Carrera de
-            <b>{{ topicStudent.student?.career?.degree }}</b>
+            <b>{{ topicStudent?.student?.career?.degree }}</b>
             de la Universidad Iberoamericana del Ecuador (UNIB.E), en reunión
             ordinaria No.
             <mat-form-field appearance="fill">
@@ -90,7 +90,7 @@
               </mat-error>
             </mat-form-field>
             , le informa que su propuesta de investigación titulada:
-            <b> {{ topicStudent.topic?.name }}</b> ha sido:
+            <b> {{ topicStudent?.topic?.name }}</b> ha sido:
           </p>
         </div>
         <div class="observations">
@@ -109,11 +109,23 @@
             </small>
           </div>
         </div>
-        <p>Elaborado por:</p>
-        <div class="firma" fxLayout="column" fxLayoutAlign="center center">
-          <img [src]="topicStudent.student?.sign" alt="">
-          <p>{{ topicStudent.student?.firstName }} {{topicStudent.student?.lastName }}</p>
+
+        <div class="firma" fxLayout="row" fxLayoutAlign="center start" fxLayout.lt-sm="column"
+          fxLayoutAlign.lt-sm="center center">
+          <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+            <h4>Elaborado por:</h4>
+            <p>Traer datos de director de carrera</p>
+          </div>
+          <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+            <h4>Recibido por:</h4>
+            <p>{{ topicStudent?.student?.firstName }} {{topicStudent?.student?.lastName }}</p>
+          </div>
+          <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+            <h4>Entregar a:</h4>
+            <p>Secretaría de Administración y Registro</p>
+          </div>
         </div>
+
         <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
           <button mat-raised-button (click)="onCancel(stepper)">Cancelar</button>
           <button type="submit" class="primary" mat-raised-button (click)="onCreateNotification()">

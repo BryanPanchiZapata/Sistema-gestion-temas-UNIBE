@@ -20,6 +20,10 @@
   padding: 0 0.75em 0 0.75em;
 }
 
+.secondary {
+  background-color: var(--secondary-color);
+}
+
 .conatiner__card {
   margin-inline: auto;
 }
@@ -65,20 +69,8 @@ small {
   font-size: 75%;
 }
 
-.firma {
-  width: 200px;
-}
-
-.firma img {
-  width: 85px;
-  margin: 0;
-}
-
 .firma p {
-  margin: 0;
-  width: 200px;
   text-align: center;
-  border-top: 1px solid #000;
 }
 
 .primary {
@@ -96,11 +88,6 @@ small {
   .container__form {
     width: 100%;
   }
-
-  .firma img {
-    width: 85px;
-    margin: 0;
-  }
 }
 
 @media screen and (max-width: 700px) {
@@ -111,10 +98,5 @@ small {
 
   :host ::ng-deep .mat-horizontal-content-container {
     width: 100%;
-  }
-
-  .firma img {
-    width: 85px;
-    margin: 0;
   }
 }

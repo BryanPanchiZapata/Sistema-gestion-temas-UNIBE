@@ -1,10 +1,11 @@
-<mat-card id="notification" #notification class="container__form" ngClass.lt-sm="mat-card-lt-sm" fxLayout="column"
-  fxLayoutAlign="center center">
+<mat-card id="notification" #notification class="container__form" fxLayout="column" fxLayoutAlign="center center"
+  ngClass.lt-sm="mat-card-lt-sm">
   <img src="../../../assets/unibe_form.png" alt="UNIBE" />
   <div>
     <div fxLayout="column" fxLayoutAlign="center end">
       <p><strong>OFICIO N° </strong>{{ topicNotification?.documentNumber }}</p>
-      <p>Quito, D.M. {{ day }} de {{ month }} del {{ year }}</p>
+      <p>Quito, D.M. , {{topicNotification?.date | date: 'dd'}} de {{topicNotification?.date | date: 'MMMM'}} del
+        {{topicNotification?.date | date: 'yyyy'}}</p>
     </div>
 
     <div fxLayout="column" fxLayoutAlign="start start">
@@ -22,7 +23,7 @@
         <b>{{ topicNotification?.topicStudent?.student?.career?.name }}</b>
         de la Universidad Iberoamericana del Ecuador (UNIB.E), en reunión
         ordinaria No.<b>{{ topicNotification?.meetingNumber }}</b> fecha:
-        <b>{{ topicNotification?.date }}</b>, le informa que su propuesta de investigación titulada:
+        <b>{{ topicNotification?.meetingDate }}</b>, le informa que su propuesta de investigación titulada:
         <b> {{ topicNotification?.topicStudent?.topic?.name }}</b> ha sido:
       </p>
       <p *ngIf="topicNotification?.topicStudent?.topicEvaluation === 'Aprobado'">
@@ -39,20 +40,31 @@
       </p>
       <p>{{ topicNotification?.observations }}</p>
 
-      <div class="firma" fxLayout="column" fxLayoutAlign="center center">
-        <img [src]="topicStudent?.student?.sign" alt="" />
-        <p>
-          {{ topicNotification?.topicStudent?.student?.firstName }}
-          {{ topicNotification?.topicStudent?.student?.lastName }}
-        </p>
+      <div class="firma" fxLayout="row" fxLayoutAlign="center start" fxLayout.lt-sm="column"
+        fxLayoutAlign.lt-sm="center center">
+        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+          <h4>Elaborado por:</h4>
+          <p>{{academicUser?.firstName}} {{academicUser?.secondName}} {{academicUser?.lastName}}
+            {{academicUser?.secondLastname}}</p>
+        </div>
+        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+          <h4>Recibido por:</h4>
+          <p> {{ topicNotification?.topicStudent?.student?.firstName }} {{
+            topicNotification?.topicStudent?.student?.secondName }} {{topicNotification?.topicStudent?.student?.lastName
+            }} {{ topicNotification?.topicStudent?.student?.secondLastname }}</p>
+        </div>
+        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+          <h4>Entregar a:</h4>
+          <p>Secretaría de Administración y Registro</p>
+        </div>
       </div>
-    </div>
-    <div class="no-print" fxLayout="row" fxLayoutAlign="center center">
-      <button mat-raised-button>Salir</button>
-      <button mat-raised-button color="warn">Borrar</button>
-      <button type="submit" class="primary" mat-raised-button (click)="makePdf()">
-        Imprimir
-      </button>
     </div>
   </div>
 </mat-card>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <button mat-raised-button routerLink="/">Salir</button>
+  <button mat-raised-button class="secondary" (click)="onDeleteNotification()">Borrar</button>
+  <button type="submit" class="primary" mat-raised-button (click)="print('notification')">
+    Imprimir
+  </button>
+</div>

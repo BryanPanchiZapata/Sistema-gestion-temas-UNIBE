@@ -3,7 +3,18 @@
     <form fxLayout="column" [formGroup]="profileForm">
       <mat-card-header fxLayout="column" fxLayoutAlign="center center">
         <mat-card-title>Perfil de usuario</mat-card-title>
-        <mat-card-subtitle>{{user.role}}</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="user.role === 'STUDENT'">
+          Estudiante
+        </mat-card-subtitle>
+        <mat-card-subtitle *ngIf="user.role === 'CAREER_DIRECTOR'">
+          Director de Carrera
+        </mat-card-subtitle>
+        <mat-card-subtitle *ngIf="user.role === 'FINANCIAL'">
+          Dirección Financiera
+        </mat-card-subtitle>
+        <mat-card-subtitle *ngIf="user.role === 'AUTHORITY'">
+          Autoridad
+        </mat-card-subtitle>
         <mat-card-subtitle
           *ngIf="user.role === 'STUDENT' || user.role === 'CAREER_DIRECTOR'">
           Carrera: {{userAcademic.career?.name}}</mat-card-subtitle>
@@ -11,7 +22,7 @@
       </mat-card-header>
       <div fxLayout="column" fxLayoutAlign="center center">
         <mat-card-content fxLayout="column" fxLayoutAlign="center center">
-          <div class="warning">
+          <div class="warning" *ngIf="user.role === 'CAREER_DIRECTOR' || user.role === 'STUDENT'">
             <small>Advertencia: Los datos que ingrese en este apartado se mostrarán en los documentos que se generen a
               su nombre.</small>
           </div>
@@ -55,29 +66,9 @@
             <mat-error *ngIf="profileForm.get('email')?.hasError('pattern')">Email <strong>inválido</strong>
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="legacy">
-            <mat-label>Contraseña</mat-label>
-            <input [type]="hide ? 'password' : 'text'" matInput formControlName="password" required
-              [errorStateMatcher]="matcher" placeholder="Ingrese una contraseña">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-            <mat-error *ngIf="profileForm.get('password')?.hasError('required')">Campo
-              <strong>obligatorio</strong>
-            </mat-error>
-            <mat-error *ngIf="profileForm.get('password')?.hasError('minlength')">Se requiere
-              <strong>mínimo 8 caracteres</strong>
-            </mat-error>
-          </mat-form-field>
-          <form class="sign" [formGroup]="academicForm" *ngIf="user.role === 'STUDENT' || user.role === 'CAREER_DIRECTOR'" >
-            <p>Cargue su firma:</p>
-            <img src="" alt="">
-            <input te="file" required formControlName="sign">
-          </form>
         </mat-card-content>
         <mat-card-actions align="start">
-          <button mat-raised-button type="submit" (click)="onCancel()">
+          <button mat-raised-button type="submit" [disabled]="!profileForm.dirty" (click)="onCancel()">
             Cancelar
           </button>
           <button mat-raised-button class="button" type="submit" (click)="onUpdateProfile()">

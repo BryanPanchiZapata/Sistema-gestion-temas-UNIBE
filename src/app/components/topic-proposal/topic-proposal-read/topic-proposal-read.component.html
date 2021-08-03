@@ -1,0 +1,35 @@
+<div id="proposal" fxLayout="column" fxLayoutAlign="center center">
+  <mat-card
+    class="container__form"
+    ngClass.lt-sm="mat-card-lt-sm"
+    fxLayout="column"
+    fxLayoutAlign="center center"
+  >
+    <img src="../../../assets/unibe_form.png" alt="UNIBE" />
+    <h2 class="form__title">PROPUESTA DE TEMA</h2>
+
+    <div fxLayout="column" fxLayoutAlign="center start">
+      <h4>Tema de trabajo de titulación:</h4>
+      <p>{{ proposal?.topicStudent?.topic?.name }}</p>
+
+      <h4>Descripción breve del tema:</h4>
+      <p>{{ proposal?.topicDescription }}</p>
+
+      <h4>Objetivo generals:</h4>
+      <p>{{ proposal?.objectiveGeneral }}</p>
+
+      <h4>Objetivos específicos:</h4>
+      <li>{{proposal?.objectivesSpecific}}</li>
+
+      <h4>Justificación breve del estudio:</h4>
+      <p>{{ proposal?.studyJustification }}</p>
+    </div>
+  </mat-card>
+</div>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <button mat-raised-button routerLink="/">Salir</button>
+  <button mat-raised-button class="secondary" (click)="onDeleteProposal()">Borrar</button>
+  <button type="submit" class="primary" mat-raised-button (click)="print('proposal')">
+    Imprimir
+  </button>
+</div>
