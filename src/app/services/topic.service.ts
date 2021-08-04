@@ -1,6 +1,6 @@
 import { TopicModel } from './../models/topic-model';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
@@ -46,7 +46,7 @@ export class TopicService {
     return this.http.post(this.url, topic).pipe(
       map(response => response),
       catchError(error => {
-        alert(error.error)
+        alert("Los datos ingresados no son válidos")
         return error
       }
       )
@@ -57,7 +57,7 @@ export class TopicService {
     return this.http.delete(this.url + '/' + id).pipe(
       map(response => response),
       catchError(error => {
-        alert("No se puede eliminar, el tema está en ejecución o ejecutado")
+        alert(error.error)
         return error
       }
       )

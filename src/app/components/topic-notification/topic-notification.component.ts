@@ -88,9 +88,9 @@ export class TopicNotificationComponent implements OnInit {
   }
 
   onFindByStudent() {
-    if (this.academic.career?.id)
+    if (this.academic.career?.name)
       if (this.ciStudentControl.valid)
-        this.topicStudentService.getTopicStudentByStudent(this.ciStudentControl.value, this.academic.career?.id).subscribe(
+        this.topicStudentService.getTopicStudentByStudent(this.ciStudentControl.value, this.academic.career?.name).subscribe(
           data => {
             this.topicStudent = data;
             this.resetForms();

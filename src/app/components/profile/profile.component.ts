@@ -68,10 +68,12 @@ export class ProfileComponent implements OnInit {
   onUpdateProfile() {
     if (this.profileForm.valid) {
       this.authService.editProfile(this.profileForm.value).subscribe(
-        data => this.user = data
+        data => {
+          this.user = data;
+          this.sync();
+          alert("Perfil actualizado")
+        }
       );
-      this.sync();
-      alert("Perfil actualizado")
     }
   }
 }

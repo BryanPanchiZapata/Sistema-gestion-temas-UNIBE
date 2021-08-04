@@ -1,12 +1,12 @@
 <div class="container__info">
-    <p>
-      <b>Nombres del estudiante:</b> {{ topicStudent?.student?.firstName }}
-      {{ topicStudent?.student?.secondName }}
-      {{ topicStudent?.student?.lastName }}
-      {{ topicStudent?.student?.secondLastname }}
-    </p>
+  <p>
+    <b>Nombres del estudiante:</b> {{ topicStudent?.student?.firstName }}
+    {{ topicStudent?.student?.secondName }}
+    {{ topicStudent?.student?.lastName }}
+    {{ topicStudent?.student?.secondLastname }}
+  </p>
   <span class="skip"></span>
-    <p><b>Cédula:</b> {{ topicStudent?.student?.ci }}</p>
+  <p><b>Cédula:</b> {{ topicStudent?.student?.ci }}</p>
 </div>
 
 <div class="container__info">
@@ -33,7 +33,12 @@
   <p class="space"><b>Descripción del tema:</b> {{ topicStudent?.topic?.description }}</p>
 </div>
 
-<p><a [href]="['/topic-denunciation/read/' + topicStudent?.id]" >Denuncia de tema y modalidad de investigación</a></p>
-<p><a [href]="['topic-approval/read/' + topicStudent?.id]">Notificación de aprobación de tema</a></p>
-<p><a [href]="['topic-proposal/read/' + topicStudent?.topic?.id]">Propuesta de tema</a></p>
-
+<p *ngIf="role !== 'STUDENT'"><b>Documentos:</b></p>
+<p *ngIf="haveNotification === false && haveDenunciation === false && haveProposal === false"
+  style="color:rgba(0,0,0,.54)">Aún no se generan documentos</p>
+<p *ngIf="haveDenunciation === true"><a [href]="['/topic-denunciation/read/' + topicStudent?.id]">Denuncia de tema y
+    modalidad de investigación</a></p>
+<p *ngIf="haveProposal === true"><a [href]="['topic-proposal/read/' + topicStudent?.topic?.id]">Propuesta de tema</a>
+</p>
+<p *ngIf="haveNotification === true"><a [href]="['topic-approval/read/' + topicStudent?.id]">Notificación de aprobación
+    de tema</a></p>

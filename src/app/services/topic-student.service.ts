@@ -74,7 +74,7 @@ export class TopicStudentService {
     return this.http.get(this.url + '/student/' + ci + '/career/' + career).pipe(
       map((response) => response),
       catchError((error) => {
-        alert("Estudiante no encontrado");
+        alert(error.error);
         return error;
       })
     );
@@ -90,12 +90,11 @@ export class TopicStudentService {
     );
   }
 
-
   evaluationProposal(id: string, topicStudent: TopicStudentModel): Observable<any> {
     return this.http.patch(this.url + '/' + id, topicStudent).pipe(
       map((response) => response),
       catchError((error) => {
-        alert("El estudiante aún no ha presentado la Propuesta de Tema");
+        alert(error.error);
         return error;
       })
     );

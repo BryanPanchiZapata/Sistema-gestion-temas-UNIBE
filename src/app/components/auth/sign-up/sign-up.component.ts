@@ -65,6 +65,7 @@ export class SignUpComponent implements OnInit {
       if (this.registerForm.valid && this.careerForm.valid) {
         this.authService.signUpAcademic(user).subscribe(
           data => {
+            alert("Usuario registrado con éxito, inicie sesión");
             this.refresh();
             this.OnResetForm();
           }
@@ -76,6 +77,7 @@ export class SignUpComponent implements OnInit {
       if (this.registerForm.valid) {
         this.authService.signUpAdmini(this.registerForm.value).subscribe(
           data => {
+            alert("Usuario registrado con éxito, inicie sesión")
             this.refresh();
             this.OnResetForm();
           }

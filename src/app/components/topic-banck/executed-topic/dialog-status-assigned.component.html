@@ -47,8 +47,11 @@
 <div class="container__info">
   <p><b>Descripción del tema:</b> {{ topicStudent?.topic?.description }}</p>
 </div>
-
-<p><a [href]="['/topic-denunciation/read/' + topicStudent?.id]" >Denuncia de tema y modalidad de investigación</a></p>
-<p><a [href]="['topic-approval/read/' + topicStudent?.id]">Notificación de aprobación de tema</a></p>
-<p><a [href]="['topic-proposal/read/' + topicStudent?.id]">Notificación de aprobación de tema</a></p>
-
+<p><b>Documentos:</b></p>
+<p *ngIf="haveNotification === false && haveDenunciation === false && haveProposal === false"
+  style="color:rgba(0,0,0,.54)">Aún ha se generan documentos</p>
+<p *ngIf="haveDenunciation === true"><a [href]="['/topic-denunciation/read/' + topicStudent?.id]">Denuncia de tema y
+    modalidad de investigación</a></p>
+<p *ngIf="haveProposal === true"><a [href]="['topic-proposal/read/' + topicStudent?.id]">Notificación de aprobación de
+    tema</a></p>
+<p *ngIf="haveNotification === true"><a [href]="['topic-approval/read/' + topicStudent?.id]">Propuesta de tema</a></p>

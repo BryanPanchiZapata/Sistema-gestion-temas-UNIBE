@@ -21,7 +21,8 @@ table {
   width: 100%;
 }
 .btn{
-  min-width: 120px;
+  background-color: var(--primary-color);
+  color: #fff;
 }
 
 td {

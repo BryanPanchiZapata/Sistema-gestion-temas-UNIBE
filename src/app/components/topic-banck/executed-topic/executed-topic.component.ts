@@ -1,3 +1,9 @@
+import { TopicProposalService } from 'src/app/services/topic-proposal.service';
+import { TopicDenunciationService } from 'src/app/services/topic-denunciation.service';
+import { TopicApprovalService } from 'src/app/services/topic-approval.service';
+import { TopicProposalModel } from 'src/app/models/topic-proposal-model';
+import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
+import { TopicApprovalModel } from 'src/app/models/topic-approval-model';
 import { AuthService } from './../../../services/auth.service';
 import { UserAcademicModel } from './../../../models/user-model';
 import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
@@ -8,11 +14,9 @@ import {
 } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
-import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-executed-topic',
@@ -23,42 +27,43 @@ export class ExecutedTopicComponent implements AfterViewInit {
   dataStudent = new MatTableDataSource();
   academic: UserAcademicModel = {};
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   constructor(
     private topicStudentService: TopicStudentService,
     public dialog: MatDialog,
-    private route: Router,
     private authServices: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.dataStudent.paginator = this.paginator;
     this.getDataUser();
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataStudent.filter = filterValue.trim().toLowerCase();
+    console.log(this.dataStudent)
+  }
 
   getDataUser() {
-    this.authServices.profileUser().subscribe(
-      data => {
-        this.academic = data;
-        this.sync();
-      }
-    );
+    this.authServices.profileUser().subscribe((data) => {
+      this.academic = data;
+      this.sync();
+    });
   }
 
   sync() {
     if (this.academic.career?.id) {
-      this.topicStudentService.getTopicStudentsByCareer(this.academic.career?.id, "Ejecutado").subscribe(
-        data => {
-          this.dataStudent = data
-        }
-      )
+      this.topicStudentService
+        .getTopicStudentsByCareer(this.academic.career?.id, 'Ejecutado')
+        .subscribe((data) => {
+          this.dataStudent = new MatTableDataSource(data);
+        });
     } else {
       this.topicStudentService
         .getTopicsByStatus('Ejecutado')
-        .subscribe(data => {
-          this.dataStudent = data
+        .subscribe((data) => {
+          this.dataStudent = new MatTableDataSource(data);
         });
     }
   }
@@ -68,7 +73,6 @@ export class ExecutedTopicComponent implements AfterViewInit {
       data: id,
     });
   }
- 
 
   displayedColumns: string[] = [
     'position',
@@ -81,19 +85,7 @@ export class ExecutedTopicComponent implements AfterViewInit {
     'evaluacion',
   ];
 
-
-  ngAfterViewInit() {
-    this.dataStudent.paginator = this.paginator;
-    this.dataStudent.sort = this.sort;
-  }
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataStudent.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataStudent.paginator) {
-      this.dataStudent.paginator.firstPage();
-    }
-  }
+  ngAfterViewInit() {}
 }
 
 @Component({
@@ -103,12 +95,21 @@ export class ExecutedTopicComponent implements AfterViewInit {
 })
 export class DialogStatusAssignedComponent {
   public topicStudent: TopicStudentModel;
+  approvalNotification: TopicApprovalModel = {};
+  denunciation: TopicDenunciationModel = {};
+  proposal: TopicProposalModel = {};
+  haveNotification = false;
+  haveDenunciation = false;
+  haveProposal = false;
 
   constructor(
     private topicService: TopicStudentService,
     private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogStatusAssignedComponent>,
-    @Inject(MAT_DIALOG_DATA) public id: string
+    @Inject(MAT_DIALOG_DATA) public id: string,
+    private approvalNotificationSrv: TopicApprovalService,
+    private denunciationSvr: TopicDenunciationService,
+    private proposalSvr: TopicProposalService,
   ) { }
 
   ngOnInit(): void {
@@ -120,6 +121,41 @@ export class DialogStatusAssignedComponent {
     if (this.id !== null)
       this.topicService
         .getTopicStudentById(this.id)
-        .subscribe((data) => (this.topicStudent = data));
+        .subscribe(data => {
+          this.topicStudent = data;
+          this.getApprovalNotificationById();
+          this.getDenunciationById();
+          this.getProposalById();
+        });
+  }
+
+  getApprovalNotificationById() {
+    if (this.topicStudent.id)
+      this.approvalNotificationSrv.getTopicNotificationById(this.topicStudent.id).subscribe(
+        data => {
+          this.approvalNotification = data;
+          this.haveNotification = true;
+        }
+      )
+  }
+
+  getDenunciationById() {
+    if (this.topicStudent.id)
+      this.denunciationSvr.getTopicDenunciationById(this.topicStudent.id).subscribe(
+        data => {
+          this.denunciation = data;
+          this.haveDenunciation = true;
+        }
+      )
+  }
+
+  getProposalById() {
+    if (this.topicStudent.topic?.id)
+      this.proposalSvr.getTopicProposalById(this.topicStudent.topic.id).subscribe(
+        data => {
+          this.proposal = data;
+          this.haveProposal = true;
+        }
+      )
   }
 }

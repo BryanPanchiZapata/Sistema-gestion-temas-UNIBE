@@ -29,14 +29,34 @@
         </mat-form-field>
 
         <h4>Objetivos específicos:</h4>
-        <mat-form-field appearance="fill">
+        <div formArrayName="objectivesSpecific" class="objective">
+          <button class="secondary no-margin-left" type="button" mat-raised-button (click)="addObjectivesSpecific()">
+            <mat-icon>add</mat-icon>Agregar
+          </button>
+          <ng-container *ngFor="let objective of objectivesSpecific.controls; let i = index">
+            <mat-form-field appearance="fill">
+              <textarea matInput [formControlName]="i" type="text" cols="100"
+                wrap="hard" autocapitalize="sentences" required>
+                </textarea>
+              <mat-error *ngIf="objectivesSpecific.errors">Campo
+                <strong>obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+            <div>
+              <button mat-raised-button class="no-margin-left" (click)="removeObjectivesSpecific(i)">
+                <mat-icon>remove</mat-icon>Remover
+              </button>
+            </div>
+          </ng-container>
+        </div>
+        <!-- <mat-form-field appearance="fill">
           <textarea matInput formControlName="objectivesSpecific" type="text" cols="100"
             wrap="hard" autocapitalize="sentences" required>
                 </textarea>
           <mat-error *ngIf="proposalForm.get('objectivesSpecific')?.hasError('required')">Campo
             <strong>obligatorio</strong>
           </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <h4>Justificación breve del estudio:</h4>
         <mat-form-field appearance="fill">
