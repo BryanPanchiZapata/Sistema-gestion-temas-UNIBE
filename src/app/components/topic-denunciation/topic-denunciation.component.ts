@@ -1,9 +1,11 @@
+import { UserAcademicModel } from './../../models/user-model';
+import { AcademicUserService } from './../../services/academic-user.service';
 import { TopicDenunciationService } from './../../services/topic-denunciation.service';
 import { SemesterLevel, InvestigationModality, ProjectType, InvestigationLine } from './../../models/topic-denunciation-model';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
 
@@ -30,13 +32,14 @@ export class TopicDenunciationComponent implements OnInit {
   public investigationModalitys = InvestigationModality;
   public projectTypes = ProjectType;
   public investigationLine = InvestigationLine;
+  public academicUser: UserAcademicModel = {};
 
   constructor(
     private topicStudentService: TopicStudentService,
-    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private topicDenunciationSvr: TopicDenunciationService,
-    private router: Router
+    private router: Router,
+    private academicSvr: AcademicUserService
   ) {
   }
 
@@ -63,18 +66,18 @@ export class TopicDenunciationComponent implements OnInit {
     this.topicStudentService.getTopicStudentByStudentId().subscribe(
       data => {
         this.topicStudent = data;
+        this.onGetCareerDirector();
       }
     );
   }
 
-  print(elementPrint: string) {
-    const printContent = document.getElementById(elementPrint);
-    const WindowPrt = window.open('', '', 'left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0');
-    if (printContent) WindowPrt?.document.write(printContent.innerHTML);
-    WindowPrt?.document.close();
-    WindowPrt?.focus();
-    WindowPrt?.print();
-    WindowPrt?.close();
+  onGetCareerDirector() {
+    if (this.topicStudent?.topic?.career?.id)
+      this.academicSvr.getDirectorCareer(this.topicStudent?.topic?.career?.id).subscribe(
+        data => {
+          this.academicUser = data;
+        }
+      )
   }
 
   onCancel() {
@@ -87,7 +90,8 @@ export class TopicDenunciationComponent implements OnInit {
       let denunciation = Object.assign(this.denunciationForm.value, { topicStudent: this.topicStudent })
       this.topicDenunciationSvr.createDenunciation(denunciation).subscribe(
         data => {
-          this.denunciation = data
+          this.denunciation = data;
+          this.router.navigate(['/topic-denunciation/read/' + this.topicStudent.id])
           alert("La denuncia de tema ha sido enviada")
         }
       )

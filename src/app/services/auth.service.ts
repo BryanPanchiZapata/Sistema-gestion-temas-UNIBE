@@ -60,7 +60,7 @@ export class AuthService {
     return this.http.post(`${this.url}/administrative`, user).pipe(
       map(response => response),
       catchError(error => {
-        alert(error.error)
+        alert("Los datos ingresados no son válidos")
         return error
       }
       )
@@ -71,7 +71,7 @@ export class AuthService {
     return this.http.post(`${this.url}/academic`, user).pipe(
       map(response => response),
       catchError(error => {
-        alert(error.error)
+        alert("Los datos ingresados no son válidos")
         return error
       }
       )

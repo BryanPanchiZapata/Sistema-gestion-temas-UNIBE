@@ -4,7 +4,7 @@
   margin-inline: auto;
   padding: 1.5rem 0;
 }
-.title {
+h1 {
   font-size: 2rem;
   font-weight: bold;
 }
@@ -16,6 +16,10 @@
 .button__topicbanck {
   background-color: var(--primary-color);
   color: #fff;
+}
+
+a {
+  color: black;
 }
 
 .button_secondary {
@@ -69,6 +73,18 @@ td.mat-footer-cell {
 }
 span {
   font-weight: bold;
+}
+
+.topic-selected {
+  margin: 8vh 15vw 8vh 15vw;
+}
+
+.topic-selected-xs {
+  margin: 2rem;
+}
+
+h2 {
+  margin: 16px 0 0 0;
 }
 
 @media screen and (max-width: 1211px) {

@@ -29,7 +29,6 @@ export class ProfileComponent implements OnInit {
     firstName: ['', Validators.required],
     email: ['', [Validators.required, Validators.pattern(this.isValidEmail)]],
     lastName: ['', Validators.required],
-    password: [[''], [ Validators.minLength(8)]],
     secondName: [''],
     secondLastname: ['']
   });
@@ -69,10 +68,12 @@ export class ProfileComponent implements OnInit {
   onUpdateProfile() {
     if (this.profileForm.valid) {
       this.authService.editProfile(this.profileForm.value).subscribe(
-        data => this.user = data
+        data => {
+          this.user = data;
+          this.sync();
+          alert("Perfil actualizado")
+        }
       );
-      this.sync();
-      alert("Perfil actualizado")
     }
   }
 }

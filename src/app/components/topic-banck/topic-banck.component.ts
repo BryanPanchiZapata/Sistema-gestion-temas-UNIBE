@@ -1,3 +1,9 @@
+import { TopicProposalService } from 'src/app/services/topic-proposal.service';
+import { TopicDenunciationService } from 'src/app/services/topic-denunciation.service';
+import { TopicProposalModel } from 'src/app/models/topic-proposal-model';
+import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
+import { TopicApprovalModel } from 'src/app/models/topic-approval-model';
+import { TopicApprovalService } from 'src/app/services/topic-approval.service';
 import { UserAcademicModel } from './../../models/user-model';
 import { AuthService } from './../../services/auth.service';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
@@ -37,18 +43,77 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
   ];
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  dataSource= new MatTableDataSource();
+  dataSource = new MatTableDataSource();
+  approvalNotification: TopicApprovalModel = {};
+  value = '';
   topicStudent: TopicStudentModel = {};
   academic: UserAcademicModel = {};
+  denunciation: TopicDenunciationModel = {};
+  proposal: TopicProposalModel = {};
   role: String | null;
+  haveTopic = false;
+  haveNotification = false;
+  haveDenunciation = false;
+  haveProposal = false;
 
   constructor(
     private spinnerService: SpinnerService,
     private topicService: TopicService,
     public dialog: MatDialog,
     private topicStudentSvr: TopicStudentService,
-    private authService: AuthService
-  ) {}
+    private approvalNotificationSrv: TopicApprovalService,
+    private denunciationSvr: TopicDenunciationService,
+    private proposalSvr: TopicProposalService,
+    private authService: AuthService,
+  ) { }
+
+  ngOnInit(): void {
+    this.role = this.authService.getRole();
+    this.getDataUser();
+    this.dataSource.paginator = this.paginator;
+    if (this.role === "STUDENT") {
+      this.onFindTopicbyStudent();
+      this.getApprovalNotificationByStudent();
+      this.getDenunciationByStudent();
+      this.getProposalByStudent();
+    }
+  }
+
+  onFindTopicbyStudent() {
+    this.topicStudentSvr.getTopicStudentByStudentId().subscribe(
+      data => {
+        this.haveTopic = true;
+        this.topicStudent = data;
+      }
+    )
+  }
+
+  getApprovalNotificationByStudent() {
+    this.approvalNotificationSrv.getTopicNotificationByStudent().subscribe(
+      data => {
+        this.approvalNotification = data;
+        this.haveNotification = true;
+      }
+    )
+  }
+
+  getDenunciationByStudent() {
+    this.denunciationSvr.getTopicDenunciationByStudentId().subscribe(
+      data => {
+        this.denunciation = data;
+        this.haveDenunciation = true;
+      }
+    )
+  }
+
+  getProposalByStudent() {
+    this.proposalSvr.getTopicProposalByStudent().subscribe(
+      data => {
+        this.proposal = data;
+        this.haveProposal = true;
+      }
+    )
+  }
 
   openDialog(id: string | null) {
     const dialogRef = this.dialog.open(AddTopicComponent, {
@@ -72,17 +137,12 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    
+
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  ngOnInit(): void {
-    this.role = this.authService.getRole();
-    this.getDataUser();
   }
 
   getDataUser() {
@@ -108,10 +168,12 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
 
   chooseTopic(topic: TopicModel) {
     let topicStudent = Object.assign({ topic: topic, student: this.academic });
-    this.topicStudentSvr.assigmentTopic(topicStudent).subscribe((data) => {
-      this.topicStudent = data;
-      this.sync();
-    });
+    this.topicStudentSvr.assigmentTopic(topicStudent).subscribe(
+      data => {
+        this.topicStudent = data;
+        this.onFindTopicbyStudent();
+      }
+    )
   }
 
   onDeleteTopic(id: string): void {
@@ -135,7 +197,7 @@ export class DialogTopicComponent {
     private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogTopicComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.sync();
@@ -149,35 +211,41 @@ export class DialogTopicComponent {
       });
   }
 }
+
 @Component({
   selector: 'change-topic',
   styleUrls: ['./topic-banck.component.css'],
   templateUrl: './change-topic.component.html',
 })
 export class ChangeTopicComponent implements OnInit {
-  academic: UserAcademicModel = {};
+  topicStudent: TopicStudentModel = {};
 
   constructor(
     public dialogRef: MatDialogRef<ChangeTopicComponent>,
-    private authService: AuthService,
-    private spinnerService: SpinnerService
-  ) {}
-
-  // onCancel() {
-  //   this.dialogRef.close();
-  // }
+    private spinnerService: SpinnerService,
+    private topicStudentService: TopicStudentService,
+  ) { }
 
   ngOnInit() {
-    this.getDataUser();
-    console.log(this.academic);
     this.spinnerService.hide();
+    this.OnTopicStudentByStudentId();
   }
 
-  getDataUser() {
-    this.authService.profileUser().subscribe((data) => {
-      this.academic = data;
-    });
+  OnTopicStudentByStudentId() {
+    this.topicStudentService.getTopicStudentByStudentId().subscribe(
+      data => {
+        this.topicStudent = data;
+      }
+    )
   }
 
-  deleteAssignment() {}
+  onDeleteAssignment() {
+    if (this.topicStudent?.id)
+      this.topicStudentService.deleteAssigment(this.topicStudent?.id).subscribe(
+        data => {
+          window.location.reload();
+          this.dialogRef.close();
+        }
+      )
+  }
 }

@@ -34,13 +34,11 @@
 
       <p>
         <b>Director (a) de carrera: </b>
-        Traer dato de academicUser
+        {{academicUser?.firstName}} {{academicUser?.secondName}} {{academicUser?.lastName}} {{academicUser?.secondLastname}}
       </p>
 
       <p>
-        <b>Ciudad/Fecha: </b>
-
-        {{ day }} de {{ month }} del {{ year }}
+        <b>Ciudad/Fecha: </b> {{denunciation?.ciudad}}, {{denunciation?.date | date: 'dd'}} de {{denunciation?.date | date: 'MMMM'}} del {{denunciation?.date | date: 'yyyy'}}
       </p>
 
       <p>De mis consideraciones.</p>
@@ -64,22 +62,29 @@
       <p>{{ denunciation?.projectType }}</p>
       <h4>Modalidad de investigación:</h4>
       <p>{{ denunciation?.investigationModality }}</p>
-      <h4>Solicitado por:</h4>
       <div class="firma" fxLayout="row" fxLayoutAlign="center start" fxLayout.lt-sm="column"
         fxLayoutAlign.lt-sm="center center">
-        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+        <div fxFlex="100/3" class="firma" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
           <h4>Solicitado por:</h4>
-          <p>{{ topicStudent.student?.firstName }} {{topicStudent.student?.lastName }}</p>
+          <p>{{ denunciation?.topicStudent?.student?.firstName }} {{ denunciation?.topicStudent?.student?.secondName }} {{denunciation?.topicStudent?.student?.lastName }} {{ denunciation?.topicStudent?.student?.secondLastname }}</p>
         </div>
-        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+        <div fxFlex="100/3" class="firma" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
           <h4>Recibido por:</h4>
-          <p>Traer datos de director de carrera</p>
+          <p>{{academicUser?.firstName}} {{academicUser?.secondName}} {{academicUser?.lastName}} {{academicUser?.secondLastname}}</p>
         </div>
-        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+        <div fxFlex="100/3" class="firma" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
           <h4>Entregar a:</h4>
           <p>Secretaría de Administración y Registro</p>
         </div>
       </div>
+
     </div>
   </mat-card>
+</div>
+<div fxLayout="row" fxLayoutAlign="center center">
+  <button mat-raised-button routerLink="/">Salir</button>
+  <button mat-raised-button class="secondary" (click)="onDeleteDenunciation()">Borrar</button>
+  <button type="submit" class="primary" mat-raised-button (click)="print('denunciation')">
+    Imprimir
+  </button>
 </div>

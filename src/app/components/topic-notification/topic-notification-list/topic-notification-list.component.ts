@@ -20,11 +20,8 @@ export class TopicNotificationListComponent implements AfterViewInit, OnInit {
   static END_POINT = 'topic-approval';
   constructor(
     private topicApprovalService: TopicApprovalService,
-    private route: Router
   ) {
-    this.topicApprovalService.getAllTopicApproval().subscribe((data) => {
-      this.dataApprovalNotification = new MatTableDataSource(data);
-    });
+    this.sync();
   }
 
   displayedColumns: string[] = [
@@ -52,9 +49,16 @@ export class TopicNotificationListComponent implements AfterViewInit, OnInit {
     this.dataApprovalNotification.paginator = this.paginator;
   }
 
-  onDeleteTopic(id: string): void {
-    this.topicApprovalService.deleteTopic(id).subscribe((data) => {
+  sync() {
+    this.topicApprovalService.getAllTopicApproval().subscribe((data) => {
+      this.dataApprovalNotification = new MatTableDataSource(data);
+    });
+  }
+
+  onDeleteNotification(id: string): void {
+    this.topicApprovalService.deleteNotification(id).subscribe((data) => {
       this.dataApprovalNotification.data = data;
+      this.sync()
     });
   }
 }

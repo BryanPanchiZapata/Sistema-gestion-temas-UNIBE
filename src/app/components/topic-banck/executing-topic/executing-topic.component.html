@@ -67,9 +67,12 @@
       </td>
     </ng-container>
     <ng-container matColumnDef="accion">
-      <th class="ocho" mat-header-cell *matHeaderCellDef>Acción</th>
+      <th class="seis" mat-header-cell *matHeaderCellDef>Acciones</th>
       <td mat-cell *matCellDef="let topicStudent">
-        <button class="button__topicbanck" mat-button>Ejecución</button>
+        <button class="button__topicbanck" mat-button (click)="onChangeToExecuted(topicStudent?.topic?.id)" *ngIf="role === 'CAREER_DIRECTOR'">Ejecutado</button>
+        <button class="button__topicbanck" *ngIf="role === 'STUDENT'" mat-button (click)="chooseTopic(topicStudent?.topic)">
+          Seleccionar tema
+        </button>
       </td>
     </ng-container>
 

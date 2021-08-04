@@ -3,7 +3,7 @@ import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { Router } from '@angular/router';
 import { TopicProposalModel } from './../../models/topic-proposal-model';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
-import { FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -15,28 +15,72 @@ import { Component, OnInit } from '@angular/core';
 export class TopicProposalComponent implements OnInit {
   static END_POINT = 'topic-proposal';
   public topicStudent: TopicStudentModel = {};
-  public proposalM: TopicProposalModel;
+  public proposalM: TopicProposalModel = {};
 
-  constructor(
-    private formBuilder: FormBuilder,
+  constructor(private formBuilder: FormBuilder,
     private router: Router,
     private topicProposalSrv: TopicProposalService,
-    private topicStudentSvr: TopicStudentService
-  ) {
+    private topicStudentSvr: TopicStudentService) {
     this.topicStudentSvr.getTopicStudentByStudentId().subscribe((data) => {
       this.topicStudent = data;
     });
   }
 
+  get objectivesSpecific() {
+    return this.proposalForm.get('objectivesSpecific') as FormArray
+  }
+
   proposalForm = this.formBuilder.group({
-    objectives: ['', Validators.required],
+    objectiveGeneral: ['', Validators.required],
+    objectivesSpecific: this.formBuilder.array([
+      this.formBuilder.control('', [Validators.required])
+    ]),
     studyJustification: ['', Validators.required],
     topicDescription: ['', Validators.required],
   });
-  ngOnInit(): void {}
+
+  addObjectivesSpecific() {
+    this.objectivesSpecific.push(this.formBuilder.control('', [Validators.required]));
+  }
+
+  removeObjectivesSpecific(indice: number) {
+    this.objectivesSpecific.removeAt(indice);
+  }
+
+  ngOnInit(): void {
+    this.sync();
+  }
+
+  sync() {
+    this.topicStudentSvr.getTopicStudentByStudentId().subscribe(
+      data => {
+        this.topicStudent = data;
+      }
+    )
+  }
+
+  onCancel() {
+    this.proposalForm.reset();
+    this.objectivesSpecific.controls.splice(0, this.objectivesSpecific.length)
+    this.router.navigate(['']);
+  }
+
+  onCreateProposal() {
+    if (this.proposalForm.valid) {
+      let proposal = Object.assign(this.proposalForm.value, { topicStudent: this.topicStudent })
+      console.log(proposal);
+
+      this.topicProposalSrv.createProposal(proposal).subscribe(
+        data => {
+          this.router.navigate(['topic-proposal/read/' + this.topicStudent.topic?.id])
+          alert("La propuesta de tema ha sido enviada");
+        }
+      )
+    }
+  }
 
   countWords() {
-   let texto = (<HTMLInputElement>document.getElementById('topicDescription')).value
+    let texto = (<HTMLInputElement>document.getElementById('topicDescription')).value
     texto = texto.replace(/\r?\n/g, ' ');
     texto = texto.replace(/[ ]+/g, ' ');
     texto = texto.replace(/^ /, '');
@@ -46,19 +90,4 @@ export class TopicProposalComponent implements OnInit {
     console.log(numeroPalabras);
   }
 
-  onCancel() {
-    this.proposalForm.reset();
-    this.router.navigate(['']);
-  }
-
-  onCreateProposal() {
-    if (this.proposalForm.valid) {
-      let proposal = Object.assign(this.proposalForm.value, {
-        topicStudent: this.topicStudent,
-      });
-      this.topicProposalSrv.createProposal(proposal).subscribe((data) => {
-        alert('La propuesta de tema ha sido enviada');
-      });
-    }
-  }
 }

@@ -1,3 +1,9 @@
+import { TopicProposalService } from 'src/app/services/topic-proposal.service';
+import { TopicDenunciationService } from 'src/app/services/topic-denunciation.service';
+import { TopicApprovalService } from 'src/app/services/topic-approval.service';
+import { TopicProposalModel } from 'src/app/models/topic-proposal-model';
+import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
+import { TopicApprovalModel } from 'src/app/models/topic-approval-model';
 import { AuthService } from './../../../services/auth.service';
 import { UserAcademicModel } from './../../../models/user-model';
 import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
@@ -8,7 +14,6 @@ import {
 } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { TopicStudentService } from 'src/app/services/topic-student.service';
@@ -26,7 +31,6 @@ export class ExecutedTopicComponent implements AfterViewInit {
   constructor(
     private topicStudentService: TopicStudentService,
     public dialog: MatDialog,
-    private route: Router,
     private authServices: AuthService
   ) {}
 
@@ -91,13 +95,22 @@ export class ExecutedTopicComponent implements AfterViewInit {
 })
 export class DialogStatusAssignedComponent {
   public topicStudent: TopicStudentModel;
+  approvalNotification: TopicApprovalModel = {};
+  denunciation: TopicDenunciationModel = {};
+  proposal: TopicProposalModel = {};
+  haveNotification = false;
+  haveDenunciation = false;
+  haveProposal = false;
 
   constructor(
     private topicService: TopicStudentService,
     private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogStatusAssignedComponent>,
-    @Inject(MAT_DIALOG_DATA) public id: string
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public id: string,
+    private approvalNotificationSrv: TopicApprovalService,
+    private denunciationSvr: TopicDenunciationService,
+    private proposalSvr: TopicProposalService,
+  ) { }
 
   ngOnInit(): void {
     this.synch();
@@ -108,6 +121,41 @@ export class DialogStatusAssignedComponent {
     if (this.id !== null)
       this.topicService
         .getTopicStudentById(this.id)
-        .subscribe((data) => (this.topicStudent = data));
+        .subscribe(data => {
+          this.topicStudent = data;
+          this.getApprovalNotificationById();
+          this.getDenunciationById();
+          this.getProposalById();
+        });
+  }
+
+  getApprovalNotificationById() {
+    if (this.topicStudent.id)
+      this.approvalNotificationSrv.getTopicNotificationById(this.topicStudent.id).subscribe(
+        data => {
+          this.approvalNotification = data;
+          this.haveNotification = true;
+        }
+      )
+  }
+
+  getDenunciationById() {
+    if (this.topicStudent.id)
+      this.denunciationSvr.getTopicDenunciationById(this.topicStudent.id).subscribe(
+        data => {
+          this.denunciation = data;
+          this.haveDenunciation = true;
+        }
+      )
+  }
+
+  getProposalById() {
+    if (this.topicStudent.topic?.id)
+      this.proposalSvr.getTopicProposalById(this.topicStudent.topic.id).subscribe(
+        data => {
+          this.proposal = data;
+          this.haveProposal = true;
+        }
+      )
   }
 }

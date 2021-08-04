@@ -1,7 +1,7 @@
-import { Observable } from 'rxjs';
+import { UserModel } from './../../models/user-model';
+import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
 import { AuthService } from './../../services/auth.service';
-import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -10,18 +10,25 @@ import {Router} from "@angular/router";
 })
 export class NavbarComponent implements OnInit {
   role: String | null;
+  denunciation: TopicDenunciationModel = {};
+  user: UserModel = {};
 
   constructor(
-    private router: Router,
     private authService: AuthService,
-    ) {  }
+  ) {
+  }
+
+  getInfoUser() {
+    this.authService.profileUser().subscribe(
+      data =>{
+        this.user = data;
+      }
+    )
+  }
 
   ngOnInit(): void {
     this.role = this.authService.getRole();
-  }
-
-  navigateDenunciation() {
-    // if()
+    this.getInfoUser();
   }
 
   logOut() {

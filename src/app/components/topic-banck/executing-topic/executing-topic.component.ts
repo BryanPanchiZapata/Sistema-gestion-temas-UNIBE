@@ -1,3 +1,10 @@
+import { TopicProposalService } from 'src/app/services/topic-proposal.service';
+import { TopicDenunciationService } from 'src/app/services/topic-denunciation.service';
+import { TopicApprovalService } from 'src/app/services/topic-approval.service';
+import { TopicProposalModel } from 'src/app/models/topic-proposal-model';
+import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
+import { TopicApprovalModel } from 'src/app/models/topic-approval-model';
+import { TopicModel } from 'src/app/models/topic-model';
 import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
 import {
   MatDialog,
@@ -19,25 +26,51 @@ import { TopicService } from 'src/app/services/topic.service';
   styleUrls: ['./executing-topic.component.css'],
 })
 export class ExecutingTopicComponent implements AfterViewInit {
+  role: String | null;
   academic: UserAcademicModel = {};
+  topicStudent: TopicStudentModel = {};
+  haveTopic = false;
   dataStudent = new MatTableDataSource();
 
   constructor(
     private topicStudentService: TopicStudentService,
     public topicService: TopicService,
     public dialog: MatDialog,
-    private authServices: AuthService
+    private authService: AuthService,
+    private topicStudentSvr: TopicStudentService
   ) {
   }
 
   ngOnInit(): void {
+    this.role = this.authService.getRole();
     this.dataStudent.paginator = this.paginator;
     this.getDataUser();
+    if (this.role === "STUDENT")
+    this.onFindTopicbyStudent();
   }
 
+  onFindTopicbyStudent() {
+    this.topicStudentSvr.getTopicStudentByStudentId().subscribe(
+      data => {
+        this.topicStudent = data;
+        this.haveTopic = true;
+      }
+    )
+  }
+
+  chooseTopic(topic: TopicModel) {
+    let topicStudent = Object.assign({ topic: topic, student: this.academic });
+    this.topicStudentSvr.assigmentTopic(topicStudent).subscribe(
+      data => {
+        this.topicStudent = data;
+        this.onFindTopicbyStudent();
+        window.location.reload();
+      }
+    )
+  }
 
   getDataUser() {
-    this.authServices.profileUser().subscribe(
+    this.authService.profileUser().subscribe(
       data => {
         this.academic = data;
         this.sync();
@@ -87,6 +120,14 @@ export class ExecutingTopicComponent implements AfterViewInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataStudent.filter = filterValue.trim().toLowerCase();
   }
+
+  onChangeToExecuted(id: string) {
+    this.topicService.changeToExecuted(id).subscribe(
+      data => {
+        this.sync();
+      }
+    )
+  }
 }
 
 @Component({
@@ -96,13 +137,22 @@ export class ExecutingTopicComponent implements AfterViewInit {
 })
 export class DialogStatusExecutingComponent {
   public topicStudent: TopicStudentModel;
+  approvalNotification: TopicApprovalModel = {};
+  denunciation: TopicDenunciationModel = {};
+  proposal: TopicProposalModel = {};
+  haveNotification = false;
+  haveDenunciation = false;
+  haveProposal = false;
 
   constructor(
     private topicService: TopicStudentService,
     private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogStatusExecutingComponent>,
-    @Inject(MAT_DIALOG_DATA) public id: string
-  ) {}
+    @Inject(MAT_DIALOG_DATA) public id: string,
+    private approvalNotificationSrv: TopicApprovalService,
+    private denunciationSvr: TopicDenunciationService,
+    private proposalSvr: TopicProposalService,
+  ) { }
 
   ngOnInit(): void {
     this.sync();
@@ -113,6 +163,43 @@ export class DialogStatusExecutingComponent {
     if (this.id !== null)
       this.topicService
         .getTopicStudentById(this.id)
-        .subscribe((data) => (this.topicStudent = data));
+        .subscribe(
+          data => {
+            this.topicStudent = data;
+            this.getApprovalNotificationById();
+            this.getDenunciationById();
+            this.getProposalById();
+          }
+        );
+  }
+
+  getApprovalNotificationById() {
+    if (this.topicStudent.id)
+      this.approvalNotificationSrv.getTopicNotificationById(this.topicStudent.id).subscribe(
+        data => {
+          this.approvalNotification = data;
+          this.haveNotification = true;
+        }
+      )
+  }
+
+  getDenunciationById() {
+    if (this.topicStudent.id)
+      this.denunciationSvr.getTopicDenunciationById(this.topicStudent.id).subscribe(
+        data => {
+          this.denunciation = data;
+          this.haveDenunciation = true;
+        }
+      )
+  }
+
+  getProposalById() {
+    if (this.topicStudent.topic?.id)
+      this.proposalSvr.getTopicProposalById(this.topicStudent.topic.id).subscribe(
+        data => {
+          this.proposal = data;
+          this.haveProposal = true;
+        }
+      )
   }
 }

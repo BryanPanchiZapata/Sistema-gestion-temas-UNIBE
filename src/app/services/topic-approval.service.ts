@@ -26,7 +26,15 @@ export class TopicApprovalService {
   getTopicNotificationById(id: string): Observable<any> {
     return this.http.get(this.url + "/" + id).pipe(
       map(response => response), catchError(error => {
-        alert(error.error);
+        return error;
+      }
+      )
+    );
+  }
+
+  getTopicNotificationByStudent(): Observable<any> {
+    return this.http.get(this.url+ "/student").pipe(
+      map(response => response), catchError(error => {
         return error;
       }
       )
@@ -44,11 +52,11 @@ export class TopicApprovalService {
   }
 
 
-  deleteTopic(id: string): Observable<any> {
+  deleteNotification(id: string): Observable<any> {
     return this.http.delete(this.url +'/'+ id).pipe(
       map(response => response),
       catchError(error => {
-        alert("No se puede eliminar, el tema está en ejecución o ejecutado")
+        alert(error.console.error)
         return error
       }
       )

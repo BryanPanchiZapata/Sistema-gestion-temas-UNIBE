@@ -42,7 +42,7 @@
 
         <p>
           <b>Director (a) de carrera: </b>
-          Traer dato de academicUser
+          {{academicUser?.firstName}} {{academicUser?.secondName}} {{academicUser?.lastName}} {{academicUser?.secondLastname}}
         </p>
 
         <p>
@@ -82,8 +82,9 @@
       </h4>
       <div class="form-field-max">
         <mat-form-field appearance="fill">
-          <textarea matInput type="text" formControlName="articulationTopic"
+          <textarea matInput type="text" #articulationTopic formControlName="articulationTopic" maxlength="255"
             placeholder="Ingrese el nombre del proyecto de Articulación" required></textarea>
+      <mat-hint align="end">{{articulationTopic.value.length}} / 255</mat-hint>
           <mat-error *ngIf="denunciationForm.get('articulationTopic')?.hasError('required')">Campo
             <strong>obligatorio</strong>
           </mat-error>
@@ -115,17 +116,17 @@
       </mat-form-field>
 
 
-      <div class="firma" fxLayout="row" fxLayoutAlign="center start" fxLayout.lt-sm="column"
+      <div fxLayout="row" fxLayoutAlign="center start" fxLayout.lt-sm="column"
         fxLayoutAlign.lt-sm="center center">
-        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+        <div fxFlex="100/3" class="firma" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
           <h4>Solicitado por:</h4>
-          <p>{{ topicStudent.student?.firstName }} {{topicStudent.student?.lastName }}</p>
+          <p>{{ topicStudent?.student?.firstName }} {{ topicStudent?.student?.secondName }} {{topicStudent?.student?.lastName }} {{ topicStudent?.student?.secondLastname }}</p>
         </div>
-        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+        <div fxFlex="100/3" class="firma" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
           <h4>Recibido por:</h4>
-          <p>Traer datos de director de carrera</p>
+          <p>{{academicUser?.firstName}} {{academicUser?.secondName}} {{academicUser?.lastName}} {{academicUser?.secondLastname}}</p>
         </div>
-        <div fxFlex="100/3" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
+        <div fxFlex="100/3" class="firma" fxLayout="column" fxLayoutAlign="center center" fxFlex.sm="100%">
           <h4>Entregar a:</h4>
           <p>Secretaría de Administración y Registro</p>
         </div>
@@ -133,10 +134,9 @@
 
       <mat-card-actions fxLayout="row" fxLayoutAlign="center center">
         <button mat-raised-button (click)="onCancel()">Cancelar</button>
-        <button type="submit" class="primary" mat-raised-button (click)="onCreateDenunciation()" [routerLink]="['/topic-denunciation/read/' + topicStudent.id]">
+        <button type="submit" class="primary" mat-raised-button (click)="onCreateDenunciation()">
           Enviar
         </button>
-        <button (click)="print('denunciation')">Imprimir</button>
       </mat-card-actions>
     </form>
   </mat-card>

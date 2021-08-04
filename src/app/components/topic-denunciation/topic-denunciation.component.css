@@ -41,6 +41,9 @@ h4 {
 .firma p {
   text-align: center;
 }
+.firma {
+  margin: 10px;
+}
 
 button {
   margin: 0.7rem;
@@ -49,6 +52,10 @@ button {
 .primary {
   background-color: var(--primary-color);
   color: #fff;
+}
+
+.secondary {
+  background-color: var(--secondary-color);
 }
 
 @media print {
