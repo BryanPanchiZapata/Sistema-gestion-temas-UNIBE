@@ -16,9 +16,11 @@ input {
   font-size: 0.9rem;
   margin: 0.8rem 0;
 }
-
 table {
   width: 100%;
+}
+p{
+  margin: 0;
 }
 .btn{
   background-color: var(--primary-color);
