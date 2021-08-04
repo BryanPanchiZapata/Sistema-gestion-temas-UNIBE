@@ -6,13 +6,8 @@
       <mat-tab label="Disponible">
         <div class="container__button">
           <input matInput (keyup)="applyFilter($event)" [(ngModel)]="value" placeholder="Buscar..." />
-          <button class="button_secondary" mat-button (click)="openDialog(null)" *ngIf="role === 'CAREER_DIRECTOR'">
+          <button class="button__topicbanck" mat-button (click)="openDialog(null)" *ngIf="role === 'CAREER_DIRECTOR'">
             Añadir nuevo tema
-          </button>
-
-
-          <button class="button_secondary" mat-button (click)="openConfirmChangeTopic()" *ngIf="role === 'STUDENT'">
-            Eliminar selección
           </button>
         </div>
 
@@ -42,7 +37,7 @@
               <td mat-cell *matCellDef="let topic">{{ topic?.career?.name }}</td>
             </ng-container>
 
-            <<<<<<< HEAD <ng-container matColumnDef="accion">
+            <ng-container matColumnDef="accion">
               <th class="seis" mat-header-cell *matHeaderCellDef>Acciones</th>
               <td mat-cell *matCellDef="let topic">
                 <button mat-icon-button (click)="openDialogTopic(topic?.id)" *ngIf="role === 'AUTHORITY'">
@@ -58,10 +53,10 @@
                   Seleccionar tema
                 </button>
               </td>
-              </ng-container>
+            </ng-container>
 
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
           </table>
         </div>
         <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
@@ -137,13 +132,15 @@
         </div>
         <div fxFlex="50" fxFlex.lt-sm="100">
           <h2>Documentos:</h2>
-          <p><a [href]="['topic-approval/read/' + topicStudent?.id]" *ngIf="haveNotification === true">Notificación de
-              aprobación de tema</a></p>
+          <p *ngIf="haveNotification === false && haveDenunciation === false && haveProposal === false"
+            style="color:rgba(0,0,0,.54)">Aún no se generan documentos</p>
           <p><a [href]="['/topic-denunciation/read/' + topicStudent?.id]" *ngIf="haveDenunciation === true">Denuncia de
               tema y modalidad de
               investigación</a></p>
           <p><a [href]="['topic-proposal/read/' + topicStudent?.topic?.id]" *ngIf="haveProposal === true">Propuesta de
               tema</a></p>
+          <p><a [href]="['topic-approval/read/' + topicStudent?.id]" *ngIf="haveNotification === true">Notificación de
+              aprobación de tema</a></p>
         </div>
       </div>
       <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="gappx">

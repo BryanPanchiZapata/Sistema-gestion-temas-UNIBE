@@ -60,7 +60,7 @@
           <mat-form-field appearance="legacy">
             <mat-label>Email</mat-label>
             <input type="email" matInput type="email" required formControlName="email" [errorStateMatcher]="matcher"
-              placeholder="Ingrese su correo electrónico institucional">
+              placeholder="Ingrese su correo electrónico">
             <mat-error *ngIf="profileForm.get('email')?.hasError('required')">Campo <strong>obligatorio</strong>
             </mat-error>
             <mat-error *ngIf="profileForm.get('email')?.hasError('pattern')">Email <strong>inválido</strong>

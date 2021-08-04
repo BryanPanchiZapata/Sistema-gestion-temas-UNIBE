@@ -45,6 +45,7 @@ export class ExecutingTopicComponent implements AfterViewInit {
     this.role = this.authService.getRole();
     this.dataStudent.paginator = this.paginator;
     this.getDataUser();
+    if (this.role === "STUDENT")
     this.onFindTopicbyStudent();
   }
 
@@ -62,8 +63,8 @@ export class ExecutingTopicComponent implements AfterViewInit {
     this.topicStudentSvr.assigmentTopic(topicStudent).subscribe(
       data => {
         this.topicStudent = data;
-        this.sync();
         this.onFindTopicbyStudent();
+        window.location.reload();
       }
     )
   }

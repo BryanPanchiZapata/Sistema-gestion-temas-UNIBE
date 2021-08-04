@@ -18,7 +18,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class AddTopicComponent implements OnInit {
   response: any = [];
-  careers: CareerModel[];
   articulations = Articulation;
   topic: TopicModel = {};
   academic: UserAcademicModel = {};
@@ -27,7 +26,6 @@ export class AddTopicComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private careerService: CareerService,
     private topicService: TopicService,
     private spinnerService: SpinnerService,
     private authService: AuthService,
@@ -55,7 +53,7 @@ export class AddTopicComponent implements OnInit {
   }
 
   topicForm = this.formBuilder.group({
-    name: ['', Validators.required],
+    name: ['', [Validators.required, Validators.maxLength(255)]],
     articulation: ['', Validators.required],
     description: ['', Validators.required],
   });
@@ -73,21 +71,19 @@ export class AddTopicComponent implements OnInit {
       if (this.id !== null) {
         this.topicService.updateTopic(this.id, this.topicForm.value).subscribe(
           data => {
-            this.topic = data
+            this.dialogRef.close();
+            this.topic = data;
             this.onResetForm();
             this.spinnerService.hide();
-            this.dialogRef.close();
           }
         );
       } else {
         let topic = Object.assign(this.topicForm.value, {career: this.academic.career})
-        console.log(topic);
-
         this.topicService.addTopic(topic).subscribe(
           data => {
-            this.topic = data
-            this.onResetForm();
             this.dialogRef.close();
+            this.topic = data;
+            this.onResetForm();
             this.spinnerService.hide();
           }
         )
