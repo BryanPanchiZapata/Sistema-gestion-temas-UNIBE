@@ -59,7 +59,8 @@ export class TopicNotificationListComponent implements AfterViewInit, OnInit {
       this.dataApprovalNotification.data = data;
     });
   }
-  onDeleteTopic(id: string): void {
+
+  onDeleteNotification(id: string): void {
     this.topicApprovalService.deleteNotification(id).subscribe((data) => {
       this.dataApprovalNotification.data = data;
       this.sync()

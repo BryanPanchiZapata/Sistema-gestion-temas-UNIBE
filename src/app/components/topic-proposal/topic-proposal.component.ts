@@ -32,10 +32,20 @@ export class TopicProposalComponent implements OnInit {
 
   proposalForm = this.formBuilder.group({
     objectiveGeneral: ['', Validators.required],
-    objectivesSpecific: ['', Validators.required],
+    objectivesSpecific: this.formBuilder.array([
+      this.formBuilder.control('', [Validators.required])
+    ]),
     studyJustification: ['', Validators.required],
     topicDescription: ['', Validators.required],
   });
+
+  addObjectivesSpecific() {
+    this.objectivesSpecific.push(this.formBuilder.control('', [Validators.required]));
+  }
+
+  removeObjectivesSpecific(indice: number) {
+    this.objectivesSpecific.removeAt(indice);
+  }
 
   ngOnInit(): void {
     this.sync();
@@ -51,6 +61,7 @@ export class TopicProposalComponent implements OnInit {
 
   onCancel() {
     this.proposalForm.reset();
+    this.objectivesSpecific.controls.splice(0, this.objectivesSpecific.length)
     this.router.navigate(['']);
   }
 

@@ -16,7 +16,7 @@
       <p>{{ proposal?.topicDescription }}</p>
 
       <h4>Objetivo generals:</h4>
-      <p>{{ proposal?.objectiveGeneral }}</p>
+      <li *ngFor="let objetive of proposal?.objectivesSpecific">{{ objetive }}</li>
 
       <h4>Objetivos específicos:</h4>
       <li>{{proposal?.objectivesSpecific}}</li>

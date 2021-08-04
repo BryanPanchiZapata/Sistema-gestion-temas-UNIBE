@@ -87,10 +87,10 @@
       <ng-container matColumnDef="Acciones">
         <th class="nueve" mat-header-cell *matHeaderCellDef>Acciones</th>
         <td mat-cell *matCellDef="let topicApproval">
-          <button [routerLink]="['/topic-approval/read/', topicApproval.id]" mat-icon-button>
+          <button [routerLink]="['/topic-approval/read/', topicApproval?.id]" mat-icon-button>
             <mat-icon>library_books </mat-icon>
           </button>
-          <button mat-icon-button>
+          <button mat-icon-button (click)="onDeleteNotification(topicApproval?.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
