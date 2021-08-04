@@ -20,8 +20,8 @@ export class TopicNotificationListComponent implements AfterViewInit, OnInit {
   static END_POINT = 'topic-approval';
   constructor(
     private topicApprovalService: TopicApprovalService,
-    private route: Router
   ) {
+    this.sync();
   }
 
   displayedColumns: string[] = [
@@ -44,19 +44,14 @@ export class TopicNotificationListComponent implements AfterViewInit, OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataApprovalNotification.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataApprovalNotification.paginator) {
-      this.dataApprovalNotification.paginator.firstPage();
-    }
   }
   ngOnInit(): void {
     this.dataApprovalNotification.paginator = this.paginator;
-    this.sync()
   }
 
   sync() {
     this.topicApprovalService.getAllTopicApproval().subscribe((data) => {
-      this.dataApprovalNotification.data = data;
+      this.dataApprovalNotification = new MatTableDataSource(data);
     });
   }
 

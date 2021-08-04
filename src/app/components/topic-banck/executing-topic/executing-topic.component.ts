@@ -82,14 +82,14 @@ export class ExecutingTopicComponent implements AfterViewInit {
     if (this.academic.career?.id) {
       this.topicStudentService.getTopicStudentsByCareer(this.academic.career?.id, "En ejecución").subscribe(
         data => {
-          this.dataStudent = data
+          this.dataStudent = new MatTableDataSource(data);
         }
       )
     } else {
       this.topicStudentService
         .getTopicsByStatus('En ejecución')
         .subscribe(data => {
-          this.dataStudent = data
+          this.dataStudent = new MatTableDataSource(data);
         });
     }
   }
@@ -119,10 +119,6 @@ export class ExecutingTopicComponent implements AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataStudent.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataStudent.paginator) {
-      this.dataStudent.paginator.firstPage();
-    }
   }
 
   onChangeToExecuted(id: string) {

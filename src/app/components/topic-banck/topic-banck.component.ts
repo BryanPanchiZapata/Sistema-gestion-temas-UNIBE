@@ -25,8 +25,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicService } from 'src/app/services/topic.service';
 import { TopicModel } from 'src/app/models/topic-model';
-import { MatSort } from '@angular/material/sort';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-topic-banck',
@@ -137,24 +137,13 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
-
-  /*   handleSearch(value: string) {
-      this.filtro_valor = value;
-      console.log(value);
-    }
-    filtro_valor = ''; */
 
   getDataUser() {
     this.authService.profileUser().subscribe((data) => {
@@ -165,19 +154,15 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
 
   sync() {
     if (this.academic.career?.id) {
-      this.topicService.getTopicsByCareer(this.academic.career?.id).subscribe(
-        data => {
-          this.dataSource = data
-        }
-      )
-    } else {
       this.topicService
-        .getTopicsByStatus()
-        .subscribe(
-          data => {
-            this.dataSource = data;
-          }
-        );
+        .getTopicsByCareer(this.academic.career?.id)
+        .subscribe((data) => {
+          this.dataSource = new MatTableDataSource(data);
+        });
+    } else {
+      this.topicService.getTopicsByStatus().subscribe((data) => {
+        this.dataSource = new MatTableDataSource(data);
+      });
     }
   }
 
