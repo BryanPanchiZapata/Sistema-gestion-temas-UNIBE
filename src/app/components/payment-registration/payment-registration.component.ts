@@ -30,14 +30,14 @@ export class PaymentRegistrationComponent implements AfterViewInit, OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(filterValue)
+    console.log(this.dataSource)
   }
 
 
   paymentdenunciation(ciStudent: string) {
     this.topicStudentSvr.paymentDenunciation(ciStudent, "Pagado").subscribe(
       data => {
-        this.dataSource = new MatTableDataSource(data);
+        this.sync();
       }
     )
   }
