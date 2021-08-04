@@ -68,8 +68,6 @@ export class TopicProposalComponent implements OnInit {
   onCreateProposal() {
     if (this.proposalForm.valid) {
       let proposal = Object.assign(this.proposalForm.value, { topicStudent: this.topicStudent })
-      console.log(proposal);
-
       this.topicProposalSrv.createProposal(proposal).subscribe(
         data => {
           this.router.navigate(['topic-proposal/read/' + this.topicStudent.topic?.id])

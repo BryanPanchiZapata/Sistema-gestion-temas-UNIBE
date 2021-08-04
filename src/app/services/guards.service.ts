@@ -18,6 +18,8 @@ export class GuardsService implements CanActivate {
       this.router.navigate(['/login'])
     } else if (expectedRol.indexOf(role) === -1) {
       return false;
+    } else {
+      this.router.navigate(['/'])
     }
     return true;
   }
