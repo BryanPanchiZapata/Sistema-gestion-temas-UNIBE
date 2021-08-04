@@ -37,8 +37,7 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
   ];
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  topic: TopicStudentModel[] = [];
-  dataSource: MatTableDataSource<TopicStudentModel[]>;
+  dataSource= new MatTableDataSource();
   topicStudent: TopicStudentModel = {};
   academic: UserAcademicModel = {};
   role: String | null;
@@ -50,7 +49,6 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     private topicStudentSvr: TopicStudentService,
     private authService: AuthService
   ) {}
-  filterPost = '';
 
   openDialog(id: string | null) {
     const dialogRef = this.dialog.open(AddTopicComponent, {
@@ -74,7 +72,7 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
+    
   }
 
   applyFilter(event: Event) {
@@ -99,11 +97,11 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
       this.topicService
         .getTopicsByCareer(this.academic.career?.id)
         .subscribe((data) => {
-          this.dataSource = data;
+          this.dataSource = new MatTableDataSource(data);
         });
     } else {
       this.topicService.getTopicsByStatus().subscribe((data) => {
-        this.dataSource = data;
+        this.dataSource = new MatTableDataSource(data);
       });
     }
   }

@@ -11,7 +11,8 @@
         <input
           type="text"
           name="filterPost"
-          placeholder="Search..."
+          (keypress)="applyFilter($event)"
+          placeholder="Buscar..."
         />
         <button
           class="button_secondary"
