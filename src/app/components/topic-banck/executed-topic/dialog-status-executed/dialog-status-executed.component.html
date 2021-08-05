@@ -1,15 +1,4 @@
 <div class="container__info">
-  <span>Nombres del estudiante: </span>
-  <label>{{ topicStudent?.student?.firstName }} </label>
-  <label> {{ topicStudent?.student?.secondName }} </label>
-  <label> {{ topicStudent?.student?.lastName }} </label>
-  <label> {{ topicStudent?.student?.secondLastname }} </label>
-  <span class="skip"></span>
-  <span>Cédula: </span>
-  <label>{{ topicStudent?.student?.ci }}</label>
-</div>
-
-<div class="container__info">
   <div>
     <p>
       <b>Nombres del estudiante:</b> {{ topicStudent?.student?.firstName }}
@@ -47,12 +36,13 @@
 <div class="container__info">
   <p><b>Descripción del tema:</b> {{ topicStudent?.topic?.description }}</p>
 </div>
-<span *ngIf="role === 'CAREER_DIRECTOR' || role === 'AUTHORITY'"><b>Documentos:</b>
+<div *ngIf="role === 'CAREER_DIRECTOR' || role === 'AUTHORITY'"><b>Documentos:</b>
   <p *ngIf="haveNotification === false && haveDenunciation === false && haveProposal === false"
     style="color:rgba(0,0,0,.54)">Aún no se generan documentos</p>
   <p *ngIf="haveDenunciation === true"><a [href]="['/topic-denunciation/read/' + topicStudent?.id]">Denuncia de tema y
       modalidad de investigación</a></p>
-  <p *ngIf="haveNotification === true"><a [href]="['topic-approval/read/' + topicStudent?.id]">Propuesta de tema</a></p>
-  <p *ngIf="haveProposal === true"><a [href]="['topic-proposal/read/' + topicStudent?.id]">Notificación de aprobación de
-    tema</a></p>
-</span>
+      <p><a [href]="['topic-proposal/read/' + topicStudent?.topic?.id]" *ngIf="haveProposal === true">Propuesta de
+        tema</a></p>
+    <p><a [href]="['topic-approval/read/' + topicStudent?.id]" *ngIf="haveNotification === true">Notificación de
+        aprobación de tema</a></p>
+  </div>
