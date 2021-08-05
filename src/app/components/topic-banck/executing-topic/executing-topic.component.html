@@ -70,7 +70,7 @@
           (click)="chooseTopic(topicStudent?.topic?.id)">
           Seleccionar tema
         </button>
-        <button mat-icon-button (click)="openDialogTopicStudentExecuting(topicStudent.id)" *ngIf="role === 'AUTHORITY'">
+        <button mat-icon-button (click)="openDialogTopicStudentExecuting(topicStudent?.id)" *ngIf="role === 'AUTHORITY'">
           <mat-icon>library_books </mat-icon>
         </button>
       </td>
