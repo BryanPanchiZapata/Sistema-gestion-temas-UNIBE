@@ -40,7 +40,6 @@ export class DialogStatusExecutingComponent {
   ngOnInit(): void {
     this.sync();
     this.role = this.authService.getRole();
-    console.log(this.role);
     this.spinnerService.hide();
   }
 

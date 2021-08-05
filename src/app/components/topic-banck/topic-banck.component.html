@@ -41,7 +41,7 @@
                 class="Open__Dialog__Topic"
                 mat-cell
                 *matCellDef="let topic"
-                (click)="openDialogTopic(topic.id)"
+                (click)="openDialogTopic(topic?.id)"
               >
                 {{ topic?.name }}
               </td>
@@ -99,7 +99,7 @@
         </table>
 
         </div>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+
       </mat-tab>
       <mat-tab label="En ejecución" *ngIf="role === 'STUDENT' || role === 'CAREER_DIRECTOR' || role === 'AUTHORITY'">
         <app-executing-topic></app-executing-topic>
