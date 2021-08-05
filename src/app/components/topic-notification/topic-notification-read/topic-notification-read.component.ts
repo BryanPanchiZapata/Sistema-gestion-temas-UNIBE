@@ -54,6 +54,7 @@ export class TopicNotificationReadComponent implements OnInit {
         .getTopicNotificationById(this.id)
         .subscribe((data) => {
           this.topicNotification = data;
+          this.onGetCareerDirector();
         });
   }
 
@@ -63,7 +64,6 @@ export class TopicNotificationReadComponent implements OnInit {
       data => {
         this.topicNotification = data;
         this.router.navigate(['/'])
-        this.onGetCareerDirector();
       }
     )
   }
