@@ -42,6 +42,16 @@ export class TopicStudentService {
     );
   }
 
+  getTopicToPayment(): Observable<any> {
+    return this.http.get(this.url + '/payment/').pipe(
+      map((response) => response),
+      catchError((error) => {
+        alert(error.error);
+        return error;
+      })
+    );
+  }
+
   assigmentTopic(topicStudent: TopicStudentModel): Observable<any> {
     return this.http.post(this.url, topicStudent).pipe(
       map((response) => response),

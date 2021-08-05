@@ -5,13 +5,12 @@ import { TopicProposalModel } from 'src/app/models/topic-proposal-model';
 import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model';
 import { TopicApprovalModel } from 'src/app/models/topic-approval-model';
 import { TopicModel } from 'src/app/models/topic-model';
-import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { UserAcademicModel } from 'src/app/models/user-model';
@@ -25,7 +24,7 @@ import { TopicService } from 'src/app/services/topic.service';
   templateUrl: './executing-topic.component.html',
   styleUrls: ['./executing-topic.component.css'],
 })
-export class ExecutingTopicComponent implements AfterViewInit {
+export class ExecutingTopicComponent implements OnInit {
   role: String | null;
   academic: UserAcademicModel = {};
   topicStudent: TopicStudentModel = {};
@@ -38,57 +37,48 @@ export class ExecutingTopicComponent implements AfterViewInit {
     public dialog: MatDialog,
     private authService: AuthService,
     private topicStudentSvr: TopicStudentService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.role = this.authService.getRole();
-    this.dataStudent.paginator = this.paginator;
     this.getDataUser();
-    if (this.role === "STUDENT")
-    this.onFindTopicbyStudent();
+    if (this.role === 'STUDENT') this.onFindTopicbyStudent();
   }
 
   onFindTopicbyStudent() {
-    this.topicStudentSvr.getTopicStudentByStudentId().subscribe(
-      data => {
-        this.topicStudent = data;
-        this.haveTopic = true;
-      }
-    )
+    this.topicStudentSvr.getTopicStudentByStudentId().subscribe((data) => {
+      this.topicStudent = data;
+      this.haveTopic = true;
+    });
   }
 
   chooseTopic(topic: TopicModel) {
     let topicStudent = Object.assign({ topic: topic, student: this.academic });
-    this.topicStudentSvr.assigmentTopic(topicStudent).subscribe(
-      data => {
-        this.topicStudent = data;
-        this.onFindTopicbyStudent();
-        window.location.reload();
-      }
-    )
+    this.topicStudentSvr.assigmentTopic(topicStudent).subscribe((data) => {
+      this.topicStudent = data;
+      this.onFindTopicbyStudent();
+      window.location.reload();
+    });
   }
 
   getDataUser() {
-    this.authService.profileUser().subscribe(
-      data => {
-        this.academic = data;
-        this.sync();
-      }
-    );
+    this.authService.profileUser().subscribe((data) => {
+      this.academic = data;
+      this.sync();
+    });
   }
 
   sync() {
     if (this.academic.career?.id) {
-      this.topicStudentService.getTopicStudentsByCareer(this.academic.career?.id, "En ejecución").subscribe(
-        data => {
+      this.topicStudentService
+        .getTopicStudentsByCareer(this.academic.career?.id, 'En ejecución')
+        .subscribe((data) => {
           this.dataStudent = new MatTableDataSource(data);
-        }
-      )
+        });
     } else {
       this.topicStudentService
         .getTopicsByStatus('En ejecución')
-        .subscribe(data => {
+        .subscribe((data) => {
           this.dataStudent = new MatTableDataSource(data);
         });
     }
@@ -109,24 +99,18 @@ export class ExecutingTopicComponent implements AfterViewInit {
     'carrera',
     'fecha',
     'evaluacion',
-    'accion'
+    'accion',
   ];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  ngAfterViewInit() {
-    this.dataStudent.paginator = this.paginator;
-  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataStudent.filter = filterValue.trim().toLowerCase();
   }
 
   onChangeToExecuted(id: string) {
-    this.topicService.changeToExecuted(id).subscribe(
-      data => {
-        this.sync();
-      }
-    )
+    this.topicService.changeToExecuted(id).subscribe((data) => {
+      this.sync();
+    });
   }
 }
 
@@ -151,8 +135,8 @@ export class DialogStatusExecutingComponent {
     @Inject(MAT_DIALOG_DATA) public id: string,
     private approvalNotificationSrv: TopicApprovalService,
     private denunciationSvr: TopicDenunciationService,
-    private proposalSvr: TopicProposalService,
-  ) { }
+    private proposalSvr: TopicProposalService
+  ) {}
 
   ngOnInit(): void {
     this.sync();
@@ -161,45 +145,41 @@ export class DialogStatusExecutingComponent {
 
   sync(): void {
     if (this.id !== null)
-      this.topicService
-        .getTopicStudentById(this.id)
-        .subscribe(
-          data => {
-            this.topicStudent = data;
-            this.getApprovalNotificationById();
-            this.getDenunciationById();
-            this.getProposalById();
-          }
-        );
+      this.topicService.getTopicStudentById(this.id).subscribe((data) => {
+        this.topicStudent = data;
+        this.getApprovalNotificationById();
+        this.getDenunciationById();
+        this.getProposalById();
+      });
   }
 
   getApprovalNotificationById() {
     if (this.topicStudent.id)
-      this.approvalNotificationSrv.getTopicNotificationById(this.topicStudent.id).subscribe(
-        data => {
+      this.approvalNotificationSrv
+        .getTopicNotificationById(this.topicStudent.id)
+        .subscribe((data) => {
           this.approvalNotification = data;
           this.haveNotification = true;
-        }
-      )
+        });
   }
 
   getDenunciationById() {
     if (this.topicStudent.id)
-      this.denunciationSvr.getTopicDenunciationById(this.topicStudent.id).subscribe(
-        data => {
+      this.denunciationSvr
+        .getTopicDenunciationById(this.topicStudent.id)
+        .subscribe((data) => {
           this.denunciation = data;
           this.haveDenunciation = true;
-        }
-      )
+        });
   }
 
   getProposalById() {
     if (this.topicStudent.topic?.id)
-      this.proposalSvr.getTopicProposalById(this.topicStudent.topic.id).subscribe(
-        data => {
+      this.proposalSvr
+        .getTopicProposalById(this.topicStudent.topic.id)
+        .subscribe((data) => {
           this.proposal = data;
           this.haveProposal = true;
-        }
-      )
+        });
   }
 }

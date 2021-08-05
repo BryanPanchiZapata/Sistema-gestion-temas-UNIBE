@@ -6,13 +6,12 @@ import { TopicDenunciationModel } from 'src/app/models/topic-denunciation-model'
 import { TopicApprovalModel } from 'src/app/models/topic-approval-model';
 import { AuthService } from './../../../services/auth.service';
 import { UserAcademicModel } from './../../../models/user-model';
-import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicStudentModel } from 'src/app/models/topic-student-model';
 import { SpinnerService } from 'src/app/services/spinner.service';
@@ -23,11 +22,10 @@ import { TopicStudentService } from 'src/app/services/topic-student.service';
   templateUrl: './executed-topic.component.html',
   styleUrls: ['./executed-topic.component.css'],
 })
-export class ExecutedTopicComponent implements AfterViewInit {
+export class ExecutedTopicComponent implements OnInit {
   dataStudent = new MatTableDataSource();
   academic: UserAcademicModel = {};
 
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   constructor(
     private topicStudentService: TopicStudentService,
     public dialog: MatDialog,
@@ -35,14 +33,13 @@ export class ExecutedTopicComponent implements AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this.dataStudent.paginator = this.paginator;
     this.getDataUser();
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataStudent.filter = filterValue.trim().toLowerCase();
-    console.log(this.dataStudent)
+    console.log(this.dataStudent);
   }
 
   getDataUser() {
@@ -84,8 +81,6 @@ export class ExecutedTopicComponent implements AfterViewInit {
     'fecha',
     'evaluacion',
   ];
-
-  ngAfterViewInit() {}
 }
 
 @Component({
@@ -109,8 +104,8 @@ export class DialogStatusAssignedComponent {
     @Inject(MAT_DIALOG_DATA) public id: string,
     private approvalNotificationSrv: TopicApprovalService,
     private denunciationSvr: TopicDenunciationService,
-    private proposalSvr: TopicProposalService,
-  ) { }
+    private proposalSvr: TopicProposalService
+  ) {}
 
   ngOnInit(): void {
     this.synch();
@@ -119,43 +114,41 @@ export class DialogStatusAssignedComponent {
 
   synch(): void {
     if (this.id !== null)
-      this.topicService
-        .getTopicStudentById(this.id)
-        .subscribe(data => {
-          this.topicStudent = data;
-          this.getApprovalNotificationById();
-          this.getDenunciationById();
-          this.getProposalById();
-        });
+      this.topicService.getTopicStudentById(this.id).subscribe((data) => {
+        this.topicStudent = data;
+        this.getApprovalNotificationById();
+        this.getDenunciationById();
+        this.getProposalById();
+      });
   }
 
   getApprovalNotificationById() {
     if (this.topicStudent.id)
-      this.approvalNotificationSrv.getTopicNotificationById(this.topicStudent.id).subscribe(
-        data => {
+      this.approvalNotificationSrv
+        .getTopicNotificationById(this.topicStudent.id)
+        .subscribe((data) => {
           this.approvalNotification = data;
           this.haveNotification = true;
-        }
-      )
+        });
   }
 
   getDenunciationById() {
     if (this.topicStudent.id)
-      this.denunciationSvr.getTopicDenunciationById(this.topicStudent.id).subscribe(
-        data => {
+      this.denunciationSvr
+        .getTopicDenunciationById(this.topicStudent.id)
+        .subscribe((data) => {
           this.denunciation = data;
           this.haveDenunciation = true;
-        }
-      )
+        });
   }
 
   getProposalById() {
     if (this.topicStudent.topic?.id)
-      this.proposalSvr.getTopicProposalById(this.topicStudent.topic.id).subscribe(
-        data => {
+      this.proposalSvr
+        .getTopicProposalById(this.topicStudent.topic.id)
+        .subscribe((data) => {
           this.proposal = data;
           this.haveProposal = true;
-        }
-      )
+        });
   }
 }

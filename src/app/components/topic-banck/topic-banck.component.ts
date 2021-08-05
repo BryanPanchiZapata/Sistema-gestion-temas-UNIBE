@@ -21,19 +21,17 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { AddTopicComponent } from './add-topic/add-topic.component';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicService } from 'src/app/services/topic.service';
 import { TopicModel } from 'src/app/models/topic-model';
 import { SpinnerService } from 'src/app/services/spinner.service';
-import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-topic-banck',
   styleUrls: ['./topic-banck.component.css'],
   templateUrl: './topic-banck.component.html',
 })
-export class TopicBanckComponent implements AfterViewInit, OnInit {
+export class TopicBanckComponent implements OnInit {
   displayedColumns: string[] = [
     'position',
     'tema',
@@ -41,8 +39,7 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     'carrera',
     'accion',
   ];
-  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+
   dataSource = new MatTableDataSource();
   approvalNotification: TopicApprovalModel = {};
   value = '';
@@ -64,14 +61,13 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
     private approvalNotificationSrv: TopicApprovalService,
     private denunciationSvr: TopicDenunciationService,
     private proposalSvr: TopicProposalService,
-    private authService: AuthService,
-  ) { }
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.role = this.authService.getRole();
     this.getDataUser();
-    this.dataSource.paginator = this.paginator;
-    if (this.role === "STUDENT") {
+    if (this.role === 'STUDENT') {
       this.onFindTopicbyStudent();
       this.getApprovalNotificationByStudent();
       this.getDenunciationByStudent();
@@ -80,39 +76,33 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
   }
 
   onFindTopicbyStudent() {
-    this.topicStudentSvr.getTopicStudentByStudentId().subscribe(
-      data => {
-        this.haveTopic = true;
-        this.topicStudent = data;
-      }
-    )
+    this.topicStudentSvr.getTopicStudentByStudentId().subscribe((data) => {
+      this.haveTopic = true;
+      this.topicStudent = data;
+    });
   }
 
   getApprovalNotificationByStudent() {
-    this.approvalNotificationSrv.getTopicNotificationByStudent().subscribe(
-      data => {
+    this.approvalNotificationSrv
+      .getTopicNotificationByStudent()
+      .subscribe((data) => {
         this.approvalNotification = data;
         this.haveNotification = true;
-      }
-    )
+      });
   }
 
   getDenunciationByStudent() {
-    this.denunciationSvr.getTopicDenunciationByStudentId().subscribe(
-      data => {
-        this.denunciation = data;
-        this.haveDenunciation = true;
-      }
-    )
+    this.denunciationSvr.getTopicDenunciationByStudentId().subscribe((data) => {
+      this.denunciation = data;
+      this.haveDenunciation = true;
+    });
   }
 
   getProposalByStudent() {
-    this.proposalSvr.getTopicProposalByStudent().subscribe(
-      data => {
-        this.proposal = data;
-        this.haveProposal = true;
-      }
-    )
+    this.proposalSvr.getTopicProposalByStudent().subscribe((data) => {
+      this.proposal = data;
+      this.haveProposal = true;
+    });
   }
 
   openDialog(id: string | null) {
@@ -134,10 +124,6 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
 
   openConfirmChangeTopic() {
     this.dialog.open(ChangeTopicComponent);
-  }
-
-  ngAfterViewInit() {
-
   }
 
   applyFilter(event: Event) {
@@ -168,12 +154,10 @@ export class TopicBanckComponent implements AfterViewInit, OnInit {
 
   chooseTopic(topic: TopicModel) {
     let topicStudent = Object.assign({ topic: topic, student: this.academic });
-    this.topicStudentSvr.assigmentTopic(topicStudent).subscribe(
-      data => {
-        this.topicStudent = data;
-        this.onFindTopicbyStudent();
-      }
-    )
+    this.topicStudentSvr.assigmentTopic(topicStudent).subscribe((data) => {
+      this.topicStudent = data;
+      this.onFindTopicbyStudent();
+    });
   }
 
   onDeleteTopic(id: string): void {
@@ -197,7 +181,7 @@ export class DialogTopicComponent {
     private spinnerService: SpinnerService,
     public dialogRef: MatDialogRef<DialogTopicComponent>,
     @Inject(MAT_DIALOG_DATA) public id: string
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.sync();
@@ -223,8 +207,8 @@ export class ChangeTopicComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<ChangeTopicComponent>,
     private spinnerService: SpinnerService,
-    private topicStudentService: TopicStudentService,
-  ) { }
+    private topicStudentService: TopicStudentService
+  ) {}
 
   ngOnInit() {
     this.spinnerService.hide();
@@ -232,20 +216,18 @@ export class ChangeTopicComponent implements OnInit {
   }
 
   OnTopicStudentByStudentId() {
-    this.topicStudentService.getTopicStudentByStudentId().subscribe(
-      data => {
-        this.topicStudent = data;
-      }
-    )
+    this.topicStudentService.getTopicStudentByStudentId().subscribe((data) => {
+      this.topicStudent = data;
+    });
   }
 
   onDeleteAssignment() {
     if (this.topicStudent?.id)
-      this.topicStudentService.deleteAssigment(this.topicStudent?.id).subscribe(
-        data => {
+      this.topicStudentService
+        .deleteAssigment(this.topicStudent?.id)
+        .subscribe((data) => {
           window.location.reload();
           this.dialogRef.close();
-        }
-      )
+        });
   }
 }

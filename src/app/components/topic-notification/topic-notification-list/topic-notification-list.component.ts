@@ -1,13 +1,5 @@
-import {
-  AfterViewInit,
-  Component,
-  Inject,
-  ViewChild,
-  OnInit,
-} from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute, Router } from '@angular/router';
 import { TopicApprovalService } from 'src/app/services/topic-approval.service';
 
 @Component({
@@ -15,12 +7,10 @@ import { TopicApprovalService } from 'src/app/services/topic-approval.service';
   templateUrl: './topic-notification-list.component.html',
   styleUrls: ['./topic-notification-list.component.css'],
 })
-export class TopicNotificationListComponent implements AfterViewInit, OnInit {
+export class TopicNotificationListComponent implements OnInit {
   dataApprovalNotification = new MatTableDataSource();
   static END_POINT = 'topic-approval';
-  constructor(
-    private topicApprovalService: TopicApprovalService,
-  ) {
+  constructor(private topicApprovalService: TopicApprovalService) {
     this.sync();
   }
 
@@ -36,29 +26,24 @@ export class TopicNotificationListComponent implements AfterViewInit, OnInit {
     'Acciones',
   ];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  ngAfterViewInit() {
-    this.dataApprovalNotification.paginator = this.paginator;
-  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataApprovalNotification.filter = filterValue.trim().toLowerCase();
+    console.log(this.dataApprovalNotification);
   }
-  ngOnInit(): void {
-    this.dataApprovalNotification.paginator = this.paginator;
-  }
+  ngOnInit(): void {}
 
   sync() {
     this.topicApprovalService.getAllTopicApproval().subscribe((data) => {
       this.dataApprovalNotification = new MatTableDataSource(data);
+      console.log(data)
     });
   }
 
   onDeleteNotification(id: string): void {
     this.topicApprovalService.deleteNotification(id).subscribe((data) => {
       this.dataApprovalNotification.data = data;
-      this.sync()
+      this.sync();
     });
   }
 }
