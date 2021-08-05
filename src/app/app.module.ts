@@ -1,14 +1,17 @@
+import { DialogStatusExecutingComponent } from './components/topic-banck/executing-topic/dialog-status-executing/dialog-status-executing.component';
+import { DialogStatusExecutedComponent } from './components/topic-banck/executed-topic/dialog-status-executed/dialog-status-executed.component';
 import { tokenInterceptor } from './components/interceptors/token-user.interceptor';
 import { SpinnerModule } from './components/spinner/spinner.module';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 registerLocaleData(localeEs, 'es')
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ChangeTopicComponent, TopicBanckComponent } from './components/topic-banck/topic-banck.component';
+import { ChangeTopicComponent, TopicBanckComponent, DialogTopicComponent } from './components/topic-banck/topic-banck.component';
 import { MaterialModule } from './material/material.module';
 import { TopicDenunciationComponent } from './components/topic-denunciation/topic-denunciation.component';
 import { TopicProposalComponent } from './components/topic-proposal/topic-proposal.component';
@@ -53,8 +56,12 @@ import { TopicProposalReadComponent } from './components/topic-proposal/topic-pr
     TopicDenunciationReadComponent,
     ChangeTopicComponent,
     TopicProposalReadComponent,
+    DialogStatusExecutingComponent,
+    DialogStatusExecutedComponent,
+    DialogTopicComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -72,6 +79,6 @@ import { TopicProposalReadComponent } from './components/topic-proposal/topic-pr
     tokenInterceptor,
     { provide: LOCALE_ID, useValue: 'es' }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

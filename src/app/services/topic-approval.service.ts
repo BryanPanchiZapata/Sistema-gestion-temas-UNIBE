@@ -13,8 +13,8 @@ export class TopicApprovalService {
 
   constructor(private http: HttpClient) { }
 
-  getAllTopicApproval(): Observable<any> {
-    return this.http.get(this.url).pipe(
+  getTopicApprovalsByCareer(career: string): Observable<any> {
+    return this.http.get(this.url + "/career/" + career).pipe(
       map((response) => response),
       catchError((error) => {
         alert(error.error);
@@ -33,7 +33,7 @@ export class TopicApprovalService {
   }
 
   getTopicNotificationByStudent(): Observable<any> {
-    return this.http.get(this.url+ "/student").pipe(
+    return this.http.get(this.url + "/student").pipe(
       map(response => response), catchError(error => {
         return error;
       }
@@ -53,7 +53,7 @@ export class TopicApprovalService {
 
 
   deleteNotification(id: string): Observable<any> {
-    return this.http.delete(this.url +'/'+ id).pipe(
+    return this.http.delete(this.url + '/' + id).pipe(
       map(response => response),
       catchError(error => {
         alert(error.console.error)
@@ -64,7 +64,7 @@ export class TopicApprovalService {
   }
 
   updateTopic(id: string, topic: TopicModel): Observable<any> {
-    return this.http.put(this.url +'/'+ id, topic).pipe(
+    return this.http.put(this.url + '/' + id, topic).pipe(
       map(response => response),
       catchError(error => {
         alert(error.error)

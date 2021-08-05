@@ -1,0 +1,50 @@
+<div>
+  <div class="container__info">
+    <p>
+      <b>Nombres del estudiante:</b> {{ topicStudent?.student?.firstName }}
+      {{ topicStudent?.student?.secondName }}
+      {{ topicStudent?.student?.lastName }}
+      {{ topicStudent?.student?.secondLastname }}
+    </p>
+    <span class="skip"></span>
+    <p><b>Cédula:</b> {{ topicStudent?.student?.ci }}</p>
+  </div>
+
+  <div class="container__info">
+    <p class="space"><b>Tema:</b> {{ topicStudent?.topic?.name }}</p>
+  </div>
+
+  <div class="container__info">
+    <p><b>Carrera:</b> {{ topicStudent?.topic?.career?.name }}</p>
+    <span class="skip"></span>
+    <p><b>Evaluación:</b> {{ topicStudent?.topicEvaluation }}</p>
+    <span class="skip"></span>
+    <p><b>Articulación:</b> {{ topicStudent?.topic?.articulation }}</p>
+  </div>
+
+  <div class="container__info">
+    <p><b>Estado de tema:</b> {{ topicStudent?.topic?.topicStatus }}</p>
+    <span class="skip"></span>
+    <p><b>Pago:</b> {{ topicStudent?.paymentDenunciation }}</p>
+    <span class="skip"></span>
+    <p><b>Fecha:</b> {{ topicStudent?.assignedDate }}</p>
+  </div>
+
+  <div class="container__info">
+    <p class="space"><b>Descripción del tema:</b> {{ topicStudent?.topic?.description }}</p>
+  </div>
+
+  <div *ngIf="role === 'CAREER_DIRECTOR' || role === 'AUTHORITY'" ><b>Documentos:</b>
+    <p *ngIf="haveNotification === false && haveDenunciation === false && haveProposal === false"
+      style="color:rgba(0,0,0,.54)">Aún no se generan documentos</p>
+    <p><a [href]="['/topic-denunciation/read/' + topicStudent?.id]" *ngIf="haveDenunciation === true">Denuncia de tema y
+        modalidad de investigación</a></p>
+    <p><a [href]="['topic-proposal/read/' + topicStudent?.topic?.id]"  *ngIf="haveProposal === true">Propuesta de
+        tema</a>
+    </p>
+    <p><a [href]="['topic-approval/read/' + topicStudent?.id]"  *ngIf="haveNotification === true">Notificación de
+        aprobación
+        de tema</a></p>
+  </div>
+
+</div>

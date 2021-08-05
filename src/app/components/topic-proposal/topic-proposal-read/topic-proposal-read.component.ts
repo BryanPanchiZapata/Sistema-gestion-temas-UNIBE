@@ -1,3 +1,4 @@
+import { AuthService } from './../../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TopicProposalModel } from 'src/app/models/topic-proposal-model';
@@ -10,14 +11,16 @@ import { TopicProposalService } from 'src/app/services/topic-proposal.service';
 })
 export class TopicProposalReadComponent implements OnInit {
   static END_POINT = 'topic-proposal/read/:id';
+  role: String | null;
   private readonly id: string | null;
   public proposal: TopicProposalModel = {};
 
   constructor(
     private proposalSrv: TopicProposalService,
     private route: ActivatedRoute,
-    private router: Router
-  ) {
+    private router: Router,
+    private authService: AuthService,
+    ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
 
@@ -33,6 +36,7 @@ export class TopicProposalReadComponent implements OnInit {
 
   ngOnInit(): void {
     this.sync();
+    this.role = this.authService.getRole();
   }
 
   sync(): void {

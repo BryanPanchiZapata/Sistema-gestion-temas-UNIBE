@@ -28,7 +28,7 @@
 </div>
 <div fxLayout="row" fxLayoutAlign="center center">
   <button mat-raised-button routerLink="/">Salir</button>
-  <button mat-raised-button class="secondary" (click)="onDeleteProposal()">Borrar</button>
+  <button mat-raised-button class="secondary" (click)="onDeleteProposal()" *ngIf="role === 'STUDENT'">Borrar</button>
   <button type="print" class="primary" mat-raised-button (click)="print('proposal')">
     Imprimir
   </button>

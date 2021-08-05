@@ -1,4 +1,5 @@
-<mat-card id="notification" #notification class="container__form" fxLayout="column" fxLayoutAlign="center center"
+<div id="notification" fxLayout="column" fxLayoutAlign="center center">
+<mat-card class="container__form" fxLayout="column" fxLayoutAlign="center center"
   ngClass.lt-sm="mat-card-lt-sm">
   <img src="../../../assets/unibe_form.png" alt="UNIBE" />
   <div>
@@ -61,9 +62,10 @@
     </div>
   </div>
 </mat-card>
+</div>
 <div fxLayout="row" fxLayoutAlign="center center">
-  <button mat-raised-button routerLink="/">Salir</button>
-  <button mat-raised-button class="secondary" (click)="onDeleteNotification()">Borrar</button>
+  <button mat-raised-button routerLink="/topic-approval">Salir</button>
+  <button mat-raised-button class="secondary" (click)="onDeleteNotification()" *ngIf="role === 'CAREER_DIRECTOR'">Borrar</button>
   <button type="print" class="primary" mat-raised-button (click)="print('notification')">
     Imprimir
   </button>

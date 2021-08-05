@@ -1,3 +1,5 @@
+import { AuthService } from './../../../services/auth.service';
+import { UserAcademicModel } from './../../../models/user-model';
 import {
   AfterViewInit,
   Component,
@@ -18,7 +20,11 @@ import { TopicApprovalService } from 'src/app/services/topic-approval.service';
 export class TopicNotificationListComponent implements AfterViewInit, OnInit {
   dataApprovalNotification = new MatTableDataSource();
   static END_POINT = 'topic-approval';
+  role: String | null;
+  academic: UserAcademicModel = {};
+
   constructor(
+    private authService: AuthService,
     private topicApprovalService: TopicApprovalService,
   ) {
     this.sync();
@@ -46,19 +52,30 @@ export class TopicNotificationListComponent implements AfterViewInit, OnInit {
     this.dataApprovalNotification.filter = filterValue.trim().toLowerCase();
   }
   ngOnInit(): void {
+    this.getDataUser();
     this.dataApprovalNotification.paginator = this.paginator;
   }
 
+  getDataUser() {
+    this.authService.profileUser().subscribe(
+      data => {
+        this.academic = data;
+        this.sync();
+      }
+    );
+  }
+
   sync() {
-    this.topicApprovalService.getAllTopicApproval().subscribe((data) => {
+    if (this.academic.career?.id)
+    this.topicApprovalService.getTopicApprovalsByCareer(this.academic.career?.id).subscribe((data) => {
       this.dataApprovalNotification = new MatTableDataSource(data);
     });
   }
 
   onDeleteNotification(id: string): void {
     this.topicApprovalService.deleteNotification(id).subscribe((data) => {
-      this.dataApprovalNotification.data = data;
-      this.sync()
+      this.dataApprovalNotification = data;
+      this.sync();
     });
   }
 }
