@@ -1,3 +1,4 @@
+import { AuthService } from './../../../services/auth.service';
 import { UserAcademicModel } from './../../../models/user-model';
 import { AcademicUserService } from './../../../services/academic-user.service';
 import { Component, OnInit } from '@angular/core';
@@ -16,12 +17,14 @@ export class TopicDenunciationReadComponent implements OnInit {
   static END_POINT = 'topic-denunciation/read/:id';
   private readonly id: string | null;
   public denunciation: TopicDenunciationModel = {};
+  role: String | null;
   public topicStudent: TopicStudentModel;
   public academicUser: UserAcademicModel = {};
 
   constructor(
     private denunciationSrv: TopicDenunciationService,
     private academicSvr: AcademicUserService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -39,6 +42,7 @@ export class TopicDenunciationReadComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.role = this.authService.getRole();
     this.sync();
   }
 

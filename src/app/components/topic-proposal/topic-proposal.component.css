@@ -6,6 +6,9 @@
   margin: 0;
   margin-bottom: .5rem;
 }
+p, li {
+  text-align: justify;
+}
 
 mat-form-field {
   width: 100%;

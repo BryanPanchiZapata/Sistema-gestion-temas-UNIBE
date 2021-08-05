@@ -11,6 +11,10 @@
   margin-inline: auto;
 }
 
+.nav-button {
+  color: #fff;
+}
+
 .nav__ul {
   width: 100%;
   display: flex;

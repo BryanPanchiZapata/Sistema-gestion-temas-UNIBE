@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './../../../services/auth.service';
+import { UserAcademicModel } from './../../../models/user-model';
 import { MatTableDataSource } from '@angular/material/table';
 import { TopicApprovalService } from 'src/app/services/topic-approval.service';
 
@@ -10,7 +12,13 @@ import { TopicApprovalService } from 'src/app/services/topic-approval.service';
 export class TopicNotificationListComponent implements OnInit {
   dataApprovalNotification = new MatTableDataSource();
   static END_POINT = 'topic-approval';
-  constructor(private topicApprovalService: TopicApprovalService) {
+  role: String | null;
+  academic: UserAcademicModel = {};
+
+  constructor(
+    private authService: AuthService,
+    private topicApprovalService: TopicApprovalService,
+  ) {
     this.sync();
   }
 
@@ -31,10 +39,22 @@ export class TopicNotificationListComponent implements OnInit {
     this.dataApprovalNotification.filter = filterValue.trim().toLowerCase();
     console.log(this.dataApprovalNotification);
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getDataUser();
+  }
+
+  getDataUser() {
+    this.authService.profileUser().subscribe(
+      data => {
+        this.academic = data;
+        this.sync();
+      }
+    );
+  }
 
   sync() {
-    this.topicApprovalService.getAllTopicApproval().subscribe((data) => {
+    if (this.academic.career?.id)
+    this.topicApprovalService.getTopicApprovalsByCareer(this.academic.career?.id).subscribe((data) => {
       this.dataApprovalNotification = new MatTableDataSource(data);
       console.log(data)
     });

@@ -1,20 +1,20 @@
 <div class="container__nav">
   <nav class="nav">
     <ul class="nav__ul">
-      <button mat-button *ngIf="role === 'STUDENT' || role === 'CAREER_DIRECTOR' || role === 'AUTHORITY'">
-        <a class="title__nav" routerLink="/">Inicio</a>
+      <button class="nav-button" mat-button *ngIf="role === 'STUDENT' || role === 'CAREER_DIRECTOR' || role === 'AUTHORITY'" routerLink="/">
+        Inicio
       </button>
-      <button mat-button *ngIf="role === 'CAREER_DIRECTOR'">
-        <a class="title__nav" routerLink="/topic-approval">Notificaciones de aprobación de tema</a>
+      <button class="nav-button" mat-button *ngIf="role === 'CAREER_DIRECTOR'" routerLink="/topic-approval">
+        Notificaciones de aprobación de tema
       </button>
-      <button mat-button *ngIf="role === 'STUDENT'">
-        <a class="title__nav" routerLink="/topic-denunciation">Denuncia de tema y modalidad</a>
+      <button class="nav-button" mat-button *ngIf="role === 'STUDENT'" routerLink="/topic-denunciation">
+        Denuncia de tema y modalidad
       </button>
-      <button mat-button *ngIf="role === 'STUDENT'">
-        <a class="title__nav" routerLink="/topic-proposal">Propuesta de tema</a>
+      <button class="nav-button" mat-button *ngIf="role === 'STUDENT'" routerLink="/topic-proposal">
+        Propuesta de tema
       </button>
-      <button mat-button *ngIf="role === 'FINANCIAL'">
-        <a class="title__nav" routerLink="/payment-registration">Registro de pago</a>
+      <button class="nav-button" mat-button *ngIf="role === 'FINANCIAL'" routerLink="/payment-registration">
+        Registro de pago
       </button>
 
       <li>
@@ -33,8 +33,7 @@
     <mat-menu #bar__responsive="matMenu">
       <a class="mat-menu" routerLink="/profile"><button mat-menu-item><mat-icon class="account">account_circle</mat-icon> {{user?.firstName}} {{user?.lastName}} </button></a>
       <a class="mat-menu" routerLink="/"
-        *ngIf="role === 'STUDENT' || role === 'CAREER_DIRECTOR' || role === 'AUTHORITY'"><button mat-menu-item>Banco de
-          temas</button></a>
+        *ngIf="role === 'STUDENT' || role === 'CAREER_DIRECTOR' || role === 'AUTHORITY'"><button mat-menu-item>Inicio</button></a>
       <a class="mat-menu" routerLink="/topic-approval" *ngIf="role === 'CAREER_DIRECTOR'"><button
           mat-menu-item>Notificación de aprobación de tema</button></a>
 

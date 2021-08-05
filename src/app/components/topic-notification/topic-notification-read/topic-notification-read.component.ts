@@ -1,3 +1,4 @@
+import { AuthService } from './../../../services/auth.service';
 import { AcademicUserService } from './../../../services/academic-user.service';
 import { UserAcademicModel } from './../../../models/user-model';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
@@ -17,12 +18,14 @@ export class TopicNotificationReadComponent implements OnInit {
   public topicStudent: TopicStudentModel;
   public academicUser: UserAcademicModel = {};
   public evaluations = TopicEvaluation;
+  role: String | null;
   private readonly id: string | null;
 
   constructor(
     private notificationApprovalSrv: TopicApprovalService,
     private academicSvr: AcademicUserService,
     private router: Router,
+    private authService: AuthService,
     private route: ActivatedRoute,
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -41,6 +44,7 @@ export class TopicNotificationReadComponent implements OnInit {
   @ViewChild('notification', {static: false}) el!: ElementRef;
 
   ngOnInit(): void {
+    this.role = this.authService.getRole();
     this.sync();
   }
 

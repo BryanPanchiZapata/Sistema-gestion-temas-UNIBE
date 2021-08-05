@@ -11,6 +11,8 @@
   font-family: Arial;
   line-height: 30px;
   text-align: justify;
+  margin: 0;
+  margin-bottom: .5rem;
 }
 
 .container__form
