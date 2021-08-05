@@ -37,7 +37,6 @@ export class TopicNotificationListComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataApprovalNotification.filter = filterValue.trim().toLowerCase();
-    console.log(this.dataApprovalNotification);
   }
   ngOnInit(): void {
     this.getDataUser();
@@ -56,7 +55,6 @@ export class TopicNotificationListComponent implements OnInit {
     if (this.academic.career?.id)
     this.topicApprovalService.getTopicApprovalsByCareer(this.academic.career?.id).subscribe((data) => {
       this.dataApprovalNotification = new MatTableDataSource(data);
-      console.log(data)
     });
   }
 

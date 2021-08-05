@@ -43,7 +43,7 @@
                 *matCellDef="let topic"
                 (click)="openDialogTopic(topic.id)"
               >
-                {{ topic.name }}
+                {{ topic?.name }}
               </td>
             </ng-container>
 
@@ -51,12 +51,12 @@
               <th class="tres" mat-header-cell *matHeaderCellDef>
                 Articulación
               </th>
-              <td mat-cell *matCellDef="let topic">{{ topic.articulation }}</td>
+              <td mat-cell *matCellDef="let topic">{{ topic?.articulation }}</td>
             </ng-container>
 
             <ng-container matColumnDef="carrera">
               <th class="cinco" mat-header-cell *matHeaderCellDef>Carrera</th>
-              <td mat-cell *matCellDef="let topic">{{ topic.career.name }}</td>
+              <td mat-cell *matCellDef="let topic">{{ topic?.career }}</td>
             </ng-container>
 
             <ng-container matColumnDef="accion">

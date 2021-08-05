@@ -14,35 +14,35 @@
       <th class="dos" mat-header-cell *matHeaderCellDef>Tema</th>
       <td mat-cell *matCellDef="let topicStudent" class="pointer"
         (click)="openDialogTopicStudentExecuting(topicStudent.id)">
-        {{ topicStudent?.topic?.name }}
+        {{ topicStudent?.name }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="articulacion">
       <th class="tres" mat-header-cell *matHeaderCellDef>Articulación</th>
       <td mat-cell *matCellDef="let topicStudent">
-        {{ topicStudent?.topic?.articulation }}
+        {{ topicStudent?.articulation }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="pago">
       <th class="cuatro" mat-header-cell *matHeaderCellDef>Pago</th>
       <td mat-cell *matCellDef="let topicStudent">
-        {{ topicStudent?.paymentDenunciation }}
+        {{ topicStudent?.paymentStatus }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="cedula">
       <th class="cinco" mat-header-cell *matHeaderCellDef>Cédula</th>
       <td mat-cell *matCellDef="let topicStudent">
-        {{ topicStudent?.student?.ci }}
+        {{ topicStudent?.ci }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="carrera">
       <th class="seis" mat-header-cell *matHeaderCellDef>Carrera</th>
       <td mat-cell *matCellDef="let topicStudent">
-        {{ topicStudent?.topic?.career?.name }}
+        {{ topicStudent?.career }}
       </td>
     </ng-container>
 
