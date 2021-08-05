@@ -67,7 +67,7 @@
         <button class="button__topicbanck" mat-button (click)="onChangeToExecuted(topicStudent?.topic?.id)"
           *ngIf="role === 'CAREER_DIRECTOR'">Ejecutado</button>
         <button class="button__topicbanck" *ngIf="role === 'STUDENT'" mat-button
-          (click)="chooseTopic(topicStudent?.topic)">
+          (click)="chooseTopic(topicStudent?.topic?.id)">
           Seleccionar tema
         </button>
         <button mat-icon-button (click)="openDialogTopicStudentExecuting(topicStudent.id)" *ngIf="role === 'AUTHORITY'">

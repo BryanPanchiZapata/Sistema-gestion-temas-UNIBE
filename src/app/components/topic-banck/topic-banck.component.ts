@@ -152,8 +152,8 @@ export class TopicBanckComponent implements OnInit {
     }
   }
 
-  chooseTopic(topic: TopicModel) {
-    let topicStudent = Object.assign({ topic: topic, student: this.academic });
+  chooseTopic(id: string) {
+    let topicStudent = Object.assign({ topic: {id: id}, student: this.academic });
     this.topicStudentSvr.assigmentTopic(topicStudent).subscribe((data) => {
       this.topicStudent = data;
       this.onFindTopicbyStudent();
