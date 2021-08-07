@@ -34,15 +34,16 @@
     <p class="space"><b>Descripción del tema:</b> {{ topicStudent?.topic?.description }}</p>
   </div>
 
-  <div *ngIf="role === 'CAREER_DIRECTOR' || role === 'AUTHORITY'" ><b>Documentos:</b>
+  <div *ngIf="role === 'CAREER_DIRECTOR' || role === 'AUTHORITY'"><b>Documentos:</b>
     <p *ngIf="haveNotification === false && haveDenunciation === false && haveProposal === false"
       style="color:rgba(0,0,0,.54)">Aún no se generan documentos</p>
     <p><a [href]="['/topic-denunciation/read/' + topicStudent?.id]" *ngIf="haveDenunciation === true">Denuncia de tema y
         modalidad de investigación</a></p>
-    <p><a [href]="['topic-proposal/read/' + topicStudent?.topic?.id]"  *ngIf="haveProposal === true || role === 'CAREER_DIRECTOR'">Propuesta de
+    <p *ngIf="role === 'CAREER_DIRECTOR'"><a [href]="['topic-proposal/read/' + topicStudent?.topic?.id]"
+        *ngIf="haveProposal === true">Propuesta de
         tema</a>
     </p>
-    <p><a [href]="['topic-approval/read/' + topicStudent?.id]"  *ngIf="haveNotification === true">Notificación de
+    <p><a [href]="['topic-approval/read/' + topicStudent?.id]" *ngIf="haveNotification === true">Notificación de
         aprobación
         de tema</a></p>
   </div>
