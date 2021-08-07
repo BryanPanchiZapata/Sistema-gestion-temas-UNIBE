@@ -101,9 +101,8 @@
             motivos:
           </p>
 
-          <div>
-            <textarea class="textarea" matInput [formControl]="observations" cols="5" rows="10" type="text"
-              *ngIf="evaluationForm.get('topicEvaluation')?.value !== 'Aprobado'"></textarea>
+          <div *ngIf="evaluationForm.get('topicEvaluation')?.value !== 'Aprobado'">
+            <textarea class="textarea" matInput [formControl]="observations" cols="5" rows="10" type="text"></textarea>
             <small *ngIf="observations?.invalid && (observations?.dirty || observations?.touched)">Campo
               <strong>obligatorio</strong>
             </small>

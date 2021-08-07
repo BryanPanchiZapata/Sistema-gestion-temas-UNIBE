@@ -49,7 +49,7 @@ const routes: Routes = [
       },
       {
         path: TopicProposalReadComponent.END_POINT,
-        component: TopicProposalReadComponent, canActivate: [guard], data: {expectedRol: ['STUDENT', 'CAREER_DIRECTOR','AUTHORITY']}
+        component: TopicProposalReadComponent, canActivate: [guard], data: {expectedRol: ['STUDENT', 'CAREER_DIRECTOR']}
       },
       {
         path: ProfileComponent.END_POINT,

@@ -41,7 +41,7 @@
     style="color:rgba(0,0,0,.54)">Aún no se generan documentos</p>
   <p *ngIf="haveDenunciation === true"><a [href]="['/topic-denunciation/read/' + topicStudent?.id]">Denuncia de tema y
       modalidad de investigación</a></p>
-      <p><a [href]="['topic-proposal/read/' + topicStudent?.topic?.id]" *ngIf="haveProposal === true">Propuesta de
+      <p><a [href]="['topic-proposal/read/' + topicStudent?.topic?.id]" *ngIf="haveProposal === true || role === 'CAREER_DIRECTOR'">Propuesta de
         tema</a></p>
     <p><a [href]="['topic-approval/read/' + topicStudent?.id]" *ngIf="haveNotification === true">Notificación de
         aprobación de tema</a></p>
